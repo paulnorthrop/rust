@@ -30,3 +30,5 @@ Suggests: knitr,
     testthat,
     devtools
 VignetteBuilder: knitr
+URL: http://github.com/paulnorthrop/rust
+BugReports: http://github.com/paulnorthrop/rust/issues
