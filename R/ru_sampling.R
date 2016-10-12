@@ -54,7 +54,7 @@
 #' @param gm A numeric vector. Box-cox scaling parameters (optional). If
 #'   \code{lambda$gm} is supplied in input list \code{lambda} then
 #'   \code{lambda$gm} is used, not \code{gm}.
-#' @param rotate A logical scalar. If TRUE (\code{d} > 1 only) use Cholesky
+#' @param rotate A logical scalar. If TRUE (\code{d} > 1 only) use Choleski
 #'   rotation.  If d = 1 and \code{rotate} = TRUE then rotate will be set to
 #'   FALSE with a warning.
 #' @param lower,upper Numeric vectors.  Lower/upper bounds on the arguments of
@@ -293,7 +293,6 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                a_control = list(), b_control = list(), var_names = NULL) {
   #
-  print(a_algor)
   # Check that the values of key arguments are suitable
   if (r < 0) {
     stop("r must be non-negative")
