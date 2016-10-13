@@ -397,7 +397,6 @@ find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
   phi <- lapply(seq_len(ncol(phi)), function(i) phi[, i])
   # Expand into a matrix containing the grid of combinations (one combination in each row)
   phi <- expand.grid(phi)
-  print(dim(phi))
   # Evaluate the target density at each combination in the grid
   w <- apply(phi, 1, fun, ...)
   #
