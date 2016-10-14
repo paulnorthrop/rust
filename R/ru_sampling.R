@@ -324,7 +324,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       if (!is.null(lambda$gm)) {
         gm <- lambda$gm
       }
-      if (!is.null(lambda$init)) {
+      if (!is.null(lambda$init_psi)) {
         init <- lambda$init_psi
       }
       if (a_algor == "optim" & is.null(a_control$parscale)) {
