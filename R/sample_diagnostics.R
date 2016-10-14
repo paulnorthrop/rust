@@ -85,7 +85,6 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     b <- temp$breaks[length(temp$breaks)]
     h <- (b-a)/n
     xx <- seq(a, b, by = h)
-    for_logf <- c(list(xx), x$logf_args)
     density_fun <- function(z) {
       density_list <- c(list(z), x$logf_args)
       exp(do.call(plot_density, density_list))
