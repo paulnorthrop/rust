@@ -271,7 +271,7 @@ x2 <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n, trans = "BC",
 x2$pa
 ```
 
-Again we show how `trans = "user"` can be used to use user-defined tranformation, this time supplying the value of $\lambda$ using `user_args`.
+Again we show how `trans = "user"` can be used to use user-defined transformation, this time supplying the value of $\lambda$ using `user_args`.
 
 ```{r}
 # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
