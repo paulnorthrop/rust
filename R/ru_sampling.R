@@ -139,8 +139,12 @@
 #'       acceptance.}
 #'     \item{d}{A numeric scalar.  The dimension of \code{logf}.}
 #'     \item{logf}{A function. \code{logf} function supplied by the user.}
+#'     \item{logf_rho}{A function. The target function actually used in the
+#'       ratio-of-uniforms algorithm.}
 #'     \item{logf_args}{A list of further arguments to \code{logf}.}
-#'     \item{f_mode}{The estimated mode of the target density f.}
+#'     \item{f_mode}{The estimated mode of the target density f, after any
+#'       Box-Cox transformation and/or user supplied transformation, but before
+#'       mode relocation.}
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  Statistics and Computing (1991) 1, 129-133.
