@@ -7,7 +7,7 @@
 #' \code{logf} must be bounded, perhaps after a transformation of variable.
 #'
 #' @param logf A function returning the log of the target density f.
-#' @param ... further arguments to be passed to \code{logf} and related
+#' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A numeric scalar.  Number of simulated values required.
 #' @param d A numeric scalar. Dimension of f.
