@@ -470,7 +470,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     const <- lambda * gm ^ (lambda - 1)
     if (any(lambda == 0L)) {
       psi_to_phi <- function(psi) {
-        ifelse(lambda == 0, exp(gm * psi), (psi * const + 1) ^ (1 / lambda))
+        ifelse(lambda == 0, exp(psi / gm), (psi * const + 1) ^ (1 / lambda))
       }
     } else {
       psi_to_phi <- function(psi) (psi * const + 1) ^ (1 / lambda)
