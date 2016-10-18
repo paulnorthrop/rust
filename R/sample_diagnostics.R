@@ -2,11 +2,12 @@
 
 #' Plot diagnostics for an ru object
 #'
-#' \code{plot} method for class "ru".  Can only be used when d = 1 or d = 2.
-#'   For d = 1 a histogram of the simulated values is plotted with a the
-#'   density function superimposed.  The density is normalized crudely using
-#'   the trapezium rule.  For d = 2 a scatter plot of the simulated values
-#'   is produced with density contours superimposed.
+#' \code{plot} method for class "ru".  For \code{d = 1} a histogram of the
+#'   simulated values is plotted with a the density function superimposed.
+#'   The density is normalized crudely using the trapezium rule.  For
+#'   \code{d = 2} a scatter plot of the simulated values is produced with
+#'   density contours superimposed.  For \code{d > 2} pairwise plots of the
+#'   simulated values are produced using \code{pairs()}.
 #'
 #' @param x an object of class "ru", a result of a call to \code{ru}.
 #' @param y Not used.
@@ -60,13 +61,10 @@
 #'   and properties of the ratio-of-uniforms algorithm.
 #' @export
 plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
-                     prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
-                     ru_scale = FALSE) {
+                    prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
+                    ru_scale = FALSE) {
   if (!inherits(x, "ru")) {
     stop("use only with \"ru\" objects")
-  }
-  if(x$d > 2) {
-    stop("plot.ru is only available for d = 1 or d = 2")
   }
   if (n < 1) {
     stop("n must be no smaller than 1")
@@ -125,6 +123,9 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     graphics::points(plot_data, col = 8, ...)
     graphics::contour(xx, yy, zz, levels = con.levs, add = T, ann = T,
       labels = prob * 100, ...)
+  }
+  if (x$d > 2) {
+    pairs(plot_data)
   }
 }
 

@@ -32,11 +32,12 @@ scale (FALSE)?
 \code{hist} and \code{plot}.}
 }
 \description{
-\code{plot} method for class "ru".  Can only be used when d = 1 or d = 2.
-  For d = 1 a histogram of the simulated values is plotted with a the
-  density function superimposed.  The density is normalized crudely using
-  the trapezium rule.  For d = 2 a scatter plot of the simulated values
-  is produced with density contours superimposed.
+\code{plot} method for class "ru".  For \code{d = 1} a histogram of the
+  simulated values is plotted with a the density function superimposed.
+  The density is normalized crudely using the trapezium rule.  For
+  \code{d = 2} a scatter plot of the simulated values is produced with
+  density contours superimposed.  For \code{d > 2} pairwise plots of the
+  simulated values are produced using \code{pairs()}.
 }
 \details{
 Note that \code{suppressWarnings} is used to avoid potential benign warnings
