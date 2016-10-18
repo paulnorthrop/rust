@@ -17,7 +17,7 @@ ru(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
 \arguments{
 \item{logf}{A function returning the log of the target density f.}
 
-\item{...}{further arguments to be passed to \code{logf} and related
+\item{...}{Further arguments to be passed to \code{logf} and related
 functions.}
 
 \item{n}{A numeric scalar.  Number of simulated values required.}
@@ -75,7 +75,7 @@ than lambda_tol in magnitude are set to zero.}
 \code{lambda$gm} is supplied in input list \code{lambda} then
 \code{lambda$gm} is used, not \code{gm}.}
 
-\item{rotate}{A logical scalar. If TRUE (\code{d} > 1 only) use Cholesky
+\item{rotate}{A logical scalar. If TRUE (\code{d} > 1 only) use Choleski
 rotation.  If d = 1 and \code{rotate} = TRUE then rotate will be set to
 FALSE with a warning.}
 
@@ -132,8 +132,14 @@ An object of class "ru" is a list containing the following
       acceptance.}
     \item{d}{A numeric scalar.  The dimension of \code{logf}.}
     \item{logf}{A function. \code{logf} function supplied by the user.}
+    \item{logf_rho}{A function. The target function actually used in the
+      ratio-of-uniforms algorithm.}
+    \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated
+      from the function used in the ratio-of-uniforms algorithm.}
     \item{logf_args}{A list of further arguments to \code{logf}.}
-    \item{f_mode}{The estimated mode of the target density f.}
+    \item{f_mode}{The estimated mode of the target density f, after any
+      Box-Cox transformation and/or user supplied transformation, but before
+      mode relocation.}
 }
 \description{
 Uses the generalized ratio-of-uniforms method to simulate from a
@@ -170,7 +176,6 @@ If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
   is close to a variable boundary) then \code{rotate} is set to \code{FALSE}
   with a warning.  A warning is also given if this happens when
   \code{d} = 1.
-
 
   The default value of the tuning parameter \code{r} is 1/2, which is
   likely to be close to optimal in many cases, particularly if

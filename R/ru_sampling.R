@@ -112,7 +112,6 @@
 #'   with a warning.  A warning is also given if this happens when
 #'   \code{d} = 1.
 #'
-#'
 #'   The default value of the tuning parameter \code{r} is 1/2, which is
 #'   likely to be close to optimal in many cases, particularly if
 #'   \code{trans = "BC"}.
@@ -141,6 +140,8 @@
 #'     \item{logf}{A function. \code{logf} function supplied by the user.}
 #'     \item{logf_rho}{A function. The target function actually used in the
 #'       ratio-of-uniforms algorithm.}
+#'     \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated
+#'       from the function used in the ratio-of-uniforms algorithm.}
 #'     \item{logf_args}{A list of further arguments to \code{logf}.}
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
