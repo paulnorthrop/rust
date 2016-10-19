@@ -124,7 +124,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #'   posterior log-density to be finite) at the estimate, and associated
 #'   estimated SEs. These are converted into estimates and SEs for phi.  The
 #'   latter can be used to set values of \code{min_phi} and \code{max_phi}
-#'   for input to \code{find_lambda} and \code{find_lambda_one_d}.
+#'   for input to \code{find_lambda}.
 #'
 #'   In the default setting (\code{xi_eq_zero = FALSE} and
 #'   \code{init_ests = NULL}) the methods tried are Maximum Likelihood
@@ -169,12 +169,8 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #' @seealso \code{\link{gpd_sum_stats}} to calculate summary statistics for
 #'   use in \code{gpd_loglik}.
 #' @seealso \code{\link{rgpd}} for simulation from a generalized Pareto
-#' @seealso \code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-#'   a list for the argument \code{lambda} of \code{ru} for the
-#'   \code{d} = 1 case.
 #' @seealso \code{\link{find_lambda}} to produce (somewhat) automatically
-#'   a list for the argument \code{lambda} of \code{ru} for any value of
-#'   \code{d}.
+#'   a list for the argument \code{lambda} of \code{ru}.
 #' @examples
 #' \dontrun{
 #' # Sample data from a GP(sigma, xi) distribution
