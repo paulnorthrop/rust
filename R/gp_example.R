@@ -119,7 +119,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #' @param init_ests A numeric vector.  Initial estimate of
 #'   theta = (sigma, xi).  If supplied \code{gpd_init()} just
 #'   returns the corresponding initial estimate of phi = (phi1, phi2).
-#' @details The main aim is to calculate an admissible estimate of theta at,
+#' @details The main aim is to calculate an admissible estimate of theta,
 #'   i.e. one at which the log-likelihood is finite (necessary for the
 #'   posterior log-density to be finite) at the estimate, and associated
 #'   estimated SEs. These are converted into estimates and SEs for phi.  The
