@@ -130,7 +130,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #'   \code{init_ests = NULL}) the methods tried are Maximum Likelihood
 #'   Estimation (MLE) (Grimshaw, 1993), Probability-Weighted Moments (PWM)
 #'   (Hosking and Wallis, 1987) and Linear Combinations of Ratios of Spacings
-#'   (LRS) (Riess and Thomas, 2007, page 134) in that order.
+#'   (LRS) (Reiss and Thomas, 2007, page 134) in that order.
 #'
 #'   For xi < -1 the likelihood is unbounded, MLE may fail when xi is not
 #'   greater than -0.5 and the observed Fisher information for (sigma, xi) has
