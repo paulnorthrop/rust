@@ -227,7 +227,7 @@ gpd_init <- function(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
     mat <- matrix(c(1, 0, 1 / xm, 1), 2, 2, byrow = TRUE)
     var_phi <- mat %*% pwm$cov %*% t(mat)
     se_phi <- sqrt(diag(var_phi))
-    # Note: se and se_phi will be NA if pwm$est > 1/2
+    # Note: se and se_phi will be NA if pwm$est[2] > 1/2
     check <- gpd_loglik(pars = pwm$est, gpd_data = gpd_data, m = m, xm = xm,
                        sum_gp = sum_gp)
     # If MLE wasn't OK and PWM estimate is OK then use PWM estimate
