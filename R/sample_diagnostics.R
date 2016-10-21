@@ -25,7 +25,6 @@
 #' @param ru_scale A logical scalar.  Should we plot data and density on the
 #'   scale used in the ratio-of-uniforms algorithm (TRUE) or on the original
 #'   scale (FALSE)?
-#'   \code{hist} and \code{plot}.
 #' @details
 #' Note that \code{suppressWarnings} is used to avoid potential benign warnings
 #'   caused by passing unused graphical parameters to \code{hist} and
