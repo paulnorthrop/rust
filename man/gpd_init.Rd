@@ -46,18 +46,18 @@ initial estimates and estimated standard errors for
 phi1 = sigma and phi2 = xi + sigma / xm.
 }
 \details{
-The main aim is to calculate an admissible estimate of theta at,
+The main aim is to calculate an admissible estimate of theta,
   i.e. one at which the log-likelihood is finite (necessary for the
   posterior log-density to be finite) at the estimate, and associated
   estimated SEs. These are converted into estimates and SEs for phi.  The
   latter can be used to set values of \code{min_phi} and \code{max_phi}
-  for input to \code{find_lambda} and \code{find_lambda_one_d}.
+  for input to \code{find_lambda}.
 
   In the default setting (\code{xi_eq_zero = FALSE} and
   \code{init_ests = NULL}) the methods tried are Maximum Likelihood
   Estimation (MLE) (Grimshaw, 1993), Probability-Weighted Moments (PWM)
   (Hosking and Wallis, 1987) and Linear Combinations of Ratios of Spacings
-  (LRS) (Riess and Thomas, 2007, page 134) in that order.
+  (LRS) (Reiss and Thomas, 2007, page 134) in that order.
 
   For xi < -1 the likelihood is unbounded, MLE may fail when xi is not
   greater than -0.5 and the observed Fisher information for (sigma, xi) has
@@ -101,12 +101,7 @@ Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
 
 \code{\link{rgpd}} for simulation from a generalized Pareto
 
-\code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-  a list for the argument \code{lambda} of \code{ru} for the
-  \code{d} = 1 case.
-
 \code{\link{find_lambda}} to produce (somewhat) automatically
-  a list for the argument \code{lambda} of \code{ru} for any value of
-  \code{d}.
+  a list for the argument \code{lambda} of \code{ru}.
 }
 
