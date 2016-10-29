@@ -28,8 +28,7 @@ within the contour are approximately prob.}
 
 \item{ru_scale}{A logical scalar.  Should we plot data and density on the
 scale used in the ratio-of-uniforms algorithm (TRUE) or on the original
-scale (FALSE)?
-\code{hist} and \code{plot}.}
+scale (FALSE)?}
 }
 \description{
 \code{plot} method for class "ru".  For \code{d = 1} a histogram of the
