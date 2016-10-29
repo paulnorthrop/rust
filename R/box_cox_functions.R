@@ -522,8 +522,6 @@ optim_box_cox <- function(x, w, lambda_range = c(-3,3), start = NULL,
     mp <- function(p) mean(w * (x - xbar) ^ p) / v1
     mp(3) / mp(2)^(3 / 2)
   }
-  print("START")
-  print(start)
   if (is.null(start)) {
     start <- 1 - apply(x, 2, skew_wt, w = w) / 2
   }
