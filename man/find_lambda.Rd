@@ -6,7 +6,8 @@
 \usage{
 find_lambda(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-04,
   min_phi = rep(ep_bc, d), max_phi = rep(10, d), which_lam = 1:d,
-  lambda_range = c(-3, 3), phi_to_theta = NULL, log_j = NULL)
+  lambda_range = c(-3, 3), init_lambda = NULL, phi_to_theta = NULL,
+  log_j = NULL)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density f.}
@@ -33,6 +34,10 @@ of phi that ARE to be Box-Cox transformed.}
 
 \item{lambda_range}{A numeric vector of length 2.  Range of lambda over
 which to optimise.}
+
+\item{init_lambda}{A numeric vector of length 1 or d.  Initial value of
+lambda used in the search for the best lambda.  If \code{init_lambda}
+is a scalar then \code{rep(init_lambda, d)} is used.}
 
 \item{phi_to_theta}{A function returning (inverse) of the transformation
 from theta to phi used to ensure positivity of phi prior to Box-Cox

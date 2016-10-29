@@ -221,6 +221,9 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'   of phi that ARE to be Box-Cox transformed.
 #' @param lambda_range A numeric vector of length 2.  Range of lambda over
 #'   which to optimise.
+#' @param init_lambda A numeric vector of length 1 or d.  Initial value of
+#'   lambda used in the search for the best lambda.  If \code{init_lambda}
+#'   is a scalar then \code{rep(init_lambda, d)} is used.
 #' @param phi_to_theta A function returning (inverse) of the transformation
 #'   from theta to phi used to ensure positivity of phi prior to Box-Cox
 #'   transformation.  The argument is phi and the returned value is theta.
@@ -354,8 +357,20 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
                         min_phi = rep(ep_bc, d), max_phi = rep(10, d),
                         which_lam = 1:d, lambda_range = c(-3,3),
-                        phi_to_theta = NULL, log_j = NULL) {
+                        init_lambda = NULL, phi_to_theta = NULL,
+                        log_j = NULL) {
   #
+  if (!is.null(init_lambda)) {
+    if (!is.vector(init_lambda)) {
+      stop("init_lambda must be a vector.")
+    }
+    if (length(init_lambda) == 1) {
+      init_lambda <- rep(init_lambda, d)
+    }
+    if (length(init_lambda) != d) {
+      stop("init_lambda must be a vector of length 1 or d.")
+    }
+  }
   # Check that max_phi > min_phi in all cases
   if (any(max_phi-min_phi <= 0)) {
     stop("max_phi must be larger than min_phi elementwise.")
@@ -407,7 +422,7 @@ find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
     stop("Attempt to use Box-Cox transformation on non-positive value(s).")
   }
   res_bc <- optim_box_cox(x = phi, w = w, which_lam = which_lam,
-                          lambda_range = lambda_range)
+                          lambda_range = lambda_range, start = init_lambda)
   lambda <- res_bc$lambda
   gm <- res_bc$gm
   phi_to_psi <- function(phi)  {
@@ -459,7 +474,7 @@ box_cox_vec <- Vectorize(box_cox, vectorize.args = c("lambda", "gm"))
 
 # =========================== optim_box_cox ===========================
 
-optim_box_cox <- function(x, w, start = NULL, lambda_range = c(-3,3),
+optim_box_cox <- function(x, w, lambda_range = c(-3,3), start = NULL,
                           which_lam = 1:ncol(x)) {
   #
   # Finds the optimal value of the Box-Cox transformation parameter lambda,
@@ -471,9 +486,9 @@ optim_box_cox <- function(x, w, start = NULL, lambda_range = c(-3,3),
   #                  column numbers in which_lam must contain positive values.
   #   w            : A numeric vector. Density values corresponding to each
   #                  row of x (up to proportionality).
-  #   start        : A numeric vector.  Optional starting value for lambda.
   #   lambda_range : A numeric vector (of length 2).  Range of lambda values
   #                  over which to search.
+  #   start        : A numeric vector.  Optional starting value for lambda.
   #   which_lam    : A numeric vector.  Indicates which variables to Box-Cox
   #                  transform.
   #
@@ -507,6 +522,8 @@ optim_box_cox <- function(x, w, start = NULL, lambda_range = c(-3,3),
     mp <- function(p) mean(w * (x - xbar) ^ p) / v1
     mp(3) / mp(2)^(3 / 2)
   }
+  print("START")
+  print(start)
   if (is.null(start)) {
     start <- 1 - apply(x, 2, skew_wt, w = w) / 2
   }
