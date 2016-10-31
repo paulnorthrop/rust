@@ -167,13 +167,13 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #'   and \code{d} = 2 only).
 #' @export
 summary.ru <- function(object, ...) {
-  cat("sample summary", "\n")
-  print(summary(object$sim_vals, ...), ...)
+  cat("ru bounding box: ", "\n")
+  print(object$box, ...)
   cat("\n")
   cat("estimated probability of acceptance: ", "\n")
   print(object$pa, ...)
   cat("\n")
-  cat("ru bounding box: ", "\n")
-  print(object$box, ...)
+  cat("sample summary", "\n")
+  print(summary(object$sim_vals, ...), ...)
 }
 
