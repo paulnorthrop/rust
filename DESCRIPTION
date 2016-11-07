@@ -3,7 +3,7 @@ Type: Package
 Title: Ratio-of-Uniforms Simulation with Transformation
 Version: 1.0.0.9000
 Date: 2016-09-15
-Authors@R: person("Paul", "Northrop", email = "p.northrop@ucl.ac.uk",
+Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
   role = c("aut", "cre", "cph"))
 Description: Uses the generalised ratio-of-uniforms (RU) method to simulate
     from univariate and (low-dimensional) multivariate continuous distributions.
