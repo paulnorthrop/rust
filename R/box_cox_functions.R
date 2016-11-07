@@ -144,14 +144,19 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
     phi_to_theta <- identity
     log_j <- function(x) 0
   }
-  # Define a function fun() returning the density f (up to proportionality)
-  fun <- function(x, ...) {
-    exp(logf(phi_to_theta(x), ...) - log_j(x))
+  # Define a function log_fun() returning the log-density logf
+  # (up to an additive constant).
+  log_fun <- function(x, ...) {
+    logf(phi_to_theta(x), ...) - log_j(x)
   }
   # Set num equally-spaced values of x in [min_phi, max_phi]
   x <- seq(min_phi, max_phi, len = num)
   # Calculate the density (weights) at these values
-  w <- fun(x, ...)
+  log_w <- log_fun(x, ...)
+  # Shift log_w so that it has a maximum of 0, to try to avoid underflow.
+  log_w <- log_w - max(log_w, na.rm = TRUE)
+  # Evaluate the density values.
+  w <- exp(log_w)
   # Standardise, so that the weights sum to 1
   w <- w / sum(w)
   n <- length(w)
@@ -392,12 +397,13 @@ find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
     phi_to_theta <- identity
     log_j <- function(x) 0
   }
-  # Define a function fun() returning the density f (up to proportionality)
-  fun <- function(x, ...) {
-    exp(logf(phi_to_theta(x), ...) - log_j(x))
+  # Define a function log_fun() returning the log-density logf
+  # (up to an additive constant).
+  log_fun <- function(x, ...) {
+    logf(phi_to_theta(x), ...) - log_j(x)
   }
-  # Evaluate the target density (up to a constant) over a grid of values that
-  # contains most of the probability.
+  # Evaluate the target density (up to a multiplicative constant) over a
+  # grid of values that contains most of the probability.
   #
   # If n_grid has not been specified then set a default value
   if (is.null(n_grid)) {
@@ -410,10 +416,15 @@ find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
   phi <- mapply(seq, from = low_phi, to = up_phi, len=n_grid)
   # Make this matrix into a list with an entry for each column
   phi <- lapply(seq_len(ncol(phi)), function(i) phi[, i])
-  # Expand into a matrix containing the grid of combinations (one combination in each row)
+  # Expand into a matrix containing the grid of combinations (one
+  # combination in each row).
   phi <- expand.grid(phi)
-  # Evaluate the target density at each combination in the grid
-  w <- apply(phi, 1, fun, ...)
+  # Evaluate the target log-density at each combination in the grid.
+  log_w <- apply(phi, 1, log_fun, ...)
+  # Shift log_w so that it has a maximum of 0, to try to avoid underflow.
+  log_w <- log_w - max(log_w, na.rm = TRUE)
+  # Evaluate the density values.
+  w <- exp(log_w)
   #
   # Seek marginal Box-Cox transformations such that the joint posterior is
   # closer to being bivariate normal
