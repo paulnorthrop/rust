@@ -96,8 +96,15 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     area <- h * (yy[1] / 2 + sum(yy[2:n]) + yy[n + 1] / 2)
     yy <- yy / area
     max_y <- max(temp$density, yy)
-    suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
-                                    ylim = c(0, max_y), ...))
+    temp <- list(...)
+    if (is.null(temp$xlab)) {
+      suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
+                                      ylim = c(0, max_y),
+                                      xlab = colnames(plot_data)[1], ...))
+    } else {
+      suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
+                                      ylim = c(0, max_y), ...))
+    }
     suppressWarnings(graphics::lines(xx, yy, ...))
   }
   if (x$d == 2) {
@@ -122,6 +129,13 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     graphics::points(plot_data, col = 8, ...)
     graphics::contour(xx, yy, zz, levels = con.levs, add = T, ann = T,
       labels = prob * 100, ...)
+    temp <- list(...)
+    if (is.null(temp$xlab)) {
+      title(xlab = colnames(plot_data)[1])
+    }
+    if (is.null(temp$ylab)) {
+      title(ylab = colnames(plot_data)[2])
+    }
   }
   if (x$d > 2) {
     pairs(plot_data)
