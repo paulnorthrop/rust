@@ -618,6 +618,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$sim_vals <- matrix(NA, ncol = d, nrow = n)
   res$sim_vals_rho <- matrix(NA, ncol = d, nrow = n)
   colnames(res$sim_vals) <- var_names
+  colnames(res$sim_vals_rho) <- paste("rho", 1:d, sep="")
   #
   d_box <- u_box - l_box
   d_r <- d * r + 1

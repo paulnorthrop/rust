@@ -25,6 +25,12 @@
 #' @param ru_scale A logical scalar.  Should we plot data and density on the
 #'   scale used in the ratio-of-uniforms algorithm (TRUE) or on the original
 #'   scale (FALSE)?
+#' @param rows A numeric scalar.  When \code{d} > 2 this sets the number of
+#'   rows of plots.  If the user doesn't provide this then it is set
+#'   internally.
+#' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
+#'   on the x and y axes respectively.  if the use doesn't provide these then
+#'   the column names of the simulated data matrix to be plotted are used.
 #' @details
 #' Note that \code{suppressWarnings} is used to avoid potential benign warnings
 #'   caused by passing unused graphical parameters to \code{hist} and
@@ -61,7 +67,7 @@
 #' @export
 plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                     prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
-                    ru_scale = FALSE) {
+                    ru_scale = FALSE, rows = NULL, xlabs = NULL, ylabs = NULL) {
   if (!inherits(x, "ru")) {
     stop("use only with \"ru\" objects")
   }
@@ -138,7 +144,28 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     }
   }
   if (x$d > 2) {
-    pairs(plot_data)
+    if (is.null(rows)) {
+      rows <- x$d -2
+    }
+    cols <- ceiling(choose(x$d, 2) / rows)
+    temp <- list(...)
+    if (is.null(xlabs)) {
+      xlabs <- colnames(plot_data)
+    }
+    if (is.null(ylabs)) {
+      ylabs <- colnames(plot_data)
+    }
+    def.par <- par(no.readonly = TRUE)
+    par(mfrow = c(rows, cols))
+    pairwise_plots <- function(x) {
+      for (i in 1:(ncol(x)-1)) {
+        for (j in (i+1):ncol(x)) {
+          plot(x[, i], x[, j], xlab = xlabs[i], ylab = ylabs[j])
+        }
+      }
+    }
+    pairwise_plots(plot_data)
+    par(def.par)
   }
 }
 
