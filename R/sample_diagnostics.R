@@ -105,8 +105,10 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     temp <- list(...)
     if (is.null(temp$xlab)) {
       suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
-                                      ylim = c(0, max_y),
-                                      xlab = colnames(plot_data)[1], ...))
+                                      ylim = c(0, max_y), xlab = "", ...))
+      if (!is.null(colnames(plot_data))) {
+        title(xlab = parse(text = colnames(plot_data)[1]))
+      }
     } else {
       suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
                                       ylim = c(0, max_y), ...))
@@ -137,10 +139,14 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
       labels = prob * 100, ...)
     temp <- list(...)
     if (is.null(temp$xlab)) {
-      title(xlab = colnames(plot_data)[1])
+      if (!is.null(colnames(plot_data))) {
+        title(xlab = parse(text = colnames(plot_data)[1]))
+      }
     }
     if (is.null(temp$ylab)) {
-      title(ylab = colnames(plot_data)[2])
+      if (!is.null(colnames(plot_data))) {
+        title(ylab = parse(text = colnames(plot_data)[2]))
+      }
     }
   }
   if (x$d > 2) {
@@ -160,7 +166,8 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     pairwise_plots <- function(x) {
       for (i in 1:(ncol(x)-1)) {
         for (j in (i+1):ncol(x)) {
-          plot(x[, i], x[, j], xlab = xlabs[i], ylab = ylabs[j])
+          plot(x[, i], x[, j], xlab = "", ylab = "", ...)
+          title(xlab = parse(text = xlabs[i]), ylab = parse(text = ylabs[j]))
         }
       }
     }
