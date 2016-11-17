@@ -166,7 +166,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     pairwise_plots <- function(x) {
       for (i in 1:(ncol(x)-1)) {
         for (j in (i+1):ncol(x)) {
-          plot(x[, i], x[, j], xlab = "", ylab = "", ...)
+          graphics::plot(x[, i], x[, j], xlab = "", ylab = "", ...)
           title(xlab = parse(text = xlabs[i]), ylab = parse(text = ylabs[j]))
         }
       }
