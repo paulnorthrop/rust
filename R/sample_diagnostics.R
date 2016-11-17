@@ -182,17 +182,16 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #'
 #' \code{summary} method for class "ru"
 #'
-#' @param object an object of class "ru", a result of a call to
-#'   \code{ru}.
+#' @param x an object of class "ru", a result of a call to \code{ru}.
 #' @param ... Additional arguments passed on to \code{print} or \code{summary}.
 #' @return Prints
 #' \itemize{
 #'   \item {a summary of the simulated values, via
-#'     \code{summary(object$sim_vals)}}
+#'     \code{summary(x$sim_vals)}}
 #'   \item {an estimate of the probability of acceptance, i.e.
-#'     \code{object$pa}}
+#'     \code{x$pa}}
 #'   \item {information about the ratio-of-uniforms bounding box, i.e.
-#'     \code{object$box}}
+#'     \code{x$box}}
 #' }
 #' @examples
 #' # one-dimensional standard normal ----------------
@@ -214,14 +213,17 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
 #'   and \code{d} = 2 only).
 #' @export
-summary.ru <- function(object, ...) {
+summary.ru <- function(x, ...) {
+  if (!inherits(x, "ru")) {
+    stop("use only with \"ru\" objects")
+  }
   cat("ru bounding box: ", "\n")
-  print(object$box, ...)
+  print(x$box, ...)
   cat("\n")
   cat("estimated probability of acceptance: ", "\n")
-  print(object$pa, ...)
+  print(x$pa, ...)
   cat("\n")
   cat("sample summary", "\n")
-  print(summary(object$sim_vals, ...), ...)
+  print(summary(x$sim_vals, ...), ...)
 }
 
