@@ -173,7 +173,9 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
   # Reset the xs over this new range
   x <- seq(r[1], r[2], len = num)
   # Recalculate the weights and the areas and midpoints
-  w <- fun(x, ...)
+  log_w <- log_fun(x, ...)
+  log_w <- log_w - max(log_w, na.rm = TRUE)
+  w <- exp(log_w)
   w <- w / sum(w)
   n <- length(w)
   wbar <- (w[1:(n-1)] + w[2:n]) / 2

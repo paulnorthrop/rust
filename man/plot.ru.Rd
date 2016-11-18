@@ -5,7 +5,8 @@
 \title{Plot diagnostics for an ru object}
 \usage{
 \method{plot}{ru}(x, y, ..., n = ifelse(x$d == 1, 1001, 101), prob = c(0.1,
-  0.25, 0.5, 0.75, 0.95, 0.99), ru_scale = FALSE)
+  0.25, 0.5, 0.75, 0.95, 0.99), ru_scale = FALSE, rows = NULL,
+  xlabs = NULL, ylabs = NULL)
 }
 \arguments{
 \item{x}{an object of class "ru", a result of a call to \code{ru}.}
@@ -29,6 +30,14 @@ within the contour are approximately prob.}
 \item{ru_scale}{A logical scalar.  Should we plot data and density on the
 scale used in the ratio-of-uniforms algorithm (TRUE) or on the original
 scale (FALSE)?}
+
+\item{rows}{A numeric scalar.  When \code{d} > 2 this sets the number of
+rows of plots.  If the user doesn't provide this then it is set
+internally.}
+
+\item{xlabs, ylabs}{Numeric vectors.  When \code{d} > 2 these set the labels
+on the x and y axes respectively.  if the use doesn't provide these then
+the column names of the simulated data matrix to be plotted are used.}
 }
 \description{
 \code{plot} method for class "ru".  For \code{d = 1} a histogram of the
