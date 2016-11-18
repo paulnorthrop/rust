@@ -5,4 +5,4 @@
 ## Downstream dependencies
 
 I have also run R CMD on downstream dependencies of rust.
-All packages passed: No ERRORs or WARNINGs found.
+All packages passed: no ERRORs or WARNINGs found.
