@@ -4,10 +4,10 @@
 \alias{summary.ru}
 \title{Summarizing ratio-of-uniforms samples}
 \usage{
-\method{summary}{ru}(x, ...)
+\method{summary}{ru}(object, ...)
 }
 \arguments{
-\item{x}{an object of class "ru", a result of a call to \code{ru}.}
+\item{object}{an object of class "ru", a result of a call to \code{ru}.}
 
 \item{...}{Additional arguments passed on to \code{print} or \code{summary}.}
 }
@@ -15,11 +15,11 @@
 Prints
 \itemize{
   \item {a summary of the simulated values, via
-    \code{summary(x$sim_vals)}}
+    \code{summary(object$sim_vals)}}
   \item {an estimate of the probability of acceptance, i.e.
-    \code{x$pa}}
+    \code{object$pa}}
   \item {information about the ratio-of-uniforms bounding box, i.e.
-    \code{x$box}}
+    \code{object$box}}
 }
 }
 \description{
