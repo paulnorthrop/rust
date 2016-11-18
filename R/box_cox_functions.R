@@ -471,7 +471,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
     retval <- (x ^ lambda - 1) / lambda / gm ^ (lambda - 1)
   } else {
     i <- 0:3
-    retval <- sum(log(x) ^ (i+1) * lambda ^ i / factorial(i + 1))
+    retval <- sum(log(x) ^ (i + 1) * lambda ^ i / factorial(i + 1))
     retval <- retval / gm ^ (lambda - 1)
   }
   retval
