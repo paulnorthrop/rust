@@ -7,7 +7,7 @@
 #'   The density is normalized crudely using the trapezium rule.  For
 #'   \code{d = 2} a scatter plot of the simulated values is produced with
 #'   density contours superimposed.  For \code{d > 2} pairwise plots of the
-#'   simulated values are produced using \code{pairs()}.
+#'   simulated values are produced.
 #'
 #' @param x an object of class "ru", a result of a call to \code{ru}.
 #' @param y Not used.

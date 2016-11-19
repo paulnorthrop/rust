@@ -34,3 +34,11 @@
   Also enable plotmath symbols to be rendered in the axis labels.
 
 # rust 1.1.0.9000
+
+## New features
+
+## Bug fixes and minor improvements
+
+* "using `pairs()`" removed from the last sentence Description of `plot.ru()`
+  because `pairs()` is not used when `d > 2`, rather a single plot is produced
+  for each pair of variables.
