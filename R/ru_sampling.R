@@ -821,7 +821,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(temp$par, lower_box, hessian = FALSE,
+        temp <- stats::optim(temp$par, lower_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
         l_box[j] <- temp$value
       }
@@ -872,7 +872,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(temp$par, upper_box, hessian = FALSE,
+        temp <- stats::optim(temp$par, upper_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
         u_box[j] <- temp$value
       }
