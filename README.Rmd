@@ -20,7 +20,7 @@ The `rust` package implements the multivariate generalized ratio-of-uniforms met
 
 ### A simple example
 
-we use the main function `ru` is used to simulate a sample of size 1000 from a two-dimensional standard normal distribution with strong positive correlation between the components.  Of course, this particular example is purely illustrative: there are better ways to simulate from a multivariate normal distribution.
+We use the function `ru` to simulate a sample of size 1000 from a two-dimensional standard normal distribution with strong positive correlation between the components.  Of course, this particular example is purely illustrative: there are better ways to simulate from a multivariate normal distribution.
 
 ```{r, eval = FALSE}
 rho <- 0.9
