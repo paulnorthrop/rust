@@ -13,7 +13,8 @@
 #' @param y Not used.
 #' @param ... Additional arguments passed on to \code{hist}, \code{lines},
 #'   \code{contour} or \code{points}.
-#' @param n A number.  The meaning depends on the value of x$d.
+#' @param n A numeric scalar.  Only relevant if \code{x$d = 1} or
+#'   \code{x$d = 2}. The meaning depends on the value of x$d.
 #' \itemize{
 #'   \item {For d = 1 : n + 1 is the number of abscissae in the trapezium
 #'      method used to normalize the density.}
@@ -211,8 +212,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' summary(x)
 #' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
 #'   \code{object$box}.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-#'   and \code{d} = 2 only).
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @export
 summary.ru <- function(object, ...) {
   if (!inherits(object, "ru")) {
