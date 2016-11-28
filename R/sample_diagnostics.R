@@ -30,7 +30,7 @@
 #'   rows of plots.  If the user doesn't provide this then it is set
 #'   internally.
 #' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
-#'   on the x and y axes respectively.  if the use doesn't provide these then
+#'   on the x and y axes respectively.  If the user doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
 #' @details
 #' Note that \code{suppressWarnings} is used to avoid potential benign warnings
