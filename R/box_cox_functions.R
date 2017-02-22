@@ -460,8 +460,8 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   # Args:
   #   x          : A numeric vector. (Positive) values to be Box-Cox
   #                transformed.
-  #   lambda     : A numeric vector.  Transformation parameter.
-  #   gm         : A numeric vector.  Optional scaling parameter.
+  #   lambda     : A numeric scalar.  Transformation parameter.
+  #   gm         : A numeric scalar.  Optional scaling parameter.
   #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
   #                a Taylor series expansion.
   #
