@@ -541,8 +541,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   check_finite <- logf_rho(temp$par, ...)
   if (!is.finite(check_finite)) {
     stop(paste("The target log-density is not finite at its mode: mode = ",
-               temp$par, ", function value = ", check_finite, ".", sep=""),
-         noBreaks. = TRUE)
+               temp$par, ", function value = ", check_finite, ".", sep=""))
   }
   #
   # Scale logf to have a maximum at 0, i.e. a=1 ------------
