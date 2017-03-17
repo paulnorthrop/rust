@@ -48,4 +48,3 @@ Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
   a list for the argument \code{lambda} of \code{ru} for any value of
   \code{d}.
 }
-

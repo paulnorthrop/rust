@@ -35,4 +35,3 @@ ss <- gpd_sum_stats(gpd_data)
 \code{\link{rgpd}} for simulation from a generalized Pareto
   distribution.
 }
-

@@ -104,4 +104,3 @@ Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
 \code{\link{find_lambda}} to produce (somewhat) automatically
   a list for the argument \code{lambda} of \code{ru}.
 }
-

@@ -12,7 +12,7 @@ ru(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   b_algor = c("nlminb", "optim"), a_method = c("Nelder-Mead", "BFGS", "CG",
   "L-BFGS-B", "SANN", "Brent"), b_method = c("Nelder-Mead", "BFGS", "CG",
   "L-BFGS-B", "SANN", "Brent"), a_control = list(), b_control = list(),
-  var_names = NULL)
+  var_names = NULL, bfgs_check = FALSE)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density f.}
@@ -110,6 +110,14 @@ set to "Brent" without warning.}
 
 \item{var_names}{A character vector.  Names to give to the column(s) of
 the simulated values.}
+
+\item{bfgs_check}{A logical scalar.  If \code{TRUE} then if a minimisation
+algorithm does not return the best possible convergence indicator
+then a call is made to \code{\link[stats]{optim}} with
+\code{method = "BFGS"} in an attempt to check the solution and obtain a
+favourable convergence indicator.  The default is
+\code{bfgs_check = FALSE} because often the original solution is fine.
+In this event a warning is given.}
 }
 \value{
 An object of class "ru" is a list containing the following
@@ -330,4 +338,3 @@ Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 
 \code{\link[base]{chol}} for the Choleski decomposition.
 }
-

@@ -25,4 +25,3 @@ Simulates a sample of size \code{m} from a generalized Pareto distribution.
 gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 }
 }
-

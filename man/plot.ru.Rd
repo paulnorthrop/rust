@@ -85,4 +85,3 @@ plot(x)
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 }
-

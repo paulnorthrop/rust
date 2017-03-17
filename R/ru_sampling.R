@@ -82,6 +82,13 @@
 #'   \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.
 #' @param var_names A character vector.  Names to give to the column(s) of
 #'   the simulated values.
+#' @param bfgs_check A logical scalar.  If \code{TRUE} then if a minimisation
+#'   algorithm does not return the best possible convergence indicator
+#'   then a call is made to \code{\link[stats]{optim}} with
+#'   \code{method = "BFGS"} in an attempt to check the solution and obtain a
+#'   favourable convergence indicator.  The default is
+#'   \code{bfgs_check = FALSE} because often the original solution is fine.
+#'   In this event a warning is given.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -296,7 +303,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
-               a_control = list(), b_control = list(), var_names = NULL) {
+               a_control = list(), b_control = list(), var_names = NULL,
+               bfgs_check = FALSE) {
   #
   # Check that the values of key arguments are suitable
   if (r < 0) {
@@ -710,7 +718,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
                            method = method, ...)
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator by using BFGS instead.
-      if (temp$convergence == 10) {
+      if (temp$convergence == 10 & bfgs_check) {
         temp <- stats::optim(temp$par, a_obj, control = control,
                              hessian = FALSE, method = "BFGS", ...)
       }
@@ -727,7 +735,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   # Sometimes nlminb isn't sure that it has found the minimum when in fact
   # it has.  Try to check this, and avoid a non-zero convergence indicator
   # by using optim with method="BFGS", starting from nlminb's solution.
-  if (temp$convergence > 0) {
+  if (temp$convergence > 0 & bfgs_check) {
     temp <- stats::optim(temp$par, a_obj, hessian = FALSE, method = "BFGS",
                          ...)
   }
@@ -819,7 +827,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
-      if (temp$convergence > 0) {
+      if (temp$convergence > 0 & bfgs_check) {
         temp <- stats::optim(temp$par, lower_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
         l_box[j] <- temp$value
@@ -847,7 +855,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
                              method = method, ...)
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
-        if (temp$convergence == 10)
+        if (temp$convergence == 10 & bfgs_check)
           temp <- stats::optim(temp$par, lower_box, j = j, control = control,
                                method = "BFGS", ...)
       }
@@ -870,7 +878,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
-      if (temp$convergence > 0) {
+      if (temp$convergence > 0 & bfgs_check) {
         temp <- stats::optim(temp$par, upper_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
         u_box[j] <- temp$value
@@ -898,7 +906,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
                              method = method, ...)
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
-        if (temp$convergence == 10)
+        if (temp$convergence == 10 & bfgs_check)
           temp <- stats::optim(temp$par, upper_box, j = j, control = control,
                                method = "BFGS", ...)
       }

@@ -188,4 +188,3 @@ Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
   a list for the argument \code{lambda} of \code{ru} for the
   \code{d} = 1 case.
 }
-

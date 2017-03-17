@@ -43,4 +43,3 @@ Bayesian extreme value analyses using reference priors. Statistica Sinica,
 
 \code{\link{rgpd}} for simulation from a generalized Pareto
 }
-

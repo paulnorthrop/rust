@@ -47,4 +47,3 @@ summary(x)
 
 \code{\link{plot.ru}} for a diagnostic plot.
 }
-
