@@ -12,7 +12,7 @@ ru(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   b_algor = c("nlminb", "optim"), a_method = c("Nelder-Mead", "BFGS", "CG",
   "L-BFGS-B", "SANN", "Brent"), b_method = c("Nelder-Mead", "BFGS", "CG",
   "L-BFGS-B", "SANN", "Brent"), a_control = list(), b_control = list(),
-  var_names = NULL, bfgs_check = FALSE)
+  var_names = NULL)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density f.}
@@ -110,14 +110,6 @@ set to "Brent" without warning.}
 
 \item{var_names}{A character vector.  Names to give to the column(s) of
 the simulated values.}
-
-\item{bfgs_check}{A logical scalar.  If \code{TRUE} then if a minimisation
-algorithm does not return the best possible convergence indicator
-then a call is made to \code{\link[stats]{optim}} with
-\code{method = "BFGS"} in an attempt to check the solution and obtain a
-favourable convergence indicator.  The default is
-\code{bfgs_check = FALSE} because often the original solution is fine.
-In this event a warning is given.}
 }
 \value{
 An object of class "ru" is a list containing the following
@@ -195,7 +187,7 @@ See \code{vignette("rust-vignette", package = "rust")} for full details.
 # Normal density ===================
 
 # one-dimensional standard normal ----------------
-x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0)
+x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0.1)
 
 # two-dimensional standard normal ----------------
 x <- ru(logf = function(x) -(x[1]^2 + x[2]^2) / 2, d = 2, n = 1000,
@@ -235,12 +227,12 @@ x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 1)
 
 # Box-Cox transform with lambda = 0 ----------------
 lambda <- 0
-x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0, trans = "BC",
+x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0.1, trans = "BC",
         lambda = lambda)
 
 # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
 # transformation and the log-Jacobian by hand
-x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0,
+x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0.1,
         trans = "user", phi_to_theta = function(x) exp(x),
         log_j = function(x) -log(x))
 
@@ -291,6 +283,7 @@ ss <- gpd_sum_stats(gpd_data)
 init <- c(mean(gpd_data), 0)
 
 # Mode relocation only ----------------
+n <- 1000
 x1 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, init = init,
          lower = c(0, -Inf), rotate = FALSE)
 plot(x1, xlab = "sigma", ylab = "xi")

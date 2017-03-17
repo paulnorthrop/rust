@@ -1,7 +1,5 @@
 # rust 1.1.0.9000
 
-* Extra argument `bfgs_check` added `ru()` to allow the prevention of error messages resulting from calls to `stats::optim` with `method = "BFGS"`.  These calls occurred when other algorithms were not sure about the minumum they returned.  Often these minima are fine and starting very close to the minimum when calling `stats::optim` with `method = "BFGS"` can result in an error concerning finite differences.  The default is `bfgs_check = FALSE`, i.e. to avoid these extra calls to `stats:optim`.
-
 # rust 1.1.0
 
 ## New features

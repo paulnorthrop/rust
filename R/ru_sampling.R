@@ -82,13 +82,6 @@
 #'   \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.
 #' @param var_names A character vector.  Names to give to the column(s) of
 #'   the simulated values.
-#' @param bfgs_check A logical scalar.  If \code{TRUE} then if a minimisation
-#'   algorithm does not return the best possible convergence indicator
-#'   then a call is made to \code{\link[stats]{optim}} with
-#'   \code{method = "BFGS"} in an attempt to check the solution and obtain a
-#'   favourable convergence indicator.  The default is
-#'   \code{bfgs_check = FALSE} because often the original solution is fine.
-#'   In this event a warning is given.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -161,7 +154,7 @@
 #' # Normal density ===================
 #'
 #' # one-dimensional standard normal ----------------
-#' x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0)
+#' x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0.1)
 #'
 #' # two-dimensional standard normal ----------------
 #' x <- ru(logf = function(x) -(x[1]^2 + x[2]^2) / 2, d = 2, n = 1000,
@@ -201,12 +194,12 @@
 #'
 #' # Box-Cox transform with lambda = 0 ----------------
 #' lambda <- 0
-#' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0, trans = "BC",
+#' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0.1, trans = "BC",
 #'         lambda = lambda)
 #'
 #' # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
 #' # transformation and the log-Jacobian by hand
-#' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0,
+#' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0.1,
 #'         trans = "user", phi_to_theta = function(x) exp(x),
 #'         log_j = function(x) -log(x))
 #'
@@ -257,6 +250,7 @@
 #' init <- c(mean(gpd_data), 0)
 #'
 #' # Mode relocation only ----------------
+#' n <- 1000
 #' x1 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, init = init,
 #'          lower = c(0, -Inf), rotate = FALSE)
 #' plot(x1, xlab = "sigma", ylab = "xi")
@@ -303,8 +297,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
-               a_control = list(), b_control = list(), var_names = NULL,
-               bfgs_check = FALSE) {
+               a_control = list(), b_control = list(), var_names = NULL) {
   #
   # Check that the values of key arguments are suitable
   if (r < 0) {
@@ -718,7 +711,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
                            method = method, ...)
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator by using BFGS instead.
-      if (temp$convergence == 10 & bfgs_check) {
+      if (temp$convergence == 10) {
         temp <- stats::optim(temp$par, a_obj, control = control,
                              hessian = FALSE, method = "BFGS", ...)
       }
@@ -735,7 +728,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   # Sometimes nlminb isn't sure that it has found the minimum when in fact
   # it has.  Try to check this, and avoid a non-zero convergence indicator
   # by using optim with method="BFGS", starting from nlminb's solution.
-  if (temp$convergence > 0 & bfgs_check) {
+  if (temp$convergence > 0) {
     temp <- stats::optim(temp$par, a_obj, hessian = FALSE, method = "BFGS",
                          ...)
   }
@@ -827,7 +820,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
-      if (temp$convergence > 0 & bfgs_check) {
+      if (temp$convergence > 0) {
         temp <- stats::optim(temp$par, lower_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
         l_box[j] <- temp$value
@@ -855,7 +848,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
                              method = method, ...)
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
-        if (temp$convergence == 10 & bfgs_check)
+        if (temp$convergence == 10)
           temp <- stats::optim(temp$par, lower_box, j = j, control = control,
                                method = "BFGS", ...)
       }
@@ -878,7 +871,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
-      if (temp$convergence > 0 & bfgs_check) {
+      if (temp$convergence > 0) {
         temp <- stats::optim(temp$par, upper_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
         u_box[j] <- temp$value
@@ -906,9 +899,10 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
                              method = method, ...)
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
-        if (temp$convergence == 10 & bfgs_check)
+        if (temp$convergence == 10) {
           temp <- stats::optim(temp$par, upper_box, j = j, control = control,
                                method = "BFGS", ...)
+        }
       }
       u_box[j] <- -temp$value
     }
