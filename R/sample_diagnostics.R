@@ -82,6 +82,13 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     plot_data <- x$sim_vals
     plot_density <- x$logf
   }
+  if (!is.null(x$logf_ptr) & !ru_scale) {
+    density_args <- c(x$logf_ptr, x$logf_args)
+  } else if (!is.null(x$logf_ptr) & ru_scale) {
+    density_args <- c(x$logf_ptr, x$logf_args, x$cpp_logf_rho_args)
+  } else {
+    density_args <- x$logf_args
+  }
   if (x$d == 1) {
     temp <- suppressWarnings(graphics::hist(plot_data, prob = TRUE,
                                             plot = FALSE))
@@ -90,7 +97,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     h <- (b-a)/n
     xx <- seq(a, b, by = h)
     density_fun <- function(z) {
-      density_list <- c(list(z), x$logf_args)
+      density_list <- c(list(z), density_args)
       exp(do.call(plot_density, density_list))
     }
     yy <- sapply(xx, density_fun)
@@ -124,7 +131,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     zz <- matrix(NA, ncol = length(xx), nrow = length(yy))
     for (i in 1:length(xx)) {
       for (j in 1:length(yy)) {
-        for_logf <- c(list(c(xx[i], yy[j])), x$logf_args)
+        for_logf <- c(list(c(xx[i], yy[j])), density_args)
         zz[i, j] <- exp(do.call(plot_density, for_logf))
       }
     }
@@ -157,10 +164,18 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     cols <- ceiling(choose(x$d, 2) / rows)
     temp <- list(...)
     if (is.null(xlabs)) {
-      xlabs <- colnames(plot_data)
+      if (!is.null(colnames(plot_data))) {
+        xlabs <- colnames(plot_data)
+      } else {
+        xlabs <- rep(NA, x$d)
+      }
     }
     if (is.null(ylabs)) {
-      ylabs <- colnames(plot_data)
+      if (!is.null(colnames(plot_data))) {
+        ylabs <- colnames(plot_data)
+      } else {
+        ylabs <- rep(NA, x$d)
+      }
     }
     def.par <- graphics::par(no.readonly = TRUE)
     graphics::par(mfrow = c(rows, cols))

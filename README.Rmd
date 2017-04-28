@@ -12,7 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-## rust: ratio-of-uniforms simulation with transformation
+# rust <img src="rust_logo.png" align="right" />
+
+## ratio-of-uniforms simulation with transformation
 
 ### What does rust do?
 

@@ -1,7 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-rust: ratio-of-uniforms simulation with transformation
-------------------------------------------------------
+rust <img src="rust_logo_new.png" align="right" />
+==================================================
+
+ratio-of-uniforms simulation with transformation
+------------------------------------------------
 
 ### What does rust do?
 
