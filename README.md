@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-rust <img src="rust_logo_new.png" align="right" />
-==================================================
+rust <img src="rust_logo.png" align="right" />
+==============================================
 
 ratio-of-uniforms simulation with transformation
 ------------------------------------------------
