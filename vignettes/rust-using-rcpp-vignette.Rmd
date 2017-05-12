@@ -1,0 +1,170 @@
+---
+title: "Rusting faster: Simulation using Rcpp"
+author: "Paul Northrop"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Rusting faster: Simulation using Rcpp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: rust.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+```
+
+The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution. For an introduction to *rust* see the vignette [Introducing rust](rust-vignette.html). The user specifies (the log of) a positive target function $f(x)$ that is proportional to the density function of the distribution. 
+This vignette describes a new feature of **rust**: the option for the user to provide a C++ function to evaluate the target log-density, rather than an R function.  The **Rcpp** [@Rcpp] and **RcppArmadillo** [@arma] packages are used to speed up simulation from the target density.  The improvement results from faster function evaluations and (in particular) from performing using C++ the looping in the ratio-of-uniforms algorithm.  
+
+## Providing a C++ function
+
+The general way that **rust** enables users to provide their own C++ functions uses external pointers and is based on the [Rcpp Gallery](http://gallery.rcpp.org/) article [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/) by Dirk Eddelbuettel.  For a detailed case study of the general approach see the **RcppDE** package [@RcppDE] vignette at the [RcppDE page on CRAN](https://CRAN.R-project.org/package=RcppDE).
+
+The user writes a C++ function to calculate $\log f(x)$.  The current implementation in **rust** requires this function to have a particular structure: it must take a constant reference to an `Rcpp::NumericVector`, say `x`, a constant reference to an `Rcpp::List`, say `pars`, and return a `double` precision scalar. `x` is the argument $x$ of $f(x)$. `pars` is a list containing the values of parameters whose values are not specified inside the function.  This allows the user to change the values of any parameters in the target density without editing the function.  If there are no such parameters then the user must still include the argument `pars` in their function, even though the list provided to the function when it is called will be empty. 
+
+A simple way for the user provide their C++ functions to create them in a file, say `user_fns.cpp`.  An example is provided below.  The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example file below also includes the function `create_xptr`, which creates an external pointer to a C++ function. See
+\href{http://gallery.rcpp.org/articles/passing-cpp-function-pointers/}{Passing user-supplied C++ functions}.  It is this external pointer that is passed to `ru_rcpp` to perform ratio-of-uniforms sampling.  If the user has written a C++ function, say `new_name`, they need to add to `create_xptr` two lines of code:
+
+    else if (fstr == "new_name")  
+      return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
+
+in order that they can create an external pointer for `new_name` using `create_xptr`.  The following example of file `user_fns.cpp` contains code for a standard normal density, a gamma density with unit scale parameter and user-supplied shape parameter `alpha` and a bivariate normal density with standard normal margins and a user-supplied correlation parameter `rho`.
+
+    #include <Rcpp.h>
+
+    using namespace Rcpp;
+
+    // [[Rcpp::interfaces(r, cpp)]]
+
+    // User-supplied C++ functions.  
+    // Note that currently the only interface available in rust is  
+    // double fun(const Rcpp::NumericVector& x, const Rcpp::List& pars)  
+    // Each function must be prefaced by the line: // [[Rcpp::export]]  
+
+    // [[Rcpp::export]]  
+    double logdN01(const Rcpp::NumericVector& x, const Rcpp::List& pars) {  
+      return (-pow(x[0], 2.0) / 2.0) ;
+    }
+
+    //  [Rcpp::export]]  
+    double logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {  
+      double alpha = pars["alpha"] ;  
+      if (x[0] > 0)   
+        return ((alpha - 1.0) * log(x[0]) - x[0]) ;  
+      if (alpha > 1)
+        return R_NegInf;  
+      else if (alpha < 1)
+        return R_PosInf ;  
+      else
+        return 0.0 ;  
+    }  
+
+    // [[Rcpp::export]]  
+    double logdnorm2(const Rcpp::NumericVector& x, const Rcpp::List& pars) {  
+      double rho = pars["rho"] ;  
+      double div = 2.0 * (1.0 - pow(rho, 2.0)) ;  
+      return (-(pow(x[0], 2.0) - 2.0 * rho * x[0] * x[1] + pow(x[1], 2.0)) / div) ;  
+    }  
+
+    // A function to create external pointers for any of the functions above.  
+    // See http://gallery.rcpp.org/articles/passing-cpp-function-pointers/  
+    // If you write a new function above called new_name then add the following
+    //
+    // else if (fstr == "new_name")  
+    //   return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;  
+
+    // [[Rcpp::export]]  
+    SEXP create_xptr(std::string fstr) {  
+      typedef double (*funcPtr)(const Rcpp::NumericVector& x,  
+                      const Rcpp::List& pars) ;  
+      if (fstr == "logdgamma")  
+        return(Rcpp::XPtr<funcPtr>(new funcPtr(&logdgamma))) ;  
+      else if (fstr == "logdN01")  
+        return(Rcpp::XPtr<funcPtr>(new funcPtr(&logdN01))) ;  
+      else if (fstr == "logdnorm2")  
+        return(Rcpp::XPtr<funcPtr>(new funcPtr(&logdnorm2))) ;  
+      else  
+        return(Rcpp::XPtr<funcPtr>(R_NilValue)) ;  
+    }  
+    
+    // We could create the external pointers when this file is sourced using   
+    // the embedded R code below and/or (re)create them using create_xptr() in 
+    // an R session or R package..
+
+    /*** R
+    ptr_gam <- create_xptr("logdgamma")
+    ptr_N01 <- create_xptr("logdN01")
+    ptr_bvn <- create_xptr("logdnorm2")
+    */
+    
+## Examples
+
+We return to selected examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.
+
+```{r setup, include=FALSE}
+devtools::document() # reload all code (after saving them)   or Ctrl-shift-L
+```
+
+```{r}
+library(rust)
+library(microbenchmark)
+library(Rcpp)
+library(RcppArmadillo)
+# Set the size of the simulated sample
+n <- 1
+set.seed(47)
+```
+
+Please note that in the following it is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.
+
+### Standard normal density
+
+We start with a very simple example: the (1-dimensional) standard normal density.
+```{r}
+# Normal density ===================
+
+# Create a pointer to the logdN01 C++ function
+# (not necessary if this was created when the file of C++ functions was sourced)
+ ptr_N01 <- create_xptr("logdN01")
+# Compare performances of ru and ru_rcpp
+microbenchmark(
+ ru = ru(logf = function(x) -x ^ 2 / 2, d = 1, n = n, init = 0.1),
+ ru_rcpp = ru_rcpp(logf = ptr_N01, d = 1, n = n, init = 0.1)
+)
+```
+
+### Multivariate normal density
+
+```{r}
+# two-dimensional normal with positive association ----------------
+rho <- 0.9
+covmat <- matrix(c(1, rho, rho, 1), 2, 2)
+log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
+  x <- matrix(x, ncol = length(x))
+  d <- ncol(x)
+  - 0.5 * (x - mean) %*% solve(sigma) %*% t(x - mean)
+}
+ptr_bvn <- create_xptr("logdnorm2")
+microbenchmark(
+ ru = ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = n, init = c(0, 0)), 
+ ru_rcpp = ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n, init = c(0, 0))
+)
+```
+
+### Gamma density
+
+```{r}
+ptr_gam <- create_xptr("logdgamma")
+alpha <- 2
+microbenchmark(
+ ru = ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n,
+  lower = 0, init = alpha), 
+ ru_rcpp = ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
+  lower = 0, init = alpha)
+)
+```
+
+## References

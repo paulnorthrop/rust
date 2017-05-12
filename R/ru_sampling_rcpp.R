@@ -21,7 +21,7 @@
 #'   If \code{trans = "user"} then the transformation should be specified
 #'   using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 #'   used to pass arguments to \code{phi_to_theta} and \code{log_j}.
-#' @param phi_to_theta A function returning (inverse) of the transformation
+#' @param phi_to_theta A function returning (the inverse) of the transformation
 #'   from theta to phi used to ensure positivity of phi prior to Box-Cox
 #'   transformation.  The argument is phi and the returned value is theta.
 #' @param log_j A function returning the log of the Jacobian of the
@@ -62,10 +62,10 @@
 #'   the function \emph{after} any transformation from theta to phi implied by
 #'   the inverse of \code{phi_to_theta}. If \code{rotate = FALSE} these
 #'   are used in the optimizations used to construct the bounding box.  If
-#'   \code{trans = "BC"} components of lower that are negative are set to zero
-#'   without warning and the bounds implied after the Box-Cox transformation
-#'   are calculated inside \code{ru}.  If \code{rotate = TRUE} all
-#'   optimizations are unconstrained.
+#'   \code{trans = "BC"} components of \code{lower} that are negative are set
+#'   to zero without warning and the bounds implied after the Box-Cox
+#'   transformation are calculated inside \code{ru}.  If \code{rotate = TRUE}
+#'   all optimizations are unconstrained.
 #' @param r A numeric scalar.  Parameter of generalized ratio-of-uniforms.
 #' @param ep A numeric scalar.  Controls initial estimates for optimizations
 #'   to find the b-bounding box parameters.  The default (\code{ep}=0)
@@ -155,17 +155,89 @@
 #' Rcpp::sourceCpp("src/user_fns.cpp")
 #' n <- 1000
 #'
-#' # Standard normal density ===================
-#' x <- ru_rcpp(logf = ptr_N01, d = 1, n = 1000, init = 0.1)
+#' # Normal density ===================
+#'
+#' # One-dimensional standard normal ----------------
+#' x <- ru_rcpp(logf = ptr_N01, d = 1, n = n, init = 0.1)
+#'
+#' # Two-dimensional standard normal ----------------
+#' rho <- 0
+#' x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n,
+#'   init = c(0, 0))
+#'
+#' # Two-dimensional normal with positive association ===================
+#' rho <- 0.9
+#' # No rotation.
+#' x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n, init = c(0, 0),
+#'              rotate = FALSE)
+#'
+#' # With rotation.
+#' x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n, init = c(0, 0))
+#'
+#' # three-dimensional normal with positive association ----------------
+#' covmat <- matrix(rho, 3, 3) + diag(1 - rho, 3)
+#'
+#' # No rotation.
+#' x <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = n,
+#'              init = c(0, 0, 0), rotate = FALSE)
+#'
+#' # With rotation.
+#' x <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = n,
+#'              init = c(0, 0, 0))
+#'
+#' # Log-normal density ===================
+#'
+#' mu <- 0
+#' sigma <- 1
+#' # Sampling on original scale ----------------
+#' x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = n,
+#'              lower = 0, init = exp(mu))
+#'
+#' # Box-Cox transform with lambda = 0 ----------------
+#' lambda <- 0
+#' x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = n,
+#'              lower = 0, init = exp(mu), trans = "BC", lambda = lambda)
+#'
+#' # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
+#' # transformation and the log-Jacobian by hand
+#' x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = n,
+#'   init = 0.1, trans = "user", phi_to_theta = ptr_phi_to_theta_lnorm,
+#'   log_j = ptr_log_j_lnorm)
 #'
 #' # Gamma (alpha, 1) density ===================
-#' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000,
+#'
+#' # Note: the gamma density in unbounded when its shape parameter is < 1.
+#' # Therefore, we can only use trans="none" if the shape parameter is >= 1.
+#'
+#' # Sampling on original scale ----------------
+#'
+#' alpha <- 10
+#' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
 #'   lower = 0, init = alpha)
 #'
-#' # two-dimensional normal with positive association ===================
-#' x <- ru_rcpp(logf = ptr_bvn, d = 2, n = 1000, init = c(0.1, 0.1))
+#' alpha <- 1
+#' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
+#'   lower = 0, init = alpha)
 #'
-#' # GP posterior density ===================
+#' # Box-Cox transform with lambda = 1/3 works well for shape >= 1. -----------
+#'
+#' alpha <- 1
+#' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
+#'   trans = "BC", lambda = 1/3, init = alpha)
+#' summary(x)
+#'
+#' # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
+#' # transformation and the log-Jacobian by hand
+#'
+#' lambda <- 1/3
+#' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
+#'   trans = "user", phi_to_theta = ptr_phi_to_theta_bc, log_j = ptr_log_j_bc,
+#'   user_args = list(lambda = lambda), init = alpha)
+#' summary(x)
+#'
+#' \dontrun{
+#' # Generalized Pareto posterior distribution ===================
+#'
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = -0.5, sigma = 1)
 #' # Calculate summary statistics for use in the log-likelihood
@@ -173,9 +245,25 @@
 #' # Calculate an initial estimate
 #' init <- c(mean(gpd_data), 0)
 #'
+#' # Mode relocation only ----------------
+#' n <- 1000
 #' for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
-#'   lower = c(0, -Inf)), ss)
-#' x <- do.call(ru_rcpp, for_ru_rcpp)
+#'                  lower = c(0, -Inf)), ss, rotate = FALSE)
+#' x1 <- do.call(ru_rcpp, for_ru_rcpp)
+#' plot(x1, xlab = "sigma", ylab = "xi")
+#' # Parameter constraint line xi > -sigma/max(data)
+#' # [This may not appear if the sample is far from the constraint.]
+#' abline(a = 0, b = -1 / ss$xm)
+#' summary(x1)
+#'
+#' # Rotation of axes plus mode relocation ----------------
+#' for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
+#'                  lower = c(0, -Inf)), ss)
+#' x2 <- do.call(ru_rcpp, for_ru_rcpp)
+#' plot(x2, xlab = "sigma", ylab = "xi")
+#' abline(a = 0, b = -1 / ss$xm)
+#' summary(x2)
+#' }
 #'
 #' library(microbenchmark)
 #' microbenchmark(
@@ -369,95 +457,114 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   hscale <- 0
   # Mode of (transformed) target density: set to zero initially
   psi_mode <- rep(0, d)
-  if (trans == "none" & is.function(phi_to_theta)) {
+  is_pointer <- (class(phi_to_theta) == "externalptr")
+  if (trans == "none" & is_pointer) {
     warning("phi_to_theta() not used when trans = ``none'': identity fn used")
   }
-  if (!is.function(phi_to_theta) & !is.null(phi_to_theta)) {
-    stop("phi_to_theta must be a function or NULL")
+  if (!is_pointer & !is.null(phi_to_theta)) {
+    stop("phi_to_theta must be an external pointer to a function or NULL")
   }
-  if (is.function(phi_to_theta) & is.null(log_j)) {
-    log_j <- function(x) 0
-    warning("No Jacobian for phi_to_theta(): constant Jacobian has been used")
-  }
-  if (is.null(phi_to_theta)) {
-    phi_to_theta <- identity
-    log_j <- function(x) 0
+  if (trans == "user" & is.null(phi_to_theta)) {
+    stop("When trans = ``user'' phi_to_theta must be supplied")
   }
   # variable rotation matrix: set to matrix of ones initially
   rot_mat <- diag(d)
-#  if (trans == "BC") {
-#    const <- lambda * gm ^ (lambda - 1)
-#    if (any(lambda == 0L)) {
-#      psi_to_phi <- function(psi) {
-#        ifelse(lambda == 0, exp(psi / gm), (psi * const + 1) ^ (1 / lambda))
-#      }
-#    } else {
-#      psi_to_phi <- function(psi) (psi * const + 1) ^ (1 / lambda)
-#    }
-#  }
   init_psi <- init
   #
-#  if (trans == "none") {
-#    rho_to_theta <- function(rho) rho_to_psi(rho)
-#  }
-#  if (trans == "BC") {
-#    rho_to_theta <- function(rho) phi_to_theta(psi_to_phi(rho_to_psi(rho)))
-#  }
-#  if (trans == "user") {
-#    rho_to_theta <- function(rho) phi_to_theta(rho_to_psi(rho))
-#  }
+  # Determine which case applies:
   #
-#  if (trans == "none") {
-#    logf_rho <- function(rho,...) {
-#      theta <- rho_to_psi(rho)
-#      val <- logf(theta, ...) - hscale
-#      structure(val, theta = theta)
-#    }
-#  }
-#  if (trans == "BC") {
-#    logf_rho <- function(rho, ...) {
-#      psi <- rho_to_psi(rho)
-#      # When lambda is not equal to one (psi * const + 1) must be positive
-#      test <- (psi * const + 1)[which_lam]
-#      if (any(test <= 0)) return(-Inf)
-#      phi <- psi_to_phi(psi)
-#      theta <- phi_to_theta(phi)
-#      log_bc_jac <- sum((lambda - 1)[which_lam] * log(phi[which_lam]))
-#      val <- logf(theta, ...) - log_bc_jac - log_j(theta) - hscale
-#      structure(val, theta = theta)
-#    }
-#  }
-  if (trans == "user") {
-    logf_rho <- function(rho, ...) {
-      phi <- rho_to_psi(rho)
-      theta <- do.call(phi_to_theta, c(phi, user_args))
-      if (!is.finite(theta)) return(-Inf)
-      logj <- do.call(log_j, c(theta, user_args))
-      val <- logf(theta, ...) - logj - hscale
-      structure(val, theta = theta)
+  if (trans == "none") {
+    logf_fun <- cpp_logf_rho
+    a_obj_fun <- cpp_a_obj
+    lower_box_fun <- cpp_lower_box
+    upper_box_fun <- cpp_upper_box
+    ru_fun <- ru_cpp
+    logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
+                      logf = logf, pars = pars)
+    ru_args <- list(d = d, r = r)
+  } else if (trans == "BC" & is.null(phi_to_theta)) {
+    case <- 2
+    logf_fun <- cpp_logf_rho_2
+    a_obj_fun <- cpp_a_obj_2
+    lower_box_fun <- cpp_lower_box_2
+    upper_box_fun <- cpp_upper_box_2
+    ru_fun <- ru_cpp_2
+    con <- lambda * gm ^ (lambda - 1)
+    tpars <- list(which_lam = which_lam, lambda = lambda, gm = gm, con = con)
+    tfun <- create_trans_xptr("case_2")
+    if (all(lambda != 0)) {
+      ptpfun <- create_psi_to_phi_xptr("no_zero")
+    } else {
+      ptpfun <- create_psi_to_phi_xptr("has_zero")
     }
+    phi_to_theta = create_phi_to_theta_xptr("no_trans")
+    log_j = create_log_jac_xptr("log_none_jac")
+    logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
+                      logf = logf, pars = pars, tpars = tpars, ptpfun = ptpfun,
+                      phi_to_theta = phi_to_theta, log_j = log_j,
+                      user_args = user_args)
+    ru_args <- list(d = d, r = r, tfun = tfun)
+  } else if (trans == "BC" & !is.null(phi_to_theta)) {
+    case <- 3
+    logf_fun <- cpp_logf_rho_3
+    a_obj_fun <- cpp_a_obj_2
+    lower_box_fun <- cpp_lower_box_2
+    upper_box_fun <- cpp_upper_box_2
+    ru_fun <- ru_cpp_3
+    con <- lambda * gm ^ (lambda - 1)
+    tpars <- list(which_lam = which_lam, lambda = lambda, gm = gm, con = con)
+    tfun <- create_trans_xptr("case_3")
+    if (all(lambda != 0)) {
+      ptpfun <- create_psi_to_phi_xptr("no_zero")
+    } else {
+      ptpfun <- create_psi_to_phi_xptr("has_zero")
+    }
+    if (is.null(log_j)) {
+      log_j <- create_log_jac_xptr("case_3")
+    }
+    logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
+                      logf = logf, pars = pars, tpars = tpars, ptpfun = ptpfun,
+                      phi_to_theta = phi_to_theta, log_j = log_j,
+                      user_args = user_args)
+    ru_args <- list(d = d, r = r, tfun = tfun)
+  } else {
+    case <- 4
+    logf_fun <- cpp_logf_rho_4
+    a_obj_fun <- cpp_a_obj_2
+    lower_box_fun <- cpp_lower_box_2
+    upper_box_fun <- cpp_upper_box_2
+    ru_fun <- ru_cpp_4
+    tpars <- list()
+    tfun <- create_trans_xptr("case_4")
+    ptpfun <- create_psi_to_phi_xptr("no_trans")
+    if (is.null(log_j)) {
+      log_j <- create_log_jac_xptr("case_4")
+    }
+    logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
+                      logf = logf, pars = pars, tpars = tpars, ptpfun = ptpfun,
+                      phi_to_theta = phi_to_theta, log_j = log_j,
+                      user_args = user_args)
+    ru_args <- list(d = d, r = r, tfun = tfun)
   }
   #
   # Scale logf ---------------------------------
   #
-  hscale <- cpp_logf_rho(init_psi, rep(0, d), diag(d), 0, logf,
-                         pars = pars)
-  if (is.infinite(hscale)) {
-      stop("posterior density is zero at initial parameter values")
+  logf_args$hscale <- do.call(logf_fun, c(list(rho = init_psi), logf_args))
+  if (is.infinite(logf_args$hscale)) {
+    stop("posterior density is zero at initial parameter values")
   }
   #
   # Calculate a(r) ----------------------------------
   # Create list of arguments for find_a()
-  for_find_a <- list(logf = logf, init_psi = init_psi, d = d,
-                     r = r, lower = lower, upper = upper, algor = a_algor,
-                     method = a_method, control = a_control,
-                     hscale = hscale, pars = pars)
+  ru_args <- c(ru_args, logf_args)
+  for_find_a <- list(init_psi = init_psi, lower = lower, upper = upper,
+                     algor = a_algor, method = a_method, control = a_control,
+                     a_obj_fun = a_obj_fun, ru_args = ru_args)
   temp <- do.call("cpp_find_a", for_find_a)
   #
   # Check that logf is finite at 0
   #
-  check_finite <- cpp_logf_rho(temp$par, rep(0, d), diag(d), hscale, logf,
-                               pars = pars)
+  check_finite <- do.call(logf_fun, c(list(rho = temp$par), logf_args))
   if (!is.finite(check_finite)) {
     stop(paste("The target log-density is not finite at its mode: mode = ",
                temp$par, ", function value = ", check_finite, ".", sep=""))
@@ -465,7 +572,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   #
   # Scale logf to have a maximum at 0, i.e. a=1 ------------
   #
-  hscale <- check_finite + hscale
+  ru_args$hscale <- check_finite + logf_args$hscale
+  logf_args$hscale <- ru_args$hscale
   a_box <- 1
   f_mode <- temp$par
   vals[1, ] <- rep(0, d)
@@ -518,15 +626,17 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   }
   # In the C++ function cpp_rho_to_psi() the vectors are column vectors
   # so we need to transpose rot_mat.
-  rot_mat <- t(rot_mat)
-  psi_mode <- f_mode
+  ru_args$rot_mat <- t(rot_mat)
+  ru_args$psi_mode <- f_mode
+  logf_args$rot_mat <- t(rot_mat)
+  logf_args$psi_mode <- f_mode
   # Calculate biminus(r) and biplus(r), i = 1, ...d -----------
   # Create list of arguments for find_bs()
-  for_find_bs <- list(logf = logf, d = d, r = r, lower = lower,
-                      upper = upper, f_mode = f_mode, ep = ep, vals = vals,
-                      conv = conv, algor = b_algor, method = b_method,
-                      control = b_control, psi_mode = psi_mode,
-                      rot_mat = rot_mat, hscale = hscale, pars = pars)
+  for_find_bs <- list(lower = lower, upper = upper, ep = ep, vals = vals,
+                      conv = conv,
+                      algor = b_algor, method = b_method, control = b_control,
+                      lower_box_fun = lower_box_fun,
+                      upper_box_fun = upper_box_fun, ru_args = ru_args)
   temp <- do.call("cpp_find_bs", for_find_bs)
   vals <- temp$vals
   conv <- temp$conv
@@ -535,9 +645,11 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   #
   # Perform ratio-of-uniforms rejection samping ---------------
   # Call C++ function to do this.
-  res <- ru_cpp(n = n, d = d, r = r, a_box = a_box, l_box = l_box,
-                u_box = u_box, logf = logf, psi_mode= psi_mode,
-                rot_mat = rot_mat, hscale = hscale, pars = pars)
+  #
+  box_args <- list(n = n, a_box = a_box, l_box = l_box, u_box = u_box)
+  ru_args <- c(box_args, ru_args)
+  ru_args$tfun <- NULL
+  res <- do.call(ru_fun, ru_args)
   res$pa <- n / res$ntry
   box <- c(a_box, l_box, u_box)
   res$box <- cbind(box, vals, conv)
@@ -549,12 +661,10 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
     print(res$box)
   }
   res$d <- d
-  res$logf <- logf
   res$logf <- cpp_logf
-  res$logf_args <- list(pars = pars)
-  res$logf_rho <- cpp_logf_rho
-  res$cpp_logf_rho_args <- list(psi_mode = psi_mode, rot_mat = rot_mat,
-                            hscale = hscale)
+  res$logf_args <- list(logf = logf, pars = pars)
+  res$logf_rho <- logf_fun
+  res$logf_rho_args <- logf_args
   res$f_mode <- f_mode
   class(res) <- "ru"
   return(res)
@@ -563,112 +673,127 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
 # =========================== cpp_find_a ===========================
 
 
-cpp_find_a <-  function(logf, init_psi, d, r, lower, upper, algor,
-                        method, control, hscale, pars) {
+cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
+                        a_obj_fun, ru_args) {
   #
   # Finds the value of a(r).
   #
   # Args:
-  #   logf     : A pointer to the (original) target log-density function.
-  #   init_psi     : A numeric scalar.  Initial value of psi.
-  #   d            : A numeric scalar. Dimension of f.
-  #   r            : A numeric scalar. Parameter of generalized
-  #                  ratio-of-uniforms.
-  #   lower        : A numeric vector.  Lower bounds on the arguments of logf.
-  #   upper        : A numeric vector.  Upper bounds on the arguments of logf.
-  #   algor        : A character scalar.  Algorithm ("optim" or "nlminb").
-  #   method       : A character scalar.  Only relvant if algorithm = "optim".
-  #   control      : A numeric list.  Control arguments to algor.
-  #   hscale       : A numeric scalar.  Scales the target log-density.
+  #   init_psi  : A numeric scalar.  Initial value of psi.
+  #   lower     : A numeric vector.  Lower bounds on the arguments of logf.
+  #   upper     : A numeric vector.  Upper bounds on the arguments of logf.
+  #   algor     : A character scalar.  Algorithm ("optim" or "nlminb").
+  #   method    : A character scalar.  Only relevant if algorithm = "optim".
+  #   control   : A numeric list.  Control arguments to algor.
+  #   a_obj_fun : The function to be minimized to find a(r).
+  #   ru_args   : A numeric list, containing:
+  #     d         : A numeric scalar. Dimension of f.
+  #     r         : A numeric scalar. Generalized ratio-of-uniforms parameter.
+  #     psi_mode  : A numeric vector.  Latterly this will contain the estimated
+  #                 mode of the target density after transformation but prior
+  #                 to mode relation. Equal to rep(0, d) at this stage.
+  #     rot_mat   : A numeric matrix.  Latterly this will contain the rotation
+  #                 matrix.  Equal to diag(d) at this stage.
+  #     hscale    : A numeric scalar.  Scales the target log-density.
+  #                 Equal to logf evaluated at init at this stage.
+  #     which_lam : A vector of integers indication which components of lambda
+  #                 are Box-Cox transformed. Only present if trans = "BC".
+  #     lambda    : Box-Cox transformation parameters.
+  #                 Only present if trans = "BC".
+  #     gm        : Box-Cox scale parameters.  Only present if trans = "BC".
+  #     con       : lambda * gm ^(lambda - 1).  Only present if trans = "BC".
+  #     logf      : A pointer to the (original) target log-density function.
+  #     pars      : A numeric list of additional arguments to logf.
   #
   # Returns: a list containing
   #   the standard returns from optim or nlminb
   #   hessian: the estimated hessian of -cpp_logf_rho/(d*r+1) at its minimum.
   #
-  psi_mode <- rep(0, d)
-  rot_mat <- diag(d)
   big_val <- 10 ^ 10
-  #
-  fn_args <- list(psi_mode = psi_mode, rot_mat = rot_mat, hscale = hscale,
-                  logf = logf, d = d, r = r, pars = pars)
   #
   if (algor == "optim") {
     if (method == "L-BFGS-B" | method == "Brent") {
-      add_args <- list(par = init_psi, fn = cpp_a_obj, method = method,
+      add_args <- list(par = init_psi, fn = a_obj_fun, method = method,
                        control = control, lower = lower, upper = upper,
                        big_val = big_val)
-      temp <- do.call(stats::optim, c(fn_args, add_args))
+      temp <- do.call(stats::optim, c(ru_args, add_args))
     } else {
-      add_args <- list(par = init_psi, fn = cpp_a_obj, method = method,
+      add_args <- list(par = init_psi, fn = a_obj_fun, method = method,
                        control = control, big_val = Inf)
-      temp <- do.call(stats::optim, c(fn_args, add_args))
+      temp <- do.call(stats::optim, c(ru_args, add_args))
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator by using BFGS instead.
       if (temp$convergence == 10) {
-        add_args <- list(par = temp$par, fn = cpp_a_obj, method = "BFGS",
+        add_args <- list(par = temp$par, fn = a_obj_fun, method = "BFGS",
                          control = control, big_val = Inf)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
       }
     }
   } else {
-    add_args <- list(start = init_psi, objective = cpp_a_obj, control = control,
+    add_args <- list(start = init_psi, objective = a_obj_fun, control = control,
                      lower = lower, upper = upper, big_val = Inf)
-    temp <- do.call(stats::nlminb, c(fn_args, add_args))
+    temp <- do.call(stats::nlminb, c(ru_args, add_args))
     # Sometimes nlminb isn't sure that it has found the minimum when in fact
     # it has.  Try to check this, and avoid a non-zero convergence indicator
     # by using optim with method="BFGS", starting from nlminb's solution.
     if (temp$convergence > 0) {
-      add_args <- list(par = temp$par, fn = cpp_a_obj, hessian = FALSE,
+      add_args <- list(par = temp$par, fn = a_obj_fun, hessian = FALSE,
                        method = "BFGS", control = control, big_val = Inf)
-      temp <- do.call(stats::optim, c(fn_args, add_args))
+      temp <- do.call(stats::optim, c(ru_args, add_args))
     }
   }
   # Try to calculate Hessian, but avoid problems if an error is produced.
   # An error may occur if the MAP estimate is very close to a parameter
   # boundary.
-  add_args <- list(par = temp$par, fn = cpp_a_obj, big_val = Inf)
-  temp$hessian <- try(do.call(stats::optimHess, c(fn_args, add_args)),
+  add_args <- list(par = temp$par, fn = a_obj_fun, big_val = Inf)
+  temp$hessian <- try(do.call(stats::optimHess, c(ru_args, add_args)),
                       silent = TRUE)
   return(temp)
 }
 
 # =========================== cpp_find_bs ===========================
 
-cpp_find_bs <-  function(logf, d, r, lower, upper, f_mode, ep, vals, conv,
-                         algor, method, control, psi_mode, rot_mat, hscale,
-                         pars) {
+cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
+                         control, lower_box_fun, upper_box_fun, ru_args) {
   # Finds the values of b-(r) and b+(r).
   #
   # Args:
-  #   logf     : A pointer to the (original) target log-density function.
-  #   init_psi     : A numeric scalar.  Initial value of psi.
-  #   d            : A numeric scalar. Dimension of f.
-  #   r            : A numeric scalar. Parameter of generalized
-  #                  ratio-of-uniforms.
-  #   lower        : A numeric vector.  Lower bounds on the arguments of logf.
-  #   upper        : A numeric vector.  Upper bounds on the arguments of logf.
-  #   f_mode       : A numeric scalar.  The estimated mode of the target
-  #                  log-density logf.
-  #   ep           : A numeric scalar.  Controls initial estimates for
-  #                  optimizations to find the b-bounding box parameters.
-  #                  The default (ep=0) corresponds to starting at the mode of
-  #                  logf small positive values of ep move the constrained
-  #                  variable slightly away from the mode in the correct
-  #                  direction.  If ep is negative its absolute value is used,
-  #                  with no warning given.
-  #   vals         : A numeric matrix.  Will contain the values of the
-  #                  variables at which the ru box dimensions occur.
-  #                  Row 1 already contains the values for a(r).
-  #   conv         : A numeric scalar.  Will contain the covergence
-  #                  indicators returned by the optimisation algorithms.
-  #                  Row 1 already contains the values for a(r).
-  #   algor        : A character scalar. Algorithm ("optim" or "nlminb").
-  #   method       : A character scalar.  Only relvant if algorithm = "optim".
-  #   control      : A numeric list. Control arguments to algor.
-  #   psi_mode     : A numeric vector.  Mode of the target log-density.
-  #   rot_mat      : A numeric matrix.  Rotation matrix (equal to the identity
-  #                  matrix if rotate = FALSE).
-  #   hscale       : A numeric scalar.  Scales the target log-density.
+  #   lower         : A numeric vector.  Lower bounds on the arguments of logf.
+  #   upper         : A numeric vector.  Upper bounds on the arguments of logf.
+  #   ep            : A numeric scalar.  Controls initial estimates for
+  #                   optimizations to find the b-bounding box parameters.
+  #                   The default (ep=0) corresponds to starting at the mode of
+  #                   logf small positive values of ep move the constrained
+  #                   variable slightly away from the mode in the correct
+  #                   direction.  If ep is negative its absolute value is used,
+  #                   with no warning given.
+  #   vals          : A numeric matrix.  Will contain the values of the
+  #                   variables at which the ru box dimensions occur.
+  #                   Row 1 already contains the values for a(r).
+  #   conv          : A numeric scalar.  Will contain the covergence
+  #                   indicators returned by the optimisation algorithms.
+  #                   Row 1 already contains the values for a(r).
+  #   algor         : A character scalar. Algorithm ("optim" or "nlminb").
+  #   method        : A character scalar.  Only relevant if algor = "optim".
+  #   control       : A numeric list. Control arguments to algor.
+  #   lower_box_fun : The function to be minimized to find b-(r).
+  #   upper_box_fun : The function to be minimized to find b+(r).
+  #   ru_args       : A numeric list, containing:
+  #     d         : A numeric scalar. Dimension of f.
+  #     r         : A numeric scalar. Generalized ratio-of-uniforms parameter.
+  #     psi_mode  : A numeric vector.  The estimated mode of the target
+  #                 density after transformation but prior to mode relocation.
+  #     rot_mat   : A numeric matrix.  Rotation matrix (equal to the identity
+  #                 matrix if rotate = FALSE).
+  #     hscale    : A numeric scalar.  Scales the target log-density.
+  #     which_lam : A vector of integers indication which components of lambda
+  #                 are Box-Cox transformed. Only present if trans = "BC".
+  #     lambda    : Box-Cox transformation parameters.
+  #                 Only present if trans = "BC".
+  #     gm        : Box-Cox scale parameters.  Only present if trans = "BC".
+  #     con       : lambda * gm ^(lambda - 1).  Only present if trans = "BC".
+  #     logf      : A pointer to the (original) target log-density function.
+  #     pars      : A numeric list of additional arguments to logf.
   #
   # Returns: a list containing
   #   l_box : A numeric vector.  Values of biminus(r), i = 1, ...d.
@@ -677,9 +802,8 @@ cpp_find_bs <-  function(logf, d, r, lower, upper, f_mode, ep, vals, conv,
   #   conv  : as described above in Args.
   #
   big_val <- 10 ^ 10
-  #
-  fn_args <- list(psi_mode = psi_mode, rot_mat = rot_mat, hscale = hscale,
-                  logf = logf, d = d, r = r, pars = pars)
+  f_mode <- ru_args$psi_mode
+  d <- ru_args$d
   #
   l_box <- u_box <- NULL
   zeros <- rep(0, d)
@@ -695,38 +819,38 @@ cpp_find_bs <-  function(logf, d, r, lower, upper, f_mode, ep, vals, conv,
     t_upper <- upper - f_mode
     t_upper[j] <- 0
     if (algor == "nlminb") {
-      add_args <- list(start = rho_init, objective = cpp_lower_box,
+      add_args <- list(start = rho_init, objective = lower_box_fun,
                        upper = t_upper, lower = lower - f_mode, j = j - 1,
                        control = control, big_val = Inf)
-      temp <- do.call(stats::nlminb, c(fn_args, add_args))
+      temp <- do.call(stats::nlminb, c(ru_args, add_args))
       l_box[j] <- temp$objective
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        add_args <- list(par = temp$par, fn = cpp_lower_box, j = j - 1,
+        add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
                          method = "BFGS", big_val = Inf)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
         l_box[j] <- temp$value
       }
     }
     if (algor == "optim") {
       # L-BFGS-B and Brent don't like Inf or NA
       if (method == "L-BFGS-B" | method == "Brent") {
-        add_args <- list(par = rho_init, fn = cpp_lower_box, upper = t_upper,
+        add_args <- list(par = rho_init, fn = lower_box_fun, upper = t_upper,
                          lower = lower - f_mode, j = j - 1, control = control,
                          method = method, big_val = big_val)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
       } else {
-        add_args <- list(par = rho_init, fn = cpp_lower_box, j = j - 1,
+        add_args <- list(par = rho_init, fn = lower_box_fun, j = j - 1,
                          control = control, method = method, big_val = Inf)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10)
-          add_args <- list(par = temp$par, fn = cpp_lower_box, j = j - 1,
+          add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
                            control = control, method = "BFGS", big_val = Inf)
-          temp <- do.call(stats::optim, c(fn_args, add_args))
+          temp <- do.call(stats::optim, c(ru_args, add_args))
       }
       l_box[j] <- temp$value
     }
@@ -740,38 +864,38 @@ cpp_find_bs <-  function(logf, d, r, lower, upper, f_mode, ep, vals, conv,
     t_lower <- lower - f_mode
     t_lower[j] <- 0
     if (algor == "nlminb") {
-      add_args <- list(start = rho_init, objective = cpp_upper_box,
+      add_args <- list(start = rho_init, objective = upper_box_fun,
                        lower = t_lower, upper = upper - f_mode, j = j - 1,
                        control = control, big_val = Inf)
-      temp <- do.call(stats::nlminb, c(fn_args, add_args))
+      temp <- do.call(stats::nlminb, c(ru_args, add_args))
       u_box[j] <- -temp$objective
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        add_args <- list(par = temp$par, fn = cpp_upper_box, j = j - 1,
+        add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
                          method = "BFGS", big_val = Inf)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
         u_box[j] <- temp$value
       }
     }
     if (algor == "optim") {
       # L-BFGS-B and Brent don't like Inf or NA
       if (method == "L-BFGS-B" | method == "Brent") {
-        add_args <- list(par = rho_init, fn = cpp_upper_box,
+        add_args <- list(par = rho_init, fn = upper_box_fun,
                          lower = t_lower, upper = upper - f_mode, j = j - 1,
                          control = control, method = method, big_val = big_val)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
       } else {
-        add_args <- list(par = rho_init, fn = cpp_upper_box, j = j - 1,
+        add_args <- list(par = rho_init, fn = upper_box_fun, j = j - 1,
                          control = control, method = method, big_val = Inf)
-        temp <- do.call(stats::optim, c(fn_args, add_args))
+        temp <- do.call(stats::optim, c(ru_args, add_args))
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10) {
-          add_args <- list(par = temp$par, fn = cpp_upper_box, j = j - 1,
+          add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
                            control = control, method = "BFGS", big_val = Inf)
-          temp <- do.call(stats::optim, c(fn_args, add_args))
+          temp <- do.call(stats::optim, c(ru_args, add_args))
         }
       }
       u_box[j] <- -temp$value

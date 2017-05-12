@@ -19,7 +19,8 @@ Description: Uses the generalised ratio-of-uniforms (RU) method to simulate
 Imports: stats,
     graphics,
     methods,
-    spatstat
+    spatstat,
+    Rcpp (>= 0.12.10)
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
@@ -28,7 +29,10 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     testthat,
-    devtools
+    devtools,
+    inline,
+    microbenchmark
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/rust
 BugReports: http://github.com/paulnorthrop/rust/issues
+LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo 

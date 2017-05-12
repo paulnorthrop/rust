@@ -1,5 +1,17 @@
 # rust 1.1.0.9000
 
+## New features
+
+* Package Rcpp (https://CRAN.R-project.org/package=Rcpp) can be used to speed up (considerably) the computations.  
+
+## Bug fixes and minor improvements
+
+* Bug fixed in `plot.ru()`: previously `plot.ru()` failed when `d > 2`  and no axis label names were provided.
+
+* Bug fixed in `plot.ru` : previously, in the `d = 2` case, providing the graphical parameter `col` produced an error because `col = 8` was hard-coded in a call to `points`. Now the extra argument `points_par` enables the user to provide a list of arguments to `points`.
+
+* "using `pairs()`" removed from the last sentence Description of `plot.ru()` because `pairs()` is not used when `d > 2`, rather a single plot is produced for each pair of variables.
+
 # rust 1.1.0
 
 ## New features
@@ -23,11 +35,3 @@
 * `find_lambda()`: carry out calculation of the target on a shifted log scale to avoid underflow.
 
 * Set up `plot.ru()` so that if the user supplies axis labels then they are used and otherwise the column name(s) of `ru_object$sim_vals` are used. Also enable plotmath symbols to be rendered in the axis labels.
-
-# rust 1.1.0.9000
-
-## New features
-
-## Bug fixes and minor improvements
-
-* "using `pairs()`" removed from the last sentence Description of `plot.ru()` because `pairs()` is not used when `d > 2`, rather a single plot is produced for each pair of variables.

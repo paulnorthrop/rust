@@ -40,4 +40,6 @@
 #' @name rust
 #' @import methods
 #' @importFrom stats runif
+#' @useDynLib rust
+#' @importFrom Rcpp sourceCpp
 NULL

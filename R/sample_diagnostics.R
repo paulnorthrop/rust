@@ -68,7 +68,8 @@
 #' @export
 plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                     prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
-                    ru_scale = FALSE, rows = NULL, xlabs = NULL, ylabs = NULL) {
+                    ru_scale = FALSE, rows = NULL, xlabs = NULL,
+                    ylabs = NULL, points_par = list(col = 8)) {
   if (!inherits(x, "ru")) {
     stop("use only with \"ru\" objects")
   }
@@ -80,12 +81,15 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     plot_density <- x$logf_rho
   } else {
     plot_data <- x$sim_vals
-    plot_density <- x$logf
+    pmedian <- apply(x$sim_vals, 2, median)
+    hshift <- do.call(x$logf, c(list(pmedian), x$logf_args))
+    xlogf <- x$logf
+    plot_density <- function(x, ...) {
+      xlogf(x, ...) - hshift
+    }
   }
-  if (!is.null(x$logf_ptr) & !ru_scale) {
-    density_args <- c(x$logf_ptr, x$logf_args)
-  } else if (!is.null(x$logf_ptr) & ru_scale) {
-    density_args <- c(x$logf_ptr, x$logf_args, x$cpp_logf_rho_args)
+  if (!is.null(x$logf_rho_args) & ru_scale) {
+    density_args <- x$logf_rho_args
   } else {
     density_args <- x$logf_args
   }
@@ -142,7 +146,8 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     #
     graphics::contour(xx, yy, zz, levels = con.levs, add = F, ann = F,
       labels = prob * 100, ...)
-    graphics::points(plot_data, col = 8, ...)
+#    graphics::points(plot_data, col = pcol, ...)
+    do.call(graphics::points, c(list(x = plot_data), points_par))
     graphics::contour(xx, yy, zz, levels = con.levs, add = T, ann = T,
       labels = prob * 100, ...)
     temp <- list(...)
@@ -162,7 +167,6 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
       rows <- x$d -2
     }
     cols <- ceiling(choose(x$d, 2) / rows)
-    temp <- list(...)
     if (is.null(xlabs)) {
       if (!is.null(colnames(plot_data))) {
         xlabs <- colnames(plot_data)

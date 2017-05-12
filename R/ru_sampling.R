@@ -3,10 +3,10 @@
 #' Generalized ratio-of-uniforms sampling
 #'
 #' Uses the generalized ratio-of-uniforms method to simulate from a
-#' distribution with log-density \code{logf} (up to an additive constant).
-#' \code{logf} must be bounded, perhaps after a transformation of variable.
+#' distribution with log-density \eqn{log f} (up to an additive constant).
+#' The density \eqn{f} must be bounded, perhaps after a transformation of variable.
 #'
-#' @param logf A function returning the log of the target density f.
+#' @param logf A function returning the log of the target density \eqn{f}.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A numeric scalar.  Number of simulated values required.
@@ -20,7 +20,7 @@
 #'   If \code{trans = "user"} then the transformation should be specified
 #'   using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 #'   used to pass arguments to \code{phi_to_theta} and \code{log_j}.
-#' @param phi_to_theta A function returning (inverse) of the transformation
+#' @param phi_to_theta A function returning (the inverse) of the transformation
 #'   from theta to phi used to ensure positivity of phi prior to Box-Cox
 #'   transformation.  The argument is phi and the returned value is theta.
 #' @param log_j A function returning the log of the Jacobian of the
@@ -29,7 +29,7 @@
 #' @param user_args A list of numeric components. If \code{trans = ``user''}
 #'   then \code{user_args} is a list providing arguments to the user-supplied
 #'   functions \code{phi_to_theta} and \code{log_j}.  If \code{phi_to_theta}
-#'   is undefined at the input value then the  function should return NA.
+#'   is undefined at the input value then the function should return NA.
 #' @param lambda Either
 #' \itemize{
 #'   \item {A numeric vector.  Box-Cox transformaton parameters, or}
@@ -61,10 +61,10 @@
 #'   the function \emph{after} any transformation from theta to phi implied by
 #'   the inverse of \code{phi_to_theta}. If \code{rotate = FALSE} these
 #'   are used in the optimizations used to construct the bounding box.  If
-#'   \code{trans = "BC"} components of lower that are negative are set to zero
-#'   without warning and the bounds implied after the Box-Cox transformation
-#'   are calculated inside \code{ru}.  If \code{rotate = TRUE} all
-#'   optimizations are unconstrained.
+#'   \code{trans = "BC"} components of \code{lower} that are negative are set
+#'   to zero without warning and the bounds implied after the Box-Cox
+#'   transformation are calculated inside \code{ru}.  If \code{rotate = TRUE}
+#'   all optimizations are unconstrained.
 #' @param r A numeric scalar.  Parameter of generalized ratio-of-uniforms.
 #' @param ep A numeric scalar.  Controls initial estimates for optimizations
 #'   to find the b-bounding box parameters.  The default (\code{ep}=0)
@@ -153,14 +153,14 @@
 #' @examples
 #' # Normal density ===================
 #'
-#' # one-dimensional standard normal ----------------
+#' # One-dimensional standard normal ----------------
 #' x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0.1)
 #'
-#' # two-dimensional standard normal ----------------
+#' # Two-dimensional standard normal ----------------
 #' x <- ru(logf = function(x) -(x[1]^2 + x[2]^2) / 2, d = 2, n = 1000,
 #'         init = c(0, 0))
 #'
-#' # two-dimensional normal with positive association ----------------
+#' # Two-dimensional normal with positive association ----------------
 #' rho <- 0.9
 #' covmat <- matrix(c(1, rho, rho, 1), 2, 2)
 #' log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
@@ -194,8 +194,8 @@
 #'
 #' # Box-Cox transform with lambda = 0 ----------------
 #' lambda <- 0
-#' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, init = 0.1, trans = "BC",
-#'         lambda = lambda)
+#' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 0.1,
+#'         trans = "BC", lambda = lambda)
 #'
 #' # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
 #' # transformation and the log-Jacobian by hand
@@ -203,7 +203,7 @@
 #'         trans = "user", phi_to_theta = function(x) exp(x),
 #'         log_j = function(x) -log(x))
 #'
-#' # Gamma density ===================
+#' # Gamma(alpha, 1) density ===================
 #'
 #' # Note: the gamma density in unbounded when its shape parameter is < 1.
 #' # Therefore, we can only use trans="none" if the shape parameter is >= 1.
@@ -593,9 +593,9 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     rot_mat <- solve(t(chol(hess_mat)))
     # We standardize so that the determinant of rot_mat is 1, i.e. the
     # transformation rotates but doesn't scale.  To do this we divide
-    # by the det(rot_mat)^(1/d).  The determinant is the product of the
+    # by det(rot_mat)^(1/d).  The determinant is the product of the
     # eigenvalues of rot_mat.  These eigenvalues are the eigenvalues of
-    # hess-Mat in e_vals, raised to the power -1/2.
+    # hess_mat in e_vals, raised to the power -1/2.
     rot_mat <- rot_mat / exp(-mean(log(e_vals)) / 2)
   }
   psi_mode <- f_mode
@@ -672,7 +672,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   #   lower        : A numeric vector.  Lower bounds on the arguments of logf.
   #   upper        : A numeric vector.  Upper bounds on the arguments of logf.
   #   algor        : A character scalar.  Algorithm ("optim" or "nlminb").
-  #   method       : A character scalar.  Only relvant if algorithm = "optim".
+  #   method       : A character scalar.  Only relevant if algorithm = "optim".
   #   control      : A numeric list.  Control arguments to algor.
   #
   # Returns: a list containing
@@ -747,7 +747,6 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
   #
   # Args:
   #   f_rho        : A function.  Target probability density function.
-  #   init_psi     : A numeric scalar.  Initial value of psi.
   #   d            : A numeric scalar. Dimension of f.
   #   r            : A numeric scalar. Parameter of generalized
   #                  ratio-of-uniforms.
@@ -769,7 +768,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
   #                  indicators returned by the optimisation algorithms.
   #                  Row 1 already contains the values for a(r).
   #   algor        : A character scalar. Algorithm ("optim" or "nlminb").
-  #   method       : A character scalar.  Only relvant if algorithm = "optim".
+  #   method       : A character scalar.  Only relevant if algorithm = "optim".
   #   control      : A numeric list. Control arguments to algor.
   #
   # Returns: a list containing
@@ -832,7 +831,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         lower_box <- function(rho, j, ...) {
           if (any(is.na(rho))) return(big_finite_val)
           if (rho[j] == 0) return(0)
-          if (rho[j] > 0) return(big_val)
+          if (rho[j] > 0) return(big_finite_val)
           if (f_rho(rho, ...) == 0) return(big_finite_val)
           check <- rho[j] * f_rho(rho, ...) ^ (r / (d * r + 1))
           if (is.infinite(check)) check <- big_finite_val
@@ -842,15 +841,16 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       if (method == "L-BFGS-B" | method == "Brent") {
         temp <- stats::optim(rho_init, lower_box, upper = t_upper,
                              lower = lower - f_mode, j = j,
-                             control = control, method = method, ...)
+                             control = control, method = method,
+                             hessian = FALSE, ...)
       } else {
         temp <- stats::optim(rho_init, lower_box, j = j, control = control,
-                             method = method, ...)
+                             method = method, hessian = FALSE, ...)
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10)
           temp <- stats::optim(temp$par, lower_box, j = j, control = control,
-                               method = "BFGS", ...)
+                               method = "BFGS", hessian = FALSE, ...)
       }
       l_box[j] <- temp$value
     }
@@ -883,7 +883,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         upper_box <- function(rho, j, ...) {
           if (any(is.na(rho))) return(big_finite_val)
           if (rho[j] == 0) return(0)
-          if (rho[j] < 0) return(big_val)
+          if (rho[j] < 0) return(big_finite_val)
           if (f_rho(rho, ...) == 0) return(big_finite_val)
           check <- -rho[j] * f_rho(rho, ...) ^ (r / (d * r + 1))
           if (is.infinite(check)) check <- big_finite_val

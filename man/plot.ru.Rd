@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{ru}(x, y, ..., n = ifelse(x$d == 1, 1001, 101), prob = c(0.1,
   0.25, 0.5, 0.75, 0.95, 0.99), ru_scale = FALSE, rows = NULL,
-  xlabs = NULL, ylabs = NULL)
+  xlabs = NULL, ylabs = NULL, points_par = list(col = 8))
 }
 \arguments{
 \item{x}{an object of class "ru", a result of a call to \code{ru}.}
