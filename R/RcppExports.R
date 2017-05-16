@@ -136,6 +136,14 @@ create_phi_to_theta_xptr <- function(fstr) {
     .Call('rust_create_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
 }
 
+new_logdgamma <- function(xS, env) {
+    .Call('rust_new_logdgamma', PACKAGE = 'rust', xS, env)
+}
+
+new_create_xptr <- function(fstr) {
+    .Call('rust_new_create_xptr', PACKAGE = 'rust', fstr)
+}
+
 logdN01 <- function(x, pars) {
     .Call('rust_logdN01', PACKAGE = 'rust', x, pars)
 }
@@ -186,6 +194,10 @@ vecpower <- function(base, exp) {
 
 bc_phi_to_theta <- function(phi, user_args) {
     .Call('rust_bc_phi_to_theta', PACKAGE = 'rust', phi, user_args)
+}
+
+gp_phi_to_theta <- function(phi, user_args) {
+    .Call('rust_gp_phi_to_theta', PACKAGE = 'rust', phi, user_args)
 }
 
 my_create_phi_to_theta_xptr <- function(fstr) {

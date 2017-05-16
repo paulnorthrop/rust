@@ -180,6 +180,16 @@ Rcpp::NumericVector bc_phi_to_theta(const Rcpp::NumericVector& phi,
 }
 
 // [[Rcpp::export]]
+Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
+                                    const Rcpp::List& user_args) {
+  double xm = user_args["xm"] ;
+  Rcpp::NumericVector val(2);
+  val[0] = phi[0] ;
+  val[1] = phi[1] - phi[0] / xm ;
+  return val ;
+}
+
+// [[Rcpp::export]]
 SEXP my_create_phi_to_theta_xptr(std::string fstr) {
   typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
                                const Rcpp::List& user_args) ;
@@ -187,6 +197,8 @@ SEXP my_create_phi_to_theta_xptr(std::string fstr) {
     return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&exptrans))) ;
   else if (fstr == "bc")
     return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&bc_phi_to_theta))) ;
+  else if (fstr == "gp")
+    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&gp_phi_to_theta))) ;
   else
     return(Rcpp::XPtr<p2tPtr>(R_NilValue)) ;
 }
@@ -206,4 +218,5 @@ ptr_phi_to_theta_lnorm <- my_create_phi_to_theta_xptr("exponential")
 ptr_log_j_lnorm <- create_log_j_xptr("neglog")
 ptr_phi_to_theta_bc <- my_create_phi_to_theta_xptr("bc")
 ptr_log_j_bc <- create_log_j_xptr("bc")
-  */
+ptr_phi_to_theta_gp <- my_create_phi_to_theta_xptr("gp")
+*/

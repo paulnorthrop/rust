@@ -15,7 +15,7 @@ ru_rcpp(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   var_names = NULL)
 }
 \arguments{
-\item{logf}{A pointer to the compiled C++ function returning the log
+\item{logf}{A pointer to a compiled C++ function returning the log
 of the target density \eqn{f}.}
 
 \item{...}{Further arguments to be passed to \code{logf} and related
@@ -36,18 +36,19 @@ If \code{trans = "user"} then the transformation should be specified
 using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 used to pass arguments to \code{phi_to_theta} and \code{log_j}.}
 
-\item{phi_to_theta}{A function returning (the inverse) of the transformation
-from theta to phi used to ensure positivity of phi prior to Box-Cox
-transformation.  The argument is phi and the returned value is theta.}
+\item{phi_to_theta}{A pointer to a compiled C++ function returning
+(the inverse) of the transformation from theta to phi used to ensure
+positivity of phi prior to Box-Cox transformation.  The argument is
+phi and the returned value is theta.  If \code{phi_to_theta}
+is undefined at the input value then the function should return NA.}
 
-\item{log_j}{A function returning the log of the Jacobian of the
-transformation from theta to phi, i.e. based on derivatives of phi with
-respect to theta. Takes theta as its argument.}
+\item{log_j}{A pointer to a compiled C++ function returning the log of
+the Jacobian of the transformation from theta to phi, i.e. based on
+derivatives of phi with respect to theta. Takes theta as its argument.}
 
 \item{user_args}{A list of numeric components. If \code{trans = ``user''}
 then \code{user_args} is a list providing arguments to the user-supplied
-functions \code{phi_to_theta} and \code{log_j}.  If \code{phi_to_theta}
-is undefined at the input value then the  function should return NA.}
+functions \code{phi_to_theta} and \code{log_j}.}
 
 \item{lambda}{Either
 \itemize{
@@ -278,9 +279,8 @@ ss <- gpd_sum_stats(gpd_data)
 # Calculate an initial estimate
 init <- c(mean(gpd_data), 0)
 
-# Mode relocation only ----------------
 n <- 1000
-
+# Mode relocation only ----------------
 for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
                  lower = c(0, -Inf)), ss, rotate = FALSE)
 x1 <- do.call(ru_rcpp, for_ru_rcpp)

@@ -6,7 +6,7 @@
 #' distribution with log-density \eqn{log f} (up to an additive constant).
 #' \eqn{f} must be bounded, perhaps after a transformation of variable.
 #'
-#' @param logf A pointer to the compiled C++ function returning the log
+#' @param logf A pointer to a compiled C++ function returning the log
 #'   of the target density \eqn{f}.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
@@ -21,16 +21,17 @@
 #'   If \code{trans = "user"} then the transformation should be specified
 #'   using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 #'   used to pass arguments to \code{phi_to_theta} and \code{log_j}.
-#' @param phi_to_theta A function returning (the inverse) of the transformation
-#'   from theta to phi used to ensure positivity of phi prior to Box-Cox
-#'   transformation.  The argument is phi and the returned value is theta.
-#' @param log_j A function returning the log of the Jacobian of the
-#'  transformation from theta to phi, i.e. based on derivatives of phi with
-#'  respect to theta. Takes theta as its argument.
+#' @param phi_to_theta A pointer to a compiled C++ function returning
+#'   (the inverse) of the transformation from theta to phi used to ensure
+#'   positivity of phi prior to Box-Cox transformation.  The argument is
+#'   phi and the returned value is theta.  If \code{phi_to_theta}
+#'   is undefined at the input value then the function should return NA.
+#' @param log_j A pointer to a compiled C++ function returning the log of
+#'  the Jacobian of the transformation from theta to phi, i.e. based on
+#'  derivatives of phi with respect to theta. Takes theta as its argument.
 #' @param user_args A list of numeric components. If \code{trans = ``user''}
 #'   then \code{user_args} is a list providing arguments to the user-supplied
-#'   functions \code{phi_to_theta} and \code{log_j}.  If \code{phi_to_theta}
-#'   is undefined at the input value then the  function should return NA.
+#'   functions \code{phi_to_theta} and \code{log_j}.
 #' @param lambda Either
 #' \itemize{
 #'   \item {A numeric vector.  Box-Cox transformaton parameters, or}
@@ -245,8 +246,8 @@
 #' # Calculate an initial estimate
 #' init <- c(mean(gpd_data), 0)
 #'
-#' # Mode relocation only ----------------
 #' n <- 1000
+#' # Mode relocation only ----------------
 #' for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
 #'                  lower = c(0, -Inf)), ss, rotate = FALSE)
 #' x1 <- do.call(ru_rcpp, for_ru_rcpp)
@@ -304,10 +305,23 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
                a_control = list(), b_control = list(), var_names = NULL) {
-  #
+  # Check that logf is an external pointer.
+  is_pointer <- (class(logf) == "externalptr")
+  if (!is_pointer) {
+    stop("logf must be an external pointer to a function")
+  }
   # Extract list of parameters for logf
   #
   pars <- list(...)
+  # If the user has supplied a list rather than individual components
+  # then remove the extra layer of list and retrieve the original
+  # variable names.
+  par_names <- names(pars)
+  if (length(par_names) == 1) {
+    keep_name <- nchar(par_names) + 2
+    pars <- unlist(pars, recursive = FALSE)
+    names(pars) <- substring(names(pars), keep_name)
+  }
   #
   # Check that the values of key arguments are suitable
   if (r < 0) {
@@ -351,6 +365,9 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
       }
       if (!is.null(lambda$log_j)) {
         log_j <- lambda$log_j
+      }
+      if (!is.null(lambda$user_args)) {
+        user_args <- lambda$user_args
       }
       lambda <- lambda$lambda
     }
@@ -467,6 +484,10 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   if (trans == "user" & is.null(phi_to_theta)) {
     stop("When trans = ``user'' phi_to_theta must be supplied")
   }
+  is_pointer <- (class(log_j) == "externalptr")
+  if (!is_pointer & !is.null(log_j)) {
+    stop("log_j must be an external pointer to a function or NULL")
+  }
   # variable rotation matrix: set to matrix of ones initially
   rot_mat <- diag(d)
   init_psi <- init
@@ -483,14 +504,14 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                       logf = logf, pars = pars)
     ru_args <- list(d = d, r = r)
   } else if (trans == "BC" & is.null(phi_to_theta)) {
-    case <- 2
     logf_fun <- cpp_logf_rho_2
     a_obj_fun <- cpp_a_obj_2
     lower_box_fun <- cpp_lower_box_2
     upper_box_fun <- cpp_upper_box_2
     ru_fun <- ru_cpp_2
     con <- lambda * gm ^ (lambda - 1)
-    tpars <- list(which_lam = which_lam, lambda = lambda, gm = gm, con = con)
+    tpars <- list(which_lam = which_lam - 1, lambda = lambda, gm = gm,
+                  con = con)
     tfun <- create_trans_xptr("case_2")
     if (all(lambda != 0)) {
       ptpfun <- create_psi_to_phi_xptr("no_zero")
@@ -505,14 +526,14 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                       user_args = user_args)
     ru_args <- list(d = d, r = r, tfun = tfun)
   } else if (trans == "BC" & !is.null(phi_to_theta)) {
-    case <- 3
     logf_fun <- cpp_logf_rho_3
     a_obj_fun <- cpp_a_obj_2
     lower_box_fun <- cpp_lower_box_2
     upper_box_fun <- cpp_upper_box_2
     ru_fun <- ru_cpp_3
     con <- lambda * gm ^ (lambda - 1)
-    tpars <- list(which_lam = which_lam, lambda = lambda, gm = gm, con = con)
+    tpars <- list(which_lam = which_lam - 1, lambda = lambda, gm = gm,
+                  con = con)
     tfun <- create_trans_xptr("case_3")
     if (all(lambda != 0)) {
       ptpfun <- create_psi_to_phi_xptr("no_zero")
@@ -528,7 +549,6 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                       user_args = user_args)
     ru_args <- list(d = d, r = r, tfun = tfun)
   } else {
-    case <- 4
     logf_fun <- cpp_logf_rho_4
     a_obj_fun <- cpp_a_obj_2
     lower_box_fun <- cpp_lower_box_2

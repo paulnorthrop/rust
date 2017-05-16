@@ -135,14 +135,14 @@ double cpp_logf_rho_2(const arma::vec& rho, const arma::vec& psi_mode,
   double val, log_bc_jac ;
   psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
   temp = psi * con + 1.0 ;
-  temp = temp[which_lam - 1] ;
+  temp = temp[which_lam] ;
   if (any_nonpos(temp)) {
     return R_NegInf ;
   }
   phi = psi_to_phi_fun(psi, lambda, gm, con) ;
-  phi2 = phi[which_lam - 1] ;
+  phi2 = phi[which_lam] ;
   temp = Rcpp::log(phi2) ;
-  temp2 = lambda[which_lam - 1] ;
+  temp2 = lambda[which_lam] ;
   log_bc_jac = sum((temp2 - 1.0) * temp) ;
   val = fun(phi, pars) - log_bc_jac - hscale ;
   return val ;
@@ -187,7 +187,7 @@ double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode,
   double val, log_bc_jac, logj ;
   psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
   temp = psi * con + 1.0 ;
-  temp = temp[which_lam - 1] ;
+  temp = temp[which_lam] ;
   if (any_nonpos(temp)) {
     return R_NegInf ;
   }
@@ -197,9 +197,9 @@ double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode,
     return R_NegInf ;
   }
   logj = log_j_fun(theta, user_args) ;
-  phi2 = phi[which_lam - 1] ;
+  phi2 = phi[which_lam] ;
   temp = Rcpp::log(phi2) ;
-  temp2 = lambda[which_lam - 1] ;
+  temp2 = lambda[which_lam] ;
   log_bc_jac = sum((temp2 - 1.0) * temp) ;
   val = fun(theta, pars) - log_bc_jac - logj - hscale ;
   return val ;
@@ -416,6 +416,7 @@ Rcpp::List ru_cpp(const int& n, const int& d, const double& r,
                   const Rcpp::NumericVector& u_box, const SEXP& logf,
                   const arma::vec& psi_mode, const arma::mat& rot_mat,
                   const double& hscale, const Rcpp::List& pars) {
+  RNGScope scope; // ensure RNG gets set/reset
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
@@ -457,6 +458,7 @@ Rcpp::List ru_cpp_2(const int& n, const int& d, const double& r,
                     const Rcpp::List& pars, const Rcpp::List& tpars,
                     const SEXP& ptpfun, const SEXP& phi_to_theta,
                     const SEXP& log_j, const Rcpp::List& user_args) {
+  RNGScope scope; // ensure RNG gets set/reset
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
@@ -488,13 +490,13 @@ Rcpp::List ru_cpp_2(const int& n, const int& d, const double& r,
     rho = vs / pow(u, r) ;
     psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
     temp = psi * con + 1.0 ;
-    temp = temp[which_lam - 1] ;
+    temp = temp[which_lam] ;
     ntry++ ;
     if (all_pos(temp)) {
       phi = psi_to_phi_fun(psi, lambda, gm, con) ;
-      phi2 = phi[which_lam - 1] ;
+      phi2 = phi[which_lam] ;
       temp = Rcpp::log(phi2) ;
-      temp2 = lambda[which_lam - 1] ;
+      temp2 = lambda[which_lam] ;
       log_bc_jac = sum((temp2 - 1.0) * temp) ;
       rhs = fun(phi, pars) - log_bc_jac - hscale ;
       if (d_r * log(u) < rhs) {
@@ -518,6 +520,7 @@ Rcpp::List ru_cpp_3(const int& n, const int& d, const double& r,
                     const Rcpp::List& pars, const Rcpp::List& tpars,
                     const SEXP& ptpfun, const SEXP& phi_to_theta,
                     const SEXP& log_j, const Rcpp::List& user_args) {
+  RNGScope scope; // ensure RNG gets set/reset
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
@@ -559,16 +562,16 @@ Rcpp::List ru_cpp_3(const int& n, const int& d, const double& r,
     rho = vs / pow(u, r) ;
     psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
     temp = psi * con + 1.0 ;
-    temp = temp[which_lam - 1] ;
+    temp = temp[which_lam] ;
     ntry++ ;
     if (all_pos(temp)) {
       phi = psi_to_phi_fun(psi, lambda, gm, con) ;
       theta = phi_to_theta_fun(phi, user_args) ;
       if (no_naC(theta)) {
         logj = log_j_fun(theta, user_args) ;
-        phi2 = phi[which_lam - 1] ;
+        phi2 = phi[which_lam] ;
         temp = Rcpp::log(phi2) ;
-        temp2 = lambda[which_lam - 1] ;
+        temp2 = lambda[which_lam] ;
         log_bc_jac = sum((temp2 - 1.0) * temp) ;
         rhs = fun(theta, pars) - log_bc_jac - logj - hscale ;
         if (d_r * log(u) < rhs) {
@@ -593,6 +596,7 @@ Rcpp::List ru_cpp_4(const int& n, const int& d, const double& r,
                     const Rcpp::List& pars, const Rcpp::List& tpars,
                     const SEXP& ptpfun, const SEXP& phi_to_theta,
                     const SEXP& log_j, const Rcpp::List& user_args) {
+  RNGScope scope; // ensure RNG gets set/reset
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
