@@ -2,7 +2,9 @@
 
 ## New features
 
-* Package Rcpp (https://CRAN.R-project.org/package=Rcpp) can be used to speed up (considerably) the computations.  
+* Package Rcpp (https://CRAN.R-project.org/package=Rcpp) can be used to speed up the computations.  New functions: `ru_rcpp`, `find_lambda_rcpp` and `find_lambda_one_d_rcpp`.  
+
+* New vignette. "Rusting faster: Simulation using Rcpp".
 
 ## Bug fixes and minor improvements
 

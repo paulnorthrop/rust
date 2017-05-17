@@ -25,6 +25,15 @@ log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
 x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
 ```
 
+From version 1.2.0 onwards the faster function `ru_rcpp` can be used. See the vignette "Rusting faster: Simulation using Rcpp" for details.
+
+``` r
+# Create an external pointer to a C++ function to evaluate the log-density.
+ptr_bvn <- create_xptr("logdnorm2")
+# Pass the external pointer to `ru_rcpp`.
+x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1000, init = c(0, 0))
+```
+
 ### Installation
 
 To get the current released version from CRAN:
@@ -35,4 +44,4 @@ install.packages("rust")
 
 ### Vignette
 
-See `vignette("rust-vignette", package = "rust")` for an overview of the package.
+See `vignette("rust-vignette", package = "rust")` for an overview of the package and `vignette("rust-using-rcpp-vignette", package = "rust")` for information on how to take advantage of the Rcpp package.
