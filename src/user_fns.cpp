@@ -5,7 +5,7 @@ using namespace Rcpp;
 
 // [[Rcpp::interfaces(r, cpp)]]
 
-// User-supplied C++ functions.
+// User-supplied C++ functions for logf.
 
 // Note that currently the only interface available in rust is
 // double fun(const Rcpp::NumericVector& x, const Rcpp::List& pars).
@@ -14,14 +14,14 @@ using namespace Rcpp;
 
 // Each function must be prefaced by the line: // [[Rcpp::export]]
 
-// One-dimentional standard normal.
+// One-dimensional standard normal.
 
 // [[Rcpp::export]]
 double logdN01(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return (-pow(x[0], 2.0) / 2.0) ;
 }
 
-// Two-dimensional normal with zero-mean and unit variances
+// Two-dimensional normal with zero-mean and unit variances.
 
 // [[Rcpp::export]]
 double logdnorm2(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
@@ -40,7 +40,7 @@ double logdmvnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return -qform / 2.0  ;
 }
 
-// Lognormal(mu, sigma)
+// Lognormal(mu, sigma).
 
 // [[Rcpp::export]]
 double logdlnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
@@ -52,7 +52,7 @@ double logdlnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
     return R_NegInf ;
 }
 
-// Gamma(alpha, 1) distribution.
+// Gamma(alpha, 1).
 
 // [[Rcpp::export]]
 double logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
@@ -103,9 +103,10 @@ double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   return (logprior + loglik) ;
 }
 
-// A function to create external pointers for any of the functions above.
+// A function to create external pointers to the functions to evalauet logf.
 // See http://gallery.rcpp.org/articles/passing-cpp-function-pointers/
-// If you write a new function above called new_name then add the following
+// If you write a new function above called new_name then add something
+// like the following.
 //
 // else if (fstr == "new_name")
 //   return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
@@ -130,6 +131,9 @@ SEXP create_xptr(std::string fstr) {
     return(Rcpp::XPtr<funcPtr>(R_NilValue)) ;
 }
 
+// User-supplied C++ functions for log_j, the log-Jacobian of the
+// transformation from theta to phi.
+
 // [[Rcpp::export]]
 double neglog(const Rcpp::NumericVector& theta,
               const Rcpp::List& user_args) {
@@ -143,6 +147,8 @@ double bc_log_j(const Rcpp::NumericVector& theta,
   return (lambda - 1.0) * log(theta[0]) ;
 }
 
+// A function to create external pointers to functions to evaluate log_j.
+
 // [[Rcpp::export]]
 SEXP create_log_j_xptr(std::string fstr) {
   typedef double (*logjacPtr)(const Rcpp::NumericVector& theta,
@@ -154,6 +160,9 @@ SEXP create_log_j_xptr(std::string fstr) {
   else
     return(Rcpp::XPtr<logjacPtr>(R_NilValue)) ;
 }
+
+// User-supplied C++ functions for phi_to_theta, which performs
+// transformation from phi to theta.
 
 // [[Rcpp::export]]
 Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
@@ -189,6 +198,9 @@ Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
   return val ;
 }
 
+// A function to create external pointers to functions to evaluate
+// phi_to_theta.
+
 // [[Rcpp::export]]
 SEXP my_create_phi_to_theta_xptr(std::string fstr) {
   typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
@@ -203,9 +215,9 @@ SEXP my_create_phi_to_theta_xptr(std::string fstr) {
     return(Rcpp::XPtr<p2tPtr>(R_NilValue)) ;
 }
 
-// We could create the external pointers when this file is sourced using this
-// embedded R code below and/or (re)create them using create_xptr() in an
-// R session or R package.
+// We could create the external pointers when this file is sourced using
+// this embedded R code below and/or (re)create them using the relevant
+// pointer-creation functions in an R session or R package.
 
 /*** R
 ptr_N01 <- create_xptr("logdN01")

@@ -395,21 +395,6 @@ double cpp_upper_box_2(const arma::vec& rho, int j, const arma::vec& psi_mode,
   return -rho(j) * pow(exp(val), (r / (d * r + 1))) ;
 }
 
-//' Generalised ratio-of-uniforms algorithm in C++
-//'
-//' Generalised ratio-of-uniforms algorithm in C++, for use by Rcpp.
-//'
-//' @param n A numeric scalar. Number of simulated values required
-//' @param d A numerical scalar.  The dimension of the target density.
-//' @param r A numeric scalar.  Parameter of generalized ratio-of-uniforms.
-//' @param a_box  A numeric scalar. The a box parameter.
-//' @param l_box  A numeric vector. Values of biminus(r), i = 1, ...d.
-//' @param u_box  A numeric vector. Values of biplus(r), i = 1, ...d.
-//' @param logf pointer
-//' @param psi_mode mode
-//' @param rot_mat rotation matrix
-//' @param hscale scale
-//' @return A list containing sim_vals and sim_vals_rho.
 // [[Rcpp::export]]
 Rcpp::List ru_cpp(const int& n, const int& d, const double& r,
                   const double& a_box, const Rcpp::NumericVector& l_box,
