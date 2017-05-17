@@ -6,8 +6,8 @@
 #' distribution with log-density \eqn{log f} (up to an additive constant).
 #' \eqn{f} must be bounded, perhaps after a transformation of variable.
 #'
-#' @param logf A pointer to a compiled C++ function returning the log
-#'   of the target density \eqn{f}.
+#' @param logf An external pointer to a compiled C++ function returning the
+#'   log of the target density \eqn{f}.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A numeric scalar.  Number of simulated values required.
@@ -21,13 +21,13 @@
 #'   If \code{trans = "user"} then the transformation should be specified
 #'   using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 #'   used to pass arguments to \code{phi_to_theta} and \code{log_j}.
-#' @param phi_to_theta A pointer to a compiled C++ function returning
+#' @param phi_to_theta An external pointer to a compiled C++ function returning
 #'   (the inverse) of the transformation from theta to phi used to ensure
 #'   positivity of phi prior to Box-Cox transformation.  The argument is
 #'   phi and the returned value is theta.  If \code{phi_to_theta}
 #'   is undefined at the input value then the function should return NA.
-#' @param log_j A pointer to a compiled C++ function returning the log of
-#'  the Jacobian of the transformation from theta to phi, i.e. based on
+#' @param log_j An external pointer to a compiled C++ function returning the
+#'  log of the Jacobian of the transformation from theta to phi, i.e. based on
 #'  derivatives of phi with respect to theta. Takes theta as its argument.
 #' @param user_args A list of numeric components. If \code{trans = ``user''}
 #'   then \code{user_args} is a list providing arguments to the user-supplied
@@ -47,9 +47,10 @@
 #'       deviations of the Box-Cox transformed variables (optional).}
 #'     \item{phi_to_theta}{as above (optional).}
 #'     \item{log_j}{as above (optional).}
+#'     \item{user_args}{as above (optional).}
 #'   }
-#'   This list may be created using \link{find_lambda_one_d} (for \code{d} = 1)
-#'   or \link{find_lambda} (for any \code{d}).
+#'   This list may be created using \code{\link{find_lambda_one_d_rcpp}}
+#'   (for \code{d} = 1) or \code{\link{find_lambda_rcpp}} (for any \code{d}).
 #' }
 #' @param lambda_tol A numeric scalar.  Any values in lambda that are less
 #'  than lambda_tol in magnitude are set to zero.
@@ -145,13 +146,20 @@
 #'     \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated
 #'       from the function used in the ratio-of-uniforms algorithm.}
 #'     \item{logf_args}{A list of further arguments to \code{logf}.}
+#'     \item{logf_rho_args}{A list of further arguments to \code{logf_rho}.}
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
-#'  Statistics and Computing (1991) 1, 129-133.
+#'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
 #'  \url{http://dx.doi.org/10.1007/BF01889987}.
+#' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
+#'  R and C++ Integration. \emph{Journal of Statistical Software},
+#'  \strong{40}(8), 1-18.
+#'  \url{http://www.jstatsoft.org/v40/i08/}.
+#' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
+#'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
 #' Rcpp::sourceCpp("src/user_fns.cpp")
 #' n <- 1000
@@ -277,10 +285,10 @@
 #'   and properties of the ratio-of-uniforms algorithm.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
 #'   and \code{d} = 2 only).
-#' @seealso \code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-#'   a list for the argument \code{lambda} of \code{ru} for the
+#' @seealso \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat)
+#'   automatically a list for the argument \code{lambda} of \code{ru} for the
 #'   \code{d} = 1 case.
-#' @seealso \code{\link{find_lambda}} to produce (somewhat) automatically
+#' @seealso \code{\link{find_lambda_rcpp}} to produce (somewhat) automatically
 #'   a list for the argument \code{lambda} of \code{ru} for any value of
 #'   \code{d}.
 #' @seealso \code{\link[stats]{optim}} for choices of the arguments
@@ -311,18 +319,30 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
     stop("logf must be an external pointer to a function")
   }
   # Extract list of parameters for logf
-  #
   pars <- list(...)
+  # Function to determine how deep a list is, i.e. how many layers
+  # of listing it has.
+  list_depth <- function(x) {
+    ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
+  }
+  # Find the depth of pars.
+  if (length(pars) > 0) {
+    pars_depth <- list_depth(pars)
+  } else {
+    pars_depth <- 0
+  }
   # If the user has supplied a list rather than individual components
   # then remove the extra layer of list and retrieve the original
   # variable names.
-  par_names <- names(pars)
-  if (length(par_names) == 1) {
-    keep_name <- nchar(par_names) + 2
+  if (pars_depth > 1) {
+    par_names <- names(pars)
     pars <- unlist(pars, recursive = FALSE)
-    names(pars) <- substring(names(pars), keep_name)
+    # Remove the user's list name, if they gave it one.
+    if (!is.null(par_names)) {
+      keep_name <- nchar(par_names) + 2
+      names(pars) <- substring(names(pars), keep_name)
+    }
   }
-  #
   # Check that the values of key arguments are suitable
   if (r < 0) {
     stop("r must be non-negative")
@@ -671,6 +691,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   ru_args$tfun <- NULL
   res <- do.call(ru_fun, ru_args)
   res$pa <- n / res$ntry
+  res$ntry <- NULL
   box <- c(a_box, l_box, u_box)
   res$box <- cbind(box, vals, conv)
   bs <- paste(paste("b", 1:d, sep=""),rep(c("minus", "plus"), each=d), sep="")

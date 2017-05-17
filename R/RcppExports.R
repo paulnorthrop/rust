@@ -77,21 +77,6 @@ cpp_upper_box_2 <- function(rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf
     .Call('rust_cpp_upper_box_2', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args)
 }
 
-#' Generalised ratio-of-uniforms algorithm in C++
-#'
-#' Generalised ratio-of-uniforms algorithm in C++, for use by Rcpp.
-#'
-#' @param n A numeric scalar. Number of simulated values required
-#' @param d A numerical scalar.  The dimension of the target density.
-#' @param r A numeric scalar.  Parameter of generalized ratio-of-uniforms.
-#' @param a_box  A numeric scalar. The a box parameter.
-#' @param l_box  A numeric vector. Values of biminus(r), i = 1, ...d.
-#' @param u_box  A numeric vector. Values of biplus(r), i = 1, ...d.
-#' @param logf pointer
-#' @param psi_mode mode
-#' @param rot_mat rotation matrix
-#' @param hscale scale
-#' @return A list containing sim_vals and sim_vals_rho.
 ru_cpp <- function(n, d, r, a_box, l_box, u_box, logf, psi_mode, rot_mat, hscale, pars) {
     .Call('rust_ru_cpp', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, logf, psi_mode, rot_mat, hscale, pars)
 }

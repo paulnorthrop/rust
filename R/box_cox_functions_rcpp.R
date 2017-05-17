@@ -32,9 +32,8 @@
 #'   positivity of phi prior to Box-Cox transformation.  The argument is
 #'   phi and the returned value is theta.  If \code{phi_to_theta}
 #'   is undefined at the input value then the function should return NA.
-#' @param user_args A list of numeric components. If \code{trans = ``user''}
-#'   then \code{user_args} is a list providing arguments to the user-supplied
-#'   functions \code{phi_to_theta} and \code{log_j}.
+#' @param user_args A list of numeric components providing arguments to
+#'   the user-supplied functions \code{phi_to_theta} and \code{log_j}.
 #' @param log_j A pointer to a compiled C++ function returning the log of
 #'  the Jacobian of the transformation from theta to phi, i.e. based on
 #'  derivatives of phi with respect to theta. Takes theta as its argument.
@@ -66,6 +65,7 @@
 #'  \item{phi_to_theta}{as detailed above (only if \code{phi_to_theta} is
 #'    supplied)}
 #'  \item{log_j}{as detailed above (only if \code{log_j} is supplied)}
+#'  \item{user_args}{as detailed above (only if \code{user_args} is supplied)}
 #'
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
@@ -73,6 +73,12 @@
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
 #'  \url{http://dx.doi.org/10.2307/2528821}.
+#' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
+#'  R and C++ Integration. \emph{Journal of Statistical Software},
+#'  \strong{40}(8), 1-18.
+#'  \url{http://www.jstatsoft.org/v40/i08/}.
+#' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
+#'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
 #' # Log-normal density ===================
 #'
@@ -120,8 +126,8 @@
 #' plot(x)
 #' plot(x, ru_scale = TRUE)
 #' }
-#' @seealso \code{\link{ru}} to perform ratio-of-uniforms sampling.
-#' @seealso \code{\link{find_lambda}} to produce (somewhat) automatically
+#' @seealso \code{\link{ru_rcpp}} to perform ratio-of-uniforms sampling.
+#' @seealso \code{\link{find_lambda_rcpp}} to produce (somewhat) automatically
 #'   a list for the argument \code{lambda} of \code{ru} for any value of
 #'   \code{d}.
 #'
@@ -281,9 +287,8 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'   positivity of phi prior to Box-Cox transformation.  The argument is
 #'   phi and the returned value is theta.  If \code{phi_to_theta}
 #'   is undefined at the input value then the function should return NA.
-#' @param user_args A list of numeric components. If \code{trans = ``user''}
-#'   then \code{user_args} is a list providing arguments to the user-supplied
-#'   functions \code{phi_to_theta} and \code{log_j}.
+#' @param user_args A list of numeric components providing arguments to
+#'   the user-supplied functions \code{phi_to_theta} and \code{log_j}.
 #' @param log_j A pointer to a compiled C++ function returning the log of
 #'  the Jacobian of the transformation from theta to phi, i.e. based on
 #'  derivatives of phi with respect to theta. Takes theta as its argument.
@@ -307,12 +312,19 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'  \item{phi_to_theta}{as detailed above (only if \code{phi_to_theta} is
 #'    supplied)}
 #'  \item{log_j}{as detailed above (only if \code{log_j} is supplied)}
+#'  \item{user_args}{as detailed above (only if \code{user_args} is supplied)}
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
 #'  211-252, \url{http://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
 #'  \url{http://dx.doi.org/10.2307/2528821}.
+#' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
+#'  R and C++ Integration. \emph{Journal of Statistical Software},
+#'  \strong{40}(8), 1-18.
+#'  \url{http://www.jstatsoft.org/v40/i08/}.
+#' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
+#'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
 #' # Log-normal density ===================
 #' # Note: the default value max_phi = 10 is OK here but this will not always
@@ -410,9 +422,9 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
 #'   main = "Box-Cox, mode relocation and rotation")
 #' }
-#' @seealso \code{\link{ru}} to perform ratio-of-uniforms sampling.
-#' @seealso \code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-#'   a list for the argument \code{lambda} of \code{ru} for the
+#' @seealso \code{\link{ru_rcpp}} to perform ratio-of-uniforms sampling.
+#' @seealso \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat)
+#'   automatically a list for the argument \code{lambda} of \code{ru} for the
 #'   \code{d} = 1 case.
 #' @export
 find_lambda_rcpp <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
