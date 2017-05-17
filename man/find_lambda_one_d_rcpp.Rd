@@ -45,9 +45,8 @@ is undefined at the input value then the function should return NA.}
 the Jacobian of the transformation from theta to phi, i.e. based on
 derivatives of phi with respect to theta. Takes theta as its argument.}
 
-\item{user_args}{A list of numeric components. If \code{trans = ``user''}
-then \code{user_args} is a list providing arguments to the user-supplied
-functions \code{phi_to_theta} and \code{log_j}.}
+\item{user_args}{A list of numeric components providing arguments to
+the user-supplied functions \code{phi_to_theta} and \code{log_j}.}
 }
 \value{
 A list containing the following components
@@ -62,6 +61,7 @@ A list containing the following components
  \item{phi_to_theta}{as detailed above (only if \code{phi_to_theta} is
    supplied)}
  \item{log_j}{as detailed above (only if \code{log_j} is supplied)}
+ \item{user_args}{as detailed above (only if \code{user_args} is supplied)}
 }
 \description{
 Finds a value of the Box-Cox transformation parameter lambda for which
@@ -146,11 +146,19 @@ Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
  Transformations of Multivariate Data, Biometrics, 27(4),
  \url{http://dx.doi.org/10.2307/2528821}.
+
+Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
+ R and C++ Integration. \emph{Journal of Statistical Software},
+ \strong{40}(8), 1-18.
+ \url{http://www.jstatsoft.org/v40/i08/}.
+
+Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
+ with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 }
 \seealso{
-\code{\link{ru}} to perform ratio-of-uniforms sampling.
+\code{\link{ru_rcpp}} to perform ratio-of-uniforms sampling.
 
-\code{\link{find_lambda}} to produce (somewhat) automatically
+\code{\link{find_lambda_rcpp}} to produce (somewhat) automatically
   a list for the argument \code{lambda} of \code{ru} for any value of
   \code{d}.
 }

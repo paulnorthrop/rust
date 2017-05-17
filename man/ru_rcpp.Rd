@@ -15,8 +15,8 @@ ru_rcpp(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   var_names = NULL)
 }
 \arguments{
-\item{logf}{A pointer to a compiled C++ function returning the log
-of the target density \eqn{f}.}
+\item{logf}{An external pointer to a compiled C++ function returning the
+log of the target density \eqn{f}.}
 
 \item{...}{Further arguments to be passed to \code{logf} and related
 functions.}
@@ -36,14 +36,14 @@ If \code{trans = "user"} then the transformation should be specified
 using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 used to pass arguments to \code{phi_to_theta} and \code{log_j}.}
 
-\item{phi_to_theta}{A pointer to a compiled C++ function returning
+\item{phi_to_theta}{An external pointer to a compiled C++ function returning
 (the inverse) of the transformation from theta to phi used to ensure
 positivity of phi prior to Box-Cox transformation.  The argument is
 phi and the returned value is theta.  If \code{phi_to_theta}
 is undefined at the input value then the function should return NA.}
 
-\item{log_j}{A pointer to a compiled C++ function returning the log of
-the Jacobian of the transformation from theta to phi, i.e. based on
+\item{log_j}{An external pointer to a compiled C++ function returning the
+log of the Jacobian of the transformation from theta to phi, i.e. based on
 derivatives of phi with respect to theta. Takes theta as its argument.}
 
 \item{user_args}{A list of numeric components. If \code{trans = ``user''}
@@ -65,9 +65,10 @@ functions \code{phi_to_theta} and \code{log_j}.}
       deviations of the Box-Cox transformed variables (optional).}
     \item{phi_to_theta}{as above (optional).}
     \item{log_j}{as above (optional).}
+    \item{user_args}{as above (optional).}
   }
-  This list may be created using \link{find_lambda_one_d} (for \code{d} = 1)
-  or \link{find_lambda} (for any \code{d}).
+  This list may be created using \code{\link{find_lambda_one_d_rcpp}}
+  (for \code{d} = 1) or \code{\link{find_lambda_rcpp}} (for any \code{d}).
 }}
 
 \item{lambda_tol}{A numeric scalar.  Any values in lambda that are less
@@ -139,6 +140,7 @@ An object of class "ru" is a list containing the following
     \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated
       from the function used in the ratio-of-uniforms algorithm.}
     \item{logf_args}{A list of further arguments to \code{logf}.}
+    \item{logf_rho_args}{A list of further arguments to \code{logf_rho}.}
     \item{f_mode}{The estimated mode of the target density f, after any
       Box-Cox transformation and/or user supplied transformation, but before
       mode relocation.}
@@ -310,8 +312,16 @@ microbenchmark(
 \references{
 Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
  Efficient generation of random variates via the ratio-of-uniforms method.
- Statistics and Computing (1991) 1, 129-133.
+ \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
  \url{http://dx.doi.org/10.1007/BF01889987}.
+
+Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
+ R and C++ Integration. \emph{Journal of Statistical Software},
+ \strong{40}(8), 1-18.
+ \url{http://www.jstatsoft.org/v40/i08/}.
+
+Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
+ with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 }
 \seealso{
 \code{\link{summary.ru}} for summaries of the simulated values
@@ -320,11 +330,11 @@ Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
   and \code{d} = 2 only).
 
-\code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-  a list for the argument \code{lambda} of \code{ru} for the
+\code{\link{find_lambda_one_d_rcpp}} to produce (somewhat)
+  automatically a list for the argument \code{lambda} of \code{ru} for the
   \code{d} = 1 case.
 
-\code{\link{find_lambda}} to produce (somewhat) automatically
+\code{\link{find_lambda_rcpp}} to produce (somewhat) automatically
   a list for the argument \code{lambda} of \code{ru} for any value of
   \code{d}.
 
