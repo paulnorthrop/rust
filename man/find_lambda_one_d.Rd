@@ -39,7 +39,8 @@ transformation.  The argument is phi and the returned value is theta.}
 
 \item{log_j}{A function returning the log of the Jacobian of the
 transformation from theta to phi, i.e. based on derivatives of phi with
-respect to theta. Takes theta as its argument.}
+respect to theta. Takes theta as its argument.
+If this is not supplied then a constant Jacobian is used.}
 }
 \value{
 A list containing the following components

@@ -48,11 +48,6 @@ the column names of the simulated data matrix to be plotted are used.}
   density contours superimposed.  For \code{d > 2} pairwise plots of the
   simulated values are produced.
 }
-\details{
-Note that \code{suppressWarnings} is used to avoid potential benign warnings
-  caused by passing unused graphical parameters to \code{hist} and
-  \code{lines} via \code{...}.
-}
 \examples{
 # Log-normal density ----------------
 x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 1)

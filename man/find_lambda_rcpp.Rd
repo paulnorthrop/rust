@@ -2,7 +2,7 @@
 % Please edit documentation in R/box_cox_functions_rcpp.R
 \name{find_lambda_rcpp}
 \alias{find_lambda_rcpp}
-\title{Selecting Box-Cox parameter lambda for general d.}
+\title{Selecting Box-Cox parameter lambda for general d using C++ via Rcpp.}
 \usage{
 find_lambda_rcpp(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-04,
   min_phi = rep(ep_bc, d), max_phi = rep(10, d), which_lam = 1:d,
@@ -86,6 +86,8 @@ The general idea is to evaluate the density f on a d-dimensional
  certain components of phi are to be transformed.
 }
 \examples{
+Rcpp::sourceCpp("src/user_fns.cpp")
+
 # Log-normal density ===================
 # Note: the default value max_phi = 10 is OK here but this will not always
 # be the case

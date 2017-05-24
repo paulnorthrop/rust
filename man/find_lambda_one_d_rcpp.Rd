@@ -2,10 +2,11 @@
 % Please edit documentation in R/box_cox_functions_rcpp.R
 \name{find_lambda_one_d_rcpp}
 \alias{find_lambda_one_d_rcpp}
-\title{Selecting Box-Cox parameter lambda in the one-dimensional case}
+\title{Selecting Box-Cox parameter lambda in the one-dimensional case using
+C++ via Rcpp}
 \usage{
 find_lambda_one_d_rcpp(logf, ..., ep_bc = 1e-04, min_phi = ep_bc,
-  max_phi = 10, num = 1001, xdiv = 100, probs = seq(0.01, 0.99, by =
+  max_phi = 10, num = 1001L, xdiv = 100, probs = seq(0.01, 0.99, by =
   0.01), lambda_range = c(-3, 3), phi_to_theta = NULL, log_j = NULL,
   user_args = list())
 }
@@ -43,7 +44,8 @@ is undefined at the input value then the function should return NA.}
 
 \item{log_j}{A pointer to a compiled C++ function returning the log of
 the Jacobian of the transformation from theta to phi, i.e. based on
-derivatives of phi with respect to theta. Takes theta as its argument.}
+derivatives of phi with respect to theta. Takes theta as its argument.
+If this is not supplied then a constant Jacobian is used.}
 
 \item{user_args}{A list of numeric components providing arguments to
 the user-supplied functions \code{phi_to_theta} and \code{log_j}.}
@@ -91,6 +93,8 @@ The general idea is to estimate quantiles of f corresponding to a
   probabilities at the midpoints as weights.
 }
 \examples{
+Rcpp::sourceCpp("src/user_fns.cpp")
+
 # Log-normal density ===================
 
 # Note: the default value of max_phi = 10 is OK here but this will not
@@ -114,7 +118,6 @@ max_phi <- qgamma(0.999, shape = alpha)
 
 lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
                                  max_phi = max_phi)
-
 lambda
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
              lambda = lambda)
@@ -128,11 +131,9 @@ alpha <- 0.1
 max_phi <- qgamma(0.999, shape = alpha)
 lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
                                  max_phi = max_phi)
-
 lambda
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
              lambda = lambda)
-
 \dontrun{
 plot(x)
 plot(x, ru_scale = TRUE)
