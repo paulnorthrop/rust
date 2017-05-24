@@ -2,7 +2,9 @@
 
 ## New features
 
-* Package Rcpp (https://CRAN.R-project.org/package=Rcpp) can be used to speed up the computations.  New functions: `ru_rcpp`, `find_lambda_rcpp` and `find_lambda_one_d_rcpp`.  
+* Packages Rcpp (https://CRAN.R-project.org/package=Rcpp) and RcppArmadillo (https://CRAN.R-project.org/package=RcppArmadillo) to speed up the computations if the user provides a C++ function to evaluate their target log-density.  
+
+* New functions: `ru_rcpp`, `find_lambda_rcpp` and `find_lambda_one_d_rcpp`.  
 
 * New vignette. "Rusting faster: Simulation using Rcpp".
 
@@ -13,6 +15,12 @@
 * Bug fixed in `plot.ru` : previously, in the `d = 2` case, providing the graphical parameter `col` produced an error because `col = 8` was hard-coded in a call to `points`. Now the extra argument `points_par` enables the user to provide a list of arguments to `points`.
 
 * "using `pairs()`" removed from the last sentence Description of `plot.ru()` because `pairs()` is not used when `d > 2`, rather a single plot is produced for each pair of variables.
+
+* Obsolete function `rho_to_theta()` removed from function `ru` in `ru_sampling.R`.
+
+* If the user calls `ru` (or `ru_rcpp`) with `trans = "user"` but doesn't supply `phi_to_theta` then an error is returned.
+
+* `plot.ru` edited to avoid warning message that occurred in the `d=1` case when `breaks` was supplied as an argument.
 
 # rust 1.1.0
 
