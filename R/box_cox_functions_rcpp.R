@@ -1,6 +1,7 @@
 # =========================== find_lambda_one_d ===========================
 
-#' Selecting Box-Cox parameter lambda in the one-dimensional case
+#' Selecting Box-Cox parameter lambda in the one-dimensional case using
+#' C++ via Rcpp
 #'
 #' Finds a value of the Box-Cox transformation parameter lambda for which
 #' the (positive univariate) random variable with log-density logf
@@ -37,6 +38,7 @@
 #' @param log_j A pointer to a compiled C++ function returning the log of
 #'  the Jacobian of the transformation from theta to phi, i.e. based on
 #'  derivatives of phi with respect to theta. Takes theta as its argument.
+#'  If this is not supplied then a constant Jacobian is used.
 #' @details The general idea is to estimate quantiles of f corresponding to a
 #'   set of equally-spaced probabilities in \code{probs} and to use these
 #'   estimated quantiles as data in a standard estimation of the Box-Cox
@@ -80,6 +82,8 @@
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
+#' Rcpp::sourceCpp("src/user_fns.cpp")
+#'
 #' # Log-normal density ===================
 #'
 #' # Note: the default value of max_phi = 10 is OK here but this will not
@@ -103,7 +107,6 @@
 #'
 #' lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
 #'                                  max_phi = max_phi)
-#'
 #' lambda
 #' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
 #'              lambda = lambda)
@@ -117,11 +120,9 @@
 #' max_phi <- qgamma(0.999, shape = alpha)
 #' lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
 #'                                  max_phi = max_phi)
-#'
 #' lambda
 #' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
 #'              lambda = lambda)
-#'
 #' \dontrun{
 #' plot(x)
 #' plot(x, ru_scale = TRUE)
@@ -133,7 +134,7 @@
 #'
 #' @export
 find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
-                              max_phi = 10, num = 1001, xdiv = 100,
+                              max_phi = 10, num = 1001L, xdiv = 100,
                               probs = seq(0.01, 0.99, by = 0.01),
                               lambda_range = c(-3, 3), phi_to_theta = NULL,
                               log_j = NULL, user_args = list()) {
@@ -169,7 +170,6 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
     if (is.null(log_j)) {
       log_j = create_log_jac_xptr("log_none_jac")
       trans_list$log_j <- log_j
-      warning("No Jacobian for phi_to_theta(): constant Jacobian has been set")
     }
   } else {
     phi_to_theta = create_phi_to_theta_xptr("no_trans")
@@ -180,14 +180,28 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
   x <- seq(min_phi, max_phi, len = num)
   # Set parameters for passing to cpp_log_rho_4().
   pars <- list(...)
+  # Function to determine how deep a list is, i.e. how many layers
+  # of listing it has.
+  list_depth <- function(x) {
+    ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
+  }
+  # Find the depth of pars.
+  if (length(pars) > 0) {
+    pars_depth <- list_depth(pars)
+  } else {
+    pars_depth <- 0
+  }
   # If the user has supplied a list rather than individual components
   # then remove the extra layer of list and retrieve the original
   # variable names.
-  par_names <- names(pars)
-  if (length(par_names) == 1) {
-    keep_name <- nchar(par_names) + 2
+  if (pars_depth > 1) {
+    par_names <- names(pars)
     pars <- unlist(pars, recursive = FALSE)
-    names(pars) <- substring(names(pars), keep_name)
+    # Remove the user's list name, if they gave it one.
+    if (!is.null(par_names)) {
+      keep_name <- nchar(par_names) + 2
+      names(pars) <- substring(names(pars), keep_name)
+    }
   }
   tpars <- list()
   ptpfun <- create_psi_to_phi_xptr("no_trans")
@@ -197,10 +211,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
                     phi_to_theta = phi_to_theta, log_j = log_j,
                     user_args = user_args)
   # Calculate the density (weights) at these values
-  my_fun <- function(x) {
-    do.call(cpp_logf_rho_4, c(list(rho = x), logf_args))
-  }
-  log_w <- sapply(x, my_fun)
+  log_w <- do.call(rcpp_apply, c(list(x = matrix(x)), logf_args))
   # Shift log_w so that it has a maximum of 0, to try to avoid underflow.
   log_w <- log_w - max(log_w, na.rm = TRUE)
   # Evaluate the density values.
@@ -221,9 +232,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
   # Reset the xs over this new range
   x <- seq(r[1], r[2], len = num)
   # Recalculate the weights and the areas and midpoints
-  for (i in 1:num) {
-    log_w[i] <- do.call(cpp_logf_rho_4, c(list(rho = x[i]), logf_args))
-  }
+  log_w <- do.call(rcpp_apply, c(list(x = matrix(x)), logf_args))
   log_w <- log_w - max(log_w, na.rm = TRUE)
   w <- exp(log_w)
   w <- w / sum(w)
@@ -253,7 +262,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 
 # =========================== find_lambda ===========================
 
-#' Selecting Box-Cox parameter lambda for general d.
+#' Selecting Box-Cox parameter lambda for general d using C++ via Rcpp.
 #'
 #' Finds a value of the Box-Cox transformation parameter lambda for which
 #' the (positive) random variable with log-density logf has a density
@@ -326,6 +335,8 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
+#' Rcpp::sourceCpp("src/user_fns.cpp")
+#'
 #' # Log-normal density ===================
 #' # Note: the default value max_phi = 10 is OK here but this will not always
 #' # be the case
@@ -474,7 +485,6 @@ find_lambda_rcpp <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
     if (is.null(log_j)) {
       log_j = create_log_jac_xptr("log_none_jac")
       trans_list$log_j <- log_j
-      warning("No Jacobian for phi_to_theta(): constant Jacobian has been set")
     }
   } else {
     phi_to_theta = create_phi_to_theta_xptr("no_trans")
@@ -500,14 +510,28 @@ find_lambda_rcpp <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
   phi <- expand.grid(phi)
   # Set parameters for passing to cpp_log_rho_4().
   pars <- list(...)
+  # Function to determine how deep a list is, i.e. how many layers
+  # of listing it has.
+  list_depth <- function(x) {
+    ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
+  }
+  # Find the depth of pars.
+  if (length(pars) > 0) {
+    pars_depth <- list_depth(pars)
+  } else {
+    pars_depth <- 0
+  }
   # If the user has supplied a list rather than individual components
   # then remove the extra layer of list and retrieve the original
   # variable names.
-  par_names <- names(pars)
-  if (length(par_names) == 1) {
-    keep_name <- nchar(par_names) + 2
+  if (pars_depth > 1) {
+    par_names <- names(pars)
     pars <- unlist(pars, recursive = FALSE)
-    names(pars) <- substring(names(pars), keep_name)
+    # Remove the user's list name, if they gave it one.
+    if (!is.null(par_names)) {
+      keep_name <- nchar(par_names) + 2
+      names(pars) <- substring(names(pars), keep_name)
+    }
   }
   tpars <- list()
   ptpfun <- create_psi_to_phi_xptr("no_trans")
@@ -516,10 +540,8 @@ find_lambda_rcpp <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
                     phi_to_theta = phi_to_theta, log_j = log_j,
                     user_args = user_args)
   # Evaluate the target log-density at each combination in the grid.
-  my_fun <- function(x) {
-    do.call(cpp_logf_rho_4, c(list(rho = x), logf_args))
-  }
-  log_w <- apply(phi, 1, my_fun)
+  phi <- data.matrix(phi)
+  log_w <- do.call(rcpp_apply, c(list(x = phi), logf_args))
   # Shift log_w so that it has a maximum of 0, to try to avoid underflow.
   log_w <- log_w - max(log_w, na.rm = TRUE)
   # Evaluate the density values.

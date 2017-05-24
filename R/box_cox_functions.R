@@ -32,6 +32,7 @@
 #' @param log_j A function returning the log of the Jacobian of the
 #'   transformation from theta to phi, i.e. based on derivatives of phi with
 #'   respect to theta. Takes theta as its argument.
+#'   If this is not supplied then a constant Jacobian is used.
 #' @details The general idea is to estimate quantiles of f corresponding to a
 #'   set of equally-spaced probabilities in \code{probs} and to use these
 #'   estimated quantiles as data in a standard estimation of the Box-Cox
@@ -138,7 +139,6 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
     if (is.null(log_j)) {
       log_j <- function(x) 0
       trans_list$log_j <- function(x) 0
-      warning("No Jacobian for phi_to_theta(): constant Jacobian has been set")
     }
   } else {
     phi_to_theta <- identity
@@ -393,7 +393,6 @@ find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
     if (is.null(log_j)) {
       log_j <- function(x) 0
       trans_list$log_j <- function(x) 0
-      warning("No Jacobian for phi_to_theta(): constant Jacobian has been set")
     }
   } else {
     phi_to_theta <- identity
