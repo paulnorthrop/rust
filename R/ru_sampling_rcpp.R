@@ -5,6 +5,9 @@
 #' Uses the generalized ratio-of-uniforms method to simulate from a
 #' distribution with log-density \eqn{log f} (up to an additive constant).
 #' \eqn{f} must be bounded, perhaps after a transformation of variable.
+#' The file file `user_fns.cpp` that is sourced before running the examples
+#' below is available at the
+#' [rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).
 #'
 #' @param logf An external pointer to a compiled C++ function returning the
 #'   log of the target density \eqn{f}.
@@ -183,7 +186,11 @@
 #' # With rotation.
 #' x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n, init = c(0, 0))
 #'
-#' # three-dimensional normal with positive association ----------------
+#' # Using general multivariate normal function.
+#' covmat <- matrix(rho, 2, 2) + diag(1 - rho, 2)
+#' x <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = n, init = c(0, 0))
+#'
+#' # Three-dimensional normal with positive association ----------------
 #' covmat <- matrix(rho, 3, 3) + diag(1 - rho, 3)
 #'
 #' # No rotation.
@@ -273,13 +280,6 @@
 #' abline(a = 0, b = -1 / ss$xm)
 #' summary(x2)
 #' }
-#'
-#' library(microbenchmark)
-#' microbenchmark(
-#'   ru = ru(logf = gpd_logpost, ss = ss, d = 2, n = n, init = init,
-#'     lower = c(0, -Inf)),
-#'   ru_rcpp = do.call(ru_rcpp, for_ru_rcpp)
-#' )
 #'
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.

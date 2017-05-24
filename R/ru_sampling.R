@@ -454,6 +454,9 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   if (!is.function(phi_to_theta) & !is.null(phi_to_theta)) {
     stop("phi_to_theta must be a function or NULL")
   }
+  if (trans == "user" & is.null(phi_to_theta)) {
+    stop("When trans = ``user'' phi_to_theta must be supplied")
+  }
   if (is.function(phi_to_theta) & is.null(log_j)) {
     log_j <- function(x) 0
     warning("No Jacobian for phi_to_theta(): constant Jacobian has been used")
@@ -480,16 +483,6 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     }
   }
   init_psi <- init
-  #
-  if (trans == "none") {
-    rho_to_theta <- function(rho) rho_to_psi(rho)
-  }
-  if (trans == "BC") {
-    rho_to_theta <- function(rho) phi_to_theta(psi_to_phi(rho_to_psi(rho)))
-  }
-  if (trans == "user") {
-    rho_to_theta <- function(rho) phi_to_theta(rho_to_psi(rho))
-  }
   #
   if (trans == "none") {
     logf_rho <- function(rho,...) {
