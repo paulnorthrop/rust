@@ -56,6 +56,12 @@ double logdlnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 
 // [[Rcpp::export]]
 double logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  double shp = pars["alpha"] ;
+  return Rcpp::dgamma(x, shp, 1.0, 1)[0] ;
+}
+
+// [[Rcpp::export]]
+double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   double alpha = pars["alpha"] ;
   if (x[0] > 0)
     return ((alpha - 1.0) * log(x[0]) - x[0]) ;

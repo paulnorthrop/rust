@@ -241,6 +241,27 @@ double cpp_logf_rho_4(const arma::vec& rho, const arma::vec& psi_mode,
   return val ;
 }
 
+// Function to vectorize cpp_logf_rho_4() for use in find_lambda_rcpp()
+// and find_lambda_one_d_rcpp().
+
+// [[Rcpp::export]]
+Rcpp::NumericVector rcpp_apply(const Rcpp::NumericMatrix& x,
+                               const arma::vec& psi_mode,
+                               const arma::mat& rot_mat, const double& hscale,
+                               const SEXP& logf, const Rcpp::List& pars,
+                               const Rcpp::List& tpars, const SEXP& ptpfun,
+                               const SEXP& phi_to_theta, const SEXP& log_j,
+                               const Rcpp::List& user_args) {
+  int nRows = x.nrow() ;
+  Rcpp::NumericVector out = no_init(nRows) ;
+  for(int i=0; i < nRows; i++) {
+    arma::vec rho = x(i, _) ;
+    out[i] = cpp_logf_rho_4(rho, psi_mode, rot_mat, hscale, logf, pars, tpars,
+                            ptpfun, phi_to_theta, log_j, user_args) ;
+  }
+  return out ;
+}
+
 // [[Rcpp::export]]
 double cpp_a_obj(const arma::vec& psi, const arma::vec& psi_mode,
                  const arma::mat& rot_mat, const double& hscale,

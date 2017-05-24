@@ -445,6 +445,46 @@ RcppExport SEXP rust_cpp_logf_rho_4(SEXP rhoSEXP, SEXP psi_modeSEXP, SEXP rot_ma
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// rcpp_apply
+Rcpp::NumericVector rcpp_apply(const Rcpp::NumericMatrix& x, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars, const Rcpp::List& tpars, const SEXP& ptpfun, const SEXP& phi_to_theta, const SEXP& log_j, const Rcpp::List& user_args);
+static SEXP rust_rcpp_apply_try(SEXP xSEXP, SEXP psi_modeSEXP, SEXP rot_matSEXP, SEXP hscaleSEXP, SEXP logfSEXP, SEXP parsSEXP, SEXP tparsSEXP, SEXP ptpfunSEXP, SEXP phi_to_thetaSEXP, SEXP log_jSEXP, SEXP user_argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type psi_mode(psi_modeSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type rot_mat(rot_matSEXP);
+    Rcpp::traits::input_parameter< const double& >::type hscale(hscaleSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type logf(logfSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type tpars(tparsSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type ptpfun(ptpfunSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type phi_to_theta(phi_to_thetaSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type log_j(log_jSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type user_args(user_argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_apply(x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP rust_rcpp_apply(SEXP xSEXP, SEXP psi_modeSEXP, SEXP rot_matSEXP, SEXP hscaleSEXP, SEXP logfSEXP, SEXP parsSEXP, SEXP tparsSEXP, SEXP ptpfunSEXP, SEXP phi_to_thetaSEXP, SEXP log_jSEXP, SEXP user_argsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(rust_rcpp_apply_try(xSEXP, psi_modeSEXP, rot_matSEXP, hscaleSEXP, logfSEXP, parsSEXP, tparsSEXP, ptpfunSEXP, phi_to_thetaSEXP, log_jSEXP, user_argsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // cpp_a_obj
 double cpp_a_obj(const arma::vec& psi, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const int& d, const double& r, const double& big_val, const Rcpp::List& pars);
 static SEXP rust_cpp_a_obj_try(SEXP psiSEXP, SEXP psi_modeSEXP, SEXP rot_matSEXP, SEXP hscaleSEXP, SEXP logfSEXP, SEXP dSEXP, SEXP rSEXP, SEXP big_valSEXP, SEXP parsSEXP) {
@@ -1085,67 +1125,6 @@ RcppExport SEXP rust_create_phi_to_theta_xptr(SEXP fstrSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// new_logdgamma
-double new_logdgamma(SEXP xS, SEXP env);
-static SEXP rust_new_logdgamma_try(SEXP xSSEXP, SEXP envSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< SEXP >::type xS(xSSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type env(envSEXP);
-    rcpp_result_gen = Rcpp::wrap(new_logdgamma(xS, env));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP rust_new_logdgamma(SEXP xSSEXP, SEXP envSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(rust_new_logdgamma_try(xSSEXP, envSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
-// new_create_xptr
-SEXP new_create_xptr(std::string fstr);
-static SEXP rust_new_create_xptr_try(SEXP fstrSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
-    rcpp_result_gen = Rcpp::wrap(new_create_xptr(fstr));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP rust_new_create_xptr(SEXP fstrSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(rust_new_create_xptr_try(fstrSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // logdN01
 double logdN01(const Rcpp::NumericVector& x, const Rcpp::List& pars);
 static SEXP rust_logdN01_try(SEXP xSEXP, SEXP parsSEXP) {
@@ -1286,6 +1265,37 @@ RcppExport SEXP rust_logdgamma(SEXP xSEXP, SEXP parsSEXP) {
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(rust_logdgamma_try(xSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// old_logdgamma
+double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars);
+static SEXP rust_old_logdgamma_try(SEXP xSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(old_logdgamma(x, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP rust_old_logdgamma(SEXP xSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(rust_old_logdgamma_try(xSEXP, parsSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1626,6 +1636,7 @@ static int rust_RcppExport_validate(const char* sig) {
         signatures.insert("double(*cpp_logf_rho_2)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_logf_rho_3)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_logf_rho_4)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
+        signatures.insert("Rcpp::NumericVector(*rcpp_apply)(const Rcpp::NumericMatrix&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_a_obj)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const int&,const double&,const double&,const Rcpp::List&)");
         signatures.insert("double(*cpp_a_obj_2)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const int&,const double&,const double&,const SEXP&,const Rcpp::List&,const SEXP&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_lower_box)(const arma::vec&,int,const arma::vec&,const arma::mat&,const double&,const SEXP&,const int&,const double&,const double&,const Rcpp::List&)");
@@ -1643,13 +1654,12 @@ static int rust_RcppExport_validate(const char* sig) {
         signatures.insert("SEXP(*create_log_jac_xptr)(std::string)");
         signatures.insert("Rcpp::NumericVector(*no_trans)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*create_phi_to_theta_xptr)(std::string)");
-        signatures.insert("double(*new_logdgamma)(SEXP,SEXP)");
-        signatures.insert("SEXP(*new_create_xptr)(std::string)");
         signatures.insert("double(*logdN01)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdnorm2)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdmvnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdlnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdgamma)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*old_logdgamma)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*loggp)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*create_xptr)(std::string)");
         signatures.insert("double(*neglog)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -1679,6 +1689,7 @@ RcppExport SEXP rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "rust_cpp_logf_rho_2", (DL_FUNC)rust_cpp_logf_rho_2_try);
     R_RegisterCCallable("rust", "rust_cpp_logf_rho_3", (DL_FUNC)rust_cpp_logf_rho_3_try);
     R_RegisterCCallable("rust", "rust_cpp_logf_rho_4", (DL_FUNC)rust_cpp_logf_rho_4_try);
+    R_RegisterCCallable("rust", "rust_rcpp_apply", (DL_FUNC)rust_rcpp_apply_try);
     R_RegisterCCallable("rust", "rust_cpp_a_obj", (DL_FUNC)rust_cpp_a_obj_try);
     R_RegisterCCallable("rust", "rust_cpp_a_obj_2", (DL_FUNC)rust_cpp_a_obj_2_try);
     R_RegisterCCallable("rust", "rust_cpp_lower_box", (DL_FUNC)rust_cpp_lower_box_try);
@@ -1696,13 +1707,12 @@ RcppExport SEXP rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "rust_create_log_jac_xptr", (DL_FUNC)rust_create_log_jac_xptr_try);
     R_RegisterCCallable("rust", "rust_no_trans", (DL_FUNC)rust_no_trans_try);
     R_RegisterCCallable("rust", "rust_create_phi_to_theta_xptr", (DL_FUNC)rust_create_phi_to_theta_xptr_try);
-    R_RegisterCCallable("rust", "rust_new_logdgamma", (DL_FUNC)rust_new_logdgamma_try);
-    R_RegisterCCallable("rust", "rust_new_create_xptr", (DL_FUNC)rust_new_create_xptr_try);
     R_RegisterCCallable("rust", "rust_logdN01", (DL_FUNC)rust_logdN01_try);
     R_RegisterCCallable("rust", "rust_logdnorm2", (DL_FUNC)rust_logdnorm2_try);
     R_RegisterCCallable("rust", "rust_logdmvnorm", (DL_FUNC)rust_logdmvnorm_try);
     R_RegisterCCallable("rust", "rust_logdlnorm", (DL_FUNC)rust_logdlnorm_try);
     R_RegisterCCallable("rust", "rust_logdgamma", (DL_FUNC)rust_logdgamma_try);
+    R_RegisterCCallable("rust", "rust_old_logdgamma", (DL_FUNC)rust_old_logdgamma_try);
     R_RegisterCCallable("rust", "rust_loggp", (DL_FUNC)rust_loggp_try);
     R_RegisterCCallable("rust", "rust_create_xptr", (DL_FUNC)rust_create_xptr_try);
     R_RegisterCCallable("rust", "rust_neglog", (DL_FUNC)rust_neglog_try);

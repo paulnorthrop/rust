@@ -53,6 +53,10 @@ cpp_logf_rho_4 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, pt
     .Call('rust_cpp_logf_rho_4', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
+rcpp_apply <- function(x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
+    .Call('rust_rcpp_apply', PACKAGE = 'rust', x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+}
+
 cpp_a_obj <- function(psi, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars) {
     .Call('rust_cpp_a_obj', PACKAGE = 'rust', psi, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
 }
@@ -121,14 +125,6 @@ create_phi_to_theta_xptr <- function(fstr) {
     .Call('rust_create_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
 }
 
-new_logdgamma <- function(xS, env) {
-    .Call('rust_new_logdgamma', PACKAGE = 'rust', xS, env)
-}
-
-new_create_xptr <- function(fstr) {
-    .Call('rust_new_create_xptr', PACKAGE = 'rust', fstr)
-}
-
 logdN01 <- function(x, pars) {
     .Call('rust_logdN01', PACKAGE = 'rust', x, pars)
 }
@@ -147,6 +143,10 @@ logdlnorm <- function(x, pars) {
 
 logdgamma <- function(x, pars) {
     .Call('rust_logdgamma', PACKAGE = 'rust', x, pars)
+}
+
+old_logdgamma <- function(x, pars) {
+    .Call('rust_old_logdgamma', PACKAGE = 'rust', x, pars)
 }
 
 loggp <- function(x, ss) {
