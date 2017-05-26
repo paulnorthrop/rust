@@ -1095,21 +1095,21 @@ RcppExport SEXP rust_no_trans(SEXP thetaSEXP, SEXP user_argsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// create_phi_to_theta_xptr
-SEXP create_phi_to_theta_xptr(std::string fstr);
-static SEXP rust_create_phi_to_theta_xptr_try(SEXP fstrSEXP) {
+// null_phi_to_theta_xptr
+SEXP null_phi_to_theta_xptr(std::string fstr);
+static SEXP rust_null_phi_to_theta_xptr_try(SEXP fstrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
-    rcpp_result_gen = Rcpp::wrap(create_phi_to_theta_xptr(fstr));
+    rcpp_result_gen = Rcpp::wrap(null_phi_to_theta_xptr(fstr));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP rust_create_phi_to_theta_xptr(SEXP fstrSEXP) {
+RcppExport SEXP rust_null_phi_to_theta_xptr(SEXP fstrSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(rust_create_phi_to_theta_xptr_try(fstrSEXP));
+        rcpp_result_gen = PROTECT(rust_null_phi_to_theta_xptr_try(fstrSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1588,21 +1588,21 @@ RcppExport SEXP rust_gp_phi_to_theta(SEXP phiSEXP, SEXP user_argsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// my_create_phi_to_theta_xptr
-SEXP my_create_phi_to_theta_xptr(std::string fstr);
-static SEXP rust_my_create_phi_to_theta_xptr_try(SEXP fstrSEXP) {
+// create_phi_to_theta_xptr
+SEXP create_phi_to_theta_xptr(std::string fstr);
+static SEXP rust_create_phi_to_theta_xptr_try(SEXP fstrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
-    rcpp_result_gen = Rcpp::wrap(my_create_phi_to_theta_xptr(fstr));
+    rcpp_result_gen = Rcpp::wrap(create_phi_to_theta_xptr(fstr));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP rust_my_create_phi_to_theta_xptr(SEXP fstrSEXP) {
+RcppExport SEXP rust_create_phi_to_theta_xptr(SEXP fstrSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(rust_my_create_phi_to_theta_xptr_try(fstrSEXP));
+        rcpp_result_gen = PROTECT(rust_create_phi_to_theta_xptr_try(fstrSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1653,7 +1653,7 @@ static int rust_RcppExport_validate(const char* sig) {
         signatures.insert("double(*log_none_jac)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*create_log_jac_xptr)(std::string)");
         signatures.insert("Rcpp::NumericVector(*no_trans)(const Rcpp::NumericVector&,const Rcpp::List&)");
-        signatures.insert("SEXP(*create_phi_to_theta_xptr)(std::string)");
+        signatures.insert("SEXP(*null_phi_to_theta_xptr)(std::string)");
         signatures.insert("double(*logdN01)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdnorm2)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdmvnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -1669,7 +1669,7 @@ static int rust_RcppExport_validate(const char* sig) {
         signatures.insert("Rcpp::NumericVector(*vecpower)(const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
         signatures.insert("Rcpp::NumericVector(*bc_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("Rcpp::NumericVector(*gp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-        signatures.insert("SEXP(*my_create_phi_to_theta_xptr)(std::string)");
+        signatures.insert("SEXP(*create_phi_to_theta_xptr)(std::string)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -1706,7 +1706,7 @@ RcppExport SEXP rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "rust_log_none_jac", (DL_FUNC)rust_log_none_jac_try);
     R_RegisterCCallable("rust", "rust_create_log_jac_xptr", (DL_FUNC)rust_create_log_jac_xptr_try);
     R_RegisterCCallable("rust", "rust_no_trans", (DL_FUNC)rust_no_trans_try);
-    R_RegisterCCallable("rust", "rust_create_phi_to_theta_xptr", (DL_FUNC)rust_create_phi_to_theta_xptr_try);
+    R_RegisterCCallable("rust", "rust_null_phi_to_theta_xptr", (DL_FUNC)rust_null_phi_to_theta_xptr_try);
     R_RegisterCCallable("rust", "rust_logdN01", (DL_FUNC)rust_logdN01_try);
     R_RegisterCCallable("rust", "rust_logdnorm2", (DL_FUNC)rust_logdnorm2_try);
     R_RegisterCCallable("rust", "rust_logdmvnorm", (DL_FUNC)rust_logdmvnorm_try);
@@ -1722,7 +1722,64 @@ RcppExport SEXP rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "rust_vecpower", (DL_FUNC)rust_vecpower_try);
     R_RegisterCCallable("rust", "rust_bc_phi_to_theta", (DL_FUNC)rust_bc_phi_to_theta_try);
     R_RegisterCCallable("rust", "rust_gp_phi_to_theta", (DL_FUNC)rust_gp_phi_to_theta_try);
-    R_RegisterCCallable("rust", "rust_my_create_phi_to_theta_xptr", (DL_FUNC)rust_my_create_phi_to_theta_xptr_try);
+    R_RegisterCCallable("rust", "rust_create_phi_to_theta_xptr", (DL_FUNC)rust_create_phi_to_theta_xptr_try);
     R_RegisterCCallable("rust", "rust_RcppExport_validate", (DL_FUNC)rust_RcppExport_validate);
     return R_NilValue;
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"rust_any_naC", (DL_FUNC) &rust_any_naC, 1},
+    {"rust_no_naC", (DL_FUNC) &rust_no_naC, 1},
+    {"rust_any_nonpos", (DL_FUNC) &rust_any_nonpos, 1},
+    {"rust_all_pos", (DL_FUNC) &rust_all_pos, 1},
+    {"rust_vecpow", (DL_FUNC) &rust_vecpow, 2},
+    {"rust_cpp_rho_to_psi", (DL_FUNC) &rust_cpp_rho_to_psi, 3},
+    {"rust_cpp_psi_to_phi", (DL_FUNC) &rust_cpp_psi_to_phi, 4},
+    {"rust_cpp_psi_to_phi_0", (DL_FUNC) &rust_cpp_psi_to_phi_0, 4},
+    {"rust_cpp_logf", (DL_FUNC) &rust_cpp_logf, 3},
+    {"rust_cpp_logf_rho", (DL_FUNC) &rust_cpp_logf_rho, 6},
+    {"rust_cpp_logf_rho_2", (DL_FUNC) &rust_cpp_logf_rho_2, 11},
+    {"rust_cpp_logf_rho_3", (DL_FUNC) &rust_cpp_logf_rho_3, 11},
+    {"rust_cpp_logf_rho_4", (DL_FUNC) &rust_cpp_logf_rho_4, 11},
+    {"rust_rcpp_apply", (DL_FUNC) &rust_rcpp_apply, 11},
+    {"rust_cpp_a_obj", (DL_FUNC) &rust_cpp_a_obj, 9},
+    {"rust_cpp_a_obj_2", (DL_FUNC) &rust_cpp_a_obj_2, 15},
+    {"rust_cpp_lower_box", (DL_FUNC) &rust_cpp_lower_box, 10},
+    {"rust_cpp_lower_box_2", (DL_FUNC) &rust_cpp_lower_box_2, 16},
+    {"rust_cpp_upper_box", (DL_FUNC) &rust_cpp_upper_box, 10},
+    {"rust_cpp_upper_box_2", (DL_FUNC) &rust_cpp_upper_box_2, 16},
+    {"rust_ru_cpp", (DL_FUNC) &rust_ru_cpp, 11},
+    {"rust_ru_cpp_2", (DL_FUNC) &rust_ru_cpp_2, 16},
+    {"rust_ru_cpp_3", (DL_FUNC) &rust_ru_cpp_3, 16},
+    {"rust_ru_cpp_4", (DL_FUNC) &rust_ru_cpp_4, 16},
+    {"rust_create_trans_xptr", (DL_FUNC) &rust_create_trans_xptr, 1},
+    {"rust_bc_no_trans", (DL_FUNC) &rust_bc_no_trans, 4},
+    {"rust_create_psi_to_phi_xptr", (DL_FUNC) &rust_create_psi_to_phi_xptr, 1},
+    {"rust_log_none_jac", (DL_FUNC) &rust_log_none_jac, 2},
+    {"rust_create_log_jac_xptr", (DL_FUNC) &rust_create_log_jac_xptr, 1},
+    {"rust_no_trans", (DL_FUNC) &rust_no_trans, 2},
+    {"rust_null_phi_to_theta_xptr", (DL_FUNC) &rust_null_phi_to_theta_xptr, 1},
+    {"rust_logdN01", (DL_FUNC) &rust_logdN01, 2},
+    {"rust_logdnorm2", (DL_FUNC) &rust_logdnorm2, 2},
+    {"rust_logdmvnorm", (DL_FUNC) &rust_logdmvnorm, 2},
+    {"rust_logdlnorm", (DL_FUNC) &rust_logdlnorm, 2},
+    {"rust_logdgamma", (DL_FUNC) &rust_logdgamma, 2},
+    {"rust_old_logdgamma", (DL_FUNC) &rust_old_logdgamma, 2},
+    {"rust_loggp", (DL_FUNC) &rust_loggp, 2},
+    {"rust_create_xptr", (DL_FUNC) &rust_create_xptr, 1},
+    {"rust_neglog", (DL_FUNC) &rust_neglog, 2},
+    {"rust_bc_log_j", (DL_FUNC) &rust_bc_log_j, 2},
+    {"rust_create_log_j_xptr", (DL_FUNC) &rust_create_log_j_xptr, 1},
+    {"rust_exptrans", (DL_FUNC) &rust_exptrans, 2},
+    {"rust_vecpower", (DL_FUNC) &rust_vecpower, 2},
+    {"rust_bc_phi_to_theta", (DL_FUNC) &rust_bc_phi_to_theta, 2},
+    {"rust_gp_phi_to_theta", (DL_FUNC) &rust_gp_phi_to_theta, 2},
+    {"rust_create_phi_to_theta_xptr", (DL_FUNC) &rust_create_phi_to_theta_xptr, 1},
+    {"rust_RcppExport_registerCCallable", (DL_FUNC) &rust_RcppExport_registerCCallable, 0},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_rust(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

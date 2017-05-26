@@ -82,13 +82,13 @@
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
-#' Rcpp::sourceCpp("src/user_fns.cpp")
 #'
 #' # Log-normal density ===================
 #'
 #' # Note: the default value of max_phi = 10 is OK here but this will not
 #' # always be the case.
 #'
+#' ptr_lnorm <- create_xptr("logdlnorm")
 #' mu <- 0
 #' sigma <- 1
 #' lambda <- find_lambda_one_d_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma)
@@ -105,6 +105,7 @@
 #' # In practice the value of lambda chosen is quite insensitive to the choice
 #' # of max_phi, provided that max_phi is not far too large or far too small.]
 #'
+#' ptr_gam <- create_xptr("logdgamma")
 #' lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
 #'                                  max_phi = max_phi)
 #' lambda
@@ -172,7 +173,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
       trans_list$log_j <- log_j
     }
   } else {
-    phi_to_theta = create_phi_to_theta_xptr("no_trans")
+    phi_to_theta = null_phi_to_theta_xptr("no_trans")
     log_j = create_log_jac_xptr("log_none_jac")
   }
   trans_list$user_args <- user_args
@@ -335,11 +336,13 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
-#' Rcpp::sourceCpp("src/user_fns.cpp")
 #'
 #' # Log-normal density ===================
 #' # Note: the default value max_phi = 10 is OK here but this will not always
 #' # be the case
+#' ptr_lnorm <- create_xptr("logdlnorm")
+#' mu <- 0
+#' sigma <- 1
 #' lambda <- find_lambda_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma)
 #' lambda
 #' x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = 1000,
@@ -353,6 +356,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' # In practice the value of lambda chosen is quite insensitive to the choice
 #' # of max_phi, provided that max_phi is not far too large or far too small.]
 #'
+#' ptr_gam <- create_xptr("logdgamma")
 #' lambda <- find_lambda_rcpp(logf = ptr_gam, alpha = alpha, max_phi = max_phi)
 #' lambda
 #' x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
@@ -370,6 +374,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'
 #' n <- 1000
 #' # Sample on original scale, with no rotation ----------------
+#' ptr_gp <- create_xptr("loggp")
 #' for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
 #'                      lower = c(0, -Inf)), ss, rotate = FALSE)
 #' x1 <- do.call(ru_rcpp, for_ru_rcpp)
@@ -402,7 +407,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' # We use phi1 = sigma and phi2 = xi + sigma / max(data)
 #'
 #' # Create an external pointer to this C++ function
-#' ptr_phi_to_theta_gp <- my_create_phi_to_theta_xptr("gp")
+#' ptr_phi_to_theta_gp <- create_phi_to_theta_xptr("gp")
 #' # Note: log_j is set to zero by default inside find_lambda_rcpp()
 #' lambda <- find_lambda_rcpp(logf = ptr_gp, ss = ss, d = 2, min_phi = min_phi,
 #'                            max_phi = max_phi, user_args = list(xm = ss$xm),
@@ -487,7 +492,7 @@ find_lambda_rcpp <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
       trans_list$log_j <- log_j
     }
   } else {
-    phi_to_theta = create_phi_to_theta_xptr("no_trans")
+    phi_to_theta = null_phi_to_theta_xptr("no_trans")
     log_j = create_log_jac_xptr("log_none_jac")
   }
   trans_list$user_args <- user_args

@@ -1,12 +1,12 @@
 ---
-title: "Rusting faster: Simulation using Rcpp"
+title: "Rusting Faster: Simulation using Rcpp"
 author: "Paul Northrop"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Rusting faster: Simulation using Rcpp}
+  %\VignetteIndexEntry{Rusting Faster: Simulation using Rcpp}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: rust.bib
@@ -36,6 +36,8 @@ A simple way for the user provide their C++ functions to create them in a file, 
 
 in order that they can create an external pointer for `new_name` using `create_xptr`.  The following example of file `user_fns.cpp` contains code for a standard normal density.  Note that for this particular example we don't need RcppArmadillo: we could replace `#include <RcppArmadillo.h>` with `#include <Rcpp.h>` and delete `using namespace arma;`.  However, RcppArmadillo is used in the the [multivariate normal example](#mvn) below and will be useful in many examples.
 
+    // [[Rcpp::depends(RcppArmadillo)]]
+    
     #include <RcppArmadillo.h>
 
     using namespace arma;
@@ -89,7 +91,8 @@ in order that they can create an external pointer for `new_name` using `create_x
 All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.
 
 ```{r setup, include=FALSE}
-devtools::document() # reload all code (after saving them)   or Ctrl-shift-L
+#devtools::load_all() # reload all code (after saving them)   or Ctrl-shift-L
+devtools::document()
 ```
 
 ```{r}
@@ -308,8 +311,9 @@ temp <- do.call(gpd_init, ss)
 min_phi <- pmax(0, temp$init_phi - 2 * temp$se_phi)
 max_phi <- pmax(0, temp$init_phi + 2 * temp$se_phi)
 
-# Create an external pointer to this C++ function
-ptr_phi_to_theta_gp <- my_create_phi_to_theta_xptr("gp")
+# Create external pointers
+ptr_gp <- create_xptr("loggp")
+ptr_phi_to_theta_gp <- create_phi_to_theta_xptr("gp")
 # Note: log_j is set to zero by default inside find_lambda_rcpp()
 lambda <- find_lambda_rcpp(logf = ptr_gp, ss = ss, d = 2, min_phi = min_phi,
                            max_phi = max_phi, user_args = list(xm = ss$xm),

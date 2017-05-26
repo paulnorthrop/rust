@@ -1,4 +1,5 @@
 // [[Rcpp::depends(RcppArmadillo)]]
+
 #include <RcppArmadillo.h>
 
 using namespace arma;
@@ -711,11 +712,8 @@ Rcpp::NumericVector no_trans(const Rcpp::NumericVector& theta,
 }
 
 // [[Rcpp::export]]
-SEXP create_phi_to_theta_xptr(std::string fstr) {
+SEXP null_phi_to_theta_xptr(std::string fstr) {
   typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
                                const Rcpp::List& user_args) ;
-  if (fstr == "no_trans")
-    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&no_trans))) ;
-  else
-    return(Rcpp::XPtr<p2tPtr>(R_NilValue)) ;
+  return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&no_trans))) ;
 }

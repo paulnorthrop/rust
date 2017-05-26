@@ -32,6 +32,9 @@
 #' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
 #'   on the x and y axes respectively.  If the user doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
+#' @param points_par A list of arguments to pass to
+#'   \code{\link[graphics]{points}} to control the appearance of points
+#'   depicting the simulated values. Only relevant when \code{d = 2}.
 #' @examples
 #' # Log-normal density ----------------
 #' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 1)
@@ -77,7 +80,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     plot_density <- x$logf_rho
   } else {
     plot_data <- x$sim_vals
-    pmedian <- apply(x$sim_vals, 2, median)
+    pmedian <- apply(x$sim_vals, 2, stats::median)
     hshift <- do.call(x$logf, c(list(pmedian), x$logf_args))
     xlogf <- x$logf
     plot_density <- function(x, ...) {

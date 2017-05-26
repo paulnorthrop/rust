@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# rust <img src="rust_logo.png" align="right" />
+# rust <img src="tools/rust_logo.png" align="right" />
 
 ## ratio-of-uniforms simulation with transformation
 

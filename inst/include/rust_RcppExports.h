@@ -595,17 +595,17 @@ namespace rust {
         return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
     }
 
-    inline SEXP create_phi_to_theta_xptr(std::string fstr) {
-        typedef SEXP(*Ptr_create_phi_to_theta_xptr)(SEXP);
-        static Ptr_create_phi_to_theta_xptr p_create_phi_to_theta_xptr = NULL;
-        if (p_create_phi_to_theta_xptr == NULL) {
-            validateSignature("SEXP(*create_phi_to_theta_xptr)(std::string)");
-            p_create_phi_to_theta_xptr = (Ptr_create_phi_to_theta_xptr)R_GetCCallable("rust", "rust_create_phi_to_theta_xptr");
+    inline SEXP null_phi_to_theta_xptr(std::string fstr) {
+        typedef SEXP(*Ptr_null_phi_to_theta_xptr)(SEXP);
+        static Ptr_null_phi_to_theta_xptr p_null_phi_to_theta_xptr = NULL;
+        if (p_null_phi_to_theta_xptr == NULL) {
+            validateSignature("SEXP(*null_phi_to_theta_xptr)(std::string)");
+            p_null_phi_to_theta_xptr = (Ptr_null_phi_to_theta_xptr)R_GetCCallable("rust", "rust_null_phi_to_theta_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_phi_to_theta_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_null_phi_to_theta_xptr(Rcpp::wrap(fstr));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -899,17 +899,17 @@ namespace rust {
         return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
     }
 
-    inline SEXP my_create_phi_to_theta_xptr(std::string fstr) {
-        typedef SEXP(*Ptr_my_create_phi_to_theta_xptr)(SEXP);
-        static Ptr_my_create_phi_to_theta_xptr p_my_create_phi_to_theta_xptr = NULL;
-        if (p_my_create_phi_to_theta_xptr == NULL) {
-            validateSignature("SEXP(*my_create_phi_to_theta_xptr)(std::string)");
-            p_my_create_phi_to_theta_xptr = (Ptr_my_create_phi_to_theta_xptr)R_GetCCallable("rust", "rust_my_create_phi_to_theta_xptr");
+    inline SEXP create_phi_to_theta_xptr(std::string fstr) {
+        typedef SEXP(*Ptr_create_phi_to_theta_xptr)(SEXP);
+        static Ptr_create_phi_to_theta_xptr p_create_phi_to_theta_xptr = NULL;
+        if (p_create_phi_to_theta_xptr == NULL) {
+            validateSignature("SEXP(*create_phi_to_theta_xptr)(std::string)");
+            p_create_phi_to_theta_xptr = (Ptr_create_phi_to_theta_xptr)R_GetCCallable("rust", "rust_create_phi_to_theta_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_my_create_phi_to_theta_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_phi_to_theta_xptr(Rcpp::wrap(fstr));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

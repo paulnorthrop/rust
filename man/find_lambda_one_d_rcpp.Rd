@@ -93,13 +93,13 @@ The general idea is to estimate quantiles of f corresponding to a
   probabilities at the midpoints as weights.
 }
 \examples{
-Rcpp::sourceCpp("src/user_fns.cpp")
 
 # Log-normal density ===================
 
 # Note: the default value of max_phi = 10 is OK here but this will not
 # always be the case.
 
+ptr_lnorm <- create_xptr("logdlnorm")
 mu <- 0
 sigma <- 1
 lambda <- find_lambda_one_d_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma)
@@ -116,6 +116,7 @@ max_phi <- qgamma(0.999, shape = alpha)
 # In practice the value of lambda chosen is quite insensitive to the choice
 # of max_phi, provided that max_phi is not far too large or far too small.]
 
+ptr_gam <- create_xptr("logdgamma")
 lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
                                  max_phi = max_phi)
 lambda
