@@ -3,6 +3,8 @@
 rust <img src="tools/rust_logo.png" align="right" />
 ====================================================
 
+[![Travis-CI Build Status](https://travis-ci.org/paulnorthrop/rust.svg?branch=master)](https://travis-ci.org/paulnorthrop/rust)
+
 ratio-of-uniforms simulation with transformation
 ------------------------------------------------
 
