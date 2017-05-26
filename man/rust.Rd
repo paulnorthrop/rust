@@ -12,7 +12,7 @@ distribution with log-density \code{logf} (up to an additive constant).
 }
 \details{
 The main functions in the rust package are \code{\link{ru}} and
-  \code{\link{ru_rcpp}}, which implment the generalized ratio-of-uniforms
+  \code{\link{ru_rcpp}}, which implement the generalized ratio-of-uniforms
   algorithm.  The latter uses the Rcpp package to improve efficiency.
   Also provided are two functions,
   \code{find_lambda} and \code{find_lambda_one_d}, that may be used to

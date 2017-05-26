@@ -63,7 +63,7 @@ has a density closer to that of a Gaussian random variable.
 Works by estimating a set of quantiles of the distribution implied
 by logf and treating those quantiles as data in a standard Box-Cox
 analysis.  In the following we use theta to denote the argument of
-logf on the orginal scale and phi on the Box-Cox transformed scale.
+logf on the original scale and phi on the Box-Cox transformed scale.
 }
 \details{
 The general idea is to estimate quantiles of f corresponding to a

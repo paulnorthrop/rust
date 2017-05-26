@@ -9,7 +9,7 @@
 #' Works by estimating a set of quantiles of the distribution implied
 #' by logf and treating those quantiles as data in a standard Box-Cox
 #' analysis.  In the following we use theta to denote the argument of
-#' logf on the orginal scale and phi on the Box-Cox transformed scale.
+#' logf on the original scale and phi on the Box-Cox transformed scale.
 #'
 #' @param logf A pointer to a compiled C++ function returning the log
 #'   of the target density \eqn{f}.
@@ -269,7 +269,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' the (positive) random variable with log-density logf has a density
 #' closer to that of a Gaussian random variable.
 #' In the following we use theta to denote the argument of
-#' logf on the orginal scale and phi on the Box-Cox transformed scale.
+#' logf on the original scale and phi on the Box-Cox transformed scale.
 #'
 #' @param logf A pointer to a compiled C++ function returning the log
 #'   of the target density \eqn{f}.

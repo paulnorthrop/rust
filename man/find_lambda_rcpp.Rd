@@ -73,7 +73,7 @@ Finds a value of the Box-Cox transformation parameter lambda for which
 the (positive) random variable with log-density logf has a density
 closer to that of a Gaussian random variable.
 In the following we use theta to denote the argument of
-logf on the orginal scale and phi on the Box-Cox transformed scale.
+logf on the original scale and phi on the Box-Cox transformed scale.
 }
 \details{
 The general idea is to evaluate the density f on a d-dimensional
