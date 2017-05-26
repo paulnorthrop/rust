@@ -8,6 +8,9 @@ pa <- matrix(pa, ncol = length(d), nrow = 1)
 colnames(pa) <- d
 knitr::kable(round(pa,3), caption = "$p_a(d, 1/2)$ as $d$ varies.")
 
+## ----setup, include=FALSE------------------------------------------------
+devtools::load_all()
+
 ## ------------------------------------------------------------------------
 library(rust)
 set.seed(46)

@@ -1,6 +1,9 @@
 ## ---- include = FALSE----------------------------------------------------
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
+## ----setup, include=FALSE------------------------------------------------
+devtools::document()
+
 ## ------------------------------------------------------------------------
 library(rust)
 library(Rcpp)

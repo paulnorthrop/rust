@@ -105,6 +105,10 @@ For a review of Bayesian extreme value modelling see @Stephenson2016 and for an 
 
 We simulate some data from a GP(1, -1/2) distribution.  We choose $\xi=-1/2$ because this tends to result in a posterior distribution with strong negative posterior association between $\sigma$ and $\xi$, making the benefit of transformation more apparent.  We also calculate some sample properties that feature in the likelihood, so that they can be passed to the log-density `logf` rather than being recalculated, and set an initial estimate at which `logf` is positive.
 
+```{r setup, include=FALSE}
+devtools::load_all()
+```
+
 ```{r}
 library(rust)
 set.seed(46)

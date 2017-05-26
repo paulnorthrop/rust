@@ -200,9 +200,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq      mean median     uq    max neval</span>
-<span class="co">#&gt;   old 32.520 33.740 36.374008 34.950 39.080 58.950   100</span>
-<span class="co">#&gt;   new  2.375  2.539  2.798837  2.707  2.841  8.223   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq      mean median     uq     max neval</span>
+<span class="co">#&gt;   old 31.990 33.470 37.498158  34.09 38.110 174.900   100</span>
+<span class="co">#&gt;   new  2.442  2.576  2.740526   2.70  2.763   7.146   100</span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
@@ -241,9 +241,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )  
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr     min      lq       mean  median      uq   max neval</span>
-<span class="co">#&gt;   old 231.400 242.500 249.704727 247.300 251.900 378.2   100</span>
-<span class="co">#&gt;   new   8.932   9.182   9.800889   9.368   9.609  15.2   100</span></code></pre></div>
+<span class="co">#&gt;  expr     min      lq       mean  median     uq    max neval</span>
+<span class="co">#&gt;   old 230.000 245.800 261.369274 253.200 264.50 403.20   100</span>
+<span class="co">#&gt;   new   8.987   9.395   9.944666   9.615  10.13  15.41   100</span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -270,8 +270,8 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr    min     lq      mean median     uq   max neval</span>
-<span class="co">#&gt;   old 47.940 55.650 58.814465 56.830 59.860 201.0   100</span>
-<span class="co">#&gt;   new  5.016  5.215  6.439541  5.321  5.473  75.5   100</span></code></pre></div>
+<span class="co">#&gt;   old 48.490 56.360 59.290428 58.060 61.430 72.30   100</span>
+<span class="co">#&gt;   new  5.048  5.314  6.414968  5.473  5.715 74.53   100</span></code></pre></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3>Generalized Pareto posterior density</h3>
@@ -333,8 +333,8 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr    min     lq      mean median     uq    max neval</span>
-<span class="co">#&gt;   old 145.10 152.40 156.74784 154.60 157.70 284.60   100</span>
-<span class="co">#&gt;   new  18.36  19.38  20.57036  19.55  20.16  27.68   100</span></code></pre></div>
+<span class="co">#&gt;   old 145.30 152.60 160.47946 155.40 164.00 287.60   100</span>
+<span class="co">#&gt;   new  18.53  19.38  21.19399  19.83  22.47  29.62   100</span></code></pre></div>
 </div>
 </div>
 <div id="examples-find_lambda_rcpp_one_d-and-find_lambda_rcpp" class="section level2">
@@ -400,10 +400,10 @@ lambda
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000011ee4c40&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000011aa1900&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000011ee4e90&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000011aa1970&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>
