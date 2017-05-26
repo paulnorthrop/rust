@@ -18,9 +18,6 @@ using namespace Rcpp;
 
 // One-dimensional standard normal.
 
-//' Name1
-//'
-//'
 // [[Rcpp::export]]
 double logdN01(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return (-pow(x[0], 2.0) / 2.0) ;
@@ -28,9 +25,6 @@ double logdN01(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 
 // Two-dimensional normal with zero-mean and unit variances.
 
-//' Name2
-//'
-//'
 // [[Rcpp::export]]
 double logdnorm2(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   double rho = pars["rho"] ;
@@ -40,9 +34,6 @@ double logdnorm2(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 
 // d-dimensional normal with zero-mean and covariance matrix sigma.
 
-//' Name3
-//'
-//'
 // [[Rcpp::export]]
 double logdmvnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   arma::mat sigma = as<arma::mat>(pars["sigma"]) ;
@@ -53,9 +44,6 @@ double logdmvnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 
 // Lognormal(mu, sigma).
 
-//' Name4
-//'
-//'
 // [[Rcpp::export]]
 double logdlnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   double mu = pars["mu"] ;
@@ -68,17 +56,12 @@ double logdlnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 
 // Gamma(alpha, 1).
 
-//' Name5
-//'
-//'
 // [[Rcpp::export]]
 double logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   double shp = pars["alpha"] ;
   return Rcpp::dgamma(x, shp, 1.0, 1)[0] ;
 }
 
-//' Name6
-//'
 // [[Rcpp::export]]
 double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   double alpha = pars["alpha"] ;
@@ -95,9 +78,6 @@ double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 // Generalized Pareto posterior based on an MDI prior truncated to
 // shape parameter xi >= -1.
 
-//' Name7
-//'
-//'
 // [[Rcpp::export]]
 double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   Rcpp::NumericVector gpd_data = ss["gpd_data"] ;
@@ -143,6 +123,7 @@ double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
 //'
 //' @param fstr A string indicating the C++ function required.
 //'
+//' @export
 // [[Rcpp::export]]
 SEXP create_xptr(std::string fstr) {
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
@@ -166,18 +147,12 @@ SEXP create_xptr(std::string fstr) {
 // User-supplied C++ functions for log_j, the log-Jacobian of the
 // transformation from theta to phi.
 
-//' Name8
-//'
-//'
 // [[Rcpp::export]]
 double neglog(const Rcpp::NumericVector& theta,
               const Rcpp::List& user_args) {
   return -log(theta[0]) ;
 }
 
-//' Name9
-//'
-//'
 // [[Rcpp::export]]
 double bc_log_j(const Rcpp::NumericVector& theta,
                 const Rcpp::List& user_args) {
@@ -191,6 +166,7 @@ double bc_log_j(const Rcpp::NumericVector& theta,
 //'
 //' @param fstr A string indicating the C++ function required.
 //'
+//' @export
 // [[Rcpp::export]]
 SEXP create_log_j_xptr(std::string fstr) {
   typedef double (*logjacPtr)(const Rcpp::NumericVector& theta,
@@ -206,9 +182,6 @@ SEXP create_log_j_xptr(std::string fstr) {
 // User-supplied C++ functions for phi_to_theta, which performs
 // transformation from phi to theta.
 
-//' Name10
-//'
-//'
 // [[Rcpp::export]]
 Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
                                 const Rcpp::List& user_args) {
@@ -217,9 +190,6 @@ Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
 
 // See http://stackoverflow.com/questions/30106492/vectorized-exponent-for-pow-in-rcpp
 
-//' Name11
-//'
-//'
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpower(const Rcpp::NumericVector& base,
                              const Rcpp::NumericVector& exp) {
@@ -229,9 +199,6 @@ Rcpp::NumericVector vecpower(const Rcpp::NumericVector& base,
   return out ;
 }
 
-//' Name12
-//'
-//'
 // [[Rcpp::export]]
 Rcpp::NumericVector bc_phi_to_theta(const Rcpp::NumericVector& phi,
                                     const Rcpp::List& user_args) {
@@ -240,9 +207,6 @@ Rcpp::NumericVector bc_phi_to_theta(const Rcpp::NumericVector& phi,
   return ifelse(test > 0, vecpower(test, 1.0 / lambda), NA_REAL) ;
 }
 
-//' Name13
-//'
-//'
 // [[Rcpp::export]]
 Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
                                     const Rcpp::List& user_args) {
@@ -260,6 +224,7 @@ Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
 //'
 //' @param fstr A string indicating the C++ function required.
 //'
+//' @export
 // [[Rcpp::export]]
 SEXP create_phi_to_theta_xptr(std::string fstr) {
   typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,

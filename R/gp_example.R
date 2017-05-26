@@ -23,6 +23,7 @@
 #' }
 #' @seealso \code{\link{rgpd}} for simulation from a generalized Pareto
 #'   distribution.
+#' @export
 gpd_sum_stats <- function(gpd_data) {
   ss <- list()
   nas <- is.na(gpd_data)
@@ -65,6 +66,7 @@ gpd_sum_stats <- function(gpd_data) {
 #' # Calculate the generalized Pareto log-posterior
 #' gpd_logpost(pars = c(1, 0), ss = ss)
 #' }
+#' @export
 gpd_logpost <- function(pars, ss) {
   loglik <- do.call(gpd_loglik, c(list(pars = pars), ss))
   logprior <- log_gpd_mdi_prior(pars = pars)
@@ -86,6 +88,7 @@ gpd_logpost <- function(pars, ss) {
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 #' }
+#' @export
 rgpd <- function (m = 1, sigma = 1, xi = 0) {
   if (min(sigma) <= 0) {
     stop("sigma must be positive")
@@ -180,6 +183,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #' # Calculate initial estimates
 #' do.call(gpd_init, ss)
 #' }
+#' @export
 gpd_init <- function(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
                     init_ests = NULL) {
   #

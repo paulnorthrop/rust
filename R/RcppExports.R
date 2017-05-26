@@ -125,50 +125,30 @@ null_phi_to_theta_xptr <- function(fstr) {
     .Call('rust_null_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
 }
 
-#' Name1
-#'
-#'
 logdN01 <- function(x, pars) {
     .Call('rust_logdN01', PACKAGE = 'rust', x, pars)
 }
 
-#' Name2
-#'
-#'
 logdnorm2 <- function(x, pars) {
     .Call('rust_logdnorm2', PACKAGE = 'rust', x, pars)
 }
 
-#' Name3
-#'
-#'
 logdmvnorm <- function(x, pars) {
     .Call('rust_logdmvnorm', PACKAGE = 'rust', x, pars)
 }
 
-#' Name4
-#'
-#'
 logdlnorm <- function(x, pars) {
     .Call('rust_logdlnorm', PACKAGE = 'rust', x, pars)
 }
 
-#' Name5
-#'
-#'
 logdgamma <- function(x, pars) {
     .Call('rust_logdgamma', PACKAGE = 'rust', x, pars)
 }
 
-#' Name6
-#'
 old_logdgamma <- function(x, pars) {
     .Call('rust_old_logdgamma', PACKAGE = 'rust', x, pars)
 }
 
-#' Name7
-#'
-#'
 loggp <- function(x, ss) {
     .Call('rust_loggp', PACKAGE = 'rust', x, ss)
 }
@@ -177,20 +157,15 @@ loggp <- function(x, ss) {
 #'
 #' @param fstr A string indicating the C++ function required.
 #'
+#' @export
 create_xptr <- function(fstr) {
     .Call('rust_create_xptr', PACKAGE = 'rust', fstr)
 }
 
-#' Name8
-#'
-#'
 neglog <- function(theta, user_args) {
     .Call('rust_neglog', PACKAGE = 'rust', theta, user_args)
 }
 
-#' Name9
-#'
-#'
 bc_log_j <- function(theta, user_args) {
     .Call('rust_bc_log_j', PACKAGE = 'rust', theta, user_args)
 }
@@ -199,34 +174,23 @@ bc_log_j <- function(theta, user_args) {
 #'
 #' @param fstr A string indicating the C++ function required.
 #'
+#' @export
 create_log_j_xptr <- function(fstr) {
     .Call('rust_create_log_j_xptr', PACKAGE = 'rust', fstr)
 }
 
-#' Name10
-#'
-#'
 exptrans <- function(phi, user_args) {
     .Call('rust_exptrans', PACKAGE = 'rust', phi, user_args)
 }
 
-#' Name11
-#'
-#'
 vecpower <- function(base, exp) {
     .Call('rust_vecpower', PACKAGE = 'rust', base, exp)
 }
 
-#' Name12
-#'
-#'
 bc_phi_to_theta <- function(phi, user_args) {
     .Call('rust_bc_phi_to_theta', PACKAGE = 'rust', phi, user_args)
 }
 
-#' Name13
-#'
-#'
 gp_phi_to_theta <- function(phi, user_args) {
     .Call('rust_gp_phi_to_theta', PACKAGE = 'rust', phi, user_args)
 }
@@ -235,6 +199,7 @@ gp_phi_to_theta <- function(phi, user_args) {
 #'
 #' @param fstr A string indicating the C++ function required.
 #'
+#' @export
 create_phi_to_theta_xptr <- function(fstr) {
     .Call('rust_create_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
 }
