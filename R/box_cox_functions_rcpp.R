@@ -428,6 +428,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' abline(a = 0, b = -1 / ss$xm)
 #' summary(x4)
 #'
+#' def_par <- graphics::par(no.readonly = TRUE)
 #' par(mfrow = c(2,2), mar = c(4, 4, 1.5, 1))
 #' plot(x1, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
 #'   main = "mode relocation")
@@ -437,6 +438,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'   main = "Box-Cox and mode relocation")
 #' plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
 #'   main = "Box-Cox, mode relocation and rotation")
+#' par(def_par)
 #' }
 #' @seealso \code{\link{ru_rcpp}} to perform ratio-of-uniforms sampling.
 #' @seealso \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat)

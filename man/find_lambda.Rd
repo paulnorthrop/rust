@@ -161,6 +161,7 @@ plot(x4, xlab = "sigma", ylab = "xi")
 abline(a = 0, b = -1 / ss$xm)
 summary(x4)
 
+def_par <- graphics::par(no.readonly = TRUE)
 par(mfrow = c(2,2), mar = c(4, 4, 1.5, 1))
 plot(x1, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
   main = "mode relocation")
@@ -170,6 +171,7 @@ plot(x3, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
   main = "Box-Cox and mode relocation")
 plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
   main = "Box-Cox, mode relocation and rotation")
+par(def_par)
 }
 }
 \references{

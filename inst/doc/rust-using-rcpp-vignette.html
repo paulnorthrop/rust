@@ -12,9 +12,9 @@
 
 <meta name="author" content="Paul Northrop" />
 
-<meta name="date" content="2017-05-25" />
+<meta name="date" content="2017-05-26" />
 
-<title>Rusting faster: Simulation using Rcpp</title>
+<title>Rusting Faster: Simulation using Rcpp</title>
 
 
 
@@ -68,9 +68,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">Rusting faster: Simulation using Rcpp</h1>
+<h1 class="title toc-ignore">Rusting Faster: Simulation using Rcpp</h1>
 <h4 class="author"><em>Paul Northrop</em></h4>
-<h4 class="date"><em>2017-05-25</em></h4>
+<h4 class="date"><em>2017-05-26</em></h4>
 
 
 <div id="TOC">
@@ -97,10 +97,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Providing a C++ function to <code>ru_rcpp</code></h2>
 <p>The general way that <strong>rust</strong> enables users to provide their own C++ functions uses external pointers and is based on the <a href="http://gallery.rcpp.org/">Rcpp Gallery</a> article <a href="http://gallery.rcpp.org/articles/passing-cpp-function-pointers/">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel. For a detailed case study of the general approach see the <strong>RcppDE</strong> package <span class="citation">(Eddelbuettel 2016)</span> vignette at the <a href="https://CRAN.R-project.org/package=RcppDE">RcppDE page on CRAN</a>.</p>
 <p>The user writes a C++ function to calculate <span class="math inline">\(\log f(x)\)</span>. The current implementation in <strong>rust</strong> requires this function to have a particular structure: it must take a constant reference to an <code>Rcpp::NumericVector</code>, say <code>x</code>, a constant reference to an <code>Rcpp::List</code>, say <code>pars</code>, and return a <code>double</code> precision scalar. <code>x</code> is the argument <span class="math inline">\(x\)</span> of <span class="math inline">\(f(x)\)</span>. <code>pars</code> is a list containing the values of parameters whose values are not specified inside the function. This allows the user to change the values of any parameters in the target density without editing the function. If there are no such parameters then the user must still include the argument <code>pars</code> in their function, even though the list provided to the function when it is called will be empty.</p>
-<p>A simple way for the user provide their C++ functions to create them in a file, say <code>user_fns.cpp</code>. Example content of this file is provided below. The full file is available on the <a href="https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp">rust Github page</a>. The functions in this file are compiled and made available to R, either using the <code>Rcpp::sourceCpp</code> function (e.g. <code>Rcpp::sourceCpp(&quot;user_fns.cpp&quot;)</code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_xptr</code>, which creates an external pointer to a C++ function. See . It is this external pointer that is passed to <code>ru_rcpp</code> to perform ratio-of-uniforms sampling. If the user has written a C++ function, say <code>new_name</code>, they need to add to <code>create_xptr</code> two lines of code:</p>
+<p>A simple way for the user to provide their C++ functions to create them in a file, say <code>user_fns.cpp</code>. Content from an example of this file, <code>example_user_fns.cpp</code>, is provided below. The full file is available on the <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/example_user_fns.cpp">rust Github page</a>. The functions in this file are compiled and made available to R, either using the <code>Rcpp::sourceCpp</code> function (e.g. <code>Rcpp::sourceCpp(&quot;user_fns.cpp&quot;)</code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_xptr</code>, which creates an external pointer to a C++ function. See . It is this external pointer that is passed to <code>ru_rcpp</code> to perform ratio-of-uniforms sampling. If the user has written a C++ function, say <code>new_name</code>, they need to add to <code>create_xptr</code> two lines of code:</p>
 <pre><code>else if (fstr == &quot;new_name&quot;)  
   return(Rcpp::XPtr&lt;funcPtr&gt;(new funcPtr(&amp;new_name))) ;</code></pre>
-<p>in order that they can create an external pointer for <code>new_name</code> using <code>create_xptr</code>. The following example of file <code>user_fns.cpp</code> contains code for a standard normal density. Note that for this particular example we don’t need RcppArmadillo: we could replace <code>#include &lt;RcppArmadillo.h&gt;</code> with <code>#include &lt;Rcpp.h&gt;</code> and delete <code>using namespace arma;</code>. However, RcppArmadillo is used in the the <a href="#mvn">multivariate normal example</a> below and will be useful in many examples.</p>
+<p>in order that they can create an external pointer for <code>new_name</code> using <code>create_xptr</code>. The following example file <code>example_user_fns.cpp</code> contains code for a standard normal density. Note that for this particular example we don’t need RcppArmadillo: we could replace <code>#include &lt;RcppArmadillo.h&gt;</code> with <code>#include &lt;Rcpp.h&gt;</code> and delete <code>using namespace arma;</code>. However, RcppArmadillo is used in the the <a href="#mvn">multivariate normal example</a> below and will be useful in many examples.</p>
 <pre><code>// [[Rcpp::depends(RcppArmadillo)]]
 
 #include &lt;RcppArmadillo.h&gt;
@@ -161,9 +161,32 @@ ptr_N01 &lt;- create_xptr(&quot;logdN01&quot;)
 <span class="co"># Set the size of the simulated sample</span>
 n &lt;-<span class="st"> </span><span class="dv">1000</span></code></pre></div>
 <p>It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the <code>Rcpp::sourceCpp</code> function (e.g. <code>Rcpp::sourceCpp(&quot;user_fns.cpp&quot;)</code>) or using RStudio’s Source button on the editor toolbar.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rcpp::<span class="kw">sourceCpp</span>(<span class="st">'example_user_fns.cpp'</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_N01 &lt;- create_xptr(&quot;logdN01&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_bvn &lt;- create_xptr(&quot;logdnorm2&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_mvn &lt;- create_xptr(&quot;logdmvnorm&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_lnorm &lt;- create_xptr(&quot;logdlnorm&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_gam &lt;- create_xptr(&quot;logdgamma&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_gp &lt;- create_xptr(&quot;loggp&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_phi_to_theta_lnorm &lt;- create_phi_to_theta_xptr(&quot;exponential&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_log_j_lnorm &lt;- create_log_j_xptr(&quot;neglog&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_phi_to_theta_bc &lt;- create_phi_to_theta_xptr(&quot;bc&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_log_j_bc &lt;- create_log_j_xptr(&quot;bc&quot;)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &gt; ptr_phi_to_theta_gp &lt;- create_phi_to_theta_xptr(&quot;gp&quot;)</span></code></pre></div>
 <div id="standard-normal-density" class="section level3">
 <h3>Standard normal density</h3>
-<p>We start with a simple example: the (1-dimensional) standard normal density, based on the C++ function <code>logdN01</code> in the example <code>user_fns.cpp</code> file above.</p>
+<p>We start with a simple example: the (1-dimensional) standard normal density, based on the C++ function <code>logdN01</code> in the example <code>example_user_fns.cpp</code> file above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normal density ===================</span>
 
 <span class="co"># Create a pointer to the logdN01 C++ function</span>
@@ -200,14 +223,14 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq      mean median     uq     max neval</span>
-<span class="co">#&gt;   old 33.470 36.610 41.537590 40.790 42.820 162.600   100</span>
-<span class="co">#&gt;   new  2.604  2.751  3.086832  2.925  3.024   7.219   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq      mean median     uq   max neval</span>
+<span class="co">#&gt;   old 35.990 38.100 43.463729  42.29 47.160 66.99   100</span>
+<span class="co">#&gt;   new  2.574  2.811  3.301665   2.95  3.168 11.86   100</span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
 <h3>Multivariate normal density</h3>
-<p>To execute this example we add the following function to <code>user_fns.cpp</code></p>
+<p>To execute this example we add the following function to <code>example_user_fns.cpp</code></p>
 <pre><code>// d-dimensional normal with zero-mean and covariance matrix sigma.
 
 // [[Rcpp::export]]
@@ -220,7 +243,7 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
 <p>and add</p>
 <pre><code>else if (fstr == &quot;logdmvnorm&quot;)
   return(Rcpp::XPtr&lt;funcPtr&gt;(new funcPtr(&amp;logdmvnorm))) ;</code></pre>
-<p>to the function <code>create_xptr</code> in <code>user_fns.cpp</code>.</p>
+<p>to the function <code>create_xptr</code> in <code>example_user_fns.cpp</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Three-dimensional normal with positive association ----------------</span>
 rho &lt;-<span class="st"> </span><span class="fl">0.9</span>
 covmat &lt;-<span class="st"> </span><span class="kw">matrix</span>(rho, <span class="dv">3</span>, <span class="dv">3</span>) +<span class="st"> </span><span class="kw">diag</span>(<span class="dv">1</span> -<span class="st"> </span>rho, <span class="dv">3</span>)
@@ -241,9 +264,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )  
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr     min      lq      mean median    uq    max neval</span>
-<span class="co">#&gt;   old 234.600 262.100 274.51402 272.60 285.5 401.40   100</span>
-<span class="co">#&gt;   new   8.975   9.908  10.96687  10.34  10.7  20.44   100</span></code></pre></div>
+<span class="co">#&gt;  expr     min      lq      mean median     uq   max neval</span>
+<span class="co">#&gt;   old 246.000 267.100 298.04328 295.60 319.10 444.7   100</span>
+<span class="co">#&gt;   new   9.047   9.885  11.32401  10.39  11.39  20.8   100</span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -269,9 +292,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq      mean median    uq   max neval</span>
-<span class="co">#&gt;   old 49.360 55.270 57.269187  56.75 59.74 64.89   100</span>
-<span class="co">#&gt;   new  4.848  5.127  6.053989   5.24  5.36 81.24   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq      mean median     uq   max neval</span>
+<span class="co">#&gt;   old 51.020 57.790 63.035390 60.980 67.930 98.62   100</span>
+<span class="co">#&gt;   new  5.038  5.372  7.131392  5.677  5.982 98.93   100</span></code></pre></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3>Generalized Pareto posterior density</h3>
@@ -333,8 +356,8 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr    min     lq      mean median     uq    max neval</span>
-<span class="co">#&gt;   old 145.40 150.90 156.37649  153.6 157.30 267.50   100</span>
-<span class="co">#&gt;   new  18.08  18.94  20.45427   19.4  22.67  25.85   100</span></code></pre></div>
+<span class="co">#&gt;   old 146.80 158.90 162.96165 162.00 165.20 299.50   100</span>
+<span class="co">#&gt;   new  18.11  19.16  20.73803  19.65  20.98  32.57   100</span></code></pre></div>
 </div>
 </div>
 <div id="examples-find_lambda_rcpp_one_d-and-find_lambda_rcpp" class="section level2">
@@ -400,10 +423,10 @@ lambda
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x000000000860dec0&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000010c21f40&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x000000000860dd40&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000010c21f20&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>

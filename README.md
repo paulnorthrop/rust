@@ -25,7 +25,7 @@ log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
 x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
 ```
 
-From version 1.2.0 onwards the faster function `ru_rcpp` can be used. See the vignette "Rusting faster: Simulation using Rcpp" for details.
+From version 1.2.0 onwards the faster function `ru_rcpp` can be used. See the vignette "Rusting Faster: Simulation using Rcpp" for details.
 
 ``` r
 # Create an external pointer to a C++ function to evaluate the log-density.

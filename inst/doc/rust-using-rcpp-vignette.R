@@ -2,7 +2,6 @@
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
 ## ----setup, include=FALSE------------------------------------------------
-#devtools::load_all() # reload all code (after saving them)   or Ctrl-shift-L
 devtools::document()
 
 ## ------------------------------------------------------------------------
@@ -12,6 +11,9 @@ library(RcppArmadillo)
 library(microbenchmark)
 # Set the size of the simulated sample
 n <- 1000
+
+## ------------------------------------------------------------------------
+Rcpp::sourceCpp('example_user_fns.cpp')
 
 ## ------------------------------------------------------------------------
 # Normal density ===================
