@@ -156,34 +156,11 @@ ptr_N01 &lt;- create_xptr(&quot;logdN01&quot;)
 <p>All the examples in the documentation for <code>ru</code> are replicated in the documentation for <code>ru_rcpp</code>. Here we consider a subset of the examples from the <a href="rust-vignette.html">Introducing rust</a> vignette, to illustrate how to provide user-supplied C++ functions to <code>ru_rcpp</code> and to compare the performances of <code>ru</code> and <code>ru_rcpp</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rust)
 <span class="kw">library</span>(Rcpp)
-<span class="kw">library</span>(RcppArmadillo)
 <span class="kw">library</span>(microbenchmark)
 <span class="co"># Set the size of the simulated sample</span>
 n &lt;-<span class="st"> </span><span class="dv">1000</span></code></pre></div>
 <p>It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the <code>Rcpp::sourceCpp</code> function (e.g. <code>Rcpp::sourceCpp(&quot;user_fns.cpp&quot;)</code>) or using RStudio’s Source button on the editor toolbar.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rcpp::<span class="kw">sourceCpp</span>(<span class="st">'example_user_fns.cpp'</span>)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_N01 &lt;- create_xptr(&quot;logdN01&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_bvn &lt;- create_xptr(&quot;logdnorm2&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_mvn &lt;- create_xptr(&quot;logdmvnorm&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_lnorm &lt;- create_xptr(&quot;logdlnorm&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_gam &lt;- create_xptr(&quot;logdgamma&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_gp &lt;- create_xptr(&quot;loggp&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_phi_to_theta_lnorm &lt;- create_phi_to_theta_xptr(&quot;exponential&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_log_j_lnorm &lt;- create_log_j_xptr(&quot;neglog&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_phi_to_theta_bc &lt;- create_phi_to_theta_xptr(&quot;bc&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_log_j_bc &lt;- create_log_j_xptr(&quot;bc&quot;)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; ptr_phi_to_theta_gp &lt;- create_phi_to_theta_xptr(&quot;gp&quot;)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rcpp::<span class="kw">sourceCpp</span>(<span class="st">'example_user_fns.cpp'</span>)</code></pre></div>
 <div id="standard-normal-density" class="section level3">
 <h3>Standard normal density</h3>
 <p>We start with a simple example: the (1-dimensional) standard normal density, based on the C++ function <code>logdN01</code> in the example <code>example_user_fns.cpp</code> file above.</p>
@@ -223,9 +200,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq      mean median     uq   max neval</span>
-<span class="co">#&gt;   old 35.990 38.100 43.463729  42.29 47.160 66.99   100</span>
-<span class="co">#&gt;   new  2.574  2.811  3.301665   2.95  3.168 11.86   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq      mean median    uq     max neval</span>
+<span class="co">#&gt;   old 31.900 34.060 42.232250 38.800 43.70 183.600   100</span>
+<span class="co">#&gt;   new  2.327  2.568  3.124706  2.791  3.36   7.238   100</span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
@@ -264,9 +241,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )  
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr     min      lq      mean median     uq   max neval</span>
-<span class="co">#&gt;   old 246.000 267.100 298.04328 295.60 319.10 444.7   100</span>
-<span class="co">#&gt;   new   9.047   9.885  11.32401  10.39  11.39  20.8   100</span></code></pre></div>
+<span class="co">#&gt;  expr     min      lq      mean  median     uq    max neval</span>
+<span class="co">#&gt;   old 232.200 246.400 267.21226 254.300 264.90 838.60   100</span>
+<span class="co">#&gt;   new   8.823   9.179  10.61957   9.643  10.07  26.97   100</span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -292,9 +269,9 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq      mean median     uq   max neval</span>
-<span class="co">#&gt;   old 51.020 57.790 63.035390 60.980 67.930 98.62   100</span>
-<span class="co">#&gt;   new  5.038  5.372  7.131392  5.677  5.982 98.93   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq      mean median     uq    max neval</span>
+<span class="co">#&gt;   old 47.610 55.740 61.677557 59.090 62.320 197.20   100</span>
+<span class="co">#&gt;   new  4.807  5.167  6.622539  5.384  5.857  76.68   100</span></code></pre></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3>Generalized Pareto posterior density</h3>
@@ -356,8 +333,8 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 <span class="kw">print</span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr    min     lq      mean median     uq    max neval</span>
-<span class="co">#&gt;   old 146.80 158.90 162.96165 162.00 165.20 299.50   100</span>
-<span class="co">#&gt;   new  18.11  19.16  20.73803  19.65  20.98  32.57   100</span></code></pre></div>
+<span class="co">#&gt;   old 146.20 151.90 158.12645 155.90 159.20 280.00   100</span>
+<span class="co">#&gt;   new  18.27  18.85  20.88073  19.29  24.12  26.35   100</span></code></pre></div>
 </div>
 </div>
 <div id="examples-find_lambda_rcpp_one_d-and-find_lambda_rcpp" class="section level2">
@@ -365,7 +342,7 @@ res &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 <p>We repeat two examples from the <a href="rust-vignette.html">Introducing rust</a> vignette.</p>
 <div id="gamma-density-example-for-find_lambda_one_d" class="section level3">
 <h3>Gamma density: example for <code>find_lambda_one_d</code></h3>
-<p>We make use of the <a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-sugar.pdf">Rcpp sugar</a> function <code>dgamma</code>.</p>
+<p>We make use of the <a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf">Rcpp sugar</a> function <code>dgamma</code>.</p>
 <pre><code>// Gamma(alpha, 1).
 
 // [[Rcpp::export]]
@@ -423,10 +400,10 @@ lambda
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000010c21f40&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000083c8f60&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000010c21f20&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000083c9030&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>

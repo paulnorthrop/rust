@@ -285,7 +285,7 @@ We repeat two examples from the [Introducing rust](rust-vignette.html) vignette.
 ### Gamma density: example for `find_lambda_one_d`
 
 We make use of the 
-[Rcpp sugar](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-sugar.pdf) function `dgamma`.
+[Rcpp sugar](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf) function `dgamma`.
 
     // Gamma(alpha, 1).
 

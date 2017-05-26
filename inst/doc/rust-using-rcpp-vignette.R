@@ -7,13 +7,12 @@ devtools::document()
 ## ------------------------------------------------------------------------
 library(rust)
 library(Rcpp)
-library(RcppArmadillo)
 library(microbenchmark)
 # Set the size of the simulated sample
 n <- 1000
 
-## ------------------------------------------------------------------------
-Rcpp::sourceCpp('example_user_fns.cpp')
+## ---- eval = FALSE-------------------------------------------------------
+#  Rcpp::sourceCpp('example_user_fns.cpp')
 
 ## ------------------------------------------------------------------------
 # Normal density ===================
