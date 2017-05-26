@@ -97,7 +97,6 @@ devtools::document()
 ```{r}
 library(rust)
 library(Rcpp)
-library(RcppArmadillo)
 library(microbenchmark)
 # Set the size of the simulated sample
 n <- 1000
@@ -105,7 +104,7 @@ n <- 1000
 
 It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.
 
-```{r}
+```{r, eval = FALSE}
 Rcpp::sourceCpp('example_user_fns.cpp')
 ```
 
