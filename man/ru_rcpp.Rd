@@ -191,15 +191,16 @@ If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
 See \code{vignette("rust-vignette", package = "rust")} for full details.
 }
 \examples{
-Rcpp::sourceCpp("src/user_fns.cpp")
 n <- 1000
 
 # Normal density ===================
 
 # One-dimensional standard normal ----------------
+ptr_N01 <- create_xptr("logdN01")
 x <- ru_rcpp(logf = ptr_N01, d = 1, n = n, init = 0.1)
 
 # Two-dimensional standard normal ----------------
+ptr_bvn <- create_xptr("logdnorm2")
 rho <- 0
 x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n,
   init = c(0, 0))
@@ -214,6 +215,7 @@ x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n, init = c(0, 0),
 x <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = n, init = c(0, 0))
 
 # Using general multivariate normal function.
+ptr_mvn <- create_xptr("logdmvnorm")
 covmat <- matrix(rho, 2, 2) + diag(1 - rho, 2)
 x <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = n, init = c(0, 0))
 
@@ -230,6 +232,7 @@ x <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = n,
 
 # Log-normal density ===================
 
+ptr_lnorm <- create_xptr("logdlnorm")
 mu <- 0
 sigma <- 1
 # Sampling on original scale ----------------
@@ -243,6 +246,8 @@ x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = n,
 
 # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
 # transformation and the log-Jacobian by hand
+ptr_phi_to_theta_lnorm <- create_phi_to_theta_xptr("exponential")
+ptr_log_j_lnorm <- create_log_j_xptr("neglog")
 x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = n,
   init = 0.1, trans = "user", phi_to_theta = ptr_phi_to_theta_lnorm,
   log_j = ptr_log_j_lnorm)
@@ -254,6 +259,7 @@ x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = n,
 
 # Sampling on original scale ----------------
 
+ptr_gam <- create_xptr("logdgamma")
 alpha <- 10
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
   lower = 0, init = alpha)
@@ -273,6 +279,8 @@ summary(x)
 # transformation and the log-Jacobian by hand
 
 lambda <- 1/3
+ptr_phi_to_theta_bc <- create_phi_to_theta_xptr("bc")
+ptr_log_j_bc <- create_log_j_xptr("bc")
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
   trans = "user", phi_to_theta = ptr_phi_to_theta_bc, log_j = ptr_log_j_bc,
   user_args = list(lambda = lambda), init = alpha)
@@ -290,6 +298,7 @@ init <- c(mean(gpd_data), 0)
 
 n <- 1000
 # Mode relocation only ----------------
+ptr_gp <- create_xptr("loggp")
 for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
                  lower = c(0, -Inf)), ss, rotate = FALSE)
 x1 <- do.call(ru_rcpp, for_ru_rcpp)
