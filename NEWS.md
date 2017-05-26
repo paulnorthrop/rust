@@ -22,6 +22,8 @@
 
 * `plot.ru` edited to avoid warning message that occurred in the `d=1` case when `breaks` was supplied as an argument.
 
+* The functions `rgpd`, `gpd_sum_stats`, `gpd_init` and `gpd_logpost` are now exported.
+
 # rust 1.1.0
 
 ## New features

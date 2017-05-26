@@ -308,6 +308,9 @@ Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
  \url{http://dx.doi.org/10.1007/BF01889987}.
 }
 \seealso{
+\code{\link{ru_rcpp}} for a version of \code{\link{ru}} that uses
+  the Rcpp package to improve efficiency.
+
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 

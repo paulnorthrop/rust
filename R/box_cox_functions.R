@@ -111,10 +111,15 @@
 #' plot(x)
 #' plot(x, ru_scale = TRUE)
 #' }
-#' @seealso \code{\link{ru}} to perform ratio-of-uniforms sampling.
-#' @seealso \code{\link{find_lambda}} to produce (somewhat) automatically
-#'   a list for the argument \code{lambda} of \code{ru} for any value of
-#'   \code{d}.
+#' @seealso \code{\link{ru}} and \code{\link{ru_rcpp}} to perform
+#'   ratio-of-uniforms sampling.
+#' @seealso \code{\link{find_lambda}} and \code{\link{find_lambda_rcpp}}
+#'   to produce (somewhat) automatically
+#'   a list for the argument \code{lambda} of \code{ru}/\code{ru_rcpp}
+#'   for any value of \code{d}.
+#' @seealso \code{\link{find_lambda_one_d_rcpp}} for a version of
+#'   \code{\link{find_lambda_one_d}} that uses the Rcpp package to improve
+#'   efficiency.
 #'
 #' @export
 find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
@@ -356,10 +361,15 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
 #'   main = "Box-Cox, mode relocation and rotation")
 #' }
-#' @seealso \code{\link{ru}} to perform ratio-of-uniforms sampling.
-#' @seealso \code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-#'   a list for the argument \code{lambda} of \code{ru} for the
+#' @seealso \code{\link{ru}} and \code{\link{ru_rcpp}} to perform
+#'   ratio-of-uniforms sampling.
+#' @seealso \code{\link{find_lambda_one_d}} and
+#'   \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat) automatically
+#'   a list for the argument \code{lambda} of \code{ru}/\code{ru_rcpp} for the
 #'   \code{d} = 1 case.
+#' @seealso \code{\link{find_lambda_rcpp}} for a version of
+#'   \code{\link{find_lambda}} that uses the Rcpp package to improve
+#'   efficiency.
 #' @export
 find_lambda <- function(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-4,
                         min_phi = rep(ep_bc, d), max_phi = rep(10, d),

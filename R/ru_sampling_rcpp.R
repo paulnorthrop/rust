@@ -290,6 +290,8 @@
 #' summary(x2)
 #' }
 #'
+#' @seealso \code{\link{ru}} for a version of \code{\link{ru_rcpp}} that
+#'   accepts R functions as arguments.
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1

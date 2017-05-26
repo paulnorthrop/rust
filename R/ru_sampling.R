@@ -267,6 +267,8 @@
 #' abline(a = 0, b = -1 / ss$xm)
 #' summary(x2)
 #' }
+#' @seealso \code{\link{ru_rcpp}} for a version of \code{\link{ru}} that uses
+#'   the Rcpp package to improve efficiency.
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1

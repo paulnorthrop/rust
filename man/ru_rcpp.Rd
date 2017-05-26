@@ -333,6 +333,9 @@ Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 }
 \seealso{
+\code{\link{ru}} for a version of \code{\link{ru_rcpp}} that
+  accepts R functions as arguments.
+
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 

@@ -182,9 +182,15 @@ Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
  \url{http://dx.doi.org/10.2307/2528821}.
 }
 \seealso{
-\code{\link{ru}} to perform ratio-of-uniforms sampling.
+\code{\link{ru}} and \code{\link{ru_rcpp}} to perform
+  ratio-of-uniforms sampling.
 
-\code{\link{find_lambda_one_d}} to produce (somewhat) automatically
-  a list for the argument \code{lambda} of \code{ru} for the
+\code{\link{find_lambda_one_d}} and
+  \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat) automatically
+  a list for the argument \code{lambda} of \code{ru}/\code{ru_rcpp} for the
   \code{d} = 1 case.
+
+\code{\link{find_lambda_rcpp}} for a version of
+  \code{\link{find_lambda}} that uses the Rcpp package to improve
+  efficiency.
 }

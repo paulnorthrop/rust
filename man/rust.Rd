@@ -11,12 +11,16 @@ distribution with log-density \code{logf} (up to an additive constant).
 \code{logf} must be bounded, perhaps after a transformation of variable.
 }
 \details{
-The main function in the rust package is \code{ru}, which implments the
-  generalized ratio-of-uniforms algorithm.  Also provided are two functions,
+The main functions in the rust package are \code{\link{ru}} and
+  \code{\link{ru_rcpp}}, which implment the generalized ratio-of-uniforms
+  algorithm.  The latter uses the Rcpp package to improve efficiency.
+  Also provided are two functions,
   \code{find_lambda} and \code{find_lambda_one_d}, that may be used to
   set a suitable value for the parameter \code{lambda} if Box-Cox
-  transformation is used prior to simulation.  Basic \code{plot} and
-  \code{summary} methods are also provided.
+  transformation is used prior to simulation.
+  If \code{\link{ru_rcpp}} is used the equivalent functions are
+  \code{find_lambda_rcpp} and \code{find_lambda_one_d_rcpp}
+  Basic \code{plot} and \code{summary} methods are also provided.
 
 See \code{vignette("rust-vignette", package = "rust")} for an overview of
 the package.
@@ -30,6 +34,13 @@ Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. Efficient
 Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
  211-252, \url{http://www.jstor.org/stable/2984418}.
+
+Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless R and
+  C++ Integration. Journal of Statistical Software, 40(8), 1-18.
+  \url{http://www.jstatsoft.org/v40/i08/}.
+
+Eddelbuettel, D. (2013) Seamless R and C++ Integration with
+  Rcpp. Springer, New York. ISBN 978-1-4614-6867-7.
 }
 \seealso{
 \code{\link{ru}} and \code{\link{ru_rcpp}} to perform
