@@ -22,8 +22,7 @@ Imports: stats,
     graphics,
     methods,
     spatstat,
-    Rcpp (>= 0.12.10),
-    RcppArmadillo
+    Rcpp (>= 0.12.10)
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
