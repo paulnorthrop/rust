@@ -1,9 +1,6 @@
 ## ---- include = FALSE----------------------------------------------------
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
-## ----setup, include=FALSE------------------------------------------------
-devtools::document()
-
 ## ------------------------------------------------------------------------
 library(rust)
 library(Rcpp)
@@ -11,8 +8,8 @@ library(microbenchmark)
 # Set the size of the simulated sample
 n <- 1000
 
-## ---- eval = FALSE-------------------------------------------------------
-#  Rcpp::sourceCpp('example_user_fns.cpp')
+## ---- results = "hide"---------------------------------------------------
+Rcpp::sourceCpp('example_user_fns.cpp')
 
 ## ------------------------------------------------------------------------
 # Normal density ===================

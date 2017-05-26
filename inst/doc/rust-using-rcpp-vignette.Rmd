@@ -90,10 +90,6 @@ in order that they can create an external pointer for `new_name` using `create_x
 
 All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.
 
-```{r setup, include=FALSE}
-devtools::document()
-```
-
 ```{r}
 library(rust)
 library(Rcpp)
@@ -104,7 +100,7 @@ n <- 1000
 
 It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.
 
-```{r, eval = FALSE}
+```{r, results = "hide"}
 Rcpp::sourceCpp('example_user_fns.cpp')
 ```
 

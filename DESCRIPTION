@@ -31,8 +31,6 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     testthat,
-    devtools,
-    roxygen2,
     inline,
     microbenchmark
 VignetteBuilder: knitr
