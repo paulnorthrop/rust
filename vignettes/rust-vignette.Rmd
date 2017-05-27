@@ -213,9 +213,8 @@ summary(x1)
 
 # Box-Cox transform with lambda = 0 ----------------
 lambda <- 0
-init <- box_cox(1, lambda = lambda)
-x2 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = init, trans = "BC",
-      lambda = lambda)
+x2 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = 0.1, trans = "BC",
+         lambda = lambda)
 x2$pa
 ```
 

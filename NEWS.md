@@ -1,4 +1,7 @@
-# rust 1.1.0.9000
+# rust 1.2.0.9000
+
+
+# rust 1.2.0
 
 ## New features
 
