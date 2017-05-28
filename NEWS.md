@@ -1,5 +1,10 @@
 # rust 1.2.0.9000
 
+## Bug fixes and minor improvements
+
+Unnecessary dependence on packages `devtools` and `roxygen2` via Suggests is removed.
+
+Minor edit to vignette: provide link directly to example C++ file `user_fns.cpp` in `src` directory, rather than the the (identical) `example_user_fns.cpp` file in the `vignettes` directory.
 
 # rust 1.2.0
 
