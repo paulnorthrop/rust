@@ -28,13 +28,13 @@ The general way that **rust** enables users to provide their own C++ functions u
 
 The user writes a C++ function to calculate $\log f(x)$.  The current implementation in **rust** requires this function to have a particular structure: it must take a constant reference to an `Rcpp::NumericVector`, say `x`, a constant reference to an `Rcpp::List`, say `pars`, and return a `double` precision scalar. `x` is the argument $x$ of $f(x)$. `pars` is a list containing the values of parameters whose values are not specified inside the function.  This allows the user to change the values of any parameters in the target density without editing the function.  If there are no such parameters then the user must still include the argument `pars` in their function, even though the list provided to the function when it is called will be empty. 
 
-A simple way for the user to provide their C++ functions to create them in a file, say `user_fns.cpp`.  Content from an example of this file, `example_user_fns.cpp`, is provided below.  The full file is available on the [rust Github page](https://github.com/paulnorthrop/rust/blob/master/vignettes/example_user_fns.cpp).  The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example content below also includes the function `create_xptr`, which creates an external pointer to a C++ function. See
+A simple way for the user to provide their C++ functions to create them in a file, say `user_fns.cpp`.  Example content is provided below.  The full file is available on the [rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).  The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example content below also includes the function `create_xptr`, which creates an external pointer to a C++ function. See
 \href{http://gallery.rcpp.org/articles/passing-cpp-function-pointers/}{Passing user-supplied C++ functions}.  It is this external pointer that is passed to `ru_rcpp` to perform ratio-of-uniforms sampling.  If the user has written a C++ function, say `new_name`, they need to add to `create_xptr` two lines of code:
 
     else if (fstr == "new_name")  
       return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
 
-in order that they can create an external pointer for `new_name` using `create_xptr`.  The following example file `example_user_fns.cpp` contains code for a standard normal density.  Note that for this particular example we don't need RcppArmadillo: we could replace `#include <RcppArmadillo.h>` with `#include <Rcpp.h>` and delete `using namespace arma;`.  However, RcppArmadillo is used in the the [multivariate normal example](#mvn) below and will be useful in many examples.
+in order that they can create an external pointer for `new_name` using `create_xptr`.  The following excerpt from the example `user_fns.cpp` file contains code for a standard normal density.  Note that for this particular example we don't need RcppArmadillo: we could replace `#include <RcppArmadillo.h>` with `#include <Rcpp.h>` and delete `using namespace arma;`.  However, RcppArmadillo is used in the the [multivariate normal example](#mvn) below and will be useful in many examples.
 
     // [[Rcpp::depends(RcppArmadillo)]]
     
@@ -90,10 +90,6 @@ in order that they can create an external pointer for `new_name` using `create_x
 
 All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.
 
-```{r setup, include=FALSE}
-devtools::document()
-```
-
 ```{r}
 library(rust)
 library(Rcpp)
@@ -104,13 +100,9 @@ n <- 1000
 
 It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.
 
-```{r, results = "hide"}
-Rcpp::sourceCpp('example_user_fns.cpp')
-```
-
 ### Standard normal density
 
-We start with a simple example: the (1-dimensional) standard normal density, based on the C++ function `logdN01` in the example `example_user_fns.cpp` file above.
+We start with a simple example: the (1-dimensional) standard normal density, based on the C++ function `logdN01` in the example `user_fns.cpp` file above.
 
 ```{r}
 # Normal density ===================
@@ -140,7 +132,7 @@ As we would hope, `ru_rcpp` is faster than `ru`.  If we start from the same rand
 
 ### Multivariate normal density {#mvn}
 
-To execute this example we add the following function to `example_user_fns.cpp`
+To execute this example we add the following function to `user_fns.cpp`
 
     // d-dimensional normal with zero-mean and covariance matrix sigma.
 
@@ -157,7 +149,7 @@ and add
     else if (fstr == "logdmvnorm")
       return(Rcpp::XPtr<funcPtr>(new funcPtr(&logdmvnorm))) ;
 
-to the function `create_xptr` in `example_user_fns.cpp`.
+to the function `create_xptr` in `user_fns.cpp`.
 
 ```{r}
 # Three-dimensional normal with positive association ----------------

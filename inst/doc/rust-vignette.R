@@ -8,9 +8,6 @@ pa <- matrix(pa, ncol = length(d), nrow = 1)
 colnames(pa) <- d
 knitr::kable(round(pa,3), caption = "$p_a(d, 1/2)$ as $d$ varies.")
 
-## ----setup, include=FALSE------------------------------------------------
-devtools::load_all()
-
 ## ------------------------------------------------------------------------
 library(rust)
 set.seed(46)
@@ -89,15 +86,14 @@ summary(x1)
 
 # Box-Cox transform with lambda = 0 ----------------
 lambda <- 0
-init <- box_cox(1, lambda = lambda)
-x2 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = init, trans = "BC",
-      lambda = lambda)
+x2 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = 0.1, trans = "BC",
+         lambda = lambda)
 x2$pa
 
 ## ------------------------------------------------------------------------
 # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
 # transformation and the log-Jacobian by hand
-x3 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = init, trans = "user",
+x3 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = 0.1, trans = "user",
         phi_to_theta = function(x) exp(x), log_j = function(x) -log(x))
 x3$pa
 

@@ -105,10 +105,6 @@ For a review of Bayesian extreme value modelling see @Stephenson2016 and for an 
 
 We simulate some data from a GP(1, -1/2) distribution.  We choose $\xi=-1/2$ because this tends to result in a posterior distribution with strong negative posterior association between $\sigma$ and $\xi$, making the benefit of transformation more apparent.  We also calculate some sample properties that feature in the likelihood, so that they can be passed to the log-density `logf` rather than being recalculated, and set an initial estimate at which `logf` is positive.
 
-```{r setup, include=FALSE}
-devtools::load_all()
-```
-
 ```{r}
 library(rust)
 set.seed(46)
@@ -223,7 +219,7 @@ To show how a user could implement their own transformation prior to sampling we
 ```{r}
 # Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox
 # transformation and the log-Jacobian by hand
-x3 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = init, trans = "user",
+x3 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = 0.1, trans = "user",
         phi_to_theta = function(x) exp(x), log_j = function(x) -log(x))
 x3$pa
 ```

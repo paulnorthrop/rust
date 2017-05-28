@@ -12,7 +12,7 @@
 
 <meta name="author" content="Paul Northrop" />
 
-<meta name="date" content="2017-05-26" />
+<meta name="date" content="2017-05-28" />
 
 <title>Introducing rust: Ratio-of-Uniforms Simulation with Transformation</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introducing rust: Ratio-of-Uniforms Simulation with Transformation</h1>
 <h4 class="author"><em>Paul Northrop</em></h4>
-<h4 class="date"><em>2017-05-26</em></h4>
+<h4 class="date"><em>2017-05-28</em></h4>
 
 
 <div id="TOC">
@@ -297,15 +297,14 @@ x1$pa
 
 <span class="co"># Box-Cox transform with lambda = 0 ----------------</span>
 lambda &lt;-<span class="st"> </span><span class="dv">0</span>
-init &lt;-<span class="st"> </span><span class="kw">box_cox</span>(<span class="dv">1</span>, <span class="dt">lambda =</span> lambda)
-x2 &lt;-<span class="st"> </span><span class="kw">ru</span>(<span class="dt">logf =</span> dlnorm, <span class="dt">log =</span> <span class="ot">TRUE</span>, <span class="dt">d =</span> <span class="dv">1</span>, <span class="dt">n =</span> n, <span class="dt">init =</span> init, <span class="dt">trans =</span> <span class="st">&quot;BC&quot;</span>,
-      <span class="dt">lambda =</span> lambda)
+x2 &lt;-<span class="st"> </span><span class="kw">ru</span>(<span class="dt">logf =</span> dlnorm, <span class="dt">log =</span> <span class="ot">TRUE</span>, <span class="dt">d =</span> <span class="dv">1</span>, <span class="dt">n =</span> n, <span class="dt">init =</span> <span class="fl">0.1</span>, <span class="dt">trans =</span> <span class="st">&quot;BC&quot;</span>,
+         <span class="dt">lambda =</span> lambda)
 x2$pa
 <span class="co">#&gt; [1] 0.7944074</span></code></pre></div>
 <p>To show how a user could implement their own transformation prior to sampling we use the <code>trans = &quot;user&quot;</code> argument and supply the inverse Box-Cox transformation via <code>phi_to_theta</code> and the log-Jacobian via <code>log_j</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Equivalently, we could use trans = &quot;user&quot; and supply the (inverse) Box-Cox</span>
 <span class="co"># transformation and the log-Jacobian by hand</span>
-x3 &lt;-<span class="st"> </span><span class="kw">ru</span>(<span class="dt">logf =</span> dlnorm, <span class="dt">log =</span> <span class="ot">TRUE</span>, <span class="dt">d =</span> <span class="dv">1</span>, <span class="dt">n =</span> n, <span class="dt">init =</span> init, <span class="dt">trans =</span> <span class="st">&quot;user&quot;</span>,
+x3 &lt;-<span class="st"> </span><span class="kw">ru</span>(<span class="dt">logf =</span> dlnorm, <span class="dt">log =</span> <span class="ot">TRUE</span>, <span class="dt">d =</span> <span class="dv">1</span>, <span class="dt">n =</span> n, <span class="dt">init =</span> <span class="fl">0.1</span>, <span class="dt">trans =</span> <span class="st">&quot;user&quot;</span>,
         <span class="dt">phi_to_theta =</span> function(x) <span class="kw">exp</span>(x), <span class="dt">log_j =</span> function(x) -<span class="kw">log</span>(x))
 x3$pa
 <span class="co">#&gt; [1] 0.7931472</span></code></pre></div>
