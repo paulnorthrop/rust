@@ -270,11 +270,11 @@ res <- microbenchmark(
 print(res, signif = 4)
 ```
 
-## Examples : `find_lambda_rcpp_one_d` and `find_lambda_rcpp`
+## Examples : `find_lambda_one_d_rcpp` and `find_lambda_rcpp`
 
 We repeat two examples from the [Introducing rust](rust-vignette.html) vignette.
 
-### Gamma density: example for `find_lambda_one_d`
+### Gamma density: example for `find_lambda_one_d_rcpp`
 
 We make use of the 
 [Rcpp sugar](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf) function `dgamma`.
@@ -296,7 +296,7 @@ lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
 lambda
 ```
 
-### Generalized Pareto posterior density: example for `find_lambda`
+### Generalized Pareto posterior density: example for `find_lambda_rcpp`
 
 In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. See the [Introducing rust](rust-vignette.html) vignette for the form of  transformation.
 
