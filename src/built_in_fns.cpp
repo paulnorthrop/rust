@@ -35,7 +35,7 @@ Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base,
                            const Rcpp::NumericVector& exp) {
   Rcpp::NumericVector out(base.size()) ;
   std::transform(base.begin(), base.end(),
-                 exp.begin(), out.begin(), std::pow) ;
+                 exp.begin(), out.begin(), ::pow) ;
   return out ;
 }
 
