@@ -40,8 +40,9 @@ Rcpp::NumericVector vecpow98(const Rcpp::NumericVector& base,
 }
 
 // [[Rcpp::export]]
-std::vector<double> vecpow(const std::vector<double>& base, const std::vector<double>& exp) {
-  std::vector<double> res(base.size());
+Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base,
+                             const Rcpp::NumericVector& exp) {
+  Rcpp::NumericVector res(base.size()) ;
   std::transform(base.begin(), base.end(), exp.begin(), res.begin(),
                  [&](double lhs, double rhs) -> double {
                    return std::pow(lhs, rhs);
