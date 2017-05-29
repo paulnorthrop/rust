@@ -190,14 +190,14 @@ Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
 
 // See http://stackoverflow.com/questions/30106492/vectorized-exponent-for-pow-in-rcpp
 
-// [[Rcpp::export]]
-Rcpp::NumericVector vecpower98(const Rcpp::NumericVector& base,
-                             const Rcpp::NumericVector& exp) {
-  Rcpp::NumericVector out(base.size()) ;
-  std::transform(base.begin(), base.end(),
-                 exp.begin(), out.begin(), ::pow) ;
-  return out ;
-}
+//// [[Rcpp::export]]
+//Rcpp::NumericVector vecpower98(const Rcpp::NumericVector& base,
+//                             const Rcpp::NumericVector& exp) {
+//  Rcpp::NumericVector out(base.size()) ;
+//  std::transform(base.begin(), base.end(),
+//                 exp.begin(), out.begin(), ::pow) ;
+//  return out ;
+//}
 
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpower(const Rcpp::NumericVector& base,
