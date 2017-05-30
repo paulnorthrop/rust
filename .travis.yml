@@ -1,4 +1,6 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+#
+# https://stackoverflow.com/questions/39728709/using-an-alternate-complier-for-travis-ci-r-project-builds
 
 language: R
 cache: packages
@@ -8,6 +10,10 @@ warnings_are_errors: true
 before_install:
   - source travis/before-install.sh
 
+os:
+  - linux
+  - osx
+
 addons:
   apt:
     packages:
@@ -16,11 +22,11 @@ addons:
       - clang
 
 r:
-  - oldrel
+#  - oldrel
   - release
-  - devel
+#  - devel
 
 env:
-  - COMPILER=gcc-4.4
+#  - COMPILER=gcc-4.4
   - COMPILER=gcc
   - COMPILER=clang
