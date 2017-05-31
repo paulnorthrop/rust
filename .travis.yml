@@ -23,7 +23,7 @@ addons:
 
 r:
   - release
-  - devel
+#  - devel
 #  - oldrel
 
 env:
