@@ -37,7 +37,7 @@
 #'   functions \code{phi_to_theta} and \code{log_j}.
 #' @param lambda Either
 #' \itemize{
-#'   \item {A numeric vector.  Box-Cox transformaton parameters, or}
+#'   \item {A numeric vector.  Box-Cox transformation parameters, or}
 #'   \item {A list with components}
 #'   \describe{
 #'     \item{lambda}{A numeric vector.  Box-Cox parameters (required).}
