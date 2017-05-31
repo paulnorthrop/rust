@@ -145,10 +145,6 @@ logdgamma <- function(x, pars) {
     .Call('rust_logdgamma', PACKAGE = 'rust', x, pars)
 }
 
-old_logdgamma <- function(x, pars) {
-    .Call('rust_old_logdgamma', PACKAGE = 'rust', x, pars)
-}
-
 loggp <- function(x, ss) {
     .Call('rust_loggp', PACKAGE = 'rust', x, ss)
 }

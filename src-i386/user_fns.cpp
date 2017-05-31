@@ -62,19 +62,6 @@ double logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return Rcpp::dgamma(x, shp, 1.0, 1)[0] ;
 }
 
-// [[Rcpp::export]]
-double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-  double alpha = pars["alpha"] ;
-  if (x[0] > 0)
-    return ((alpha - 1.0) * log(x[0]) - x[0]) ;
-  if (alpha > 1)
-    return R_NegInf;
-  else if (alpha < 1)
-    return R_PosInf ;
-  else
-    return 0.0 ;
-}
-
 // Generalized Pareto posterior based on an MDI prior truncated to
 // shape parameter xi >= -1.
 
@@ -188,15 +175,15 @@ Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
   return exp(phi);
 }
 
-// See http://stackoverflow.com/questions/30106492/vectorized-exponent-for-pow-in-rcpp
-
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpower(const Rcpp::NumericVector& base,
                              const Rcpp::NumericVector& exp) {
-  Rcpp::NumericVector out(base.size()) ;
-  std::transform(base.begin(), base.end(),
-                 exp.begin(), out.begin(), ::pow) ;
-  return out ;
+  int n = base.size() ;
+  Rcpp::NumericVector res(n) ;
+  for(int i=0; i < n; i++) {
+    res[i] = std::pow(base[i], exp[i]) ;
+  }
+  return res;
 }
 
 // [[Rcpp::export]]

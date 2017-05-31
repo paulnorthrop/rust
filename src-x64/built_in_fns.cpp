@@ -29,14 +29,15 @@ bool all_pos(const Rcpp::NumericVector& x) {
   return Rcpp::is_true(Rcpp::all(x > 0));
 }
 
-// See http://stackoverflow.com/questions/30106492/vectorized-exponent-for-pow-in-rcpp
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base,
                            const Rcpp::NumericVector& exp) {
-  Rcpp::NumericVector out(base.size()) ;
-  std::transform(base.begin(), base.end(),
-                 exp.begin(), out.begin(), ::pow) ;
-  return out ;
+  int n = base.size() ;
+  Rcpp::NumericVector res(n) ;
+  for(int i=0; i < n; i++) {
+    res[i] = std::pow(base[i], exp[i]) ;
+  }
+  return res;
 }
 
 // Functions to perform (inverse) transformations of variable.

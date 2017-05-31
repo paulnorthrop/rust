@@ -709,25 +709,6 @@ namespace rust {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
-    inline double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-        typedef SEXP(*Ptr_old_logdgamma)(SEXP,SEXP);
-        static Ptr_old_logdgamma p_old_logdgamma = NULL;
-        if (p_old_logdgamma == NULL) {
-            validateSignature("double(*old_logdgamma)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_old_logdgamma = (Ptr_old_logdgamma)R_GetCCallable("rust", "rust_old_logdgamma");
-        }
-        RObject rcpp_result_gen;
-        {
-            RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_old_logdgamma(Rcpp::wrap(x), Rcpp::wrap(pars));
-        }
-        if (rcpp_result_gen.inherits("interrupted-error"))
-            throw Rcpp::internal::InterruptedException();
-        if (rcpp_result_gen.inherits("try-error"))
-            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
-        return Rcpp::as<double >(rcpp_result_gen);
-    }
-
     inline double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
         typedef SEXP(*Ptr_loggp)(SEXP,SEXP);
         static Ptr_loggp p_loggp = NULL;

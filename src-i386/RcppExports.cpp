@@ -1280,37 +1280,6 @@ RcppExport SEXP rust_logdgamma(SEXP xSEXP, SEXP parsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// old_logdgamma
-double old_logdgamma(const Rcpp::NumericVector& x, const Rcpp::List& pars);
-static SEXP rust_old_logdgamma_try(SEXP xSEXP, SEXP parsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
-    rcpp_result_gen = Rcpp::wrap(old_logdgamma(x, pars));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP rust_old_logdgamma(SEXP xSEXP, SEXP parsSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(rust_old_logdgamma_try(xSEXP, parsSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // loggp
 double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss);
 static SEXP rust_loggp_try(SEXP xSEXP, SEXP ssSEXP) {
@@ -1659,7 +1628,6 @@ static int rust_RcppExport_validate(const char* sig) {
         signatures.insert("double(*logdmvnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdlnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdgamma)(const Rcpp::NumericVector&,const Rcpp::List&)");
-        signatures.insert("double(*old_logdgamma)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*loggp)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*create_xptr)(std::string)");
         signatures.insert("double(*neglog)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -1712,7 +1680,6 @@ RcppExport SEXP rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "rust_logdmvnorm", (DL_FUNC)rust_logdmvnorm_try);
     R_RegisterCCallable("rust", "rust_logdlnorm", (DL_FUNC)rust_logdlnorm_try);
     R_RegisterCCallable("rust", "rust_logdgamma", (DL_FUNC)rust_logdgamma_try);
-    R_RegisterCCallable("rust", "rust_old_logdgamma", (DL_FUNC)rust_old_logdgamma_try);
     R_RegisterCCallable("rust", "rust_loggp", (DL_FUNC)rust_loggp_try);
     R_RegisterCCallable("rust", "rust_create_xptr", (DL_FUNC)rust_create_xptr_try);
     R_RegisterCCallable("rust", "rust_neglog", (DL_FUNC)rust_neglog_try);
@@ -1764,7 +1731,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"rust_logdmvnorm", (DL_FUNC) &rust_logdmvnorm, 2},
     {"rust_logdlnorm", (DL_FUNC) &rust_logdlnorm, 2},
     {"rust_logdgamma", (DL_FUNC) &rust_logdgamma, 2},
-    {"rust_old_logdgamma", (DL_FUNC) &rust_old_logdgamma, 2},
     {"rust_loggp", (DL_FUNC) &rust_loggp, 2},
     {"rust_create_xptr", (DL_FUNC) &rust_create_xptr, 1},
     {"rust_neglog", (DL_FUNC) &rust_neglog, 2},
