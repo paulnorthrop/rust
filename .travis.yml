@@ -24,7 +24,7 @@ addons:
 r:
 #  - oldrel
   - release
-#  - devel
+  - devel
 
 env:
 #  - COMPILER=gcc-4.4
