@@ -1,6 +1,10 @@
-This is a re-submission to fix a significant bug in the last release (v1.2.0), which caused compilation errors on some platforms. I apologize for the initial error and for having to trouble you again.
+## Resubmission
 
-* Corrected ::pow to std::pow and avoided the incorrect use of std::transform,  as requested by Brian Ripley.
+This is a resubmission, prompted by a request from Brian Ripley to correct the bugs that caused compilation errors in v1.2.0. I have
+
+* Corrected ::pow to std::pow.
+
+* Avoided using std::transform by not using it at all.
 
 ## R CMD check results
 
@@ -8,10 +12,11 @@ This is a re-submission to fix a significant bug in the last release (v1.2.0), w
 
 ## Test environments
 
+- Fedora Linux, clang, gfortran (on r-hub), R-devel 
 - ubuntu 12.04 + GCC (on travis-ci), R-oldrel, R-release, R-devel
 - ubuntu 12.04 + clang (on travis-ci), R-oldrel, R-release, R-devel
 - osx (on travis-ci), R-oldrel, R-release
-- win-builder (devel and release)
+- win-builder (R-devel and R-release)
 
 ## Downstream dependencies
 
