@@ -22,9 +22,9 @@ addons:
       - clang
 
 r:
-#  - release
+  - release
   - devel
-  - oldrel
+#  - oldrel
 
 env:
 #  - COMPILER=gcc-4.4
