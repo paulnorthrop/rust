@@ -39,14 +39,25 @@ bool all_pos(const Rcpp::NumericVector& x) {
 //  return out ;
 //}
 
+//// [[Rcpp::export]]
+//Rcpp::NumericVector vecpow_old(const Rcpp::NumericVector& base,
+//                             const Rcpp::NumericVector& exp) {
+//  Rcpp::NumericVector res(base.size()) ;
+//  std::transform(base.begin(), base.end(), exp.begin(), res.begin(),
+//                 [&](double lhs, double rhs) -> double {
+//                   return std::pow(lhs, rhs);
+//                 });
+//  return res;
+//}
+
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base,
-                             const Rcpp::NumericVector& exp) {
-  Rcpp::NumericVector res(base.size()) ;
-  std::transform(base.begin(), base.end(), exp.begin(), res.begin(),
-                 [&](double lhs, double rhs) -> double {
-                   return std::pow(lhs, rhs);
-                 });
+                           const Rcpp::NumericVector& exp) {
+  int n = base.size() ;
+  Rcpp::NumericVector res(n) ;
+  for(int i=0; i < n; i++) {
+    res[i] = std::pow(base[i], exp[i]) ;
+  }
   return res;
 }
 

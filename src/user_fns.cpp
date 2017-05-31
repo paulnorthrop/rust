@@ -199,14 +199,25 @@ Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
 //  return out ;
 //}
 
+//// [[Rcpp::export]]
+//Rcpp::NumericVector vecpower(const Rcpp::NumericVector& base,
+//                             const Rcpp::NumericVector& exp) {
+//  Rcpp::NumericVector res(base.size()) ;
+//  std::transform(base.begin(), base.end(), exp.begin(), res.begin(),
+//                 [&](double lhs, double rhs) -> double {
+//                   return std::pow(lhs, rhs);
+//                 });
+//  return res;
+//}
+
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpower(const Rcpp::NumericVector& base,
                              const Rcpp::NumericVector& exp) {
-  Rcpp::NumericVector res(base.size()) ;
-  std::transform(base.begin(), base.end(), exp.begin(), res.begin(),
-                 [&](double lhs, double rhs) -> double {
-                   return std::pow(lhs, rhs);
-                 });
+  int n = base.size() ;
+  Rcpp::NumericVector res(n) ;
+  for(int i=0; i < n; i++) {
+    res[i] = std::pow(base[i], exp[i]) ;
+  }
   return res;
 }
 
