@@ -29,27 +29,6 @@ bool all_pos(const Rcpp::NumericVector& x) {
   return Rcpp::is_true(Rcpp::all(x > 0));
 }
 
-// See http://stackoverflow.com/questions/30106492/vectorized-exponent-for-pow-in-rcpp
-//// [[Rcpp::export]]
-//Rcpp::NumericVector vecpow98(const Rcpp::NumericVector& base,
-//                           const Rcpp::NumericVector& exp) {
-//  Rcpp::NumericVector out(base.size()) ;
-//  std::transform(base.begin(), base.end(),
-//                 exp.begin(), out.begin(), ::pow) ;
-//  return out ;
-//}
-
-//// [[Rcpp::export]]
-//Rcpp::NumericVector vecpow_old(const Rcpp::NumericVector& base,
-//                             const Rcpp::NumericVector& exp) {
-//  Rcpp::NumericVector res(base.size()) ;
-//  std::transform(base.begin(), base.end(), exp.begin(), res.begin(),
-//                 [&](double lhs, double rhs) -> double {
-//                   return std::pow(lhs, rhs);
-//                 });
-//  return res;
-//}
-
 // [[Rcpp::export]]
 Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base,
                            const Rcpp::NumericVector& exp) {

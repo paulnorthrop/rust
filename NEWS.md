@@ -1,6 +1,8 @@
-# rust 1.2.0.9000
+# rust 1.2.1
 
 ## Bug fixes and minor improvements
+
+* Corrected C++ function `vecpow` to avoid compilation errors on some platforms.
 
 * Unnecessary dependence on packages `devtools` and `roxygen2` via Suggests is removed.
 
