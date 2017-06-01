@@ -1,4 +1,8 @@
-# rust 1.2.1.9000
+# rust 1.2.2
+
+## Bug fixes and minor improvements
+
+* An overloading ambiguity has been corrected to ensure installation on Solaris.
 
 # rust 1.2.1
 
@@ -14,7 +18,7 @@
 
 ## New features
 
-* Packages Rcpp (https://CRAN.R-project.org/package=Rcpp) and RcppArmadillo (https://CRAN.R-project.org/package=RcppArmadillo) to speed up the computations if the user provides a C++ function to evaluate their target log-density.  
+* Packages Rcpp (https://CRAN.R-project.org/package=Rcpp) and RcppArmadillo (https://CRAN.R-project.org/package=RcppArmadillo) are used to speed up the computations if the user provides a C++ function to evaluate their target log-density. 
 
 * New functions: `ru_rcpp`, `find_lambda_rcpp` and `find_lambda_one_d_rcpp`.  
 

@@ -1,10 +1,8 @@
 ## Resubmission
 
-This is a resubmission, prompted by a request from Brian Ripley to correct the bugs that caused compilation errors in v1.2.0. I have
+This is a resubmission, prompted by Brian identifying the remaining bug that prevented installation of v1.2.1 on Solaris.  There is only one change to the code in v1.2.1:
 
-* Corrected ::pow to std::pow.
-
-* Avoided using std::transform by not using it at all.
+* An overloading ambiguity in function `loggp` has been corrected.
 
 ## R CMD check results
 
