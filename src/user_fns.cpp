@@ -98,7 +98,7 @@ double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   return (logprior + loglik) ;
 }
 
-// A function to create external pointers to the functions to evalauet logf.
+// A function to create external pointers to the functions to evaluate logf.
 // See http://gallery.rcpp.org/articles/passing-cpp-function-pointers/
 // If you write a new function above called new_name then add something
 // like the following.
