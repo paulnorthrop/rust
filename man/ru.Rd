@@ -148,7 +148,7 @@ distribution with log-density \eqn{log f} (up to an additive constant).
 The density \eqn{f} must be bounded, perhaps after a transformation of variable.
 }
 \details{
-If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
+If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
   implements the (multivariate) generalized ratio of uniforms method
   described in Wakefield, Gelfand and Smith (1991) using a target
   density whose mode is relocated to the origin (`mode relocation') in the

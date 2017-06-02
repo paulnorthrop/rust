@@ -16,7 +16,10 @@ ru_rcpp(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
 }
 \arguments{
 \item{logf}{An external pointer to a compiled C++ function returning the
-log of the target density \eqn{f}.}
+log of the target density \eqn{f}.
+See the \code{vignette("rust-using-rcpp-vignette", package = "rust")},
+particularly the Section
+\strong{Providing a C++ function to \code{ru_rcpp}}, for details.}
 
 \item{...}{Further arguments to be passed to \code{logf} and related
 functions.}
@@ -154,7 +157,7 @@ below is available at the
 [rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).
 }
 \details{
-If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
+If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
   implements the (multivariate) generalized ratio of uniforms method
   described in Wakefield, Gelfand and Smith (1991) using a target
   density whose mode is relocated to the origin (`mode relocation') in the
@@ -188,7 +191,8 @@ If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
   likely to be close to optimal in many cases, particularly if
   \code{trans = "BC"}.
 
-See \code{vignette("rust-vignette", package = "rust")} for full details.
+See \code{vignette("rust-using-rcpp-vignette", package = "rust")} and
+\code{vignette("rust-vignette", package = "rust")} for full details.
 }
 \examples{
 n <- 1000
