@@ -22,7 +22,7 @@ This vignette describes a new feature of **rust**: the option for the user to pr
 
 In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use.  For more information about these examples see the vignette [Introducing rust](rust-vignette.html)
 
-## Providing a C++ function to `ru_rcpp`
+## Providing a C++ function to `ru_rcpp` {#cpp_fun}
 
 The general way that **rust** enables users to provide their own C++ functions uses external pointers and is based on the [Rcpp Gallery](http://gallery.rcpp.org/) article [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/) by Dirk Eddelbuettel.  For a detailed case study of the general approach see the **RcppDE** package [@RcppDE] vignette at the [RcppDE page on CRAN](https://CRAN.R-project.org/package=RcppDE).
 
@@ -237,7 +237,7 @@ The C++ function to calculate the log-posterior density is:
           for(int i = 1; i < 5; ++i) {
             t1 = pow(sdatj, i) ;
             t2 = (i * sdatj - i - 1) ;
-            total += pow(-1, i) * t1 * t2 * pow(x[1], i) / i / (i + 1) ;
+            total += pow(-1.0, i) * t1 * t2 * pow(x[1], i) / i / (i + 1) ;
           }
         }
         loglik = -m * log(x[0]) - sum_gp / x[0] - total ;
@@ -307,7 +307,7 @@ lambda
 
 ### Generalized Pareto posterior density: example for `find_lambda_rcpp`
 
-In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. See the [Introducing rust](rust-vignette.html) vignette for the form of  transformation.
+In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function `phi_to_theta` must have the same structure as the function used to calculate $\log f$. See [Providing a C++ function to `ru_rcpp`](#cpp_fun) for details. See the [Introducing rust](rust-vignette.html) vignette for the form of the transformation.
 
 ```{r}
 temp <- do.call(gpd_init, ss)
