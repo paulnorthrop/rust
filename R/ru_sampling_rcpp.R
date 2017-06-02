@@ -11,6 +11,9 @@
 #'
 #' @param logf An external pointer to a compiled C++ function returning the
 #'   log of the target density \eqn{f}.
+#'   See the \code{vignette("rust-using-rcpp-vignette", package = "rust")},
+#'   particularly the Section
+#'   \strong{Providing a C++ function to \code{ru_rcpp}}, for details.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A numeric scalar.  Number of simulated values required.
@@ -88,7 +91,7 @@
 #'   \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.
 #' @param var_names A character vector.  Names to give to the column(s) of
 #'   the simulated values.
-#' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
+#' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
 #'   density whose mode is relocated to the origin (`mode relocation') in the
@@ -122,7 +125,8 @@
 #'   likely to be close to optimal in many cases, particularly if
 #'   \code{trans = "BC"}.
 #'
-#' See \code{vignette("rust-vignette", package = "rust")} for full details.
+#' See \code{vignette("rust-using-rcpp-vignette", package = "rust")} and
+#' \code{vignette("rust-vignette", package = "rust")} for full details.
 #'
 #' @return An object of class "ru" is a list containing the following
 #'   components:

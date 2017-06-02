@@ -83,7 +83,7 @@
 #'   \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.
 #' @param var_names A character vector.  Names to give to the column(s) of
 #'   the simulated values.
-#' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{rou}
+#' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
 #'   density whose mode is relocated to the origin (`mode relocation') in the
