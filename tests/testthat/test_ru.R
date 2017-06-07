@@ -1,4 +1,3 @@
-library(rust)
 context("Bounding box")
 
 # Checks the values in the ratio-of-uniforms bounding box returned by ru()
