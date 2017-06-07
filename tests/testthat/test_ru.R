@@ -75,19 +75,19 @@ my_tol <- 1e-5
 # (a) N(0, 1)
 
 x1a <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1, init = 0)
-expect_equal(x1a$box, normal_box(d = 1), tolerance = my_tol)
+testthat::expect_equal(x1a$box, normal_box(d = 1), tolerance = my_tol)
 
 # (b) N(0, 2)
 
 sigma <- 2 # Note: sigma means variance here
 x1b <- ru(logf = function(x) -x ^ 2 / (2 * sigma), d = 1, n = 1, init = 0)
-expect_equal(x1b$box, normal_box(d = 1, sigma = 2), tolerance = my_tol)
+testthat::expect_equal(x1b$box, normal_box(d = 1, sigma = 2), tolerance = my_tol)
 
 # (c) N(1, 2)
 
 sigma <- 2 # Note: sigma means variance here
 x1c <- ru(logf = function(x) -(x - 1) ^ 2 / (2 * sigma), d = 1, n = 1, init = 0)
-expect_equal(x1c$box, normal_box(d = 1, sigma = 2), tolerance = my_tol)
+testthat::expect_equal(x1c$box, normal_box(d = 1, sigma = 2), tolerance = my_tol)
 
 # 2. 2-dimensional normal
 
@@ -97,12 +97,12 @@ expect_equal(x1c$box, normal_box(d = 1, sigma = 2), tolerance = my_tol)
 # (i) rotate = TRUE
 x2ai <- ru(logf = function(x) -(x[1]^2 + x[2]^2) / 2, d = 2, n = 1000,
          init = c(0, 0), rotate = TRUE)
-expect_equal(x2ai$box, normal_box(d = 2), tolerance = my_tol)
+testthat::expect_equal(x2ai$box, normal_box(d = 2), tolerance = my_tol)
 
 # (ii) rotate = FALSE
 x2aii <- ru(logf = function(x) -(x[1]^2 + x[2]^2) / 2, d = 2, n = 1000,
            init = c(0, 0), rotate = FALSE)
-expect_equal(x2aii$box, normal_box(d = 2), tolerance = my_tol)
+testthat::expect_equal(x2aii$box, normal_box(d = 2), tolerance = my_tol)
 
 # Function to evaluate the unnormalized log-density of a d-dimensional
 # normal distribution
@@ -119,13 +119,13 @@ covmat <- matrix(c(1, rho, rho, 1), 2, 2)
 # (i) rotate = FALSE
 x2bi <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1, init = c(0, 0),
            rotate = FALSE)
-expect_equal(x2bi$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
+testthat::expect_equal(x2bi$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
              tolerance = my_tol)
 
 # (ii) rotate = TRUE
 x2bii <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1, init = c(0, 0),
            rotate = TRUE)
-expect_equal(x2bii$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
+testthat::expect_equal(x2bii$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
              tolerance = my_tol)
 
 # (c) Zero mean, different variances with positive association
@@ -134,13 +134,13 @@ covmat <- matrix(c(10, 3, 3, 2), 2, 2)
 # (i) rotate = FALSE
 x2ci <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1,
   init = c(0, 0), rotate = FALSE)
-expect_equal(x2ci$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
+testthat::expect_equal(x2ci$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
              tolerance = my_tol)
 
 # (ii) rotate = TRUE
 x2ci <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1,
            init = c(0, 0), rotate = TRUE)
-expect_equal(x2ci$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
+testthat::expect_equal(x2ci$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
              tolerance = my_tol)
 
 # (d) Mean (1,2), different variances with negative association
@@ -149,13 +149,13 @@ covmat <- matrix(c(10, -3, -3, 2), 2, 2)
 # (i) rotate = FALSE
 x2di <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1,
            init = c(0, 0), rotate = FALSE, mean = c(1,2))
-expect_equal(x2di$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
+testthat::expect_equal(x2di$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
              tolerance = my_tol)
 
 # (ii) rotate = TRUE
 x2dii <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1,
            init = c(0, 0), rotate = TRUE, mean = c(1,2))
-expect_equal(x2dii$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
+testthat::expect_equal(x2dii$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
              tolerance = my_tol)
 
 # 3. 3-dimensional normal
@@ -166,13 +166,13 @@ covmat <- matrix(rho, 3, 3) + diag(1 - rho, 3)
 # (i) rotate = FALSE
 x3ai <- ru(logf = log_dmvnorm, sigma = covmat, d = 3, n = 1,
             init = c(0, 0, 0), rotate = FALSE)
-expect_equal(x3ai$box, normal_box(d = 3, sigma = covmat, rotate = FALSE),
+testthat::expect_equal(x3ai$box, normal_box(d = 3, sigma = covmat, rotate = FALSE),
              tolerance = my_tol)
 
 # (i) rotate = TRUE
 x3aii <- ru(logf = log_dmvnorm, sigma = covmat, d = 3, n = 1,
            init = c(0, 0, 0), rotate = TRUE)
-expect_equal(x3aii$box, normal_box(d = 3, sigma = covmat, rotate = TRUE),
+testthat::expect_equal(x3aii$box, normal_box(d = 3, sigma = covmat, rotate = TRUE),
              tolerance = my_tol)
 
 # B. 1-dimensional log-normal density
@@ -183,7 +183,7 @@ lambda <- 0
 init <- box_cox(1, lambda = lambda)
 x <- ru(logf = stats::dlnorm, log = TRUE, d = 1, n = 1, init = init, trans = "BC",
         lambda = lambda)
-expect_equal(x$box, normal_box(d = 1), tolerance = my_tol)
+testthat::expect_equal(x$box, normal_box(d = 1), tolerance = my_tol)
 
 # C: 1-dimensional gamma density, with shape parameter not less than 1
 
@@ -237,9 +237,9 @@ gamma_box <- function(shape = 1, rate = 1, r = 1 / 2) {
 # Shape = 1
 x1 <- ru(logf = dgamma, shape = 1, log = TRUE, d = 1, n = 1, lower = 0,
         init = 1)
-expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
+testthat::expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
 
 # Shape = 10
 x2 <- ru(logf = dgamma, shape = 10, log = TRUE, d = 1, n = 1, lower = 0,
          init = 10)
-expect_equal(x2$box, gamma_box(shape = 10), tolerance = my_tol)
+testthat::expect_equal(x2$box, gamma_box(shape = 10), tolerance = my_tol)
