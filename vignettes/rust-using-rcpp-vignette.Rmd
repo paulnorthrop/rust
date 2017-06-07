@@ -88,7 +88,7 @@ in order that they can create an external pointer for `new_name` using `create_x
     
 ## Examples : `ru_rcpp`
 
-All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.
+All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.  We use the **microbenchmark** package [@microbenchmark] to make the comparision.
 
 ```{r}
 library(rust)
