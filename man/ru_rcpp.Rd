@@ -143,7 +143,9 @@ An object of class "ru" is a list containing the following
     \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated
       from the function used in the ratio-of-uniforms algorithm.}
     \item{logf_args}{A list of further arguments to \code{logf}.}
-    \item{logf_rho_args}{A list of further arguments to \code{logf_rho}.}
+    \item{logf_rho_args}{A list of further arguments to \code{logf_rho}.
+      Note: this component is returned by \code{ru_rcpp} but not
+      by \code{ru}.}
     \item{f_mode}{The estimated mode of the target density f, after any
       Box-Cox transformation and/or user supplied transformation, but before
       mode relocation.}

@@ -153,7 +153,9 @@
 #'     \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated
 #'       from the function used in the ratio-of-uniforms algorithm.}
 #'     \item{logf_args}{A list of further arguments to \code{logf}.}
-#'     \item{logf_rho_args}{A list of further arguments to \code{logf_rho}.}
+#'     \item{logf_rho_args}{A list of further arguments to \code{logf_rho}.
+#'       Note: this component is returned by \code{ru_rcpp} but not
+#'       by \code{ru}.}
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
@@ -707,6 +709,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   res <- do.call(ru_fun, ru_args)
   res$pa <- n / res$ntry
   res$ntry <- NULL
+  colnames(res$sim_vals) <- var_names
+  colnames(res$sim_vals_rho) <- paste("rho[", 1:d, "]", sep="")
   box <- c(a_box, l_box, u_box)
   res$box <- cbind(box, vals, conv)
   bs <- paste(paste("b", 1:d, sep=""),rep(c("minus", "plus"), each=d), sep="")

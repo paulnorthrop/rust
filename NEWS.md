@@ -1,5 +1,9 @@
 # rust 1.2.2.9000
 
+## Bug fixes and minor improvements
+
+* The `var_names` argument to `ru_rcpp` didn't work.  This is now corrected.
+
 # rust 1.2.2
 
 ## Bug fixes and minor improvements
