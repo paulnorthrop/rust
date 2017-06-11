@@ -93,7 +93,7 @@ All the examples in the documentation for `ru` are replicated in the documentati
 ```{r}
 library(rust)
 library(Rcpp)
-mb_available <- require("microbenchmark")
+mb_available <- requireNamespace("microbenchmark")
 if (mb_available) library(microbenchmark)
 # Set the size of the simulated sample
 n <- 1000
