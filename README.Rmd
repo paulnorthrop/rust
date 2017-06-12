@@ -56,6 +56,6 @@ To get the current released version from CRAN:
 install.packages("rust")
 ```
 
-### Vignette
+### Vignettes
 
 See `vignette("rust-vignette", package = "rust")` for an overview of the package and `vignette("rust-using-rcpp-vignette", package = "rust")` for information on how to take advantage of the Rcpp package.
