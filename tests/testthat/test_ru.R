@@ -180,8 +180,7 @@ testthat::expect_equal(x3aii$box, normal_box(d = 3, sigma = covmat, rotate = TRU
 # Check that using a log transformation takes us back to the standard
 # normal case
 lambda <- 0
-init <- box_cox(1, lambda = lambda)
-x <- ru(logf = stats::dlnorm, log = TRUE, d = 1, n = 1, init = init, trans = "BC",
+x <- ru(logf = stats::dlnorm, log = TRUE, d = 1, n = 1, init = 0.1, trans = "BC",
         lambda = lambda)
 testthat::expect_equal(x$box, normal_box(d = 1), tolerance = my_tol)
 
