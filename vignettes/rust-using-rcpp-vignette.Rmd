@@ -93,8 +93,10 @@ All the examples in the documentation for `ru` are replicated in the documentati
 ```{r}
 library(rust)
 library(Rcpp)
-mb_available <- requireNamespace("microbenchmark")
-if (mb_available) library(microbenchmark)
+got_microbenchmark <- requireNamespace("microbenchmark")
+if (got_microbenchmark) {
+  library(microbenchmark)
+}  
 # Set the size of the simulated sample
 n <- 1000
 ```
@@ -122,7 +124,7 @@ x_new <- ru_rcpp(logf = ptr_N01, d = 1, n = n, init = 0.1)
 head(x_new$sim_vals)
 
 # Compare performances of ru and ru_rcpp
-if (mb_available) {
+if (got_microbenchmark) {
   res <- microbenchmark(
     old = ru(logf = function(x) -x ^ 2 / 2, d = 1, n = n, init = 0.1),
     new = ru_rcpp(logf = ptr_N01, d = 1, n = n, init = 0.1)
@@ -167,7 +169,7 @@ log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
 # Create a pointer to the logdmvnorm C++ function
 ptr_mvn <- create_xptr("logdmvnorm")
 
-if (mb_available) {
+if (got_microbenchmark) {
   res <- microbenchmark(
     old = ru(logf = log_dmvnorm, sigma = covmat, d = 3, n = n,
              init = c(0, 0, 0)), 
@@ -198,7 +200,7 @@ In this example we use a log transform (Box-Cox parameter $\lambda = 0$) so that
 
 ```{r}
 ptr_lnorm <- create_xptr("logdlnorm")
-if (mb_available) {
+if (got_microbenchmark) {
   res <- microbenchmark(
    old = ru(logf = dlnorm, log = TRUE, d = 1, n = n, lower = 0, init = 0.1,
             trans = "BC", lambda = 0),
@@ -269,7 +271,7 @@ ptr_gp <- create_xptr("loggp")
 for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
                  lower = c(0, -Inf)), ss)
 
-if (mb_available) {
+if (got_microbenchmark) {
   res <- microbenchmark(
    old = ru(logf = gpd_logpost, ss = ss, d = 2, n = n, init = init,
             lower = c(0, -Inf)),
