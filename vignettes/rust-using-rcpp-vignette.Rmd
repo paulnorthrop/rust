@@ -93,7 +93,8 @@ All the examples in the documentation for `ru` are replicated in the documentati
 ```{r}
 library(rust)
 library(Rcpp)
-got_microbenchmark <- requireNamespace("microbenchmark")
+# Is microbenchmark available?
+got_microbenchmark <- requireNamespace("microbenchmark", quietly = TRUE)
 if (got_microbenchmark) {
   library(microbenchmark)
 }  
