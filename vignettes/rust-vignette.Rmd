@@ -361,3 +361,7 @@ plot(x4, ru_scale = TRUE)
 ```
 
 ## References
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>
