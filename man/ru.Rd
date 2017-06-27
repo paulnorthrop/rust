@@ -15,7 +15,8 @@ ru(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   var_names = NULL)
 }
 \arguments{
-\item{logf}{A function returning the log of the target density \eqn{f}.}
+\item{logf}{A function returning the log of the target density \eqn{f}.
+This function should return \code{-Inf} when the density is zero.}
 
 \item{...}{Further arguments to be passed to \code{logf} and related
 functions.}

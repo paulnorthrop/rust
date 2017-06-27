@@ -4,6 +4,8 @@
 
 * The `var_names` argument to `ru_rcpp` didn't work.  This has been corrected.
 
+* That the function `logf` supplied to `ru` or `ru_rcpp` should return `-Inf` when the density f is zero is stated explicitly in the help files.
+
 # rust 1.2.2
 
 ## Bug fixes and minor improvements

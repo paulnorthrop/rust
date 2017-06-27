@@ -11,6 +11,7 @@
 #'
 #' @param logf An external pointer to a compiled C++ function returning the
 #'   log of the target density \eqn{f}.
+#'   This function should return \code{-Inf} when the density is zero.
 #'   See the \code{vignette("rust-using-rcpp-vignette", package = "rust")},
 #'   particularly the Section
 #'   \strong{Providing a C++ function to \code{ru_rcpp}}, for details.

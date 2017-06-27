@@ -7,6 +7,7 @@
 #' The density \eqn{f} must be bounded, perhaps after a transformation of variable.
 #'
 #' @param logf A function returning the log of the target density \eqn{f}.
+#'   This function should return \code{-Inf} when the density is zero.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A numeric scalar.  Number of simulated values required.
