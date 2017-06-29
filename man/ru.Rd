@@ -27,8 +27,8 @@ functions.}
 
 \item{init}{A numeric vector. Initial estimates of the mode of \code{logf}.
 If \code{trans="BC"} or \code{trans = "user"} this is \emph{after} Box-Cox
-transformation or user-defined transformation, but BEFORE any rotation
-of axes.}
+transformation or user-defined transformation, but \emph{before} any
+rotation of axes.}
 
 \item{trans}{A character scalar. "none" for no transformation, "BC" for
 Box-Cox transformation, "user" for a user-defined transformation.
