@@ -20,9 +20,9 @@
 #' @param n A numeric scalar.  Number of simulated values required.
 #' @param d A numeric scalar. Dimension of f.
 #' @param init A numeric vector. Initial estimates of the mode of \code{logf}.
-#'   If \code{trans="BC"} or \code{trans = "user"} this is \emph{after} Box-Cox
-#'   transformation or user-defined transformation, but \emph{before} any
-#'   rotation of axes.
+#'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
+#'   Box-Cox transformation or user-defined transformation, but \emph{before}
+#'   any rotation of axes.
 #' @param trans A character scalar. "none" for no transformation, "BC" for
 #'   Box-Cox transformation, "user" for a user-defined transformation.
 #'   If \code{trans = "user"} then the transformation should be specified
