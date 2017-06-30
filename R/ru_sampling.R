@@ -510,9 +510,9 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   if (trans == "user") {
     logf_rho <- function(rho, ...) {
       phi <- rho_to_psi(rho)
-      theta <- do.call(phi_to_theta, c(phi, user_args))
-      if (!is.finite(theta)) return(-Inf)
-      logj <- do.call(log_j, c(theta, user_args))
+      theta <- do.call(phi_to_theta, c(list(phi = phi), user_args))
+      if (any(!is.finite(theta))) return(-Inf)
+      logj <- do.call(log_j, c(list(theta = theta), user_args))
       val <- logf(theta, ...) - logj - hscale
       structure(val, theta = theta)
     }
