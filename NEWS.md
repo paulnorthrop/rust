@@ -6,6 +6,8 @@
 
 * That the function `logf` supplied to `ru` or `ru_rcpp` should return `-Inf` when the density f is zero is stated explicitly in the help files.
 
+* ru() did not work when `trans = "user"` and `d` > 1. This has been corrected.
+
 # rust 1.2.2
 
 ## Bug fixes and minor improvements
