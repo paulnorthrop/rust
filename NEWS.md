@@ -4,6 +4,8 @@
 
 * The `var_names` argument to `ru_rcpp` didn't work.  This has been corrected.
 
+* The arguments `lower, upper` to `ru` and `ru_rcpp` are now used, at least partly even when `rotate = TRUE`.  See the updated description of `lower, upper` in the documentation of `ru` and `ru_rcpp`.
+
 * That the function `logf` supplied to `ru` or `ru_rcpp` should return `-Inf` when the density f is zero is stated explicitly in the help files.
 
 * ru() did not work when `trans = "user"` and `d` > 1. This has been corrected.

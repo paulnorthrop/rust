@@ -70,11 +70,12 @@
 #' @param lower,upper Numeric vectors.  Lower/upper bounds on the arguments of
 #'   the function \emph{after} any transformation from theta to phi implied by
 #'   the inverse of \code{phi_to_theta}. If \code{rotate = FALSE} these
-#'   are used in the optimizations used to construct the bounding box.  If
-#'   \code{trans = "BC"} components of \code{lower} that are negative are set
-#'   to zero without warning and the bounds implied after the Box-Cox
-#'   transformation are calculated inside \code{ru}.  If \code{rotate = TRUE}
-#'   all optimizations are unconstrained.
+#'   are used in all of the optimizations used to construct the bounding box.
+#'   If \code{rotate = TRUE} then they are use only in the first optimisation
+#'   to maximise the target density.`
+#'   If \code{trans = "BC"} components of \code{lower} that are negative are
+#'   set to zero without warning and the bounds implied after the Box-Cox
+#'   transformation are calculated inside \code{ru}.
 #' @param r A numeric scalar.  Parameter of generalized ratio-of-uniforms.
 #' @param ep A numeric scalar.  Controls initial estimates for optimizations
 #'   to find the b-bounding box parameters.  The default (\code{ep}=0)
@@ -426,24 +427,17 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
     if (length(lambda) == 1) {
       lambda <- rep(lambda, d)
     }
-    # If rotate = FALSE, adjust lower and upper for the value of lambda
-    if (!rotate) {
-      # Check that all components of upper are positive
-      if (any(upper <= 0)) {
-        stop("when trans = ``BC'' all elements of upper must be positive")
-      }
-      # If any components of lower or upper are negative then set them to zero.
-      lower <- pmax(0, lower)
-      lower <- ifelse(lambda == 0, gm * log(lower),
-                      (lower^lambda - 1) / (lambda * gm ^ (lambda -1)))
-      upper <- ifelse(lambda == 0, gm * log(upper),
-                      (upper^lambda - 1) / (lambda * gm ^ (lambda -1)))
+    # Adjust lower and upper for the value of lambda
+    # Check that all components of upper are positive
+    if (any(upper <= 0)) {
+      stop("when trans = ``BC'' all elements of upper must be positive")
     }
-  }
-  # If rotate = TRUE then don't use impose any (finite) bounds
-  if (rotate) {
-    lower <- rep(-Inf, d)
-    upper <- rep(Inf, d)
+    # If any components of lower or upper are negative then set them to zero.
+    lower <- pmax(0, lower)
+    lower <- ifelse(lambda == 0, gm * log(lower),
+                    (lower^lambda - 1) / (lambda * gm ^ (lambda -1)))
+    upper <- ifelse(lambda == 0, gm * log(upper),
+                    (upper^lambda - 1) / (lambda * gm ^ (lambda -1)))
   }
   # Check that the optimization algorithm is appropriate given the bounds in
   # lower and upper.  If not then change it, with a warning.
@@ -688,6 +682,13 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   ru_args$psi_mode <- f_mode
   logf_args$rot_mat <- t(rot_mat)
   logf_args$psi_mode <- f_mode
+  #
+  # If rotate = TRUE then don't use impose any (finite) bounds
+  if (rotate) {
+    lower <- rep(-Inf, d)
+    upper <- rep(Inf, d)
+  }
+  #
   # Calculate biminus(r) and biplus(r), i = 1, ...d -----------
   # Create list of arguments for find_bs()
   for_find_bs <- list(lower = lower, upper = upper, ep = ep, vals = vals,

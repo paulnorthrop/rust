@@ -89,11 +89,12 @@ FALSE with a warning.}
 \item{lower, upper}{Numeric vectors.  Lower/upper bounds on the arguments of
 the function \emph{after} any transformation from theta to phi implied by
 the inverse of \code{phi_to_theta}. If \code{rotate = FALSE} these
-are used in the optimizations used to construct the bounding box.  If
-\code{trans = "BC"} components of \code{lower} that are negative are set
-to zero without warning and the bounds implied after the Box-Cox
-transformation are calculated inside \code{ru}.  If \code{rotate = TRUE}
-all optimizations are unconstrained.}
+are used in all of the optimizations used to construct the bounding box.
+If \code{rotate = TRUE} then they are use only in the first optimisation
+to maximise the target density.`
+If \code{trans = "BC"} components of \code{lower} that are negative are
+set to zero without warning and the bounds implied after the Box-Cox
+transformation are calculated inside \code{ru}.}
 
 \item{r}{A numeric scalar.  Parameter of generalized ratio-of-uniforms.}
 
