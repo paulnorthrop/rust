@@ -294,7 +294,7 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' \dontrun{
 #' # Generalized Pareto posterior distribution ===================
 #'
-#' #' # Sample data from a GP(sigma, xi) distribution
+#' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = -0.5, sigma = 1)
 #' # Calculate summary statistics for use in the log-likelihood
 #' ss <- gpd_sum_stats(gpd_data)
