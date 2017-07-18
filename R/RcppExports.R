@@ -2,151 +2,151 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 any_naC <- function(x) {
-    .Call('rust_any_naC', PACKAGE = 'rust', x)
+    .Call('_rust_any_naC', PACKAGE = 'rust', x)
 }
 
 no_naC <- function(x) {
-    .Call('rust_no_naC', PACKAGE = 'rust', x)
+    .Call('_rust_no_naC', PACKAGE = 'rust', x)
 }
 
 any_nonpos <- function(x) {
-    .Call('rust_any_nonpos', PACKAGE = 'rust', x)
+    .Call('_rust_any_nonpos', PACKAGE = 'rust', x)
 }
 
 all_pos <- function(x) {
-    .Call('rust_all_pos', PACKAGE = 'rust', x)
+    .Call('_rust_all_pos', PACKAGE = 'rust', x)
 }
 
 vecpow <- function(base, exp) {
-    .Call('rust_vecpow', PACKAGE = 'rust', base, exp)
+    .Call('_rust_vecpow', PACKAGE = 'rust', base, exp)
 }
 
 cpp_rho_to_psi <- function(rho, psi_mode, rot_mat) {
-    .Call('rust_cpp_rho_to_psi', PACKAGE = 'rust', rho, psi_mode, rot_mat)
+    .Call('_rust_cpp_rho_to_psi', PACKAGE = 'rust', rho, psi_mode, rot_mat)
 }
 
 cpp_psi_to_phi <- function(psi, lambda, gm, con) {
-    .Call('rust_cpp_psi_to_phi', PACKAGE = 'rust', psi, lambda, gm, con)
+    .Call('_rust_cpp_psi_to_phi', PACKAGE = 'rust', psi, lambda, gm, con)
 }
 
 cpp_psi_to_phi_0 <- function(psi, lambda, gm, con) {
-    .Call('rust_cpp_psi_to_phi_0', PACKAGE = 'rust', psi, lambda, gm, con)
+    .Call('_rust_cpp_psi_to_phi_0', PACKAGE = 'rust', psi, lambda, gm, con)
 }
 
 cpp_logf <- function(theta, logf, pars) {
-    .Call('rust_cpp_logf', PACKAGE = 'rust', theta, logf, pars)
+    .Call('_rust_cpp_logf', PACKAGE = 'rust', theta, logf, pars)
 }
 
 cpp_logf_rho <- function(rho, psi_mode, rot_mat, hscale, logf, pars) {
-    .Call('rust_cpp_logf_rho', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars)
+    .Call('_rust_cpp_logf_rho', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars)
 }
 
 cpp_logf_rho_2 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_cpp_logf_rho_2', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_cpp_logf_rho_2', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 cpp_logf_rho_3 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_cpp_logf_rho_3', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_cpp_logf_rho_3', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 cpp_logf_rho_4 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_cpp_logf_rho_4', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_cpp_logf_rho_4', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 rcpp_apply <- function(x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_rcpp_apply', PACKAGE = 'rust', x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_rcpp_apply', PACKAGE = 'rust', x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 cpp_a_obj <- function(psi, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars) {
-    .Call('rust_cpp_a_obj', PACKAGE = 'rust', psi, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
+    .Call('_rust_cpp_a_obj', PACKAGE = 'rust', psi, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
 }
 
 cpp_a_obj_2 <- function(psi, psi_mode, rot_mat, hscale, d, r, big_val, tfun, tpars, logf, pars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_cpp_a_obj_2', PACKAGE = 'rust', psi, psi_mode, rot_mat, hscale, d, r, big_val, tfun, tpars, logf, pars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_cpp_a_obj_2', PACKAGE = 'rust', psi, psi_mode, rot_mat, hscale, d, r, big_val, tfun, tpars, logf, pars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 cpp_lower_box <- function(rho, j, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars) {
-    .Call('rust_cpp_lower_box', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
+    .Call('_rust_cpp_lower_box', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
 }
 
 cpp_lower_box_2 <- function(rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_cpp_lower_box_2', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_cpp_lower_box_2', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 cpp_upper_box <- function(rho, j, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars) {
-    .Call('rust_cpp_upper_box', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
+    .Call('_rust_cpp_upper_box', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, logf, d, r, big_val, pars)
 }
 
 cpp_upper_box_2 <- function(rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_cpp_upper_box_2', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_cpp_upper_box_2', PACKAGE = 'rust', rho, j, psi_mode, rot_mat, hscale, tfun, tpars, logf, pars, d, r, big_val, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 ru_cpp <- function(n, d, r, a_box, l_box, u_box, logf, psi_mode, rot_mat, hscale, pars) {
-    .Call('rust_ru_cpp', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, logf, psi_mode, rot_mat, hscale, pars)
+    .Call('_rust_ru_cpp', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, logf, psi_mode, rot_mat, hscale, pars)
 }
 
 ru_cpp_2 <- function(n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_ru_cpp_2', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_ru_cpp_2', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 ru_cpp_3 <- function(n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_ru_cpp_3', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_ru_cpp_3', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 ru_cpp_4 <- function(n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
-    .Call('rust_ru_cpp_4', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+    .Call('_rust_ru_cpp_4', PACKAGE = 'rust', n, d, r, a_box, l_box, u_box, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
 create_trans_xptr <- function(fstr) {
-    .Call('rust_create_trans_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_create_trans_xptr', PACKAGE = 'rust', fstr)
 }
 
 bc_no_trans <- function(psi, lambda, gm, con) {
-    .Call('rust_bc_no_trans', PACKAGE = 'rust', psi, lambda, gm, con)
+    .Call('_rust_bc_no_trans', PACKAGE = 'rust', psi, lambda, gm, con)
 }
 
 create_psi_to_phi_xptr <- function(fstr) {
-    .Call('rust_create_psi_to_phi_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_create_psi_to_phi_xptr', PACKAGE = 'rust', fstr)
 }
 
 log_none_jac <- function(theta, user_args) {
-    .Call('rust_log_none_jac', PACKAGE = 'rust', theta, user_args)
+    .Call('_rust_log_none_jac', PACKAGE = 'rust', theta, user_args)
 }
 
 create_log_jac_xptr <- function(fstr) {
-    .Call('rust_create_log_jac_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_create_log_jac_xptr', PACKAGE = 'rust', fstr)
 }
 
 no_trans <- function(theta, user_args) {
-    .Call('rust_no_trans', PACKAGE = 'rust', theta, user_args)
+    .Call('_rust_no_trans', PACKAGE = 'rust', theta, user_args)
 }
 
 null_phi_to_theta_xptr <- function(fstr) {
-    .Call('rust_null_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_null_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
 }
 
 logdN01 <- function(x, pars) {
-    .Call('rust_logdN01', PACKAGE = 'rust', x, pars)
+    .Call('_rust_logdN01', PACKAGE = 'rust', x, pars)
 }
 
 logdnorm2 <- function(x, pars) {
-    .Call('rust_logdnorm2', PACKAGE = 'rust', x, pars)
+    .Call('_rust_logdnorm2', PACKAGE = 'rust', x, pars)
 }
 
 logdmvnorm <- function(x, pars) {
-    .Call('rust_logdmvnorm', PACKAGE = 'rust', x, pars)
+    .Call('_rust_logdmvnorm', PACKAGE = 'rust', x, pars)
 }
 
 logdlnorm <- function(x, pars) {
-    .Call('rust_logdlnorm', PACKAGE = 'rust', x, pars)
+    .Call('_rust_logdlnorm', PACKAGE = 'rust', x, pars)
 }
 
 logdgamma <- function(x, pars) {
-    .Call('rust_logdgamma', PACKAGE = 'rust', x, pars)
+    .Call('_rust_logdgamma', PACKAGE = 'rust', x, pars)
 }
 
 loggp <- function(x, ss) {
-    .Call('rust_loggp', PACKAGE = 'rust', x, ss)
+    .Call('_rust_loggp', PACKAGE = 'rust', x, ss)
 }
 
 #' Create external pointer to a C++ function for logf
@@ -155,15 +155,15 @@ loggp <- function(x, ss) {
 #'
 #' @export
 create_xptr <- function(fstr) {
-    .Call('rust_create_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_create_xptr', PACKAGE = 'rust', fstr)
 }
 
 neglog <- function(theta, user_args) {
-    .Call('rust_neglog', PACKAGE = 'rust', theta, user_args)
+    .Call('_rust_neglog', PACKAGE = 'rust', theta, user_args)
 }
 
 bc_log_j <- function(theta, user_args) {
-    .Call('rust_bc_log_j', PACKAGE = 'rust', theta, user_args)
+    .Call('_rust_bc_log_j', PACKAGE = 'rust', theta, user_args)
 }
 
 #' Create external pointer to a C++ function for log_j
@@ -172,23 +172,23 @@ bc_log_j <- function(theta, user_args) {
 #'
 #' @export
 create_log_j_xptr <- function(fstr) {
-    .Call('rust_create_log_j_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_create_log_j_xptr', PACKAGE = 'rust', fstr)
 }
 
 exptrans <- function(phi, user_args) {
-    .Call('rust_exptrans', PACKAGE = 'rust', phi, user_args)
+    .Call('_rust_exptrans', PACKAGE = 'rust', phi, user_args)
 }
 
 vecpower <- function(base, exp) {
-    .Call('rust_vecpower', PACKAGE = 'rust', base, exp)
+    .Call('_rust_vecpower', PACKAGE = 'rust', base, exp)
 }
 
 bc_phi_to_theta <- function(phi, user_args) {
-    .Call('rust_bc_phi_to_theta', PACKAGE = 'rust', phi, user_args)
+    .Call('_rust_bc_phi_to_theta', PACKAGE = 'rust', phi, user_args)
 }
 
 gp_phi_to_theta <- function(phi, user_args) {
-    .Call('rust_gp_phi_to_theta', PACKAGE = 'rust', phi, user_args)
+    .Call('_rust_gp_phi_to_theta', PACKAGE = 'rust', phi, user_args)
 }
 
 #' Create external pointer to a C++ function for phi_to_theta
@@ -197,10 +197,10 @@ gp_phi_to_theta <- function(phi, user_args) {
 #'
 #' @export
 create_phi_to_theta_xptr <- function(fstr) {
-    .Call('rust_create_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
+    .Call('_rust_create_phi_to_theta_xptr', PACKAGE = 'rust', fstr)
 }
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('rust_RcppExport_registerCCallable', PACKAGE = 'rust')
+    .Call('_rust_RcppExport_registerCCallable', PACKAGE = 'rust')
 })

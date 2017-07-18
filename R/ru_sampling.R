@@ -645,7 +645,10 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     print(res$box)
   }
   res$d <- d
-  res$logf <- logf
+  logf_scaled <- function(theta, ...) {
+    return(logf(theta, ...) - hscale)
+  }
+  res$logf <- logf_scaled
   res$logf_args <- list(...)
   res$logf_rho <- logf_rho
   res$f_mode <- f_mode

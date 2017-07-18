@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* In `ru()` the constant `hscale` used to shift `logf` (and hence scale the target density f) is now included in function `logf` in the returned object.  This helps to avoid over/under-flow when `logf` is calculated latterly, e.g. in `plot()`.  This hasn't been done for `ru_rcpp()` (yet).
+
 * The `var_names` argument to `ru_rcpp` didn't work.  This has been corrected.
 
 * The arguments `lower, upper` to `ru` and `ru_rcpp` are now used, at least partly even when `rotate = TRUE`.  See the updated description of `lower, upper` in the documentation of `ru` and `ru_rcpp`.

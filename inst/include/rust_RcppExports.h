@@ -17,7 +17,7 @@ namespace rust {
             require("rust", Rcpp::Named("quietly") = true);
             typedef int(*Ptr_validate)(const char*);
             static Ptr_validate p_validate = (Ptr_validate)
-                R_GetCCallable("rust", "rust_RcppExport_validate");
+                R_GetCCallable("rust", "_rust_RcppExport_validate");
             if (!p_validate(sig)) {
                 throw Rcpp::function_not_exported(
                     "C++ function with signature '" + std::string(sig) + "' not found in rust");
@@ -30,12 +30,12 @@ namespace rust {
         static Ptr_any_naC p_any_naC = NULL;
         if (p_any_naC == NULL) {
             validateSignature("bool(*any_naC)(const Rcpp::NumericVector&)");
-            p_any_naC = (Ptr_any_naC)R_GetCCallable("rust", "rust_any_naC");
+            p_any_naC = (Ptr_any_naC)R_GetCCallable("rust", "_rust_any_naC");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_any_naC(Rcpp::wrap(x));
+            rcpp_result_gen = p_any_naC(Shield<SEXP>(Rcpp::wrap(x)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -49,12 +49,12 @@ namespace rust {
         static Ptr_no_naC p_no_naC = NULL;
         if (p_no_naC == NULL) {
             validateSignature("bool(*no_naC)(const Rcpp::NumericVector&)");
-            p_no_naC = (Ptr_no_naC)R_GetCCallable("rust", "rust_no_naC");
+            p_no_naC = (Ptr_no_naC)R_GetCCallable("rust", "_rust_no_naC");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_no_naC(Rcpp::wrap(x));
+            rcpp_result_gen = p_no_naC(Shield<SEXP>(Rcpp::wrap(x)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -68,12 +68,12 @@ namespace rust {
         static Ptr_any_nonpos p_any_nonpos = NULL;
         if (p_any_nonpos == NULL) {
             validateSignature("bool(*any_nonpos)(const Rcpp::NumericVector&)");
-            p_any_nonpos = (Ptr_any_nonpos)R_GetCCallable("rust", "rust_any_nonpos");
+            p_any_nonpos = (Ptr_any_nonpos)R_GetCCallable("rust", "_rust_any_nonpos");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_any_nonpos(Rcpp::wrap(x));
+            rcpp_result_gen = p_any_nonpos(Shield<SEXP>(Rcpp::wrap(x)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -87,12 +87,12 @@ namespace rust {
         static Ptr_all_pos p_all_pos = NULL;
         if (p_all_pos == NULL) {
             validateSignature("bool(*all_pos)(const Rcpp::NumericVector&)");
-            p_all_pos = (Ptr_all_pos)R_GetCCallable("rust", "rust_all_pos");
+            p_all_pos = (Ptr_all_pos)R_GetCCallable("rust", "_rust_all_pos");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_all_pos(Rcpp::wrap(x));
+            rcpp_result_gen = p_all_pos(Shield<SEXP>(Rcpp::wrap(x)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -106,12 +106,12 @@ namespace rust {
         static Ptr_vecpow p_vecpow = NULL;
         if (p_vecpow == NULL) {
             validateSignature("Rcpp::NumericVector(*vecpow)(const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
-            p_vecpow = (Ptr_vecpow)R_GetCCallable("rust", "rust_vecpow");
+            p_vecpow = (Ptr_vecpow)R_GetCCallable("rust", "_rust_vecpow");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_vecpow(Rcpp::wrap(base), Rcpp::wrap(exp));
+            rcpp_result_gen = p_vecpow(Shield<SEXP>(Rcpp::wrap(base)), Shield<SEXP>(Rcpp::wrap(exp)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -125,12 +125,12 @@ namespace rust {
         static Ptr_cpp_rho_to_psi p_cpp_rho_to_psi = NULL;
         if (p_cpp_rho_to_psi == NULL) {
             validateSignature("arma::vec(*cpp_rho_to_psi)(const arma::vec&,const arma::vec&,const arma::mat&)");
-            p_cpp_rho_to_psi = (Ptr_cpp_rho_to_psi)R_GetCCallable("rust", "rust_cpp_rho_to_psi");
+            p_cpp_rho_to_psi = (Ptr_cpp_rho_to_psi)R_GetCCallable("rust", "_rust_cpp_rho_to_psi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_rho_to_psi(Rcpp::wrap(rho), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat));
+            rcpp_result_gen = p_cpp_rho_to_psi(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -144,12 +144,12 @@ namespace rust {
         static Ptr_cpp_psi_to_phi p_cpp_psi_to_phi = NULL;
         if (p_cpp_psi_to_phi == NULL) {
             validateSignature("Rcpp::NumericVector(*cpp_psi_to_phi)(const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
-            p_cpp_psi_to_phi = (Ptr_cpp_psi_to_phi)R_GetCCallable("rust", "rust_cpp_psi_to_phi");
+            p_cpp_psi_to_phi = (Ptr_cpp_psi_to_phi)R_GetCCallable("rust", "_rust_cpp_psi_to_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_psi_to_phi(Rcpp::wrap(psi), Rcpp::wrap(lambda), Rcpp::wrap(gm), Rcpp::wrap(con));
+            rcpp_result_gen = p_cpp_psi_to_phi(Shield<SEXP>(Rcpp::wrap(psi)), Shield<SEXP>(Rcpp::wrap(lambda)), Shield<SEXP>(Rcpp::wrap(gm)), Shield<SEXP>(Rcpp::wrap(con)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -163,12 +163,12 @@ namespace rust {
         static Ptr_cpp_psi_to_phi_0 p_cpp_psi_to_phi_0 = NULL;
         if (p_cpp_psi_to_phi_0 == NULL) {
             validateSignature("Rcpp::NumericVector(*cpp_psi_to_phi_0)(const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
-            p_cpp_psi_to_phi_0 = (Ptr_cpp_psi_to_phi_0)R_GetCCallable("rust", "rust_cpp_psi_to_phi_0");
+            p_cpp_psi_to_phi_0 = (Ptr_cpp_psi_to_phi_0)R_GetCCallable("rust", "_rust_cpp_psi_to_phi_0");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_psi_to_phi_0(Rcpp::wrap(psi), Rcpp::wrap(lambda), Rcpp::wrap(gm), Rcpp::wrap(con));
+            rcpp_result_gen = p_cpp_psi_to_phi_0(Shield<SEXP>(Rcpp::wrap(psi)), Shield<SEXP>(Rcpp::wrap(lambda)), Shield<SEXP>(Rcpp::wrap(gm)), Shield<SEXP>(Rcpp::wrap(con)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -182,12 +182,12 @@ namespace rust {
         static Ptr_cpp_logf p_cpp_logf = NULL;
         if (p_cpp_logf == NULL) {
             validateSignature("double(*cpp_logf)(const Rcpp::NumericVector&,const SEXP&,const Rcpp::List&)");
-            p_cpp_logf = (Ptr_cpp_logf)R_GetCCallable("rust", "rust_cpp_logf");
+            p_cpp_logf = (Ptr_cpp_logf)R_GetCCallable("rust", "_rust_cpp_logf");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_logf(Rcpp::wrap(theta), Rcpp::wrap(logf), Rcpp::wrap(pars));
+            rcpp_result_gen = p_cpp_logf(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -201,12 +201,12 @@ namespace rust {
         static Ptr_cpp_logf_rho p_cpp_logf_rho = NULL;
         if (p_cpp_logf_rho == NULL) {
             validateSignature("double(*cpp_logf_rho)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&)");
-            p_cpp_logf_rho = (Ptr_cpp_logf_rho)R_GetCCallable("rust", "rust_cpp_logf_rho");
+            p_cpp_logf_rho = (Ptr_cpp_logf_rho)R_GetCCallable("rust", "_rust_cpp_logf_rho");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_logf_rho(Rcpp::wrap(rho), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars));
+            rcpp_result_gen = p_cpp_logf_rho(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -220,12 +220,12 @@ namespace rust {
         static Ptr_cpp_logf_rho_2 p_cpp_logf_rho_2 = NULL;
         if (p_cpp_logf_rho_2 == NULL) {
             validateSignature("double(*cpp_logf_rho_2)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_cpp_logf_rho_2 = (Ptr_cpp_logf_rho_2)R_GetCCallable("rust", "rust_cpp_logf_rho_2");
+            p_cpp_logf_rho_2 = (Ptr_cpp_logf_rho_2)R_GetCCallable("rust", "_rust_cpp_logf_rho_2");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_logf_rho_2(Rcpp::wrap(rho), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_cpp_logf_rho_2(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -239,12 +239,12 @@ namespace rust {
         static Ptr_cpp_logf_rho_3 p_cpp_logf_rho_3 = NULL;
         if (p_cpp_logf_rho_3 == NULL) {
             validateSignature("double(*cpp_logf_rho_3)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_cpp_logf_rho_3 = (Ptr_cpp_logf_rho_3)R_GetCCallable("rust", "rust_cpp_logf_rho_3");
+            p_cpp_logf_rho_3 = (Ptr_cpp_logf_rho_3)R_GetCCallable("rust", "_rust_cpp_logf_rho_3");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_logf_rho_3(Rcpp::wrap(rho), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_cpp_logf_rho_3(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -258,12 +258,12 @@ namespace rust {
         static Ptr_cpp_logf_rho_4 p_cpp_logf_rho_4 = NULL;
         if (p_cpp_logf_rho_4 == NULL) {
             validateSignature("double(*cpp_logf_rho_4)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_cpp_logf_rho_4 = (Ptr_cpp_logf_rho_4)R_GetCCallable("rust", "rust_cpp_logf_rho_4");
+            p_cpp_logf_rho_4 = (Ptr_cpp_logf_rho_4)R_GetCCallable("rust", "_rust_cpp_logf_rho_4");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_logf_rho_4(Rcpp::wrap(rho), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_cpp_logf_rho_4(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -277,12 +277,12 @@ namespace rust {
         static Ptr_rcpp_apply p_rcpp_apply = NULL;
         if (p_rcpp_apply == NULL) {
             validateSignature("Rcpp::NumericVector(*rcpp_apply)(const Rcpp::NumericMatrix&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_rcpp_apply = (Ptr_rcpp_apply)R_GetCCallable("rust", "rust_rcpp_apply");
+            p_rcpp_apply = (Ptr_rcpp_apply)R_GetCCallable("rust", "_rust_rcpp_apply");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_rcpp_apply(Rcpp::wrap(x), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_rcpp_apply(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -296,12 +296,12 @@ namespace rust {
         static Ptr_cpp_a_obj p_cpp_a_obj = NULL;
         if (p_cpp_a_obj == NULL) {
             validateSignature("double(*cpp_a_obj)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const int&,const double&,const double&,const Rcpp::List&)");
-            p_cpp_a_obj = (Ptr_cpp_a_obj)R_GetCCallable("rust", "rust_cpp_a_obj");
+            p_cpp_a_obj = (Ptr_cpp_a_obj)R_GetCCallable("rust", "_rust_cpp_a_obj");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_a_obj(Rcpp::wrap(psi), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(big_val), Rcpp::wrap(pars));
+            rcpp_result_gen = p_cpp_a_obj(Shield<SEXP>(Rcpp::wrap(psi)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(big_val)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -315,12 +315,12 @@ namespace rust {
         static Ptr_cpp_a_obj_2 p_cpp_a_obj_2 = NULL;
         if (p_cpp_a_obj_2 == NULL) {
             validateSignature("double(*cpp_a_obj_2)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const int&,const double&,const double&,const SEXP&,const Rcpp::List&,const SEXP&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_cpp_a_obj_2 = (Ptr_cpp_a_obj_2)R_GetCCallable("rust", "rust_cpp_a_obj_2");
+            p_cpp_a_obj_2 = (Ptr_cpp_a_obj_2)R_GetCCallable("rust", "_rust_cpp_a_obj_2");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_a_obj_2(Rcpp::wrap(psi), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(big_val), Rcpp::wrap(tfun), Rcpp::wrap(tpars), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_cpp_a_obj_2(Shield<SEXP>(Rcpp::wrap(psi)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(big_val)), Shield<SEXP>(Rcpp::wrap(tfun)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -334,12 +334,12 @@ namespace rust {
         static Ptr_cpp_lower_box p_cpp_lower_box = NULL;
         if (p_cpp_lower_box == NULL) {
             validateSignature("double(*cpp_lower_box)(const arma::vec&,int,const arma::vec&,const arma::mat&,const double&,const SEXP&,const int&,const double&,const double&,const Rcpp::List&)");
-            p_cpp_lower_box = (Ptr_cpp_lower_box)R_GetCCallable("rust", "rust_cpp_lower_box");
+            p_cpp_lower_box = (Ptr_cpp_lower_box)R_GetCCallable("rust", "_rust_cpp_lower_box");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_lower_box(Rcpp::wrap(rho), Rcpp::wrap(j), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(big_val), Rcpp::wrap(pars));
+            rcpp_result_gen = p_cpp_lower_box(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(j)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(big_val)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -353,12 +353,12 @@ namespace rust {
         static Ptr_cpp_lower_box_2 p_cpp_lower_box_2 = NULL;
         if (p_cpp_lower_box_2 == NULL) {
             validateSignature("double(*cpp_lower_box_2)(const arma::vec&,int,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const SEXP&,const Rcpp::List&,const int&,const double&,const double&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_cpp_lower_box_2 = (Ptr_cpp_lower_box_2)R_GetCCallable("rust", "rust_cpp_lower_box_2");
+            p_cpp_lower_box_2 = (Ptr_cpp_lower_box_2)R_GetCCallable("rust", "_rust_cpp_lower_box_2");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_lower_box_2(Rcpp::wrap(rho), Rcpp::wrap(j), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(tfun), Rcpp::wrap(tpars), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(big_val), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_cpp_lower_box_2(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(j)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(tfun)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(big_val)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -372,12 +372,12 @@ namespace rust {
         static Ptr_cpp_upper_box p_cpp_upper_box = NULL;
         if (p_cpp_upper_box == NULL) {
             validateSignature("double(*cpp_upper_box)(const arma::vec&,int,const arma::vec&,const arma::mat&,const double&,const SEXP&,const int&,const double&,const double&,const Rcpp::List&)");
-            p_cpp_upper_box = (Ptr_cpp_upper_box)R_GetCCallable("rust", "rust_cpp_upper_box");
+            p_cpp_upper_box = (Ptr_cpp_upper_box)R_GetCCallable("rust", "_rust_cpp_upper_box");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_upper_box(Rcpp::wrap(rho), Rcpp::wrap(j), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(big_val), Rcpp::wrap(pars));
+            rcpp_result_gen = p_cpp_upper_box(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(j)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(big_val)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -391,12 +391,12 @@ namespace rust {
         static Ptr_cpp_upper_box_2 p_cpp_upper_box_2 = NULL;
         if (p_cpp_upper_box_2 == NULL) {
             validateSignature("double(*cpp_upper_box_2)(const arma::vec&,int,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const SEXP&,const Rcpp::List&,const int&,const double&,const double&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_cpp_upper_box_2 = (Ptr_cpp_upper_box_2)R_GetCCallable("rust", "rust_cpp_upper_box_2");
+            p_cpp_upper_box_2 = (Ptr_cpp_upper_box_2)R_GetCCallable("rust", "_rust_cpp_upper_box_2");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_upper_box_2(Rcpp::wrap(rho), Rcpp::wrap(j), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(tfun), Rcpp::wrap(tpars), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(big_val), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_cpp_upper_box_2(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(j)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(tfun)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(big_val)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -410,12 +410,12 @@ namespace rust {
         static Ptr_ru_cpp p_ru_cpp = NULL;
         if (p_ru_cpp == NULL) {
             validateSignature("Rcpp::List(*ru_cpp)(const int&,const int&,const double&,const double&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const SEXP&,const arma::vec&,const arma::mat&,const double&,const Rcpp::List&)");
-            p_ru_cpp = (Ptr_ru_cpp)R_GetCCallable("rust", "rust_ru_cpp");
+            p_ru_cpp = (Ptr_ru_cpp)R_GetCCallable("rust", "_rust_ru_cpp");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_ru_cpp(Rcpp::wrap(n), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(a_box), Rcpp::wrap(l_box), Rcpp::wrap(u_box), Rcpp::wrap(logf), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(pars));
+            rcpp_result_gen = p_ru_cpp(Shield<SEXP>(Rcpp::wrap(n)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(a_box)), Shield<SEXP>(Rcpp::wrap(l_box)), Shield<SEXP>(Rcpp::wrap(u_box)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -429,12 +429,12 @@ namespace rust {
         static Ptr_ru_cpp_2 p_ru_cpp_2 = NULL;
         if (p_ru_cpp_2 == NULL) {
             validateSignature("Rcpp::List(*ru_cpp_2)(const int&,const int&,const double&,const double&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_ru_cpp_2 = (Ptr_ru_cpp_2)R_GetCCallable("rust", "rust_ru_cpp_2");
+            p_ru_cpp_2 = (Ptr_ru_cpp_2)R_GetCCallable("rust", "_rust_ru_cpp_2");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_ru_cpp_2(Rcpp::wrap(n), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(a_box), Rcpp::wrap(l_box), Rcpp::wrap(u_box), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_ru_cpp_2(Shield<SEXP>(Rcpp::wrap(n)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(a_box)), Shield<SEXP>(Rcpp::wrap(l_box)), Shield<SEXP>(Rcpp::wrap(u_box)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -448,12 +448,12 @@ namespace rust {
         static Ptr_ru_cpp_3 p_ru_cpp_3 = NULL;
         if (p_ru_cpp_3 == NULL) {
             validateSignature("Rcpp::List(*ru_cpp_3)(const int&,const int&,const double&,const double&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_ru_cpp_3 = (Ptr_ru_cpp_3)R_GetCCallable("rust", "rust_ru_cpp_3");
+            p_ru_cpp_3 = (Ptr_ru_cpp_3)R_GetCCallable("rust", "_rust_ru_cpp_3");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_ru_cpp_3(Rcpp::wrap(n), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(a_box), Rcpp::wrap(l_box), Rcpp::wrap(u_box), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_ru_cpp_3(Shield<SEXP>(Rcpp::wrap(n)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(a_box)), Shield<SEXP>(Rcpp::wrap(l_box)), Shield<SEXP>(Rcpp::wrap(u_box)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -467,12 +467,12 @@ namespace rust {
         static Ptr_ru_cpp_4 p_ru_cpp_4 = NULL;
         if (p_ru_cpp_4 == NULL) {
             validateSignature("Rcpp::List(*ru_cpp_4)(const int&,const int&,const double&,const double&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
-            p_ru_cpp_4 = (Ptr_ru_cpp_4)R_GetCCallable("rust", "rust_ru_cpp_4");
+            p_ru_cpp_4 = (Ptr_ru_cpp_4)R_GetCCallable("rust", "_rust_ru_cpp_4");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_ru_cpp_4(Rcpp::wrap(n), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(a_box), Rcpp::wrap(l_box), Rcpp::wrap(u_box), Rcpp::wrap(psi_mode), Rcpp::wrap(rot_mat), Rcpp::wrap(hscale), Rcpp::wrap(logf), Rcpp::wrap(pars), Rcpp::wrap(tpars), Rcpp::wrap(ptpfun), Rcpp::wrap(phi_to_theta), Rcpp::wrap(log_j), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_ru_cpp_4(Shield<SEXP>(Rcpp::wrap(n)), Shield<SEXP>(Rcpp::wrap(d)), Shield<SEXP>(Rcpp::wrap(r)), Shield<SEXP>(Rcpp::wrap(a_box)), Shield<SEXP>(Rcpp::wrap(l_box)), Shield<SEXP>(Rcpp::wrap(u_box)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(hscale)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(log_j)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -486,12 +486,12 @@ namespace rust {
         static Ptr_create_trans_xptr p_create_trans_xptr = NULL;
         if (p_create_trans_xptr == NULL) {
             validateSignature("SEXP(*create_trans_xptr)(std::string)");
-            p_create_trans_xptr = (Ptr_create_trans_xptr)R_GetCCallable("rust", "rust_create_trans_xptr");
+            p_create_trans_xptr = (Ptr_create_trans_xptr)R_GetCCallable("rust", "_rust_create_trans_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_trans_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_trans_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -505,12 +505,12 @@ namespace rust {
         static Ptr_bc_no_trans p_bc_no_trans = NULL;
         if (p_bc_no_trans == NULL) {
             validateSignature("Rcpp::NumericVector(*bc_no_trans)(const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
-            p_bc_no_trans = (Ptr_bc_no_trans)R_GetCCallable("rust", "rust_bc_no_trans");
+            p_bc_no_trans = (Ptr_bc_no_trans)R_GetCCallable("rust", "_rust_bc_no_trans");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_bc_no_trans(Rcpp::wrap(psi), Rcpp::wrap(lambda), Rcpp::wrap(gm), Rcpp::wrap(con));
+            rcpp_result_gen = p_bc_no_trans(Shield<SEXP>(Rcpp::wrap(psi)), Shield<SEXP>(Rcpp::wrap(lambda)), Shield<SEXP>(Rcpp::wrap(gm)), Shield<SEXP>(Rcpp::wrap(con)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -524,12 +524,12 @@ namespace rust {
         static Ptr_create_psi_to_phi_xptr p_create_psi_to_phi_xptr = NULL;
         if (p_create_psi_to_phi_xptr == NULL) {
             validateSignature("SEXP(*create_psi_to_phi_xptr)(std::string)");
-            p_create_psi_to_phi_xptr = (Ptr_create_psi_to_phi_xptr)R_GetCCallable("rust", "rust_create_psi_to_phi_xptr");
+            p_create_psi_to_phi_xptr = (Ptr_create_psi_to_phi_xptr)R_GetCCallable("rust", "_rust_create_psi_to_phi_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_psi_to_phi_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_psi_to_phi_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -543,12 +543,12 @@ namespace rust {
         static Ptr_log_none_jac p_log_none_jac = NULL;
         if (p_log_none_jac == NULL) {
             validateSignature("double(*log_none_jac)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_log_none_jac = (Ptr_log_none_jac)R_GetCCallable("rust", "rust_log_none_jac");
+            p_log_none_jac = (Ptr_log_none_jac)R_GetCCallable("rust", "_rust_log_none_jac");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_log_none_jac(Rcpp::wrap(theta), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_log_none_jac(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -562,12 +562,12 @@ namespace rust {
         static Ptr_create_log_jac_xptr p_create_log_jac_xptr = NULL;
         if (p_create_log_jac_xptr == NULL) {
             validateSignature("SEXP(*create_log_jac_xptr)(std::string)");
-            p_create_log_jac_xptr = (Ptr_create_log_jac_xptr)R_GetCCallable("rust", "rust_create_log_jac_xptr");
+            p_create_log_jac_xptr = (Ptr_create_log_jac_xptr)R_GetCCallable("rust", "_rust_create_log_jac_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_log_jac_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_log_jac_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -581,12 +581,12 @@ namespace rust {
         static Ptr_no_trans p_no_trans = NULL;
         if (p_no_trans == NULL) {
             validateSignature("Rcpp::NumericVector(*no_trans)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_no_trans = (Ptr_no_trans)R_GetCCallable("rust", "rust_no_trans");
+            p_no_trans = (Ptr_no_trans)R_GetCCallable("rust", "_rust_no_trans");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_no_trans(Rcpp::wrap(theta), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_no_trans(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -600,12 +600,12 @@ namespace rust {
         static Ptr_null_phi_to_theta_xptr p_null_phi_to_theta_xptr = NULL;
         if (p_null_phi_to_theta_xptr == NULL) {
             validateSignature("SEXP(*null_phi_to_theta_xptr)(std::string)");
-            p_null_phi_to_theta_xptr = (Ptr_null_phi_to_theta_xptr)R_GetCCallable("rust", "rust_null_phi_to_theta_xptr");
+            p_null_phi_to_theta_xptr = (Ptr_null_phi_to_theta_xptr)R_GetCCallable("rust", "_rust_null_phi_to_theta_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_null_phi_to_theta_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_null_phi_to_theta_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -619,12 +619,12 @@ namespace rust {
         static Ptr_logdN01 p_logdN01 = NULL;
         if (p_logdN01 == NULL) {
             validateSignature("double(*logdN01)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_logdN01 = (Ptr_logdN01)R_GetCCallable("rust", "rust_logdN01");
+            p_logdN01 = (Ptr_logdN01)R_GetCCallable("rust", "_rust_logdN01");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_logdN01(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_logdN01(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -638,12 +638,12 @@ namespace rust {
         static Ptr_logdnorm2 p_logdnorm2 = NULL;
         if (p_logdnorm2 == NULL) {
             validateSignature("double(*logdnorm2)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_logdnorm2 = (Ptr_logdnorm2)R_GetCCallable("rust", "rust_logdnorm2");
+            p_logdnorm2 = (Ptr_logdnorm2)R_GetCCallable("rust", "_rust_logdnorm2");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_logdnorm2(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_logdnorm2(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -657,12 +657,12 @@ namespace rust {
         static Ptr_logdmvnorm p_logdmvnorm = NULL;
         if (p_logdmvnorm == NULL) {
             validateSignature("double(*logdmvnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_logdmvnorm = (Ptr_logdmvnorm)R_GetCCallable("rust", "rust_logdmvnorm");
+            p_logdmvnorm = (Ptr_logdmvnorm)R_GetCCallable("rust", "_rust_logdmvnorm");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_logdmvnorm(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_logdmvnorm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -676,12 +676,12 @@ namespace rust {
         static Ptr_logdlnorm p_logdlnorm = NULL;
         if (p_logdlnorm == NULL) {
             validateSignature("double(*logdlnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_logdlnorm = (Ptr_logdlnorm)R_GetCCallable("rust", "rust_logdlnorm");
+            p_logdlnorm = (Ptr_logdlnorm)R_GetCCallable("rust", "_rust_logdlnorm");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_logdlnorm(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_logdlnorm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -695,12 +695,12 @@ namespace rust {
         static Ptr_logdgamma p_logdgamma = NULL;
         if (p_logdgamma == NULL) {
             validateSignature("double(*logdgamma)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_logdgamma = (Ptr_logdgamma)R_GetCCallable("rust", "rust_logdgamma");
+            p_logdgamma = (Ptr_logdgamma)R_GetCCallable("rust", "_rust_logdgamma");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_logdgamma(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_logdgamma(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -714,12 +714,12 @@ namespace rust {
         static Ptr_loggp p_loggp = NULL;
         if (p_loggp == NULL) {
             validateSignature("double(*loggp)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_loggp = (Ptr_loggp)R_GetCCallable("rust", "rust_loggp");
+            p_loggp = (Ptr_loggp)R_GetCCallable("rust", "_rust_loggp");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_loggp(Rcpp::wrap(x), Rcpp::wrap(ss));
+            rcpp_result_gen = p_loggp(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ss)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -733,12 +733,12 @@ namespace rust {
         static Ptr_create_xptr p_create_xptr = NULL;
         if (p_create_xptr == NULL) {
             validateSignature("SEXP(*create_xptr)(std::string)");
-            p_create_xptr = (Ptr_create_xptr)R_GetCCallable("rust", "rust_create_xptr");
+            p_create_xptr = (Ptr_create_xptr)R_GetCCallable("rust", "_rust_create_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -752,12 +752,12 @@ namespace rust {
         static Ptr_neglog p_neglog = NULL;
         if (p_neglog == NULL) {
             validateSignature("double(*neglog)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_neglog = (Ptr_neglog)R_GetCCallable("rust", "rust_neglog");
+            p_neglog = (Ptr_neglog)R_GetCCallable("rust", "_rust_neglog");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_neglog(Rcpp::wrap(theta), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_neglog(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -771,12 +771,12 @@ namespace rust {
         static Ptr_bc_log_j p_bc_log_j = NULL;
         if (p_bc_log_j == NULL) {
             validateSignature("double(*bc_log_j)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_bc_log_j = (Ptr_bc_log_j)R_GetCCallable("rust", "rust_bc_log_j");
+            p_bc_log_j = (Ptr_bc_log_j)R_GetCCallable("rust", "_rust_bc_log_j");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_bc_log_j(Rcpp::wrap(theta), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_bc_log_j(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -790,12 +790,12 @@ namespace rust {
         static Ptr_create_log_j_xptr p_create_log_j_xptr = NULL;
         if (p_create_log_j_xptr == NULL) {
             validateSignature("SEXP(*create_log_j_xptr)(std::string)");
-            p_create_log_j_xptr = (Ptr_create_log_j_xptr)R_GetCCallable("rust", "rust_create_log_j_xptr");
+            p_create_log_j_xptr = (Ptr_create_log_j_xptr)R_GetCCallable("rust", "_rust_create_log_j_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_log_j_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_log_j_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -809,12 +809,12 @@ namespace rust {
         static Ptr_exptrans p_exptrans = NULL;
         if (p_exptrans == NULL) {
             validateSignature("Rcpp::NumericVector(*exptrans)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_exptrans = (Ptr_exptrans)R_GetCCallable("rust", "rust_exptrans");
+            p_exptrans = (Ptr_exptrans)R_GetCCallable("rust", "_rust_exptrans");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_exptrans(Rcpp::wrap(phi), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_exptrans(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -828,12 +828,12 @@ namespace rust {
         static Ptr_vecpower p_vecpower = NULL;
         if (p_vecpower == NULL) {
             validateSignature("Rcpp::NumericVector(*vecpower)(const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
-            p_vecpower = (Ptr_vecpower)R_GetCCallable("rust", "rust_vecpower");
+            p_vecpower = (Ptr_vecpower)R_GetCCallable("rust", "_rust_vecpower");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_vecpower(Rcpp::wrap(base), Rcpp::wrap(exp));
+            rcpp_result_gen = p_vecpower(Shield<SEXP>(Rcpp::wrap(base)), Shield<SEXP>(Rcpp::wrap(exp)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -847,12 +847,12 @@ namespace rust {
         static Ptr_bc_phi_to_theta p_bc_phi_to_theta = NULL;
         if (p_bc_phi_to_theta == NULL) {
             validateSignature("Rcpp::NumericVector(*bc_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_bc_phi_to_theta = (Ptr_bc_phi_to_theta)R_GetCCallable("rust", "rust_bc_phi_to_theta");
+            p_bc_phi_to_theta = (Ptr_bc_phi_to_theta)R_GetCCallable("rust", "_rust_bc_phi_to_theta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_bc_phi_to_theta(Rcpp::wrap(phi), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_bc_phi_to_theta(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -866,12 +866,12 @@ namespace rust {
         static Ptr_gp_phi_to_theta p_gp_phi_to_theta = NULL;
         if (p_gp_phi_to_theta == NULL) {
             validateSignature("Rcpp::NumericVector(*gp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_phi_to_theta = (Ptr_gp_phi_to_theta)R_GetCCallable("rust", "rust_gp_phi_to_theta");
+            p_gp_phi_to_theta = (Ptr_gp_phi_to_theta)R_GetCCallable("rust", "_rust_gp_phi_to_theta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_phi_to_theta(Rcpp::wrap(phi), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_gp_phi_to_theta(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -885,12 +885,12 @@ namespace rust {
         static Ptr_create_phi_to_theta_xptr p_create_phi_to_theta_xptr = NULL;
         if (p_create_phi_to_theta_xptr == NULL) {
             validateSignature("SEXP(*create_phi_to_theta_xptr)(std::string)");
-            p_create_phi_to_theta_xptr = (Ptr_create_phi_to_theta_xptr)R_GetCCallable("rust", "rust_create_phi_to_theta_xptr");
+            p_create_phi_to_theta_xptr = (Ptr_create_phi_to_theta_xptr)R_GetCCallable("rust", "_rust_create_phi_to_theta_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_phi_to_theta_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_phi_to_theta_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
