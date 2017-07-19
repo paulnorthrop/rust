@@ -90,6 +90,23 @@ double cpp_logf(const Rcpp::NumericVector& theta, const SEXP& logf,
   return val ;
 }
 
+// Original logf (no transformation) but scaled by the maximum value
+// of the logged target density (perhaps after transformation).
+// Used only in plot.ru() when d = 2 (to avoid over/under-flow).
+
+// [[Rcpp::export]]
+double cpp_logf_scaled(const Rcpp::NumericVector& theta, const SEXP& logf,
+                       const Rcpp::List& pars) {
+  typedef double (*funcPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  Rcpp::XPtr<funcPtr> xpfun(logf) ;
+  funcPtr fun = *xpfun ;
+  double val ;
+  double hscale = pars["hscale"] ;
+  val = fun(theta, pars) - hscale ;
+  return val ;
+}
+
 // Case 1: rotation and relocation only.
 
 // [[Rcpp::export]]

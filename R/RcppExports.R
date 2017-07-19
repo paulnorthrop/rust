@@ -37,6 +37,10 @@ cpp_logf <- function(theta, logf, pars) {
     .Call('_rust_cpp_logf', PACKAGE = 'rust', theta, logf, pars)
 }
 
+cpp_logf_scaled <- function(theta, logf, pars) {
+    .Call('_rust_cpp_logf_scaled', PACKAGE = 'rust', theta, logf, pars)
+}
+
 cpp_logf_rho <- function(rho, psi_mode, rot_mat, hscale, logf, pars) {
     .Call('_rust_cpp_logf_rho', PACKAGE = 'rust', rho, psi_mode, rot_mat, hscale, logf, pars)
 }

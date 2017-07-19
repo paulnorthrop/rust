@@ -139,7 +139,11 @@ An object of class "ru" is a list containing the following
     \item{pa}{A numeric scalar.  An estimate of the probability of
       acceptance.}
     \item{d}{A numeric scalar.  The dimension of \code{logf}.}
-    \item{logf}{A function. \code{logf} function supplied by the user.}
+    \item{logf}{A function. \code{logf} supplied by the user, but
+      with f scaled by the maximum of the target density used in the
+      ratio-of-uniforms method (i.e. \code{logf_rho}), to avoid numerical
+      problems in contouring f in \code{\link{plot.ru}} when
+      \code{d = 2}.}
     \item{logf_rho}{A function. The target function actually used in the
       ratio-of-uniforms algorithm.}
     \item{sim_vals_rho}{An \code{n} by \code{d} matrix of values simulated

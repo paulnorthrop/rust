@@ -196,6 +196,25 @@ namespace rust {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
+    inline double cpp_logf_scaled(const Rcpp::NumericVector& theta, const SEXP& logf, const Rcpp::List& pars) {
+        typedef SEXP(*Ptr_cpp_logf_scaled)(SEXP,SEXP,SEXP);
+        static Ptr_cpp_logf_scaled p_cpp_logf_scaled = NULL;
+        if (p_cpp_logf_scaled == NULL) {
+            validateSignature("double(*cpp_logf_scaled)(const Rcpp::NumericVector&,const SEXP&,const Rcpp::List&)");
+            p_cpp_logf_scaled = (Ptr_cpp_logf_scaled)R_GetCCallable("rust", "_rust_cpp_logf_scaled");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_cpp_logf_scaled(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(logf)), Shield<SEXP>(Rcpp::wrap(pars)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
     inline double cpp_logf_rho(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars) {
         typedef SEXP(*Ptr_cpp_logf_rho)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_cpp_logf_rho p_cpp_logf_rho = NULL;

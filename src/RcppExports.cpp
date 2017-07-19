@@ -290,6 +290,38 @@ RcppExport SEXP _rust_cpp_logf(SEXP thetaSEXP, SEXP logfSEXP, SEXP parsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// cpp_logf_scaled
+double cpp_logf_scaled(const Rcpp::NumericVector& theta, const SEXP& logf, const Rcpp::List& pars);
+static SEXP _rust_cpp_logf_scaled_try(SEXP thetaSEXP, SEXP logfSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type logf(logfSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_logf_scaled(theta, logf, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _rust_cpp_logf_scaled(SEXP thetaSEXP, SEXP logfSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_rust_cpp_logf_scaled_try(thetaSEXP, logfSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // cpp_logf_rho
 double cpp_logf_rho(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars);
 static SEXP _rust_cpp_logf_rho_try(SEXP rhoSEXP, SEXP psi_modeSEXP, SEXP rot_matSEXP, SEXP hscaleSEXP, SEXP logfSEXP, SEXP parsSEXP) {
@@ -1601,6 +1633,7 @@ static int _rust_RcppExport_validate(const char* sig) {
         signatures.insert("Rcpp::NumericVector(*cpp_psi_to_phi)(const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
         signatures.insert("Rcpp::NumericVector(*cpp_psi_to_phi_0)(const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
         signatures.insert("double(*cpp_logf)(const Rcpp::NumericVector&,const SEXP&,const Rcpp::List&)");
+        signatures.insert("double(*cpp_logf_scaled)(const Rcpp::NumericVector&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_logf_rho)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_logf_rho_2)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
         signatures.insert("double(*cpp_logf_rho_3)(const arma::vec&,const arma::vec&,const arma::mat&,const double&,const SEXP&,const Rcpp::List&,const Rcpp::List&,const SEXP&,const SEXP&,const SEXP&,const Rcpp::List&)");
@@ -1653,6 +1686,7 @@ RcppExport SEXP _rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "_rust_cpp_psi_to_phi", (DL_FUNC)_rust_cpp_psi_to_phi_try);
     R_RegisterCCallable("rust", "_rust_cpp_psi_to_phi_0", (DL_FUNC)_rust_cpp_psi_to_phi_0_try);
     R_RegisterCCallable("rust", "_rust_cpp_logf", (DL_FUNC)_rust_cpp_logf_try);
+    R_RegisterCCallable("rust", "_rust_cpp_logf_scaled", (DL_FUNC)_rust_cpp_logf_scaled_try);
     R_RegisterCCallable("rust", "_rust_cpp_logf_rho", (DL_FUNC)_rust_cpp_logf_rho_try);
     R_RegisterCCallable("rust", "_rust_cpp_logf_rho_2", (DL_FUNC)_rust_cpp_logf_rho_2_try);
     R_RegisterCCallable("rust", "_rust_cpp_logf_rho_3", (DL_FUNC)_rust_cpp_logf_rho_3_try);
@@ -1704,6 +1738,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rust_cpp_psi_to_phi", (DL_FUNC) &_rust_cpp_psi_to_phi, 4},
     {"_rust_cpp_psi_to_phi_0", (DL_FUNC) &_rust_cpp_psi_to_phi_0, 4},
     {"_rust_cpp_logf", (DL_FUNC) &_rust_cpp_logf, 3},
+    {"_rust_cpp_logf_scaled", (DL_FUNC) &_rust_cpp_logf_scaled, 3},
     {"_rust_cpp_logf_rho", (DL_FUNC) &_rust_cpp_logf_rho, 6},
     {"_rust_cpp_logf_rho_2", (DL_FUNC) &_rust_cpp_logf_rho_2, 11},
     {"_rust_cpp_logf_rho_3", (DL_FUNC) &_rust_cpp_logf_rho_3, 11},
