@@ -161,8 +161,8 @@ Uses the generalized ratio-of-uniforms method to simulate from a
 distribution with log-density \eqn{log f} (up to an additive constant).
 \eqn{f} must be bounded, perhaps after a transformation of variable.
 The file file `user_fns.cpp` that is sourced before running the examples
-below is available at the
-[rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).
+below is available at the rust Github page at
+\url{https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp}.
 }
 \details{
 If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}

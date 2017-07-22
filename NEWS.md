@@ -14,6 +14,8 @@
 
 * Extra checks are used to try to avoid erroneous (lack of) convergence warnings.
 
+* Incorrectly formatted link to the Rcpp Gallery webpage corrected in the vignette "Rusting Faster: Simulation using Rcpp".
+
 # rust 1.2.2
 
 ## Bug fixes and minor improvements

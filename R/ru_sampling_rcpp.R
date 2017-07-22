@@ -6,8 +6,8 @@
 #' distribution with log-density \eqn{log f} (up to an additive constant).
 #' \eqn{f} must be bounded, perhaps after a transformation of variable.
 #' The file file `user_fns.cpp` that is sourced before running the examples
-#' below is available at the
-#' [rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).
+#' below is available at the rust Github page at
+#' \url{https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp}.
 #'
 #' @param logf An external pointer to a compiled C++ function returning the
 #'   log of the target density \eqn{f}.
