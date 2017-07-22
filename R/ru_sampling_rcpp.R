@@ -798,17 +798,27 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
                          control = control, big_val = Inf)
         temp <- do.call(stats::optim, c(ru_args, add_args))
       }
+      # In some cases optim with method = "BFGS" may reach it's iteration
+      # limit without the concergence criteria being satisfied.  Then try
+      # nlminb as a further check, but don't use the control argument in
+      # case of conflict between optim() and nlminb().
+      if (temp$convergence == 1) {
+        add_args <- list(start = temp$par, objective = a_obj_fun,
+                         lower = lower, upper = upper, big_val = Inf)
+        temp <- do.call(stats::nlminb, c(ru_args, add_args))
+      }
     }
   } else {
-    add_args <- list(start = init_psi, objective = a_obj_fun, control = control,
-                     lower = lower, upper = upper, big_val = Inf)
+    add_args <- list(start = init_psi, objective = a_obj_fun,
+                     control = control, lower = lower, upper = upper,
+                     big_val = Inf)
     temp <- do.call(stats::nlminb, c(ru_args, add_args))
     # Sometimes nlminb isn't sure that it has found the minimum when in fact
     # it has.  Try to check this, and avoid a non-zero convergence indicator
     # by using optim with method="BFGS", starting from nlminb's solution.
     if (temp$convergence > 0) {
       add_args <- list(par = temp$par, fn = a_obj_fun, hessian = FALSE,
-                       method = "BFGS", control = control, big_val = Inf)
+                       method = "BFGS", big_val = Inf)
       temp <- do.call(stats::optim, c(ru_args, add_args))
     }
   }
@@ -911,18 +921,29 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
                          lower = lower - f_mode, j = j - 1, control = control,
                          method = method, big_val = big_val)
         temp <- do.call(stats::optim, c(ru_args, add_args))
+        l_box[j] <- temp$value
       } else {
         add_args <- list(par = rho_init, fn = lower_box_fun, j = j - 1,
                          control = control, method = method, big_val = Inf)
         temp <- do.call(stats::optim, c(ru_args, add_args))
+        l_box[j] <- temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
-        if (temp$convergence == 10)
+        if (temp$convergence == 10) {
           add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
                            control = control, method = "BFGS", big_val = Inf)
           temp <- do.call(stats::optim, c(ru_args, add_args))
+          l_box[j] <- temp$value
+        }
+        # Check using nlminb() if optim's iteration limit is reached.
+        if (temp$convergence == 1) {
+          add_args <- list(start = temp$par, objective = lower_box_fun,
+                           upper = t_upper, lower = lower - f_mode, j = j - 1,
+                           big_val = Inf)
+          temp <- do.call(stats::nlminb, c(ru_args, add_args))
+          l_box[j] <- temp$objective
+        }
       }
-      l_box[j] <- temp$value
     }
     vals[j+1, ] <- temp$par
     conv[j+1] <- temp$convergence
@@ -956,19 +977,29 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
                          lower = t_lower, upper = upper - f_mode, j = j - 1,
                          control = control, method = method, big_val = big_val)
         temp <- do.call(stats::optim, c(ru_args, add_args))
+        u_box[j] <- -temp$value
       } else {
         add_args <- list(par = rho_init, fn = upper_box_fun, j = j - 1,
                          control = control, method = method, big_val = Inf)
         temp <- do.call(stats::optim, c(ru_args, add_args))
+        u_box[j] <- -temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10) {
           add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
                            control = control, method = "BFGS", big_val = Inf)
           temp <- do.call(stats::optim, c(ru_args, add_args))
+          u_box[j] <- -temp$value
+        }
+        # Check using nlminb() if optim's iteration limit is reached.
+        if (temp$convergence == 1) {
+          add_args <- list(start = rho_init, objective = upper_box_fun,
+                           lower = t_lower, upper = upper - f_mode, j = j - 1,
+                           big_val = Inf)
+          temp <- do.call(stats::nlminb, c(ru_args, add_args))
+          u_box[j] <- -temp$objective
         }
       }
-      u_box[j] <- -temp$value
     }
     vals[j+d+1, ] <- temp$par
     conv[j+d+1] <- temp$convergence

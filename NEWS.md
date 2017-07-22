@@ -12,6 +12,8 @@
 
 * ru() did not work when `trans = "user"` and `d` > 1. This has been corrected.
 
+* Extra checks are used to try to avoid erroneous (lack of) convergence warnings.
+
 # rust 1.2.2
 
 ## Bug fixes and minor improvements

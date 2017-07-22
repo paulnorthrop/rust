@@ -721,6 +721,14 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
         temp <- stats::optim(temp$par, a_obj, control = control,
                              hessian = FALSE, method = "BFGS", ...)
       }
+      # In some cases optim with method = "BFGS" may reach it's iteration
+      # limit without the concergence criteria being satisfied.  Then try
+      # nlminb as a further check, but don't use the control argument in
+      # case of conflict between optim() and nlminb().
+      if (temp$convergence == 1) {
+        temp <- stats::nlminb(temp$par, a_obj, lower = lower, upper = upper,
+                              ...)
+      }
     }
     # Try to calculate Hessian, but avoid problems if an error is produced.
     # An error may occur if the MAP estimate is very close to a parameter
@@ -849,16 +857,25 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
                              lower = lower - f_mode, j = j,
                              control = control, method = method,
                              hessian = FALSE, ...)
+        l_box[j] <- temp$value
       } else {
         temp <- stats::optim(rho_init, lower_box, j = j, control = control,
                              method = method, hessian = FALSE, ...)
+        l_box[j] <- temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
-        if (temp$convergence == 10)
+        if (temp$convergence == 10) {
           temp <- stats::optim(temp$par, lower_box, j = j, control = control,
                                method = "BFGS", hessian = FALSE, ...)
+          l_box[j] <- temp$value
+        }
+        # Check using nlminb() if optim's iteration limit is reached.
+        if (temp$convergence == 1) {
+          temp <- stats::nlminb(temp$par, lower_box, upper = t_upper,
+                                lower = lower - f_mode, j = j, ...)
+          l_box[j] <- temp$objective
+        }
       }
-      l_box[j] <- temp$value
     }
     vals[j+1, ] <- temp$par
     conv[j+1] <- temp$convergence
@@ -880,7 +897,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       if (temp$convergence > 0) {
         temp <- stats::optim(temp$par, upper_box, j = j, hessian = FALSE,
                              method = "BFGS", ...)
-        u_box[j] <- temp$value
+        u_box[j] <- -temp$value
       }
     }
     if (algor == "optim") {
@@ -900,17 +917,25 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         temp <- stats::optim(rho_init, upper_box, lower = t_lower,
                              upper = upper - f_mode, j = j, control = control,
                              method = method, ...)
+        u_box[j] <- -temp$value
       } else {
         temp <- stats::optim(rho_init, upper_box, j = j, control = control,
                              method = method, ...)
+        u_box[j] <- -temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10) {
           temp <- stats::optim(temp$par, upper_box, j = j, control = control,
                                method = "BFGS", ...)
+          u_box[j] <- -temp$value
+        }
+        # Check using nlminb() if optim's iteration limit is reached.
+        if (temp$convergence == 1) {
+          temp <- stats::nlminb(temp$par, upper_box, lower = t_lower,
+                                upper = upper - f_mode, j = j, ...)
+          u_box[j] <- -temp$objective
         }
       }
-      u_box[j] <- -temp$value
     }
     vals[j+d+1, ] <- temp$par
     conv[j+d+1] <- temp$convergence
