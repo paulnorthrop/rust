@@ -454,7 +454,7 @@ Rcpp::List ru_cpp(const int& n, const int& d, const double& r,
   d_r = d * r + 1 ;
   d_box = u_box - l_box ;
   while (nacc < n) {
-    if (ntry % (100 * n) == 0) {
+    if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
     u = runif(1, 0, a_box)[0] ;
@@ -507,7 +507,7 @@ Rcpp::List ru_cpp_2(const int& n, const int& d, const double& r,
   d_r = d * r + 1 ;
   d_box = u_box - l_box ;
   while (nacc < n) {
-    if (ntry % (100 * n) == 0) {
+    if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
     u = runif(1, 0, a_box)[0] ;
@@ -579,7 +579,7 @@ Rcpp::List ru_cpp_3(const int& n, const int& d, const double& r,
   d_r = d * r + 1 ;
   d_box = u_box - l_box ;
   while (nacc < n) {
-    if (ntry % (100 * n) == 0) {
+    if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
     u = runif(1, 0, a_box)[0] ;
@@ -644,7 +644,7 @@ Rcpp::List ru_cpp_4(const int& n, const int& d, const double& r,
   d_r = d * r + 1 ;
   d_box = u_box - l_box ;
   while (nacc < n) {
-    if (ntry % (100 * n) == 0) {
+    if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
     u = runif(1, 0, a_box)[0] ;
