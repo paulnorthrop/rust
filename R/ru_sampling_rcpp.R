@@ -967,7 +967,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
                          method = "BFGS", big_val = Inf)
         temp <- do.call(stats::optim, c(ru_args, add_args))
-        u_box[j] <- temp$value
+        u_box[j] <- -temp$value
       }
     }
     if (algor == "optim") {
