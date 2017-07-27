@@ -607,7 +607,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   #
   logf_args$hscale <- do.call(logf_fun, c(list(rho = init_psi), logf_args))
   if (is.infinite(logf_args$hscale)) {
-    stop("posterior density is zero at initial parameter values")
+    stop("The target density is zero at initial parameter values")
   }
   #
   # Calculate a(r) ----------------------------------
@@ -623,7 +623,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   check_finite <- do.call(logf_fun, c(list(rho = temp$par), logf_args))
   if (!is.finite(check_finite)) {
     stop(paste("The target log-density is not finite at its mode: mode = ",
-               temp$par, ", function value = ", check_finite, ".", sep=""))
+               paste(temp$par, collapse = ","), ",
+               function value = ", check_finite, ".", sep=""))
   }
   #
   # Scale logf to have a maximum at 0, i.e. a=1 ------------
