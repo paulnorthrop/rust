@@ -12,9 +12,11 @@
 
 * ru() did not work when `trans = "user"` and `d` > 1. This has been corrected.
 
-* Extra checks are used to try to avoid erroneous (lack of) convergence warnings.
+* Extra checks are used to try to avoid erroneous convergence warnings.
 
 * Incorrectly formatted link to the Rcpp Gallery webpage corrected in the vignette "Rusting Faster: Simulation using Rcpp".
+
+* Extra example (bivariate normal x bivariate student-t form) provided for `ru`.
 
 # rust 1.2.2
 

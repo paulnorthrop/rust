@@ -272,6 +272,33 @@
 #' plot(x2, xlab = "sigma", ylab = "xi")
 #' abline(a = 0, b = -1 / ss$xm)
 #' summary(x2)
+#'
+#' # Example 4 from Wakefield et al. (1991) ===================
+#'
+#' # Bivariate normal x bivariate student-t
+#' log_norm_t <- function(x, mean = rep(0, d), sigma1 = diag(d), sigma2 = diag(d)) {
+#'   x <- matrix(x, ncol = length(x))
+#'   d <- ncol(x)
+#'   log_h1 <- -0.5 * (x - mean) %*% solve(sigma1) %*% t(x - mean)
+#'   log_h2 <- -2 * log(1 + 0.5 * x %*% solve(sigma2) %*% t(x))
+#'   return(log_h1 + log_h2)
+#' }
+#'
+#' rho1 <- 0.9
+#' covmat1 <- matrix(c(1, rho1, rho1, 1), 2, 2)
+#' rho2 <- 0.9
+#' covmat2 <- matrix(c(1, rho2, rho2, 1), 2, 2)
+#' y <- c(0, 0)
+#'
+#' # Case in the top right corner of Table 3
+#' x <- ru(logf = log_norm_t, mean = y, sigma1 = covmat1, sigma2 = covmat2,
+#'   d = 2, n = 10000, init = y, rotate = FALSE)
+#' x$pa
+#'
+#' # Rotation increases the probability of acceptance
+#' x <- ru(logf = log_norm_t, mean = y, sigma1 = covmat1, sigma2 = covmat2,
+#'   d = 2, n = 10000, init = y, rotate = TRUE)
+#' x$pa
 #' }
 #' @seealso \code{\link{ru_rcpp}} for a version of \code{\link{ru}} that uses
 #'   the Rcpp package to improve efficiency.
