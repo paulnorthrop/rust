@@ -141,6 +141,10 @@ logdmvnorm <- function(x, pars) {
     .Call('_rust_logdmvnorm', PACKAGE = 'rust', x, pars)
 }
 
+lognormt <- function(x, pars) {
+    .Call('_rust_lognormt', PACKAGE = 'rust', x, pars)
+}
+
 logdlnorm <- function(x, pars) {
     .Call('_rust_logdlnorm', PACKAGE = 'rust', x, pars)
 }
