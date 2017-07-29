@@ -16,7 +16,7 @@
 
 * Incorrectly formatted link to the Rcpp Gallery webpage corrected in the vignette "Rusting Faster: Simulation using Rcpp".
 
-* Extra example (bivariate normal x bivariate student-t form) provided for `ru` and for `ru_rcpp`.
+* Extra examples provided for `ru` and for `ru_rcpp`: (a) half-Cauchy and (b) bivariate normal x bivariate student-t.
 
 # rust 1.2.2
 

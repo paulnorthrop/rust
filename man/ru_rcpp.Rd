@@ -328,23 +328,34 @@ plot(x2, xlab = "sigma", ylab = "xi")
 abline(a = 0, b = -1 / ss$xm)
 summary(x2)
 
+# Half-Cauchy ===================
+
+ptr_hc <- create_xptr("loghalfcauchy")
+
+# The bounding box parameter b1+(r) is attained in the limit as x increases
+# to infinity.  This is fine in theory but in practice this will cause the
+# code to hang owing to convergence problems.
+# We can resolve this using a log transformation.
+
+x <- ru_rcpp(logf = ptr_hc, init = 0, trans = "BC", lambda = 0, n = 1000)
+x$pa
+plot(x, ru_scale = TRUE)
+
 # Example 4 from Wakefield et al. (1991) ===================
 # Bivariate normal x bivariate student-t
 
 ptr_normt <- create_xptr("lognormt")
-rho1 <- 0.9
-covmat1 <- matrix(c(1, rho1, rho1, 1), 2, 2)
-rho2 <- 0.9
-covmat2 <- matrix(c(1, rho2, rho2, 1), 2, 2)
+rho <- 0.9
+covmat <- matrix(c(1, rho, rho, 1), 2, 2)
 y <- c(0, 0)
 
 # Case in the top right corner of Table 3
-x <- ru_rcpp(logf = ptr_normt, mean = y, sigma1 = covmat1, sigma2 = covmat2,
+x <- ru_rcpp(logf = ptr_normt, mean = y, sigma1 = covmat, sigma2 = covmat,
   d = 2, n = 10000, init = y, rotate = FALSE)
 x$pa
 
 # Rotation increases the probability of acceptance
-x <- ru_rcpp(logf = ptr_normt, mean = y, sigma1 = covmat1, sigma2 = covmat2,
+x <- ru_rcpp(logf = ptr_normt, mean = y, sigma1 = covmat, sigma2 = covmat,
   d = 2, n = 10000, init = y, rotate = TRUE)
 x$pa
 }

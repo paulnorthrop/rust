@@ -141,6 +141,10 @@ logdmvnorm <- function(x, pars) {
     .Call('_rust_logdmvnorm', PACKAGE = 'rust', x, pars)
 }
 
+loghalfcauchy <- function(x, pars) {
+    .Call('_rust_loghalfcauchy', PACKAGE = 'rust', x, pars)
+}
+
 lognormt <- function(x, pars) {
     .Call('_rust_lognormt', PACKAGE = 'rust', x, pars)
 }
