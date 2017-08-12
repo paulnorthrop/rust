@@ -30,6 +30,38 @@ bool all_pos(const Rcpp::NumericVector& x) {
 }
 
 // [[Rcpp::export]]
+bool any_neg(const Rcpp::NumericVector& x) {
+  return Rcpp::is_true(Rcpp::any(x < 0));
+}
+
+// [[Rcpp::export]]
+bool any_col_nonneg(const Rcpp::NumericMatrix& x) {
+  int ncols = x.ncol();
+  for(int i=0; i < ncols; i++) {
+    if (!any_neg(x(_,i))) {
+      return true ;
+    }
+  }
+  return false ;
+}
+
+// [[Rcpp::export]]
+bool any_pos(const Rcpp::NumericVector& x) {
+  return Rcpp::is_true(Rcpp::any(x > 0));
+}
+
+// [[Rcpp::export]]
+bool any_col_nonpos(const Rcpp::NumericMatrix& x) {
+  int ncols = x.ncol();
+  for(int i=0; i < ncols; i++) {
+    if (!any_pos(x(_,i))) {
+      return true ;
+    }
+  }
+  return false ;
+}
+
+// [[Rcpp::export]]
 Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base,
                            const Rcpp::NumericVector& exp) {
   int n = base.size() ;

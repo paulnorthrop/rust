@@ -101,6 +101,82 @@ namespace rust {
         return Rcpp::as<bool >(rcpp_result_gen);
     }
 
+    inline bool any_neg(const Rcpp::NumericVector& x) {
+        typedef SEXP(*Ptr_any_neg)(SEXP);
+        static Ptr_any_neg p_any_neg = NULL;
+        if (p_any_neg == NULL) {
+            validateSignature("bool(*any_neg)(const Rcpp::NumericVector&)");
+            p_any_neg = (Ptr_any_neg)R_GetCCallable("rust", "_rust_any_neg");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_any_neg(Shield<SEXP>(Rcpp::wrap(x)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<bool >(rcpp_result_gen);
+    }
+
+    inline bool any_col_nonneg(const Rcpp::NumericMatrix& x) {
+        typedef SEXP(*Ptr_any_col_nonneg)(SEXP);
+        static Ptr_any_col_nonneg p_any_col_nonneg = NULL;
+        if (p_any_col_nonneg == NULL) {
+            validateSignature("bool(*any_col_nonneg)(const Rcpp::NumericMatrix&)");
+            p_any_col_nonneg = (Ptr_any_col_nonneg)R_GetCCallable("rust", "_rust_any_col_nonneg");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_any_col_nonneg(Shield<SEXP>(Rcpp::wrap(x)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<bool >(rcpp_result_gen);
+    }
+
+    inline bool any_pos(const Rcpp::NumericVector& x) {
+        typedef SEXP(*Ptr_any_pos)(SEXP);
+        static Ptr_any_pos p_any_pos = NULL;
+        if (p_any_pos == NULL) {
+            validateSignature("bool(*any_pos)(const Rcpp::NumericVector&)");
+            p_any_pos = (Ptr_any_pos)R_GetCCallable("rust", "_rust_any_pos");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_any_pos(Shield<SEXP>(Rcpp::wrap(x)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<bool >(rcpp_result_gen);
+    }
+
+    inline bool any_col_nonpos(const Rcpp::NumericMatrix& x) {
+        typedef SEXP(*Ptr_any_col_nonpos)(SEXP);
+        static Ptr_any_col_nonpos p_any_col_nonpos = NULL;
+        if (p_any_col_nonpos == NULL) {
+            validateSignature("bool(*any_col_nonpos)(const Rcpp::NumericMatrix&)");
+            p_any_col_nonpos = (Ptr_any_col_nonpos)R_GetCCallable("rust", "_rust_any_col_nonpos");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_any_col_nonpos(Shield<SEXP>(Rcpp::wrap(x)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<bool >(rcpp_result_gen);
+    }
+
     inline Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base, const Rcpp::NumericVector& exp) {
         typedef SEXP(*Ptr_vecpow)(SEXP,SEXP);
         static Ptr_vecpow p_vecpow = NULL;
@@ -682,6 +758,25 @@ namespace rust {
         {
             RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_logdmvnorm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline double logcauchy(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+        typedef SEXP(*Ptr_logcauchy)(SEXP,SEXP);
+        static Ptr_logcauchy p_logcauchy = NULL;
+        if (p_logcauchy == NULL) {
+            validateSignature("double(*logcauchy)(const Rcpp::NumericVector&,const Rcpp::List&)");
+            p_logcauchy = (Ptr_logcauchy)R_GetCCallable("rust", "_rust_logcauchy");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_logcauchy(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

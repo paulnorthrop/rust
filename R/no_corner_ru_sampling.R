@@ -1,3 +1,10 @@
+# Add quick acceptance
+# Try to speed up each line of code
+# Remove obsolete stuff
+# Set the maximm number of quick reject points (will depend on d)
+#    and stop growing the tests there
+# Generalise: 2 -> d
+
 # =========================== ru ===========================
 
 #' Generalized ratio-of-uniforms sampling
@@ -273,25 +280,16 @@
 #' abline(a = 0, b = -1 / ss$xm)
 #' summary(x2)
 #'
-#' # Cauchy ========================
-#'
-#' # The bounding box cannot be constructed if r < 1.  For r = 1 the
-#' # bounding box parameters b1-(r) and b1+(r) are attained in the limits
-#' # as x decrease/increase to infinity respectively.  This is fine in
-#' # theory but using r > 1 avoids this problem and the largest probability
-#' # of acceptance is obtained for r approximately equal to 1.26.
-#'
-#' res <- ru(logf = dcauchy, log = TRUE, init = 0, r = 1.26, n = 1000)
-#'
 #' # Half-Cauchy ===================
 #'
 #' log_halfcauchy <- function(x) {
 #'   return(ifelse(x < 0, -Inf, dcauchy(x, log = TRUE)))
 #' }
 #'
-#' # Like the Cauchy case the bounding box cannot be constructed if r < 1.
-#' # We could use r > 1 but the mode is on the edge of the support of the
-#' # density so as an alternative we use a log transformation.
+#' # The bounding box parameter b1+(r) is attained in the limit as x increases
+#' # to infinity.  This is fine in theory but in practice this will cause the
+#' # code to hang owing to convergence problems.
+#' # We can resolve this using a log transformation.
 #'
 #' x <- ru(logf = log_halfcauchy, init = 0, trans = "BC", lambda = 0, n = 1000)
 #' x$pa
@@ -342,7 +340,7 @@
 #' @seealso \code{\link[base]{chol}} for the Choleski decomposition.
 #'
 #' @export
-ru <- function(logf, ..., n = 1, d = 1, init = NULL,
+nc_ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                trans = c("none", "BC", "user"),  phi_to_theta = NULL,
                log_j = NULL, user_args = list(), lambda = rep(1L, d),
                lambda_tol = 1e-6, gm = NULL,
@@ -355,7 +353,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
-               a_control = list(), b_control = list(), var_names = NULL) {
+               a_control = list(), b_control = list(), var_names = NULL,
+               cap_rej = 50) {
   #
   # Check that the values of key arguments are suitable
   if (r < 0) {
@@ -674,24 +673,128 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   #
   d_box <- u_box - l_box
   d_r <- d * r + 1
-  #----------------------------------# start of while loop  while (n_acc < n) {
-  while (n_acc < n) {
-    u <- runif(1, 0, a_box)
-    vs <- d_box * runif(d) + l_box
-    rho <- vs / u ^ r
-    rhs <- logf_rho(rho, ...)
-    n_try <- n_try + 1L
-    if (d_r * log(u) < rhs) {
-      n_acc <- n_acc + 1L
-      res$sim_vals[n_acc, ] <- attr(rhs, "theta")
-      res$sim_vals_rho[n_acc, ] <- rho
-    }
-  }
-  #-----------------------------------------# end of while (n_acc < n_sim) loop
+  ##########################################################################
+  # Moved from below the while loop
   box <- c(a_box, l_box, u_box)
   res$box <- cbind(box, vals, conv)
   bs <- paste(paste("b", 1:d, sep=""),rep(c("minus", "plus"), each=d), sep="")
   rownames(res$box) <- c("a", bs)
+  # Function to convert binary number (vector of TRUE/FALSE) to decimal
+  binary_to_decimal <- function(x) {
+    sum(2 ^ (which(rev(x)) - 1))
+  }
+  binary_to_decimal2 <- function(x) {
+    sum(2 ^ (rev(x) - 1))
+  }
+  # Function to find u contacts
+  find_u_contacts <- function(x) {
+    wrow <- 2:(2*d + 1)
+    wcol <- rep(2:(d + 1), times = 2)
+    w <- cbind(wrow, wcol)
+    w <- apply(w, 1, function(y) x[y[1], y[2]])
+    return((x[wrow, 1] / w) ^ (1 / r))
+  }
+  # Find the u contacts
+  # [for d > 1 I'll need to find minima/maxima of selected elements of these]
+  u_contacts <- find_u_contacts(res$box)
+  # Create an array to store information about rejected points
+  # For a given value of the 3rd index (corner of box) we have
+  # a cap_rej by d + 1 matrix.
+  # Each row of this matrix contains information about a rejected point
+  dp1 <- d + 1
+  n_corners <- 2 ^ dp1
+  rejected_points <- array(NA, dim = c(cap_rej, d + 1, n_corners))
+  accepted_points <- array(NA, dim = c(cap_rej, d + 1, n_corners))
+  # Put the vertices in rejected_points to get things started
+  print(box)
+  vs_and_u <- set_rej_points(dp1)
+  print(vs_and_u)
+#  all_corners <- 1 + binary_to_decimal(vs_and_u)
+  all_corners <- 1 + apply(vs_and_u, 1, binary_to_decimal)
+  print(all_corners)
+  rejected_points[1, , 1] <- c(0, box[2])
+  rejected_points[1, , 2] <- c(box[1], box[2])
+  rejected_points[1, , 3] <- c(0, box[3])
+  rejected_points[1, , 4] <- c(box[1], box[3])
+  accepted_points[1, , 1] <- c(u_contacts[1], 0)
+  accepted_points[1, , 2] <- c(u_contacts[1], 0)
+  accepted_points[1, , 3] <- c(u_contacts[2], 0)
+  accepted_points[1, , 4] <- c(u_contacts[2], 0)
+  # Each ROW contains a d+1 vector
+  mult_mat <- rbind(c(-1, -1), c(1, -1), c(-1, 1), c(1, 1))
+  n_rej <- rep(1L, n_corners)
+  n_acc <- rep(1L, n_corners)
+  #----------------------------------# start of while loop  while (n_acc < n) {
+  while (n_acc < n) {
+    u <- runif(1, 0, a_box)
+    vs <- d_box * runif(d) + l_box
+    # Find the corner
+    # Only works for d = 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # Odd corner number: u < u1- or u < u1+ (whichever is relevant)
+    # Small corner number (1 or 2): v <= 0
+    # Larger corner number (3 or 4): v > 0
+    v_corner <- vs > 0
+    u_corner <- ifelse(v_corner, u > u_contacts[2], u > u_contacts[1])
+    corner <- 1 + binary_to_decimal(c(v_corner, u_corner))
+    #
+    n_try <- n_try + 1L
+    do_slow <- TRUE
+    quick_rej <- quick_acc <- FALSE
+    # Quick rejection / acceptance
+    mult <- mult_mat[corner, ]
+    # Quick reject if proposal lies in shadow of any rejected proposal
+    in_corner <- rejected_points[1:n_rej[corner], , corner]
+    pjn <- t(c(u, vs) - t(in_corner))
+    pjn2 <- t(t(pjn) * mult)
+    # 2 -> d
+    if (any(rowSums(pjn2 >= 0) == d + 1)) {
+      do_slow <- FALSE
+      quick_rej <- TRUE
+#        if (d_r * log(u) < rhs) {
+#          print("OH DEAR")
+#        }
+    }
+    # Quick accept if proposal lies in shadow of any accepted proposal
+    in_corner <- accepted_points[1:n_acc[corner], , corner]
+    pjn <- t(c(u, vs) - t(in_corner))
+    pjn2 <- -t(t(pjn) * mult)
+    if (any(rowSums(pjn2 >= 0) == d + 1)) {
+      do_slow <- FALSE
+      quick_acc <- TRUE
+      #        if (d_r * log(u) >= rhs) {
+      #          print("OH DEAR")
+      #        }
+    }
+    if (do_slow) {
+      rho <- vs / u ^ r
+      rhs <- logf_rho(rho, ...)
+      #
+      # Slow testing
+    if (d_r * log(u) < rhs) {
+      n_acc <- n_acc + 1L
+      res$sim_vals[n_acc, ] <- attr(rhs, "theta")
+      res$sim_vals_rho[n_acc, ] <- rho
+    } else {
+      # Do any of the points in rejected_points lie in the shadow of
+      # this newly-rejected point?  If so, remove them from rejected_points
+      # These points have the property that their row of pjn2 contains
+      # all -1s
+      pjn3 <- which(rowSums(pjn2 <= 0) == d + 1)
+      n_drop <- length(pjn3)
+      #
+      if (n_drop > 0) {
+        n_rej[corner] <- n_rej[corner] - n_drop
+        rejected_points[1:(cap_rej - n_drop), , corner] <- rejected_points[-pjn3, , corner]
+      }
+      if (n_rej[corner] < cap_rej) {
+        n_rej[corner] <- n_rej[corner] + 1L
+        rejected_points[n_rej[corner], , corner] <- c(u, vs)
+      }
+    }
+    }
+  }
+  #-----------------------------------------# end of while (n_acc < n_sim) loop
+  ##########################################################################
   res$pa <- n_acc / n_try
   if (any(conv != 0)) {
     warning("One or more convergence indicators are non-zero.",
@@ -708,6 +811,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_rho <- logf_rho
   res$f_mode <- f_mode
   class(res) <- "ru"
+  res$rej <- na.omit(apply(rejected_points, 2, c))
   return(res)
 }
 

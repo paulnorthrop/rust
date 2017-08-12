@@ -301,14 +301,25 @@
 #' abline(a = 0, b = -1 / ss$xm)
 #' summary(x2)
 #'
+#' # Cauchy ========================
+#'
+#' ptr_c <- create_xptr("logcauchy")
+#'
+#' # The bounding box cannot be constructed if r < 1.  For r = 1 the
+#' # bounding box parameters b1-(r) and b1+(r) are attained in the limits
+#' # as x decrease/increase to infinity respectively.  This is fine in
+#' # theory but using r > 1 avoids this problem and the largest probability
+#' # of acceptance is obtained for r approximately equal to 1.26.
+#'
+#' res <- ru_rcpp(logf = ptr_c, log = TRUE, init = 0, r = 1.26, n = 1000)
+#'
 #' # Half-Cauchy ===================
 #'
 #' ptr_hc <- create_xptr("loghalfcauchy")
 #'
-#' # The bounding box parameter b1+(r) is attained in the limit as x increases
-#' # to infinity.  This is fine in theory but in practice this will cause the
-#' # code to hang owing to convergence problems.
-#' # We can resolve this using a log transformation.
+#' # Like the Cauchy case the bounding box cannot be constructed if r < 1.
+#' # We could use r > 1 but the mode is on the edge of the support of the
+#' # density so as an alternative we use a log transformation.
 #'
 #' x <- ru_rcpp(logf = ptr_hc, init = 0, trans = "BC", lambda = 0, n = 1000)
 #' x$pa

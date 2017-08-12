@@ -42,10 +42,19 @@ double logdmvnorm(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return -qform / 2.0  ;
 }
 
+// Cauchy
+
+// [[Rcpp::export]]
+double logcauchy(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return -log(1 + pow(x[0], 2.0)) ;
+}
+
 // Half-Cauchy
 
 // [[Rcpp::export]]
 double loghalfcauchy(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  if (x[0] < 0)
+    return R_NegInf ;
   return -log(1 + pow(x[0], 2.0)) ;
 }
 
@@ -148,6 +157,8 @@ SEXP create_xptr(std::string fstr) {
     return(Rcpp::XPtr<funcPtr>(new funcPtr(&lognormt))) ;
   else if (fstr == "loghalfcauchy")
     return(Rcpp::XPtr<funcPtr>(new funcPtr(&loghalfcauchy))) ;
+  else if (fstr == "logcauchy")
+    return(Rcpp::XPtr<funcPtr>(new funcPtr(&logcauchy))) ;
   else if (fstr == "logdlnorm")
     return(Rcpp::XPtr<funcPtr>(new funcPtr(&logdlnorm))) ;
   else if (fstr == "logdgamma")
@@ -261,6 +272,7 @@ SEXP create_phi_to_theta_xptr(std::string fstr) {
 ptr_N01 <- create_xptr("logdN01")
 ptr_bvn <- create_xptr("logdnorm2")
 ptr_mvn <- create_xptr("logdmvnorm")
+ptr_c <- create_xptr("logcauchy")
 ptr_hc <- create_xptr("loghalfcauchy")
 ptr_normt <- create_xptr("lognormt")
 ptr_lnorm <- create_xptr("logdlnorm")

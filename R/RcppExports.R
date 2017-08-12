@@ -17,6 +17,22 @@ all_pos <- function(x) {
     .Call('_rust_all_pos', PACKAGE = 'rust', x)
 }
 
+any_neg <- function(x) {
+    .Call('_rust_any_neg', PACKAGE = 'rust', x)
+}
+
+any_col_nonneg <- function(x) {
+    .Call('_rust_any_col_nonneg', PACKAGE = 'rust', x)
+}
+
+any_pos <- function(x) {
+    .Call('_rust_any_pos', PACKAGE = 'rust', x)
+}
+
+any_col_nonpos <- function(x) {
+    .Call('_rust_any_col_nonpos', PACKAGE = 'rust', x)
+}
+
 vecpow <- function(base, exp) {
     .Call('_rust_vecpow', PACKAGE = 'rust', base, exp)
 }
@@ -139,6 +155,10 @@ logdnorm2 <- function(x, pars) {
 
 logdmvnorm <- function(x, pars) {
     .Call('_rust_logdmvnorm', PACKAGE = 'rust', x, pars)
+}
+
+logcauchy <- function(x, pars) {
+    .Call('_rust_logcauchy', PACKAGE = 'rust', x, pars)
 }
 
 loghalfcauchy <- function(x, pars) {

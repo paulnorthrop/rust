@@ -129,6 +129,126 @@ RcppExport SEXP _rust_all_pos(SEXP xSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// any_neg
+bool any_neg(const Rcpp::NumericVector& x);
+static SEXP _rust_any_neg_try(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(any_neg(x));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _rust_any_neg(SEXP xSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_rust_any_neg_try(xSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// any_col_nonneg
+bool any_col_nonneg(const Rcpp::NumericMatrix& x);
+static SEXP _rust_any_col_nonneg_try(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(any_col_nonneg(x));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _rust_any_col_nonneg(SEXP xSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_rust_any_col_nonneg_try(xSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// any_pos
+bool any_pos(const Rcpp::NumericVector& x);
+static SEXP _rust_any_pos_try(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(any_pos(x));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _rust_any_pos(SEXP xSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_rust_any_pos_try(xSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// any_col_nonpos
+bool any_col_nonpos(const Rcpp::NumericMatrix& x);
+static SEXP _rust_any_col_nonpos_try(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(any_col_nonpos(x));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _rust_any_col_nonpos(SEXP xSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_rust_any_col_nonpos_try(xSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // vecpow
 Rcpp::NumericVector vecpow(const Rcpp::NumericVector& base, const Rcpp::NumericVector& exp);
 static SEXP _rust_vecpow_try(SEXP baseSEXP, SEXP expSEXP) {
@@ -1250,6 +1370,37 @@ RcppExport SEXP _rust_logdmvnorm(SEXP xSEXP, SEXP parsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// logcauchy
+double logcauchy(const Rcpp::NumericVector& x, const Rcpp::List& pars);
+static SEXP _rust_logcauchy_try(SEXP xSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(logcauchy(x, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _rust_logcauchy(SEXP xSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_rust_logcauchy_try(xSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // loghalfcauchy
 double loghalfcauchy(const Rcpp::NumericVector& x, const Rcpp::List& pars);
 static SEXP _rust_loghalfcauchy_try(SEXP xSEXP, SEXP parsSEXP) {
@@ -1690,6 +1841,10 @@ static int _rust_RcppExport_validate(const char* sig) {
         signatures.insert("bool(*no_naC)(const Rcpp::NumericVector&)");
         signatures.insert("bool(*any_nonpos)(const Rcpp::NumericVector&)");
         signatures.insert("bool(*all_pos)(const Rcpp::NumericVector&)");
+        signatures.insert("bool(*any_neg)(const Rcpp::NumericVector&)");
+        signatures.insert("bool(*any_col_nonneg)(const Rcpp::NumericMatrix&)");
+        signatures.insert("bool(*any_pos)(const Rcpp::NumericVector&)");
+        signatures.insert("bool(*any_col_nonpos)(const Rcpp::NumericMatrix&)");
         signatures.insert("Rcpp::NumericVector(*vecpow)(const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
         signatures.insert("arma::vec(*cpp_rho_to_psi)(const arma::vec&,const arma::vec&,const arma::mat&)");
         signatures.insert("Rcpp::NumericVector(*cpp_psi_to_phi)(const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
@@ -1721,6 +1876,7 @@ static int _rust_RcppExport_validate(const char* sig) {
         signatures.insert("double(*logdN01)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdnorm2)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdmvnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*logcauchy)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*loghalfcauchy)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*lognormt)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*logdlnorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -1745,6 +1901,10 @@ RcppExport SEXP _rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "_rust_no_naC", (DL_FUNC)_rust_no_naC_try);
     R_RegisterCCallable("rust", "_rust_any_nonpos", (DL_FUNC)_rust_any_nonpos_try);
     R_RegisterCCallable("rust", "_rust_all_pos", (DL_FUNC)_rust_all_pos_try);
+    R_RegisterCCallable("rust", "_rust_any_neg", (DL_FUNC)_rust_any_neg_try);
+    R_RegisterCCallable("rust", "_rust_any_col_nonneg", (DL_FUNC)_rust_any_col_nonneg_try);
+    R_RegisterCCallable("rust", "_rust_any_pos", (DL_FUNC)_rust_any_pos_try);
+    R_RegisterCCallable("rust", "_rust_any_col_nonpos", (DL_FUNC)_rust_any_col_nonpos_try);
     R_RegisterCCallable("rust", "_rust_vecpow", (DL_FUNC)_rust_vecpow_try);
     R_RegisterCCallable("rust", "_rust_cpp_rho_to_psi", (DL_FUNC)_rust_cpp_rho_to_psi_try);
     R_RegisterCCallable("rust", "_rust_cpp_psi_to_phi", (DL_FUNC)_rust_cpp_psi_to_phi_try);
@@ -1776,6 +1936,7 @@ RcppExport SEXP _rust_RcppExport_registerCCallable() {
     R_RegisterCCallable("rust", "_rust_logdN01", (DL_FUNC)_rust_logdN01_try);
     R_RegisterCCallable("rust", "_rust_logdnorm2", (DL_FUNC)_rust_logdnorm2_try);
     R_RegisterCCallable("rust", "_rust_logdmvnorm", (DL_FUNC)_rust_logdmvnorm_try);
+    R_RegisterCCallable("rust", "_rust_logcauchy", (DL_FUNC)_rust_logcauchy_try);
     R_RegisterCCallable("rust", "_rust_loghalfcauchy", (DL_FUNC)_rust_loghalfcauchy_try);
     R_RegisterCCallable("rust", "_rust_lognormt", (DL_FUNC)_rust_lognormt_try);
     R_RegisterCCallable("rust", "_rust_logdlnorm", (DL_FUNC)_rust_logdlnorm_try);
@@ -1799,6 +1960,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rust_no_naC", (DL_FUNC) &_rust_no_naC, 1},
     {"_rust_any_nonpos", (DL_FUNC) &_rust_any_nonpos, 1},
     {"_rust_all_pos", (DL_FUNC) &_rust_all_pos, 1},
+    {"_rust_any_neg", (DL_FUNC) &_rust_any_neg, 1},
+    {"_rust_any_col_nonneg", (DL_FUNC) &_rust_any_col_nonneg, 1},
+    {"_rust_any_pos", (DL_FUNC) &_rust_any_pos, 1},
+    {"_rust_any_col_nonpos", (DL_FUNC) &_rust_any_col_nonpos, 1},
     {"_rust_vecpow", (DL_FUNC) &_rust_vecpow, 2},
     {"_rust_cpp_rho_to_psi", (DL_FUNC) &_rust_cpp_rho_to_psi, 3},
     {"_rust_cpp_psi_to_phi", (DL_FUNC) &_rust_cpp_psi_to_phi, 4},
@@ -1830,6 +1995,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rust_logdN01", (DL_FUNC) &_rust_logdN01, 2},
     {"_rust_logdnorm2", (DL_FUNC) &_rust_logdnorm2, 2},
     {"_rust_logdmvnorm", (DL_FUNC) &_rust_logdmvnorm, 2},
+    {"_rust_logcauchy", (DL_FUNC) &_rust_logcauchy, 2},
     {"_rust_loghalfcauchy", (DL_FUNC) &_rust_loghalfcauchy, 2},
     {"_rust_lognormt", (DL_FUNC) &_rust_lognormt, 2},
     {"_rust_logdlnorm", (DL_FUNC) &_rust_logdlnorm, 2},
