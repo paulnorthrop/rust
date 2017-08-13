@@ -38,7 +38,7 @@ b_i^-(r) &=& \inf_{\chi_i^-} \, x_i \, f(x)^{r / (r d + 1)}, \\
 b_i^+(r) &=& \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},  
 \end{eqnarray}
 $$
-$\chi_i^- = \{ x \in \chi, x_i \leq 0 \}$ and $\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}$.
+where $\chi_i^- = \{ x \in \chi, x_i \leq 0 \}$ and $\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}$.
 The probability of acceptance $p_a(d, r)$ of a point simulated uniformly over the bounding box is given by
 $$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{i=1}^d \left[b_i^+(r) -b_i^-(r) \right]}. $$
 
@@ -50,7 +50,7 @@ $$ f(x) \propto \exp\left( -\frac12 \sum_{i=1}^d x_i^2 \right).$$
 
 For all dimensions $d$ the maximal probabilty of acceptance occurs when $r = 1/2$, giving
 $$ p_a(d, 1/2) = \frac{(\pi e)^{d/2}}{2^d (1+d/2)^{1+d/2}}. $$
-The maximal probabilty of acceptance decreases rapidly with $d$, as the following table shows.
+The maximal probabilty of acceptance decreases rapidly as $d$ increases, as the following table shows.
 
 ```{r, echo=FALSE, results='asis'}
 d <- 1:6
