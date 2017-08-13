@@ -277,7 +277,7 @@
 #'
 #' # The bounding box cannot be constructed if r < 1.  For r = 1 the
 #' # bounding box parameters b1-(r) and b1+(r) are attained in the limits
-#' # as x decrease/increase to infinity respectively.  This is fine in
+#' # as x decreases/increases to infinity respectively.  This is fine in
 #' # theory but using r > 1 avoids this problem and the largest probability
 #' # of acceptance is obtained for r approximately equal to 1.26.
 #'
