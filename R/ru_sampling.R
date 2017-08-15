@@ -535,7 +535,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   init_psi <- init
   #
   if (trans == "none") {
-    logf_rho <- function(rho,...) {
+    logf_rho <- function(rho, ...) {
       theta <- rho_to_psi(rho)
       val <- logf(theta, ...) - hscale
       structure(val, theta = theta)
@@ -739,12 +739,14 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   big_finite_val <- 10^10
   #
   # Function to minimize to find a(r).
-  a_obj <- function(psi, ...) {
+  # Use a weird argument name (._p) to avoid a potential argument-matching
+  # problem when nlminb() is used.
+  a_obj <- function(._psi, ...) {
     # Avoid possible problems with nlminb calling function with NaNs.
     # Indicative of solution on boundary, which is OK in the current context.
     # See https://stat_ethz.ch/pipermail/r-help/2015-May/428488.html
-    if (any(is.na(psi))) return(big_val)
-    neg_logf_rho(psi, ...) / (d * r + 1)
+    if (any(is.na(._psi))) return(big_val)
+    neg_logf_rho(._psi, ...) / (d * r + 1)
   }
   #
   if (algor == "optim") {
@@ -760,46 +762,50 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
     }
     #
     if (method %in% c("L-BFGS-B","Brent")) {
-      temp <- stats::optim(init_psi, a_obj, control = control, hessian = FALSE,
-                           method = method, lower = lower, upper = upper, ...)
+      temp <- stats::optim(par = init_psi, fn = a_obj, ..., control = control,
+                           hessian = FALSE, method = method, lower = lower,
+                           upper = upper)
     } else {
-      temp <- stats::optim(init_psi, a_obj, control = control, hessian = FALSE,
-                           method = method, ...)
+      temp <- stats::optim(par = init_psi, fn = a_obj, ..., control = control,
+                           hessian = FALSE, method = method)
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator by using BFGS instead.
       if (temp$convergence == 10) {
-        temp <- stats::optim(temp$par, a_obj, control = control,
-                             hessian = FALSE, method = "BFGS", ...)
+        temp <- stats::optim(par = temp$par, fn = a_obj, ...,
+                             control = control, hessian = FALSE,
+                             method = "BFGS")
       }
       # In some cases optim with method = "BFGS" may reach it's iteration
-      # limit without the concergence criteria being satisfied.  Then try
+      # limit without the convergence criteria being satisfied.  Then try
       # nlminb as a further check, but don't use the control argument in
       # case of conflict between optim() and nlminb().
       if (temp$convergence == 1) {
-        temp <- stats::nlminb(temp$par, a_obj, lower = lower, upper = upper,
-                              ...)
+        temp <- stats::nlminb(start = temp$par, objective = a_obj, ...,
+                              lower = lower, upper = upper)
       }
     }
     # Try to calculate Hessian, but avoid problems if an error is produced.
     # An error may occur if the MAP estimate is very close to a parameter
     # boundary.
-    temp$hessian <- try(stats::optimHess(temp$par, a_obj, ...), silent = TRUE)
+    temp$hessian <- try(stats::optimHess(par = temp$par, fn = a_obj, ...),
+                        silent = TRUE)
     return(temp)
   }
   # If we get to here we are using nlminb() ...
-  temp <- stats::nlminb(init_psi, a_obj, lower = lower, upper = upper,
-    control = control, ...)
+  temp <- stats::nlminb(start = init_psi, objective = a_obj, ...,
+                        lower = lower, upper = upper, control = control)
   # Sometimes nlminb isn't sure that it has found the minimum when in fact
   # it has.  Try to check this, and avoid a non-zero convergence indicator
   # by using optim with method="BFGS", starting from nlminb's solution.
   if (temp$convergence > 0) {
-    temp <- stats::optim(temp$par, a_obj, hessian = FALSE, method = "BFGS",
-                         ...)
+    temp <- stats::optim(par = temp$par, fn = a_obj, ..., hessian = FALSE,
+                         method = "BFGS")
   }
   # Try to calculate Hessian, but avoid problems if an error is produced.
   # An error may occur if the MAP estimate is very close to a parameter
   # boundary.
-  temp$hessian <- try(stats::optimHess(temp$par, a_obj, ...), silent = TRUE)
+  temp$hessian <- try(stats::optimHess(par = temp$par, fn = a_obj, ...),
+                      silent = TRUE)
   return(temp)
 }
 
@@ -845,22 +851,24 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
   big_finite_val <- 10^10
   #
   # Functions to minimize to find biminus(r) and biplus(s), i = 1, ...,d.
-  lower_box <- function(rho, j, ...) {
+  # Use a weird argument name (._rho) to avoid a potential argument-matching
+  # problem when nlminb() is used.
+  lower_box <- function(._rho, j, ...) {
     # Avoid possible problems with nlminb calling function with NaNs.
     # Indicative of solution on boundary, which is OK in the current context.
     # See https://stat_ethz.ch/pipermail/r-help/2015-May/428488.html
-    if (any(is.na(rho))) return(big_val)
-    if (rho[j] == 0L) return(0L)
-    if (rho[j] > 0L) return(big_val)
-    if (f_rho(rho, ...) == 0L) return(big_val)
-    rho[j] * f_rho(rho, ...) ^ (r / (d * r + 1))
+    if (any(is.na(._rho))) return(big_val)
+    if (._rho[j] == 0L) return(0L)
+    if (._rho[j] > 0L) return(big_val)
+    if (f_rho(._rho, ...) == 0L) return(big_val)
+    ._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
   }
-  upper_box <- function(rho, j, ...) {
-    if (any(is.na(rho))) return(big_val)
-    if (rho[j] == 0) return(0)
-    if (rho[j] < 0) return(big_val)
-    if (f_rho(rho, ...) == 0) return(big_val)
-    -rho[j] * f_rho(rho, ...) ^ (r / (d * r + 1))
+  upper_box <- function(._rho, j, ...) {
+    if (any(is.na(._rho))) return(big_val)
+    if (._rho[j] == 0) return(0)
+    if (._rho[j] < 0) return(big_val)
+    if (f_rho(._rho, ...) == 0) return(big_val)
+    -._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
   }
   l_box <- u_box <- NULL
   zeros <- rep(0,d)
@@ -876,16 +884,16 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
     t_upper <- upper - f_mode
     t_upper[j] <- 0
     if (algor == "nlminb") {
-      temp <- stats::nlminb(rho_init, lower_box, upper = t_upper,
-                            lower = lower - f_mode, j = j,
-                            control = control, ...)
+      temp <- stats::nlminb(start = rho_init, objective = lower_box, j = j,
+                            ..., upper = t_upper, lower = lower - f_mode,
+                            control = control)
       l_box[j] <- temp$objective
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(temp$par, lower_box, j = j, hessian = FALSE,
-                             method = "BFGS", ...)
+        temp <- stats::optim(par = temp$par, fn = lower_box, j = j, ...,
+                             hessian = FALSE, method = "BFGS")
         l_box[j] <- temp$value
       }
     }
@@ -903,26 +911,28 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         }
       }
       if (method == "L-BFGS-B" | method == "Brent") {
-        temp <- stats::optim(rho_init, lower_box, upper = t_upper,
-                             lower = lower - f_mode, j = j,
+        temp <- stats::optim(par = rho_init, fn = lower_box, j = j, ...,
+                             upper = t_upper, lower = lower - f_mode,
                              control = control, method = method,
-                             hessian = FALSE, ...)
+                             hessian = FALSE)
         l_box[j] <- temp$value
       } else {
-        temp <- stats::optim(rho_init, lower_box, j = j, control = control,
-                             method = method, hessian = FALSE, ...)
+        temp <- stats::optim(par = rho_init, fn = lower_box, j = j, ...,
+                             control = control, method = method,
+                             hessian = FALSE)
         l_box[j] <- temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10) {
-          temp <- stats::optim(temp$par, lower_box, j = j, control = control,
-                               method = "BFGS", hessian = FALSE, ...)
+          temp <- stats::optim(par = temp$par, fn = lower_box, j = j, ...,
+                               control = control, method = "BFGS",
+                               hessian = FALSE)
           l_box[j] <- temp$value
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          temp <- stats::nlminb(temp$par, lower_box, upper = t_upper,
-                                lower = lower - f_mode, j = j, ...)
+          temp <- stats::nlminb(start = temp$par, objective = lower_box, j = j,
+                                ..., upper = t_upper, lower = lower - f_mode)
           l_box[j] <- temp$objective
         }
       }
@@ -937,16 +947,16 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
     t_lower <- lower - f_mode
     t_lower[j] <- 0
     if (algor == "nlminb") {
-      temp <- stats::nlminb(rho_init, upper_box, lower = t_lower,
-                            upper = upper - f_mode, j = j, control = control,
-                            ...)
+      temp <- stats::nlminb(start = rho_init, objective = upper_box, j = j,
+                            ..., lower = t_lower, upper = upper - f_mode,
+                            control = control)
       u_box[j] <- -temp$objective
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="BFGS", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(temp$par, upper_box, j = j, hessian = FALSE,
-                             method = "BFGS", ...)
+        temp <- stats::optim(par = temp$par, fn = upper_box, j = j, ...,
+                             hessian = FALSE, method = "BFGS")
         u_box[j] <- -temp$value
       }
     }
@@ -964,25 +974,25 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         }
       }
       if (method == "L-BFGS-B" | method == "Brent") {
-        temp <- stats::optim(rho_init, upper_box, lower = t_lower,
-                             upper = upper - f_mode, j = j, control = control,
-                             method = method, ...)
+        temp <- stats::optim(par = rho_init, fn = upper_box, j = j, ...,
+                             lower = t_lower, upper = upper - f_mode,
+                             control = control, method = method)
         u_box[j] <- -temp$value
       } else {
-        temp <- stats::optim(rho_init, upper_box, j = j, control = control,
-                             method = method, ...)
+        temp <- stats::optim(par = rho_init, fn = upper_box, j = j, ...,
+                             control = control, method = method)
         u_box[j] <- -temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator by using BFGS instead.
         if (temp$convergence == 10) {
-          temp <- stats::optim(temp$par, upper_box, j = j, control = control,
-                               method = "BFGS", ...)
+          temp <- stats::optim(par = temp$par, fn = upper_box, j = j, ...,
+                               control = control, method = "BFGS")
           u_box[j] <- -temp$value
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          temp <- stats::nlminb(temp$par, upper_box, lower = t_lower,
-                                upper = upper - f_mode, j = j, ...)
+          temp <- stats::nlminb(start = temp$par, objective = upper_box, j = j,
+                                ..., lower = t_lower, upper = upper - f_mode)
           u_box[j] <- -temp$objective
         }
       }
