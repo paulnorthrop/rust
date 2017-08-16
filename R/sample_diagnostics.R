@@ -113,23 +113,21 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     yy <- yy / area
     max_y <- max(temp$density, yy)
     temp <- list(...)
-    my_hist <- function(x, ..., type, lty, lwd, pch, lend, ljoin, lmitre,
-                        main) {
-      graphics::hist(x, main = "", ...)
+    my_hist <- function(x, ..., type, lty, lwd, pch, lend, ljoin, lmitre) {
+      temp_hist <- list(...)
+      if (is.null(temp_hist$main)) {
+        graphics::hist(x, main = "", ...)
+      } else {
+        graphics::hist(x, ...)
+      }
     }
     if (is.null(temp$xlab)) {
       my_hist(plot_data, prob = TRUE, ylim = c(0, max_y), xlab = "", ...)
       if (!is.null(colnames(plot_data))) {
         graphics::title(xlab = parse(text = colnames(plot_data)[1]))
       }
-      if (!is.null(temp$main)) {
-        graphics::title(main = temp$main)
-      }
     } else {
       my_hist(plot_data, prob = TRUE, ylim = c(0, max_y), ...)
-      if (!is.null(temp$main)) {
-        graphics::title(main = temp$main)
-      }
     }
     my_lines <- function(x, y, ..., breaks, freq, probability, include.lowest,
                          right, density, angle, border, plot, labels, nclass) {
