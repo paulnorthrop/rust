@@ -752,8 +752,8 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   if (algor == "optim") {
     # L-BFGS-B and Brent don't like Inf or NA
     if (method == "L-BFGS-B" | method == "Brent") {
-      a_obj <- function(psi, ...) {
-        check <- neg_logf_rho(psi, ...) / (d * r + 1)
+      a_obj <- function(._psi, ...) {
+        check <- neg_logf_rho(._psi, ...) / (d * r + 1)
         if (is.infinite(check)) {
           check <- big_finite_val
         }
@@ -900,12 +900,12 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
     if (algor == "optim") {
       # L-BFGS-B and Brent don't like Inf or NA
       if (method == "L-BFGS-B" | method == "Brent") {
-        lower_box <- function(rho, j, ...) {
-          if (any(is.na(rho))) return(big_finite_val)
-          if (rho[j] == 0) return(0)
-          if (rho[j] > 0) return(big_finite_val)
-          if (f_rho(rho, ...) == 0) return(big_finite_val)
-          check <- rho[j] * f_rho(rho, ...) ^ (r / (d * r + 1))
+        lower_box <- function(._rho, j, ...) {
+          if (any(is.na(._rho))) return(big_finite_val)
+          if (._rho[j] == 0) return(0)
+          if (._rho[j] > 0) return(big_finite_val)
+          if (f_rho(._rho, ...) == 0) return(big_finite_val)
+          check <- ._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
           if (is.infinite(check)) check <- big_finite_val
           check
         }
@@ -963,12 +963,12 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
     if (algor == "optim") {
       # L-BFGS-B and Brent don't like Inf or NA
       if (method == "L-BFGS-B" | method == "Brent") {
-        upper_box <- function(rho, j, ...) {
-          if (any(is.na(rho))) return(big_finite_val)
-          if (rho[j] == 0) return(0)
-          if (rho[j] < 0) return(big_finite_val)
-          if (f_rho(rho, ...) == 0) return(big_finite_val)
-          check <- -rho[j] * f_rho(rho, ...) ^ (r / (d * r + 1))
+        upper_box <- function(._rho, j, ...) {
+          if (any(is.na(._rho))) return(big_finite_val)
+          if (._rho[j] == 0) return(0)
+          if (._rho[j] < 0) return(big_finite_val)
+          if (f_rho(._rho, ...) == 0) return(big_finite_val)
+          check <- -._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
           if (is.infinite(check)) check <- big_finite_val
           check
         }
