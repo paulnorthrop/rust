@@ -58,6 +58,17 @@ double loghalfcauchy(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return -log(1 + pow(x[0], 2.0)) ;
 }
 
+// Mixture of normals
+
+// [[Rcpp::export]]
+double lognormalmix(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  double mu = pars["mu"] ;
+  double p = pars["p"] ;
+  double comp1 = exp(-pow(x[0], 2.0) / 2.0)  ;
+  double comp2 = exp(-pow(x[0] - mu, 2.0) / 2.0)  ;
+  return log(p * comp1 + (1 - p) * comp2) ;
+}
+
 // Example 4 from Wakefield et al (1991).
 
 // [[Rcpp::export]]
@@ -159,6 +170,8 @@ SEXP create_xptr(std::string fstr) {
     return(Rcpp::XPtr<funcPtr>(new funcPtr(&loghalfcauchy))) ;
   else if (fstr == "logcauchy")
     return(Rcpp::XPtr<funcPtr>(new funcPtr(&logcauchy))) ;
+  else if (fstr == "lognormalmix")
+    return(Rcpp::XPtr<funcPtr>(new funcPtr(&lognormalmix))) ;
   else if (fstr == "logdlnorm")
     return(Rcpp::XPtr<funcPtr>(new funcPtr(&logdlnorm))) ;
   else if (fstr == "logdgamma")

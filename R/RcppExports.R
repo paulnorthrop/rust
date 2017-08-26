@@ -165,6 +165,10 @@ loghalfcauchy <- function(x, pars) {
     .Call('_rust_loghalfcauchy', PACKAGE = 'rust', x, pars)
 }
 
+lognormalmix <- function(x, pars) {
+    .Call('_rust_lognormalmix', PACKAGE = 'rust', x, pars)
+}
+
 lognormt <- function(x, pars) {
     .Call('_rust_lognormt', PACKAGE = 'rust', x, pars)
 }

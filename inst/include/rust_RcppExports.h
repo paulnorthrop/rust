@@ -804,6 +804,25 @@ namespace rust {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
+    inline double lognormalmix(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+        typedef SEXP(*Ptr_lognormalmix)(SEXP,SEXP);
+        static Ptr_lognormalmix p_lognormalmix = NULL;
+        if (p_lognormalmix == NULL) {
+            validateSignature("double(*lognormalmix)(const Rcpp::NumericVector&,const Rcpp::List&)");
+            p_lognormalmix = (Ptr_lognormalmix)R_GetCCallable("rust", "_rust_lognormalmix");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_lognormalmix(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
     inline double lognormt(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
         typedef SEXP(*Ptr_lognormt)(SEXP,SEXP);
         static Ptr_lognormt p_lognormt = NULL;
