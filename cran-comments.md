@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-R CMD on the one downstream dependency of rust (revdbayes) passed.
+The one downstream dependency of rust (revdbayes) passed R CMD check.
