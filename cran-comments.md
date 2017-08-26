@@ -1,9 +1,3 @@
-## Resubmission
-
-This is a resubmission, prompted by Brian identifying the remaining bug that prevented installation of v1.2.1 on Solaris.  There is only one change to the code in v1.2.1:
-
-* An overloading ambiguity in function `loggp` has been corrected.
-
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
@@ -18,5 +12,4 @@ This is a resubmission, prompted by Brian identifying the remaining bug that pre
 
 ## Downstream dependencies
 
-I have also run R CMD on downstream dependencies of rust.
-All packages passed.
+R CMD on the one downstream dependency of rust (revdbayes) passed.
