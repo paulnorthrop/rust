@@ -596,8 +596,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
     } else {
       ptpfun <- create_psi_to_phi_xptr("has_zero")
     }
-    phi_to_theta = null_phi_to_theta_xptr("no_trans")
-    log_j = create_log_jac_xptr("log_none_jac")
+    phi_to_theta <- null_phi_to_theta_xptr("no_trans")
+    log_j <- create_log_jac_xptr("log_none_jac")
     logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
                       logf = logf, pars = pars, tpars = tpars, ptpfun = ptpfun,
                       phi_to_theta = phi_to_theta, log_j = log_j,
