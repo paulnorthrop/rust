@@ -19,7 +19,47 @@ set.seed(seed)
 x_rcpp <- ru_rcpp(logf = ptr_N01, d = 1, n = n, init = 0.1)
 testthat::expect_equal(x$sim_vals, x_rcpp$sim_vals, tolerance = my_tol)
 
-# 2. Posterior density of Generalized Pareto parameters
+# 2. Gamma
+
+alpha <- 10
+lambda <- 1/3
+
+# 2a : using trans = "BC"
+
+# ru
+set.seed(seed)
+x <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n,
+        trans = "BC", lambda = 1/3, init = alpha)
+# ru_rcpp
+ptr_gam <- create_xptr("logdgamma")
+set.seed(seed)
+x_rcpp <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
+             trans = "BC", lambda = 1/3, init = alpha)
+testthat::expect_equal(x$sim_vals, x_rcpp$sim_vals, tolerance = my_tol)
+
+# 2b : using trans = "user"
+
+# ru
+phi_to_theta  <- function(x, lambda) {
+  ifelse(x * lambda + 1 > 0, (x * lambda + 1) ^ (1 / lambda), NA)
+}
+log_j <- function(x, lambda) (lambda - 1) * log(x)
+lambda <- 1/3
+set.seed(seed)
+x <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n,
+        trans = "user", phi_to_theta = phi_to_theta, log_j = log_j,
+        user_args = list(lambda = lambda), init = alpha)
+# ru_rcpp
+ptr_phi_to_theta_bc <- create_phi_to_theta_xptr("bc")
+ptr_log_j_bc <- create_log_j_xptr("bc")
+set.seed(seed)
+x_rcpp <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
+                  trans = "user", phi_to_theta = ptr_phi_to_theta_bc,
+                  log_j = ptr_log_j_bc, user_args = list(lambda = lambda),
+                  init = alpha)
+testthat::expect_equal(x$sim_vals, x_rcpp$sim_vals, tolerance = my_tol)
+
+# 3. Posterior density of Generalized Pareto parameters
 
 # Sample data from a GP(sigma, xi) distribution
 seed <- 27082017
