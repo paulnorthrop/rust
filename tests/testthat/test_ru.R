@@ -8,10 +8,6 @@ context("Bounding box")
 #      normal density
 #   C: 1-dimensional gamma density, with shape parameter not less than 1
 
-# do lognormal (lambda = 0)  ... and lambda = 1?
-# do gamma: alpha = 1, alpha > 1
-# set a = 1 in the gamma (and perhaps the log-normal) example
-
 # A. d-dimensional normal density
 
 normal_box <- function(d, sigma = diag(d), rotate = TRUE, r = 1 / 2) {
