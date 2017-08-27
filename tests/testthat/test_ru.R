@@ -144,13 +144,13 @@ covmat <- matrix(c(10, -3, -3, 2), 2, 2)
 
 # (i) rotate = FALSE
 x2di <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1,
-           init = c(0, 0), rotate = FALSE, mean = c(1,2))
+           init = c(0, 0), rotate = FALSE, mean = c(1, 2))
 testthat::expect_equal(x2di$box, normal_box(d = 2, sigma = covmat, rotate = FALSE),
              tolerance = my_tol)
 
 # (ii) rotate = TRUE
 x2dii <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1,
-           init = c(0, 0), rotate = TRUE, mean = c(1,2))
+           init = c(0, 0), rotate = TRUE, mean = c(1, 2))
 testthat::expect_equal(x2dii$box, normal_box(d = 2, sigma = covmat, rotate = TRUE),
              tolerance = my_tol)
 
