@@ -5,7 +5,7 @@ rust <img src="tools/rust_logo.png" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/paulnorthrop/rust.svg?branch=master)](https://travis-ci.org/paulnorthrop/rust) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/rust?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/rust) [![Coverage Status](https://codecov.io/github/paulnorthrop/rust/coverage.svg?branch=master)](https://codecov.io/github/paulnorthrop/rust?branch=master) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/rust)](https://cran.r-project.org/package=rust)
 
-ratio-of-uniforms simulation with transformation
+Ratio-of-uniforms simulation with transformation
 ------------------------------------------------
 
 ### What does rust do?
