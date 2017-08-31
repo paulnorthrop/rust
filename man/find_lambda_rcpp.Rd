@@ -110,7 +110,7 @@ ptr_gam <- create_xptr("logdgamma")
 lambda <- find_lambda_rcpp(logf = ptr_gam, alpha = alpha, max_phi = max_phi)
 lambda
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
-            lambda = lambda)
+             lambda = lambda)
 
 \dontrun{
 # Generalized Pareto posterior distribution ===================
@@ -166,7 +166,7 @@ lambda
 
 # Sample on Box-Cox transformed, without rotation
 x3 <- ru_rcpp(logf = ptr_gp, ss = ss, d = 2, n = n, trans = "BC",
-             lambda = lambda, rotate = FALSE)
+              lambda = lambda, rotate = FALSE)
 plot(x3, xlab = "sigma", ylab = "xi")
 abline(a = 0, b = -1 / ss$xm)
 summary(x3)
