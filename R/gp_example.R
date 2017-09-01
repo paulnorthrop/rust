@@ -347,8 +347,7 @@ gpd_mle <- function(gpd_data) {
     pjn <- revdbayes:::grimshaw_gp_mle(gpd_data)
     temp$mle <- c(pjn$a, -pjn$k)  # mle for (sigma,xi)
   } else {
-    init <- c(mean(gpd_data), 0)
-    temp <- fallback_gp_mle(init = init, gpd_data = gpd_data,
+    temp <- fallback_gp_mle(init = c(mean(gpd_data), 0), gpd_data = gpd_data,
                             m = length(gpd_data), xm = max(gpd_data),
                             sum_gp = sum(gpd_data))
   }
