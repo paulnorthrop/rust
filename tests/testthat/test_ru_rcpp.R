@@ -72,7 +72,9 @@ my_tol <- 1e-5
 
 ptr_N01 <- create_xptr("logdN01")
 x1a <- ru_rcpp(logf = ptr_N01, d = 1, n = 1, init = 0)
-testthat::expect_equal(x1a$box, normal_box(d = 1), tolerance = my_tol)
+test_that("N(0,1)", {
+  testthat::expect_equal(x1a$box, normal_box(d = 1), tolerance = my_tol)
+})
 
 # (b) N(0, 2)
 
@@ -80,8 +82,10 @@ ptr_mvn <- create_xptr("logdmvnorm")
 sigma <- 2 # Note: sigma means variance here
 covmat <- matrix(sigma, 1, 1)
 x1b <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 1, n = 1, init = 0)
-testthat::expect_equal(x1b$box, normal_box(d = 1, sigma = 2),
-                       tolerance = my_tol)
+test_that("N(0,2)", {
+  testthat::expect_equal(x1b$box, normal_box(d = 1, sigma = 2),
+                         tolerance = my_tol)
+})
 
 # 2. 2-dimensional normal
 
@@ -94,12 +98,16 @@ ptr_bvn <- create_xptr("logdnorm2")
 rho <- 0
 x2ai <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1, init = c(0, 0),
                 rotate = TRUE)
-testthat::expect_equal(x2ai$box, normal_box(d = 2), tolerance = my_tol)
+test_that("BVN, rotation", {
+  testthat::expect_equal(x2ai$box, normal_box(d = 2), tolerance = my_tol)
+})
 
 # (ii) rotate = FALSE
 x2aii <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1, init = c(0, 0),
                  rotate = FALSE)
-testthat::expect_equal(x2aii$box, normal_box(d = 2), tolerance = my_tol)
+test_that("BVN, no rotation", {
+  testthat::expect_equal(x2aii$box, normal_box(d = 2), tolerance = my_tol)
+})
 
 # (b) Zero mean, unit variances with positive association
 
@@ -110,16 +118,20 @@ covmat <- matrix(c(1, rho, rho, 1), 2, 2)
 # (i) rotate = FALSE
 x2bi <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
                 rotate = FALSE)
-testthat::expect_equal(x2bi$box, normal_box(d = 2, sigma = covmat,
-                                            rotate = FALSE),
-                       tolerance = my_tol)
+test_that("BVN, rho = 0.9, no rotation", {
+  testthat::expect_equal(x2bi$box, normal_box(d = 2, sigma = covmat,
+                                              rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x2bii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
                 rotate = TRUE)
-testthat::expect_equal(x2bii$box, normal_box(d = 2, sigma = covmat,
-                                             rotate = TRUE),
-                       tolerance = my_tol)
+test_that("BVN, rho = 0.9, rotation", {
+  testthat::expect_equal(x2bii$box, normal_box(d = 2, sigma = covmat,
+                                               rotate = TRUE),
+                         tolerance = my_tol)
+})
 
 # (c) Zero mean, different variances with positive association
 covmat <- matrix(c(10, 3, 3, 2), 2, 2)
@@ -127,16 +139,20 @@ covmat <- matrix(c(10, 3, 3, 2), 2, 2)
 # (i) rotate = FALSE
 x2ci <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
                 rotate = FALSE)
-testthat::expect_equal(x2ci$box, normal_box(d = 2, sigma = covmat,
-                                            rotate = FALSE),
-                       tolerance = my_tol)
+test_that("BVN, general Sigma, no rotation", {
+  testthat::expect_equal(x2ci$box, normal_box(d = 2, sigma = covmat,
+                                              rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x2cii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
                  rotate = TRUE)
-testthat::expect_equal(x2cii$box, normal_box(d = 2, sigma = covmat,
-                                             rotate = TRUE),
-                       tolerance = my_tol)
+test_that("BVN, general Sigma, rotation", {
+  testthat::expect_equal(x2cii$box, normal_box(d = 2, sigma = covmat,
+                                               rotate = TRUE),
+                         tolerance = my_tol)
+})
 
 # (d) Mean (1,2), different variances with negative association
 covmat <- matrix(c(10, -3, -3, 2), 2, 2)
@@ -144,16 +160,20 @@ covmat <- matrix(c(10, -3, -3, 2), 2, 2)
 # (i) rotate = FALSE
 x2di <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
                 rotate = FALSE, mean = c(1, 2))
-testthat::expect_equal(x2di$box, normal_box(d = 2, sigma = covmat,
-                                            rotate = FALSE),
-                       tolerance = my_tol)
+test_that("BVN, non-zero mu, general Sigma, no rotation", {
+  testthat::expect_equal(x2di$box, normal_box(d = 2, sigma = covmat,
+                                              rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x2dii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
                  rotate = TRUE, mean = c(1, 2))
-testthat::expect_equal(x2dii$box, normal_box(d = 2, sigma = covmat,
-                                             rotate = TRUE),
-                       tolerance = my_tol)
+test_that("BVN, non-zero mu, general Sigma, rotation", {
+  testthat::expect_equal(x2dii$box, normal_box(d = 2, sigma = covmat,
+                                               rotate = TRUE),
+                         tolerance = my_tol)
+})
 
 # 3. 3-dimensional normal
 
@@ -163,15 +183,20 @@ covmat <- matrix(rho, 3, 3) + diag(1 - rho, 3)
 # (i) rotate = FALSE
 x3ai <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = 1,
                 init = c(0, 0, 0), rotate = FALSE)
-testthat::expect_equal(x3ai$box, normal_box(d = 3, sigma = covmat,
-                                            rotate = FALSE),
-                       tolerance = my_tol)
+test_that("TVN, rho = 0.9, no rotation", {
+  testthat::expect_equal(x3ai$box, normal_box(d = 3, sigma = covmat,
+                                              rotate = FALSE),
+                         tolerance = my_tol)
+})
+
 # (ii) rotate = TRUE
 x3aii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = 1,
                  init = c(0, 0, 0), rotate = TRUE)
-testthat::expect_equal(x3aii$box, normal_box(d = 3, sigma = covmat,
-                                             rotate = TRUE),
-                       tolerance = my_tol)
+test_that("TVN, rho = 0.9, rotation", {
+  testthat::expect_equal(x3aii$box, normal_box(d = 3, sigma = covmat,
+                                               rotate = TRUE),
+                         tolerance = my_tol)
+})
 
 # B. 1-dimensional log-normal density
 
@@ -184,7 +209,9 @@ sigma <- 1
 lambda <- 0
 x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = 1,
              lower = 0, init = 0.1, trans = "BC", lambda = lambda)
-testthat::expect_equal(x$box, normal_box(d = 1), tolerance = my_tol)
+test_that("Log-normal", {
+  testthat::expect_equal(x$box, normal_box(d = 1), tolerance = my_tol)
+})
 
 # C: 1-dimensional gamma density, with shape parameter not less than 1
 
@@ -240,13 +267,17 @@ ptr_gam <- create_xptr("logdgamma")
 alpha <- 1
 x1 <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
               lower = 0, init = alpha)
-testthat::expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
+test_that("Gamma(1, 1)", {
+  testthat::expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
+})
 
 # Shape = 10
 alpha <- 10
 x2 <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
              lower = 0, init = alpha)
-testthat::expect_equal(x2$box, gamma_box(shape = 10), tolerance = my_tol)
+test_that("Gamma(10, 1)", {
+  testthat::expect_equal(x2$box, gamma_box(shape = 10), tolerance = my_tol)
+})
 
 
 
