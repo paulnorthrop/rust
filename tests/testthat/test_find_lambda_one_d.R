@@ -10,8 +10,17 @@ ptr_lnorm <- create_xptr("logdlnorm")
 mu <- 0
 sigma <- 1
 lambda_rcpp <- find_lambda_one_d_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma)
-testthat::expect_equal(lambda$lambda, lambda_rcpp$lambda, tolerance = my_tol)
-testthat::expect_equal(lambda$gm, lambda_rcpp$gm, tolerance = my_tol)
-testthat::expect_equal(lambda$init_psi, lambda_rcpp$init_psi,
-                       tolerance = my_tol)
-testthat::expect_equal(lambda$sd_psi, lambda_rcpp$sd_psi, tolerance = my_tol)
+test_that("lambda", {
+  testthat::expect_equal(lambda$lambda, lambda_rcpp$lambda, tolerance = my_tol)
+})
+test_that("gm", {
+  testthat::expect_equal(lambda$gm, lambda_rcpp$gm, tolerance = my_tol)
+})
+test_that("init_psi", {
+  testthat::expect_equal(lambda$init_psi, lambda_rcpp$init_psi,
+                         tolerance = my_tol)
+})
+test_that("sd_psi", {
+  testthat::expect_equal(lambda$sd_psi, lambda_rcpp$sd_psi, tolerance = my_tol)
+})
+

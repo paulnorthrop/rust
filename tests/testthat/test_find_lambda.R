@@ -53,8 +53,17 @@ lambda_rcpp <- find_lambda_rcpp(logf = ptr_gp, ss = ss, d = 2,
                                 user_args = list(xm = ss$xm), log_j = log_j,
                                 phi_to_theta = ptr_phi_to_theta_gp)
 
-testthat::expect_equal(lambda$lambda, lambda_rcpp$lambda, tolerance = my_tol)
-testthat::expect_equal(lambda$gm, lambda_rcpp$gm, tolerance = my_tol)
-testthat::expect_equal(lambda$init_psi, lambda_rcpp$init_psi,
-                       tolerance = my_tol)
-testthat::expect_equal(lambda$sd_psi, lambda_rcpp$sd_psi, tolerance = my_tol)
+test_that("lambda", {
+  testthat::expect_equal(lambda$lambda, lambda_rcpp$lambda, tolerance = my_tol)
+})
+test_that("gm", {
+  testthat::expect_equal(lambda$gm, lambda_rcpp$gm, tolerance = my_tol)
+})
+test_that("init_psi", {
+  testthat::expect_equal(lambda$init_psi, lambda_rcpp$init_psi,
+                         tolerance = my_tol)
+})
+test_that("sd_psi", {
+  testthat::expect_equal(lambda$sd_psi, lambda_rcpp$sd_psi, tolerance = my_tol)
+})
+
