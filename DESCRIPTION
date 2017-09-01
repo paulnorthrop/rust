@@ -18,22 +18,22 @@ Description: Uses the generalised ratio-of-uniforms (RU) method to simulate
     From version 1.2.0 the 'Rcpp' package 
     <https://cran.r-project.org/package=Rcpp> can be used to improve efficiency.
     See the rust website for more information, documentation and examples.
-Imports: stats,
-    graphics,
+Imports: graphics,
     methods,
+    Rcpp (>= 0.12.10),
     spatstat,
-    Rcpp (>= 0.12.10)
+    stats
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
     R (>= 3.3.1)
 RoxygenNote: 6.0.1
-Suggests: knitr,
-    rmarkdown,
-    testthat,
-    inline,
+Suggests: inline,
+    knitr,
     microbenchmark,
-    revdbayes
+    revdbayes,
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/rust
 BugReports: http://github.com/paulnorthrop/rust/issues
