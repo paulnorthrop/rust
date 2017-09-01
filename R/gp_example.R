@@ -226,14 +226,18 @@ gpd_init <- function(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
   }
   if (!ests_ok | !ses_ok){
     # Try PWM
-    pwm <- gpd_pwm(gpd_data)
+    if (!requireNamespace("revdbayes", quietly = TRUE)) {
+      stop("revdbayes needed for this function to work. Please install it.",
+           call. = FALSE)
+    }
+    pwm <- revdbayes:::gpd_pwm(gpd_data)
     se <- pwm$se
     mat <- matrix(c(1, 0, 1 / xm, 1), 2, 2, byrow = TRUE)
     var_phi <- mat %*% pwm$cov %*% t(mat)
     se_phi <- sqrt(diag(var_phi))
     # Note: se and se_phi will be NA if pwm$est[2] > 1/2
     check <- gpd_loglik(pars = pwm$est, gpd_data = gpd_data, m = m, xm = xm,
-                       sum_gp = sum_gp)
+                        sum_gp = sum_gp)
     # If MLE wasn't OK and PWM estimate is OK then use PWM estimate
     if (!ests_ok & init[2] > -1 & !is.infinite(check)) {
       init <- pwm$est
@@ -242,9 +246,13 @@ gpd_init <- function(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
   }
   # If estimate is not OK then try LRS
   if (!ests_ok){
-    init <- gpd_lrs(gpd_data)
+    if (!requireNamespace("revdbayes", quietly = TRUE)) {
+      stop("revdbayes needed for this function to work. Please install it.",
+           call. = FALSE)
+    }
+    init <- revdbayes:::gpd_lrs(gpd_data)
     check <- gpd_loglik(pars = init, gpd_data = gpd_data, m = m, xm = xm,
-                       sum_gp = sum_gp)
+                        sum_gp = sum_gp)
     if (init[2] > -1 & !is.infinite(check)) {
       ests_ok <- TRUE
     }
@@ -366,82 +374,6 @@ fallback_gp_mle <- function(init, ...){
   temp$mle <- x$par
   temp$nllh <- -x$value
   return(temp)
-}
-
-# =========================== gpd_pwm ===========================
-
-gpd_pwm <- function(gpd_data, u = 0) {
-  # Probability weighted moments estimation for the generalized Pareto
-  # distribution.
-  #
-  # Args:
-  #   gpd_data : A numeric vector containing positive values, assumed to be a
-  #             random sample from a generalized Pareto distribution.
-  #   u       : A numeric scalar.  A threshold.  The GP distribution is
-  #             fitted to the excesses of u.
-  # Returns:
-  #   A list with components
-  #     est  : A numeric vector.  PWM estimates of GP parameters sigma and xi.
-  #     se   : A numeric vector.  Estimated standard errors of sigma and xi.
-  #    cov   : A numeric matrix.  Estimate covariance matrix of the the PWM
-  #            estimators of sigma and xi.
-  #
-  n <- length(gpd_data)
-  exceedances <- gpd_data[gpd_data > u]
-  excess <- exceedances - u
-  nu <- length(excess)
-  xbar <- mean(excess)
-  a0 <- xbar
-  gamma <- -0.35
-  delta <- 0
-  pvec <- ((1:nu) + gamma)/(nu + delta)
-  a1 <- mean(sort(excess) * (1 - pvec))
-  xi <- 2 - a0/(a0 - 2 * a1)
-  sigma <- (2 * a0 * a1)/(a0 - 2 * a1)
-  pwm <- c(sigma, xi)
-  names(pwm) = c("sigma","xi")
-  denom <- nu * (1 - 2 * xi) * (3 - 2 * xi)
-  if (xi > 0.5) {
-    denom <- NA
-    warning("Asymptotic Standard Errors not available for PWM when xi>0.5.")
-  }
-  one <- (7 - 18 * xi + 11 * xi^2 - 2 * xi^3) * sigma ^ 2
-  two <- (1 - xi) * (1 - xi + 2 * xi^2) * (2 - xi) ^ 2
-  cov <-  - sigma * (2 - xi) * (2 - 6 * xi + 7 * xi ^ 2 - 2 * xi ^ 3)
-  pwm_varcov <- matrix(c(one, cov, cov, two), 2)/denom
-  colnames(pwm_varcov) <- c("sigma","xi")
-  rownames(pwm_varcov) <- c("sigma","xi")
-  se <- sqrt(diag(pwm_varcov))
-  return(list(est = pwm, se = se, cov = pwm_varcov))
-}
-
-# =========================== gpd_lrs ===========================
-
-gpd_lrs <- function(x) {
-  # LRS estimation for the generalized Pareto distribution.
-  #
-  # Args:
-  #   x : A numeric vector containing positive values, assumed to be a
-  #       random sample from a generalized Pareto distribution.
-  #
-  # Returns:
-  #   A numeric vector.  Estimates of parameters sigma and xi.
-  #
-  n <- length(x)                             # sample size
-  x <- sort(x)                               # put data in ascending order
-  q0 <- 1 / (n + 1)
-  q2 <- n / (n+1)                            # for sample minimum and maximum
-  a <- sqrt((1 - q2) / (1 - q0))
-  q1 <- 1 - a *(1 - q0)                      # `middle' quantile
-  n0 <- 1
-  n1 <- round((n + 1) * q1)
-  n2 <- n                                    # corresponding order statistics
-  ns <- c(n0,n1,n2); qs <- c(q0,q1,q2)
-  xs <- x[ns]
-  r_hat <- (xs[3] - xs[2]) / (xs[2] - xs[1])
-  xi_hat <- -log(r_hat) / log(a)
-  sigma_hat <- xi_hat * xs[3] / ((1 - q2) ^ (-xi_hat) - 1)
-  return(c(sigma_hat, xi_hat))
 }
 
 # =========================== gpd_obs_info ===========================
