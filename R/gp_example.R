@@ -340,7 +340,8 @@ gpd_mle <- function(gpd_data) {
   #     nllh : A numeric scalar.  The negated log-likelihood at the MLE.
   #
   # Call Grimshaw (1993) function, note: k is -xi, a is sigma
-  pjn <- grimshaw_gpdmle(gpd_data)
+#  pjn <- grimshaw_gpdmle(gpd_data)
+  pjn <- revdbayes:::grimshaw_gp_mle(gpd_data)
   temp <- list()
   temp$mle <- c(pjn$a, -pjn$k)  # mle for (sigma,xi)
   sc <- rep(temp$mle[1], length(gpd_data))

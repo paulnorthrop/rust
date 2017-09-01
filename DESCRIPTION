@@ -32,7 +32,8 @@ Suggests: knitr,
     rmarkdown,
     testthat,
     inline,
-    microbenchmark
+    microbenchmark,
+    revdbayes
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/rust
 BugReports: http://github.com/paulnorthrop/rust/issues
