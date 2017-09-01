@@ -230,7 +230,7 @@ gpd_init <- function(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
       stop("revdbayes needed for this function to work. Please install it.",
            call. = FALSE)
     }
-    pwm <- revdbayes:::gpd_pwm(gpd_data)
+    pwm <- revdbayes:::gp_pwm(gpd_data)
     se <- pwm$se
     mat <- matrix(c(1, 0, 1 / xm, 1), 2, 2, byrow = TRUE)
     var_phi <- mat %*% pwm$cov %*% t(mat)
@@ -250,7 +250,7 @@ gpd_init <- function(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
       stop("revdbayes needed for this function to work. Please install it.",
            call. = FALSE)
     }
-    init <- revdbayes:::gpd_lrs(gpd_data)
+    init <- revdbayes:::gp_lrs(gpd_data)
     check <- gpd_loglik(pars = init, gpd_data = gpd_data, m = m, xm = xm,
                         sum_gp = sum_gp)
     if (init[2] > -1 & !is.infinite(check)) {
