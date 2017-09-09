@@ -96,7 +96,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     temp <- graphics::hist(plot_data, plot = FALSE)
     a <- temp$breaks[1]
     b <- temp$breaks[length(temp$breaks)]
-    h <- (b-a)/n
+    h <- (b - a) / n
     xx <- seq(a, b, by = h)
     density_fun <- function(z) {
       density_list <- c(list(z), density_args)
@@ -137,8 +137,8 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   }
   if (x$d == 2) {
     r <- apply(plot_data, 2, range)
-    xx <- seq(r[1,1], r[2,1], len = n)
-    yy <- seq(r[1,2], r[2,2], len = n)
+    xx <- seq(r[1, 1], r[2, 1], len = n)
+    yy <- seq(r[1, 2], r[2, 2], len = n)
     zz <- matrix(NA, ncol = length(xx), nrow = length(yy))
     for (i in 1:length(xx)) {
       for (j in 1:length(yy)) {
@@ -173,7 +173,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   }
   if (x$d > 2) {
     if (is.null(rows)) {
-      rows <- x$d -2
+      rows <- x$d - 2
     }
     cols <- ceiling(choose(x$d, 2) / rows)
     if (is.null(xlabs)) {
@@ -193,8 +193,8 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     def.par <- graphics::par(no.readonly = TRUE)
     graphics::par(mfrow = c(rows, cols))
     pairwise_plots <- function(x) {
-      for (i in 1:(ncol(x)-1)) {
-        for (j in (i+1):ncol(x)) {
+      for (i in 1:(ncol(x) - 1)) {
+        for (j in (i + 1):ncol(x)) {
           graphics::plot(x[, i], x[, j], xlab = "", ylab = "", ...)
           graphics::title(xlab = parse(text = xlabs[i]),
                           ylab = parse(text = ylabs[j]))
