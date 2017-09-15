@@ -105,8 +105,8 @@ Respective optimization algorithms used to find a(r) and (bi-(r), bi+(r)).}
 
 \item{a_method, b_method}{Character scalars.  Respective methods used by
 \code{optim} to find a(r) and (bi-(r), bi+(r)).  Only used if \code{optim}
-if the chosen algorithm.  If \code{d} = 1 then a_method and b_method are
-set to "Brent" without warning.}
+is the chosen algorithm.  If \code{d} = 1 then \code{a_method} and
+\code{b_method} are set to \code{"Brent"} without warning.}
 
 \item{a_control, b_control}{Lists of control arguments to \code{optim} or
 \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.}
