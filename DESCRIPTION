@@ -17,7 +17,6 @@ Description: Uses the generalised ratio-of-uniforms (RU) method to simulate
     multivariate case rotation of axes can also be used to improve efficiency.
     From version 1.2.0 the 'Rcpp' package 
     <https://cran.r-project.org/package=Rcpp> can be used to improve efficiency.
-    See the rust website for more information, documentation and examples.
 Imports: graphics,
     methods,
     Rcpp (>= 0.12.10),
