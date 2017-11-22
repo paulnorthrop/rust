@@ -1,5 +1,9 @@
 # rust 1.2.3.9000
 
+## New features
+
+* New vignette. "When can rust be used?".
+
 # rust 1.2.3
 
 ## Bug fixes and minor improvements
