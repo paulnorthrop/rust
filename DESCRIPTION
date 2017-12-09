@@ -27,7 +27,8 @@ LazyData: TRUE
 Depends:
     R (>= 3.3.1)
 RoxygenNote: 6.0.1
-Suggests: inline,
+Suggests: bang,
+    inline,
     knitr,
     microbenchmark,
     revdbayes,
