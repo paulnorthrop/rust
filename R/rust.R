@@ -52,6 +52,6 @@
 #' @name rust
 #' @import methods
 #' @importFrom stats runif
-#' @useDynLib rust
+#' @useDynLib rust, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
