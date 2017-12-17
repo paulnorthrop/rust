@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-The downstream dependencies of rust passed R CMD check.
+All downstream dependencies of rust passed R CMD check.
