@@ -14,6 +14,11 @@ bibliography: rust.bib
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+
+required <- c("revdbayes")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
 ```
 
 The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-when-to-use-vignette.html). 
@@ -137,9 +142,9 @@ Now we perform Box-Cox transformation. We define $\phi_1 = \sigma, \phi_2 = \xi 
 # and ranges of phi1 and phi2 over over which to evaluate the posterior to find
 # a suitable value of lambda.
 #
-# \code{gpd_init} returns estimates of phi and associated estimated standard 
+# gpd_init returns estimates of phi and associated estimated standard 
 # errors based on the data alone.  This gives a basis for setting 
-# \code{min_phi} and \code{max_phi} provided that the prior the prior is not
+# min_phi and max_phi provided that the prior the prior is not
 # strongly informative.
 temp <- do.call(gpd_init, ss)
 min_phi <- pmax(0, temp$init_phi - 2 * temp$se_phi)

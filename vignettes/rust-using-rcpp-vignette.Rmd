@@ -14,6 +14,11 @@ bibliography: rust.bib
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+
+required <- c("revdbayes")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
 ```
 
 The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution. For an introduction to *rust* see the vignette [Introducing rust](rust-vignette.html). The user specifies (the log of) a positive target function $f(x)$ that is proportional to the density function of the distribution. 

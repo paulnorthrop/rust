@@ -14,6 +14,11 @@ bibliography: rust.bib
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+
+required <- c("bang")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
 ```
 
 The generalized ratio-of-uniforms can be used to simulate from a wide range of $d$-dimensional multivariate probability densities, provided that $d$ is not so large that its efficiency is prohibitively low (see the vignette [Introducing rust](rust-vignette.html)).  However, there are conditions that the target density $f$ must satisfy for this method to be applicable.  This vignette considers instances when these conditions do *not* hold and suggests strategies that may overcome this difficulty.  Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently **rust** is designed to work effectively with unimodal densities.  This vignette illustrates this using a simple 1-dimensional example.
