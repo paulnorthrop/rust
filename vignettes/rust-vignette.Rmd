@@ -16,7 +16,7 @@ bibliography: rust.bib
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
-The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  
+The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-when-to-use-vignette.html). 
 
 The user can provide either an R function (to `ru`) or, from version 1.2.0, a (pointer to a) C++ function (to `ru_rcpp`).  This vignette gives examples of the former.  For examples of the latter see the vignette [Rusting faster: Speedy Simulation using Rcpp](rust-using-rcpp-vignette.html). 
 
