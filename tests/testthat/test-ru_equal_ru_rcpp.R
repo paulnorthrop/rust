@@ -132,7 +132,7 @@ test_that("GP: rotation and BC", {
 
 set.seed(46)
 # Sample data from a GP(sigma, xi) distribution
-gpd_data <- rgpd(m = 100, xi = -0.5, sigma = 1)
+gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 # Calculate summary statistics for use in the log-likelihood
 ss <- gpd_sum_stats(gpd_data)
 

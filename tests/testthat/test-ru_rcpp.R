@@ -265,8 +265,8 @@ ptr_gam <- create_xptr("logdgamma")
 
 # Shape = 1
 alpha <- 1
-x1 <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
-              lower = 0, init = alpha)
+x1 <- suppressWarnings(ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
+              lower = 0, init = alpha))
 test_that("Gamma(1, 1)", {
   testthat::expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
 })

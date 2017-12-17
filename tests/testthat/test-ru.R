@@ -266,8 +266,8 @@ gamma_box <- function(shape = 1, rate = 1, r = 1 / 2) {
 }
 
 # Shape = 1
-x1 <- ru(logf = dgamma, shape = 1, log = TRUE, d = 1, n = 1, lower = 0,
-        init = 1)
+x1 <- suppressWarnings(ru(logf = dgamma, shape = 1, log = TRUE, d = 1, n = 1,
+                          lower = 0, init = 1))
 test_that("Gamma(1, 1)", {
   testthat::expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
 })
