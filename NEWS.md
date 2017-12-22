@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-Removed unneccesary dependence on the current release of R that caused an installation error on r-oldrel.
+Removed unnecessary dependence on the current release of R that caused an installation error on r-oldrel.
 
 # rust 1.3.3
 
