@@ -75,7 +75,7 @@ cbind(cauchy1$box, cauchy126$box)
 c(cauchy1$pa, cauchy126$pa)
 ```
 
-For $r = 1$ the algorithm finds essentially the correct values of $b_1^-$ and $b_1^*$ even though these do not occur at a turning point of the objective functions.  The estimated probability of acceptance is indeed larger for $r = 1.26$.
+For $r = 1$ the algorithm finds essentially the correct values of $b_1^-$ and $b_1^+$ even though these do not occur at a turning point of the objective functions.  The estimated probability of acceptance is indeed larger for $r = 1.26$.
 
 ### Hierarchical 1-way ANOVA with few groups
 

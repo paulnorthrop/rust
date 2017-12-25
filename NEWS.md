@@ -1,8 +1,14 @@
+# rust 1.3.4.9000
+
+## Bug fixes and minor improvements
+
+* Corrected minor typo in the penultimate sentence of the Cauchy density subection: b1* should be b1+.
+
 # rust 1.3.4
 
 ## Bug fixes and minor improvements
 
-Removed unnecessary dependence on the current release of R that caused an installation error on r-oldrel.
+* Removed unnecessary dependence on the current release of R that caused an installation error on r-oldrel.
 
 # rust 1.3.3
 
