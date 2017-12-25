@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* Corrected minor typo in the penultimate sentence of the Cauchy density subection: b1* should be b1+.
+* Corrected minor typo in the penultimate sentence of the "Cauchy density" subsection in the "When can rust be used vignette": b1* should be b1+.
 
 # rust 1.3.4
 
