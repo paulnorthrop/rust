@@ -739,7 +739,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   big_finite_val <- 10^10
   #
   # Function to minimize to find a(r).
-  # Use a weird argument name (._p) to avoid a potential argument-matching
+  # Use a weird argument name (._psi) to avoid a potential argument-matching
   # problem when nlminb() is used.
   a_obj <- function(._psi, ...) {
     # Avoid possible problems with nlminb calling function with NaNs.
