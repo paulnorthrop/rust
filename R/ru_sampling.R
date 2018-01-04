@@ -535,15 +535,15 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   init_psi <- init
   #
   if (trans == "none") {
-    logf_rho <- function(rho, ...) {
-      theta <- rho_to_psi(rho)
+    logf_rho <- function(._rho, ...) {
+      theta <- rho_to_psi(._rho)
       val <- logf(theta, ...) - hscale
       structure(val, theta = theta)
     }
   }
   if (trans == "BC") {
-    logf_rho <- function(rho, ...) {
-      psi <- rho_to_psi(rho)
+    logf_rho <- function(._rho, ...) {
+      psi <- rho_to_psi(._rho)
       # When lambda is not equal to one (psi * const + 1) must be positive
       test <- (psi * const + 1)[which_lam]
       if (any(test <= 0)) return(-Inf)
@@ -555,8 +555,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     }
   }
   if (trans == "user") {
-    logf_rho <- function(rho, ...) {
-      phi <- rho_to_psi(rho)
+    logf_rho <- function(._rho, ...) {
+      phi <- rho_to_psi(._rho)
       theta <- do.call(phi_to_theta, c(list(phi), user_args))
       if (any(!is.finite(theta))) return(-Inf)
       logj <- do.call(log_j, c(list(theta), user_args))
@@ -564,8 +564,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       structure(val, theta = theta)
     }
   }
-  neg_logf_rho <- function(rho, ...) -logf_rho(rho, ...)
-  f_rho <- function(rho, ...) exp(logf_rho(rho, ...))
+  neg_logf_rho <- function(._rho, ...) -logf_rho(._rho, ...)
+  f_rho <- function(._rho, ...) exp(logf_rho(._rho, ...))
   #
   # Scale logf ---------------------------------
   #
