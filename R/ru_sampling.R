@@ -564,7 +564,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       structure(val, theta = theta)
     }
   }
-  neg_logf_rho <- function(x, ...) -logf_rho(x, ...)
+  neg_logf_rho <- function(rho, ...) -logf_rho(rho, ...)
   f_rho <- function(rho, ...) exp(logf_rho(rho, ...))
   #
   # Scale logf ---------------------------------
