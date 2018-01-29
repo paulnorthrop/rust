@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* In the extra checks used to try to avoid erroneous convergence warnings lower and upper bounds on the parameters are now used.  
+
 * Corrected minor typo in the penultimate sentence of the "Cauchy density" subsection in the "When can rust be used vignette": b1* should be b1+.
 
 # rust 1.3.4
