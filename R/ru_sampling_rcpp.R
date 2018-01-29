@@ -762,7 +762,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   colnames(res$sim_vals_rho) <- paste("rho[", 1:d, "]", sep="")
   box <- c(a_box, l_box, u_box)
   res$box <- cbind(box, vals, conv)
-  bs <- paste(paste("b", 1:d, sep=""),rep(c("minus", "plus"), each=d), sep="")
+  bs <- paste(paste("b", 1:d, sep=""), rep(c("minus", "plus"), each=d), sep="")
   rownames(res$box) <- c("a", bs)
   if (any(conv != 0)) {
     warning("One or more convergence indicators are non-zero.",
