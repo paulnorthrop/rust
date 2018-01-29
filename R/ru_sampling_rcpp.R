@@ -835,13 +835,14 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
                        control = control, big_val = Inf)
       temp <- do.call(stats::optim, c(ru_args, add_args))
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
-      # ... so avoid non-zero convergence indicator by using BFGS instead.
+      # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
       if (temp$convergence == 10) {
-        add_args <- list(par = temp$par, fn = a_obj_fun, method = "BFGS",
-                         control = control, big_val = Inf)
+        add_args <- list(par = temp$par, fn = a_obj_fun, method = "L-BFGS-B",
+                         control = control, big_val = Inf,
+                         lower = lower, upper = upper)
         temp <- do.call(stats::optim, c(ru_args, add_args))
       }
-      # In some cases optim with method = "BFGS" may reach it's iteration
+      # In some cases optim with method = "L-BFGS-B" may reach it's iteration
       # limit without the convergence criteria being satisfied.  Then try
       # nlminb as a further check, but don't use the control argument in
       # case of conflict between optim() and nlminb().
@@ -858,10 +859,11 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
     temp <- do.call(stats::nlminb, c(ru_args, add_args))
     # Sometimes nlminb isn't sure that it has found the minimum when in fact
     # it has.  Try to check this, and avoid a non-zero convergence indicator
-    # by using optim with method="BFGS", starting from nlminb's solution.
+    # by using optim with method="L-BFGS-B", starting from nlminb's solution.
     if (temp$convergence > 0) {
       add_args <- list(par = temp$par, fn = a_obj_fun, hessian = FALSE,
-                       method = "BFGS", big_val = Inf)
+                       method = "L-BFG-S", big_val = Inf,
+                       lower = lower, upper = upper)
       temp <- do.call(stats::optim, c(ru_args, add_args))
     }
   }
@@ -949,10 +951,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       l_box[j] <- temp$objective
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
-      # by using optim with method="BFGS", starting from nlminb's solution.
+      # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
         add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
-                         method = "BFGS", big_val = Inf)
+                         method = "L-BFGS-B", big_val = Inf,
+                         upper = t_upper, lower = lower - f_mode)
         temp <- do.call(stats::optim, c(ru_args, add_args))
         l_box[j] <- temp$value
       }
@@ -971,10 +974,12 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         temp <- do.call(stats::optim, c(ru_args, add_args))
         l_box[j] <- temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
-        # ... so avoid non-zero convergence indicator by using BFGS instead.
+        # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
           add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
-                           control = control, method = "BFGS", big_val = Inf)
+                           control = control, method = "L-BFGS-B",
+                           big_val = Inf, upper = t_upper,
+                           lower = lower - f_mode)
           temp <- do.call(stats::optim, c(ru_args, add_args))
           l_box[j] <- temp$value
         }
@@ -1005,10 +1010,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       u_box[j] <- -temp$objective
       # Sometimes nlminb isn't sure that it has found the minimum when in fact
       # it has.  Try to check this, and avoid a non-zero convergence indicator
-      # by using optim with method="BFGS", starting from nlminb's solution.
+      # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
         add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
-                         method = "BFGS", big_val = Inf)
+                         method = "L-BFGS-B", big_val = Inf,
+                         lower = t_lower, upper = upper - f_mode)
         temp <- do.call(stats::optim, c(ru_args, add_args))
         u_box[j] <- -temp$value
       }
@@ -1027,10 +1033,12 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         temp <- do.call(stats::optim, c(ru_args, add_args))
         u_box[j] <- -temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
-        # ... so avoid non-zero convergence indicator by using BFGS instead.
+        # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
           add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
-                           control = control, method = "BFGS", big_val = Inf)
+                           control = control, method = "L-BFGS-B",
+                           big_val = Inf, lower = t_lower,
+                           upper = upper - f_mode)
           temp <- do.call(stats::optim, c(ru_args, add_args))
           u_box[j] <- -temp$value
         }
