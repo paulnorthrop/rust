@@ -842,7 +842,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
         temp <- do.call(stats::optim, c(ru_args, add_args))
       }
       # In some cases optim with method = "BFGS" may reach it's iteration
-      # limit without the concergence criteria being satisfied.  Then try
+      # limit without the convergence criteria being satisfied.  Then try
       # nlminb as a further check, but don't use the control argument in
       # case of conflict between optim() and nlminb().
       if (temp$convergence == 1) {
