@@ -862,7 +862,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
     # by using optim with method="L-BFGS-B", starting from nlminb's solution.
     if (temp$convergence > 0) {
       add_args <- list(par = temp$par, fn = a_obj_fun, hessian = FALSE,
-                       method = "L-BFG-S", big_val = Inf,
+                       method = "L-BFGS-B", big_val = Inf,
                        lower = lower, upper = upper)
       temp <- do.call(stats::optim, c(ru_args, add_args))
     }
