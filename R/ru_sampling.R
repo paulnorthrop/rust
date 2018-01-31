@@ -736,7 +736,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   #   hessian: the estimated hessian of neg_logf_rho/(d*r+1) at its minimum.
   #
   big_val <- Inf
-  big_finite_val <- 10^10
+  big_finite_val <- 10 ^ 10
   #
   # Function to minimize to find a(r).
   # Use a weird argument name (._psi) to avoid a potential argument-matching
