@@ -116,7 +116,7 @@ coag2$pa
 
 ## Multimodal densities
 
-Consider the simple bimodal univariate density produce by a mixture of N(0,1) and N($m$, 1) densities, with probability $p$ that a value comes from the first component.  In principle the generalized ratio-of-uniforms can be used to sample from this density but this relies on the a bounding box being found that includes the entire acceptance region.  Currently, `ru` (and `ru_rcpp`) search for bounding box parameters in a way that is designed to work well when the density is unimodal.  The following examples demonstrate that currently `ru` isn't guaranteed to find a suitable bounding box for multimodal densities.
+Consider the simple bimodal univariate density produced by a mixture of N(0,1) and N($m$, 1) densities, with probability $p$ that a value comes from the first component.  In principle the generalized ratio-of-uniforms can be used to sample from this density but this relies on the a bounding box being found that includes the entire acceptance region.  Currently, `ru` (and `ru_rcpp`) search for bounding box parameters in a way that is designed to work well when the density is unimodal.  The following examples demonstrate that currently `ru` isn't guaranteed to find a suitable bounding box for multimodal densities.
 
 ```{r, fig.show='hold'}
 normal_mixture <- function(x, mu, p) {
