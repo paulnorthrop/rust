@@ -213,7 +213,57 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' \code{summary} method for class "ru"
 #'
 #' @param object an object of class "ru", a result of a call to \code{ru}.
-#' @param ... Additional arguments passed on to \code{print} or \code{summary}.
+#' @param ... Additional arguments passed on to \code{summary}.
+#' @return Prints
+#' \itemize{
+#'   \item {information about the ratio-of-uniforms bounding box, i.e.
+#'     \code{object$box}}
+#'   \item {an estimate of the probability of acceptance, i.e.
+#'     \code{object$pa}}
+#'   \item {a summary of the simulated values, via
+#'     \code{summary(object$sim_vals)}}
+#' }
+#' @examples
+#' # one-dimensional standard normal ----------------
+#' x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0)
+#' summary(x)
+#'
+#' # two-dimensional normal with positive association ----------------
+#' rho <- 0.9
+#' covmat <- matrix(c(1, rho, rho, 1), 2, 2)
+#' log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
+#'   x <- matrix(x, ncol = length(x))
+#'   d <- ncol(x)
+#'   - 0.5 * (x - mean) %*% solve(sigma) %*% t(x - mean)
+#' }
+#' x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
+#' summary(x)
+#' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
+#'   \code{object$box}.
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
+#' @export
+summary.ru <- function(object, ...) {
+  if (!inherits(object, "ru")) {
+    stop("use only with \"ru\" objects")
+  }
+  sim_summary <- summary(object$sim_vals, ...)
+  object <- object[c("box", "pa")]
+  object$sim_summary <- sim_summary
+  class(object) <- "summary.ru"
+  return(object)
+}
+
+# =========================== print.summary.ru ===========================
+
+#' Print method for objects of class "summary.ru"
+#'
+#' \code{print} method for class "summary.ru".
+#'
+#' @param x an object of class "summary.ru", a result of a call to
+#'   \code{\link{summary.ru}}.
+#' @param ... Additional optional arguments to be passed to
+#'   \code{\link{print}}.
+#'
 #' @return Prints
 #' \itemize{
 #'   \item {a summary of the simulated values, via
@@ -242,17 +292,17 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #'   \code{object$box}.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @export
-summary.ru <- function(object, ...) {
-  if (!inherits(object, "ru")) {
-    stop("use only with \"ru\" objects")
+print.summary.ru <- function(x, ...) {
+  if (!inherits(x, "summary.ru")) {
+    stop("use only with \"summary.ru\" objects")
   }
   cat("ru bounding box: ", "\n")
-  print(object$box, ...)
+  print(x$box, ...)
   cat("\n")
   cat("estimated probability of acceptance: ", "\n")
-  print(object$pa, ...)
+  print(x$pa, ...)
   cat("\n")
   cat("sample summary", "\n")
-  print(summary(object$sim_vals, ...), ...)
+  print(x$sim_summary, ...)
+  invisible(x)
 }
-

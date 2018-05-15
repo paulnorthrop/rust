@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* The summary method for class "ru" is now set up according to Section 8.1 of the R FAQ at (https://cran.r-project.org/doc/FAQ/R-FAQ.html).
+
 * In the extra checks used to try to avoid erroneous convergence warnings lower and upper bounds on the parameters are now used.  
 
 * Corrected minor typo in the penultimate sentence of the "Cauchy density" subsection in the "When can rust be used vignette": b1* should be b1+.
