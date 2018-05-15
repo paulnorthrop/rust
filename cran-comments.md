@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-All downstream dependencies of rust passed R CMD check.
+All downstream dependencies of rust (bang, revdbayes and threshr) passed R CMD check.
