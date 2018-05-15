@@ -1,9 +1,3 @@
-Please may I submit a patch release to fix the installation ERROR of rust v1.3.3 on r-oldrel?
-
-I have changed R (>= 3.4.1) back to R (>= 3.3.1) in DESCRIPTION to fix this.
-
-Please accept my apologies for wasting your time by making such a stupid mistake.
-
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
