@@ -176,7 +176,8 @@ If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
   If \code{d} is greater than one and \code{rotate = TRUE} then a rotation
   of the variable axes is performed \emph{after} mode relocation.  The
   rotation is based on the Choleski decomposition (see \link{chol}) of the
-  estimated Hessian (computed using \link{optimHess} of the negated
+  estimated Hessian (computed using \code{\link[stats]{optimHess}}
+  of the negated
   log-density after any user-supplied transformation or Box-Cox
   transformation.  If any of the eigenvalues of the estimated Hessian are
   non-positive (which may indicate that the estimated mode of \code{logf}

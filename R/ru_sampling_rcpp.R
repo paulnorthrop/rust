@@ -115,7 +115,8 @@
 #'   If \code{d} is greater than one and \code{rotate = TRUE} then a rotation
 #'   of the variable axes is performed \emph{after} mode relocation.  The
 #'   rotation is based on the Choleski decomposition (see \link{chol}) of the
-#'   estimated Hessian (computed using \link{optimHess} of the negated
+#'   estimated Hessian (computed using \code{\link[stats]{optimHess}}
+#'   of the negated
 #'   log-density after any user-supplied transformation or Box-Cox
 #'   transformation.  If any of the eigenvalues of the estimated Hessian are
 #'   non-positive (which may indicate that the estimated mode of \code{logf}
@@ -838,7 +839,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
       # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
       if (temp$convergence == 10) {
         add_args <- list(par = temp$par, fn = a_obj_fun, method = "L-BFGS-B",
-                         control = control, big_val = Inf,
+                         control = control, big_val = big_val,
                          lower = lower, upper = upper)
         temp <- do.call(stats::optim, c(ru_args, add_args))
       }
@@ -862,7 +863,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
     # by using optim with method="L-BFGS-B", starting from nlminb's solution.
     if (temp$convergence > 0) {
       add_args <- list(par = temp$par, fn = a_obj_fun, hessian = FALSE,
-                       method = "L-BFGS-B", big_val = Inf,
+                       method = "L-BFGS-B", big_val = big_val,
                        lower = lower, upper = upper)
       temp <- do.call(stats::optim, c(ru_args, add_args))
     }
@@ -954,7 +955,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
         add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
-                         method = "L-BFGS-B", big_val = Inf,
+                         method = "L-BFGS-B", big_val = big_val,
                          upper = t_upper, lower = lower - f_mode)
         temp <- do.call(stats::optim, c(ru_args, add_args))
         l_box[j] <- temp$value
@@ -978,7 +979,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         if (temp$convergence == 10) {
           add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
                            control = control, method = "L-BFGS-B",
-                           big_val = Inf, upper = t_upper,
+                           big_val = big_val, upper = t_upper,
                            lower = lower - f_mode)
           temp <- do.call(stats::optim, c(ru_args, add_args))
           l_box[j] <- temp$value
@@ -1013,7 +1014,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
         add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
-                         method = "L-BFGS-B", big_val = Inf,
+                         method = "L-BFGS-B", big_val = big_val,
                          lower = t_lower, upper = upper - f_mode)
         temp <- do.call(stats::optim, c(ru_args, add_args))
         u_box[j] <- -temp$value
@@ -1037,7 +1038,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         if (temp$convergence == 10) {
           add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
                            control = control, method = "L-BFGS-B",
-                           big_val = Inf, lower = t_lower,
+                           big_val = big_val, lower = t_lower,
                            upper = upper - f_mode)
           temp <- do.call(stats::optim, c(ru_args, add_args))
           u_box[j] <- -temp$value

@@ -107,7 +107,8 @@
 #'   If \code{d} is greater than one and \code{rotate = TRUE} then a rotation
 #'   of the variable axes is performed \emph{after} mode relocation.  The
 #'   rotation is based on the Choleski decomposition (see \link{chol}) of the
-#'   estimated Hessian (computed using \link{optimHess} of the negated
+#'   estimated Hessian (computed using \code{\link[stats]{optimHess}}
+#'   of the negated
 #'   log-density after any user-supplied transformation or Box-Cox
 #'   transformation.  If any of the eigenvalues of the estimated Hessian are
 #'   non-positive (which may indicate that the estimated mode of \code{logf}
@@ -748,30 +749,38 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
     if (any(is.na(._psi))) return(big_val)
     neg_logf_rho(._psi, ...) / (d * r + 1)
   }
+  # Function for L-BFGS-B and Brent, which don't like Inf or NA
+  a_obj_no_inf <- function(._psi, ...) {
+    check <- neg_logf_rho(._psi, ...) / (d * r + 1)
+    if (is.infinite(check)) {
+      check <- big_finite_val
+    }
+    check
+  }
   #
   if (algor == "optim") {
-    # L-BFGS-B and Brent don't like Inf or NA
-    if (method == "L-BFGS-B" | method == "Brent") {
-      a_obj <- function(._psi, ...) {
-        check <- neg_logf_rho(._psi, ...) / (d * r + 1)
-        if (is.infinite(check)) {
-          check <- big_finite_val
-        }
-        check
-      }
-    }
+#    # L-BFGS-B and Brent don't like Inf or NA
+#    if (method == "L-BFGS-B" | method == "Brent") {
+#      a_obj <- function(._psi, ...) {
+#        check <- neg_logf_rho(._psi, ...) / (d * r + 1)
+#        if (is.infinite(check)) {
+#          check <- big_finite_val
+#        }
+#        check
+#      }
+#    }
     #
     if (method %in% c("L-BFGS-B","Brent")) {
-      temp <- stats::optim(par = init_psi, fn = a_obj, ..., control = control,
-                           hessian = FALSE, method = method, lower = lower,
-                           upper = upper)
+      temp <- stats::optim(par = init_psi, fn = a_obj_no_inf, ...,
+                           control = control, hessian = FALSE, method = method,
+                           lower = lower, upper = upper)
     } else {
       temp <- stats::optim(par = init_psi, fn = a_obj, ..., control = control,
                            hessian = FALSE, method = method)
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator by using L-BFGS-B instead.
       if (temp$convergence == 10) {
-        temp <- stats::optim(par = temp$par, fn = a_obj, ...,
+        temp <- stats::optim(par = temp$par, fn = a_obj_no_inf, ...,
                              control = control, hessian = FALSE,
                              method = "L-BFGS-B", lower = lower, upper = upper)
       }
@@ -800,8 +809,9 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   # but don't use the control argument in case of conflict between
   # optim() and nlminb().
   if (temp$convergence > 0) {
-    temp <- stats::optim(par = temp$par, fn = a_obj, ..., hessian = FALSE,
-                         method = "L-BFGS-B", lower = lower, upper = upper)
+    temp <- stats::optim(par = temp$par, fn = a_obj_no_inf, ...,
+                         hessian = FALSE, method = "L-BFGS-B", lower = lower,
+                         upper = upper)
   }
   # Try to calculate Hessian, but avoid problems if an error is produced.
   # An error may occur if the MAP estimate is very close to a parameter
@@ -872,6 +882,25 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
     if (f_rho(._rho, ...) == 0) return(big_val)
     -._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
   }
+  # Functions for L-BFGS-B and Brent, which don't like Inf or NA
+  lower_box_no_inf <- function(._rho, j, ...) {
+    if (any(is.na(._rho))) return(big_finite_val)
+    if (._rho[j] == 0) return(0)
+    if (._rho[j] > 0) return(big_finite_val)
+    if (f_rho(._rho, ...) == 0) return(big_finite_val)
+    check <- ._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
+    if (is.infinite(check)) check <- big_finite_val
+    check
+  }
+  upper_box_no_inf <- function(._rho, j, ...) {
+    if (any(is.na(._rho))) return(big_finite_val)
+    if (._rho[j] == 0) return(0)
+    if (._rho[j] < 0) return(big_finite_val)
+    if (f_rho(._rho, ...) == 0) return(big_finite_val)
+    check <- -._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
+    if (is.infinite(check)) check <- big_finite_val
+    check
+  }
   l_box <- u_box <- NULL
   zeros <- rep(0,d)
   #
@@ -894,27 +923,27 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(par = temp$par, fn = lower_box, j = j, ...,
+        temp <- stats::optim(par = temp$par, fn = lower_box_no_inf, j = j, ...,
                              hessian = FALSE, method = "L-BFGS-B",
                              upper = t_upper, lower = lower - f_mode)
         l_box[j] <- temp$value
       }
     }
     if (algor == "optim") {
-      # L-BFGS-B and Brent don't like Inf or NA
+#      # L-BFGS-B and Brent don't like Inf or NA
+#      if (method == "L-BFGS-B" | method == "Brent") {
+#        lower_box <- function(._rho, j, ...) {
+#          if (any(is.na(._rho))) return(big_finite_val)
+#          if (._rho[j] == 0) return(0)
+#          if (._rho[j] > 0) return(big_finite_val)
+#          if (f_rho(._rho, ...) == 0) return(big_finite_val)
+#          check <- ._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
+#          if (is.infinite(check)) check <- big_finite_val
+#          check
+#        }
+#      }
       if (method == "L-BFGS-B" | method == "Brent") {
-        lower_box <- function(._rho, j, ...) {
-          if (any(is.na(._rho))) return(big_finite_val)
-          if (._rho[j] == 0) return(0)
-          if (._rho[j] > 0) return(big_finite_val)
-          if (f_rho(._rho, ...) == 0) return(big_finite_val)
-          check <- ._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
-          if (is.infinite(check)) check <- big_finite_val
-          check
-        }
-      }
-      if (method == "L-BFGS-B" | method == "Brent") {
-        temp <- stats::optim(par = rho_init, fn = lower_box, j = j, ...,
+        temp <- stats::optim(par = rho_init, fn = lower_box_no_inf, j = j, ...,
                              upper = t_upper, lower = lower - f_mode,
                              control = control, method = method,
                              hessian = FALSE)
@@ -927,8 +956,8 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          temp <- stats::optim(par = temp$par, fn = lower_box, j = j, ...,
-                               control = control, method = "L-BFGS-B",
+          temp <- stats::optim(par = temp$par, fn = lower_box_no_inf, j = j,
+                               ..., control = control, method = "L-BFGS-B",
                                hessian = FALSE,
                                upper = t_upper, lower = lower - f_mode)
           l_box[j] <- temp$value
@@ -959,27 +988,27 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(par = temp$par, fn = upper_box, j = j, ...,
+        temp <- stats::optim(par = temp$par, fn = upper_box_no_inf, j = j, ...,
                              hessian = FALSE, method = "L-BFGS-B",
                              lower = t_lower, upper = upper - f_mode)
         u_box[j] <- -temp$value
       }
     }
     if (algor == "optim") {
-      # L-BFGS-B and Brent don't like Inf or NA
+#      # L-BFGS-B and Brent don't like Inf or NA
+#      if (method == "L-BFGS-B" | method == "Brent") {
+#        upper_box <- function(._rho, j, ...) {
+#          if (any(is.na(._rho))) return(big_finite_val)
+#          if (._rho[j] == 0) return(0)
+#          if (._rho[j] < 0) return(big_finite_val)
+#          if (f_rho(._rho, ...) == 0) return(big_finite_val)
+#          check <- -._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
+#          if (is.infinite(check)) check <- big_finite_val
+#          check
+#        }
+#      }
       if (method == "L-BFGS-B" | method == "Brent") {
-        upper_box <- function(._rho, j, ...) {
-          if (any(is.na(._rho))) return(big_finite_val)
-          if (._rho[j] == 0) return(0)
-          if (._rho[j] < 0) return(big_finite_val)
-          if (f_rho(._rho, ...) == 0) return(big_finite_val)
-          check <- -._rho[j] * f_rho(._rho, ...) ^ (r / (d * r + 1))
-          if (is.infinite(check)) check <- big_finite_val
-          check
-        }
-      }
-      if (method == "L-BFGS-B" | method == "Brent") {
-        temp <- stats::optim(par = rho_init, fn = upper_box, j = j, ...,
+        temp <- stats::optim(par = rho_init, fn = upper_box_no_inf, j = j, ...,
                              lower = t_lower, upper = upper - f_mode,
                              control = control, method = method)
         u_box[j] <- -temp$value
@@ -990,8 +1019,8 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          temp <- stats::optim(par = temp$par, fn = upper_box, j = j, ...,
-                               control = control, method = "L-BFGS-B",
+          temp <- stats::optim(par = temp$par, fn = upper_box_no_inf, j = j,
+                               ..., control = control, method = "L-BFGS-B",
                                lower = t_lower, upper = upper - f_mode)
           u_box[j] <- -temp$value
         }
