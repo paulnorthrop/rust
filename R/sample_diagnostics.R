@@ -257,7 +257,7 @@ summary.ru <- function(object, ...) {
 
 #' Print method for objects of class "summary.ru"
 #'
-#' \code{print} method for class "summary.ru".
+#' \code{print} method for an object \code{object} of class "summary.ru".
 #'
 #' @param x an object of class "summary.ru", a result of a call to
 #'   \code{\link{summary.ru}}.

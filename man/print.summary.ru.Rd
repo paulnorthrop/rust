@@ -25,7 +25,7 @@ Prints
 }
 }
 \description{
-\code{print} method for class "summary.ru".
+\code{print} method for an object \code{object} of class "summary.ru".
 }
 \examples{
 # one-dimensional standard normal ----------------
