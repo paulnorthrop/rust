@@ -33,7 +33,7 @@ The main function in the rust package is `ru`, which implments the generalized r
 
 ## The multivariate generalized ratio-of-uniforms method
 
-This description follows @WGS1991.  Suppose that we wish to simulate values of a $d$-dimensional continuous random variable $X = (X_1, \ldots, X_d)$ with density function proportional to a positive integrable function $f(x)$ over a subset $\chi$ of $\mathbb{R}^k$, where $x =(x_1, \ldots, x_d)$.  If variables $(u, v_1, \ldots, v_d)$ are uniformly distributed over
+This description follows @WGS1991.  Suppose that we wish to simulate values of a $d$-dimensional continuous random variable $X = (X_1, \ldots, X_d)$ with density function proportional to a positive integrable function $f(x)$ over a subset $\chi$ of $\mathbb{R}^d$, where $x =(x_1, \ldots, x_d)$.  If variables $(u, v_1, \ldots, v_d)$ are uniformly distributed over
 $$ C(r) = \left\{ (u, v_1, \ldots, v_d): 0 < u \leq \left[ f\left( \frac{v_1}{u^r}, \ldots, \frac{v_d}{u^r} \right) \right] ^ {1/(r d + 1)} \right\} $$
 for some $r \geq 0$, then $(v_1 / u ^r, \ldots, v_d / u ^ r)$ has density $f(x) / \int f(x) {\rm ~d}x$.  Typically, it is not possible directly to simulate $(u, v_1, \ldots, v_d)$ uniformly over $C(r)$.  Instead we simulate uniformly over a simpler region that encloses $C(r)$ accepting only those values for which the inequality in the definition of $C(r)$ holds.  If, over $\chi$, $f(x)$ and $x_i^{r d +1} f(x)^r$, $i = 1, \ldots, d$, are bounded then we can enclose $C(r)$ within the $(d+1)$-dimensional bounding box $\{ 0 < u \leq a(r), \, b_i^-(r) \leq v_i \leq b_i^+(r), \, i = 1, \ldots, d \}$, where the parameters of the bounding box are given by 
 $$
