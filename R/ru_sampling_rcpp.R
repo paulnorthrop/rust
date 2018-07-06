@@ -838,7 +838,10 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
       if (temp$convergence == 10) {
-        add_args <- list(par = temp$par, fn = a_obj_fun, method = "L-BFGS-B",
+        # Start a little away from the optimum, to avoid erroneous
+        # convergence warnings, using init_psi as a benchmark
+        new_start <- (init_psi + 9 * temp$par) / 10
+        add_args <- list(par = new_start, fn = a_obj_fun, method = "L-BFGS-B",
                          control = control, big_val = big_val,
                          lower = lower, upper = upper)
         temp <- do.call(stats::optim, c(ru_args, add_args))
@@ -847,8 +850,8 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
       # limit without the convergence criteria being satisfied.  Then try
       # nlminb as a further check, but don't use the control argument in
       # case of conflict between optim() and nlminb().
-      if (temp$convergence == 1) {
-        add_args <- list(start = temp$par, objective = a_obj_fun,
+      if (temp$convergence > 0) {
+        add_args <- list(start = new_start, objective = a_obj_fun,
                          lower = lower, upper = upper, big_val = Inf)
         temp <- do.call(stats::nlminb, c(ru_args, add_args))
       }
@@ -860,9 +863,10 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
     temp <- do.call(stats::nlminb, c(ru_args, add_args))
     # Sometimes nlminb isn't sure that it has found the minimum when in fact
     # it has.  Try to check this, and avoid a non-zero convergence indicator
-    # by using optim with method="L-BFGS-B", starting from nlminb's solution.
+    # by using optim with method="L-BFGS-B", again starting from new_start.
     if (temp$convergence > 0) {
-      add_args <- list(par = temp$par, fn = a_obj_fun, hessian = FALSE,
+      new_start <- (init_psi + 9 * temp$par) / 10
+      add_args <- list(par = new_start, fn = a_obj_fun, hessian = FALSE,
                        method = "L-BFGS-B", big_val = big_val,
                        lower = lower, upper = upper)
       temp <- do.call(stats::optim, c(ru_args, add_args))
