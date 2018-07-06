@@ -1,5 +1,9 @@
 # rust 1.3.5.9000
 
+## Bug fixes and minor improvements
+
+* Further steps are taken in the opimizations used to set up the ratio-of-uniforms bounding box (specifically in find_a() and in cpp_find_a()) to avoid erroneous (lack of) convergence warnings. These can occur if we start with optimization algorithm too close to the solution.
+
 # rust 1.3.5
 
 ## Bug fixes and minor improvements
