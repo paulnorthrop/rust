@@ -21,24 +21,24 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
   knitr::opts_chunk$set(eval = FALSE)
 ```
 
-The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution. For an introduction to *rust* see the vignette [Introducing rust](rust-vignette.html). The user specifies (the log of) a positive target function $f(x)$ that is proportional to the density function of the distribution. 
+The **rust** package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a $d$-dimensional continuous distribution, starting from (the log of) a positive target function $f(x)$ proportional to the density function of the distribution and provided by the user. For an introduction to *rust*, see the vignette [Introducing rust](rust-vignette.html). 
 
-This vignette describes a new feature of **rust**: the option for the user to provide a C++ function to evaluate the target log-density, rather than an R function.  The **Rcpp** [@Rcpp, @RcppDEbook] and **RcppArmadillo** [@arma] packages are used to speed up simulation from the target density.  The improvement results from faster function evaluations and (in particular) from performing using C++ the looping in the ratio-of-uniforms algorithm.  The new function `ru_rcpp` requires the target log-density to be specified using (externals pointers to) C++ functions, whereas the existing `ru` requires input R functions.  Otherwise, the functionality of these two functions is the same.  There are also Rcpp-based versions of functionsfor setting Box-Cox transformation parameters: `find_lambda_rcpp` and `find_lambda_one_d_rcpp`
+This vignette describes a new feature of **rust**: the option for the user to provide a C++ function to evaluate the target log-density, rather than an R function.  The **Rcpp** [@Rcpp, @RcppDEbook] and **RcppArmadillo** [@arma] packages are used to speed up simulation from the target density.  The improvement results from faster function evaluations and (in particular) from performing using C++ the looping in the ratio-of-uniforms algorithm.  The new function `ru_rcpp` requires the target log-density to be specified using (externals pointers to) C++ functions, whereas the existing `ru` requires R functions as input.  Otherwise, the functionality of these two functions is the same.  There are also Rcpp-based versions of functions for setting Box-Cox transformation parameters: `find_lambda_rcpp` and `find_lambda_one_d_rcpp`
 
-In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use.  For more information about these examples see the vignette [Introducing rust](rust-vignette.html)
+In this vignette, we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use. For more information about these examples, see the vignette [Introducing rust](rust-vignette.html)
 
 ## Providing a C++ function to `ru_rcpp` {#cpp_fun}
 
-The general way that **rust** enables users to provide their own C++ functions uses external pointers and is based on the [Rcpp Gallery](http://gallery.rcpp.org/) article [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/) by Dirk Eddelbuettel.  For a detailed case study of the general approach see the **RcppDE** package [@RcppDE] vignette at the [RcppDE page on CRAN](https://CRAN.R-project.org/package=RcppDE).
+The general way that **rust** enables users to provide their own C++ functions uses external pointers and is based on the [Rcpp Gallery](http://gallery.rcpp.org/) article [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/) by Dirk Eddelbuettel.  For a detailed case study of the general approach, see the **RcppDE** package [@RcppDE] vignette at the [RcppDE page on CRAN](https://CRAN.R-project.org/package=RcppDE).
 
 The user writes a C++ function to calculate $\log f(x)$.  The current implementation in **rust** requires this function to have a particular structure: it must take a constant reference to an `Rcpp::NumericVector`, say `x`, a constant reference to an `Rcpp::List`, say `pars`, and return a `double` precision scalar. `x` is the argument $x$ of $f(x)$. `pars` is a list containing the values of parameters whose values are not specified inside the function.  This allows the user to change the values of any parameters in the target density without editing the function.  If there are no such parameters then the user must still include the argument `pars` in their function, even though the list provided to the function when it is called will be empty. 
 
-A simple way for the user to provide their C++ functions to create them in a file, say `user_fns.cpp`.  Example content is provided below.  The full file is available on the [rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).  The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example content below also includes the function `create_xptr`, which creates an external pointer to a C++ function. See [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/).  It is this external pointer that is passed to `ru_rcpp` to perform ratio-of-uniforms sampling.  If the user has written a C++ function, say `new_name`, they need to add to `create_xptr` two lines of code:
+A simple way for the user to provide their C++ functions to create them in a file, say `user_fns.cpp`.  Example content is provided below.  The full file is available on the [rust Github page](https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp).  The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example content below also includes the function `create_xptr`, which creates an external pointer to a C++ function. See [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/).  It is this external pointer that is passed to `ru_rcpp` to perform ratio-of-uniforms sampling.  If the user has written a C++ function, say `new_name`, he/she needs to add to `create_xptr` two lines of code:
 
     else if (fstr == "new_name")  
       return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
 
-in order that they can create an external pointer for `new_name` using `create_xptr`.  The following excerpt from the example `user_fns.cpp` file contains code for a standard normal density.  Note that for this particular example we don't need RcppArmadillo: we could replace `#include <RcppArmadillo.h>` with `#include <Rcpp.h>` and delete `using namespace arma;`.  However, RcppArmadillo is used in the the [multivariate normal example](#mvn) below and will be useful in many examples.
+in order to create an external pointer for `new_name` using `create_xptr`.  The following excerpt from the example `user_fns.cpp` file contains code for a standard normal density.  Note that, for this particular example, we don't need RcppArmadillo: we could replace `#include <RcppArmadillo.h>` with `#include <Rcpp.h>` and delete `using namespace arma;`.  However, RcppArmadillo is used in the the [multivariate normal example](#mvn) below and will be useful in many examples.
 
     // [[Rcpp::depends(RcppArmadillo)]]
     
@@ -92,7 +92,7 @@ in order that they can create an external pointer for `new_name` using `create_x
     
 ## Examples : `ru_rcpp`
 
-All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.  We use the **microbenchmark** package [@microbenchmark] to make the comparision.
+All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here, we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.  We use the **microbenchmark** package [@microbenchmark] to make the comparisons.
 
 ```{r}
 library(rust)
@@ -106,7 +106,7 @@ if (got_microbenchmark) {
 n <- 1000
 ```
 
-It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.
+It is assumed that the user has already compiled their C++ functions and made them available to the environment of their R session, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.
 
 ### Standard normal density
 
@@ -142,7 +142,7 @@ As we would hope, `ru_rcpp` is faster than `ru`.  If we start from the same rand
 
 ### Multivariate normal density {#mvn}
 
-To execute this example we add the following function to `user_fns.cpp`
+To execute this example, we add the following function to `user_fns.cpp`
 
     // d-dimensional normal with zero-mean and covariance matrix sigma.
 
@@ -189,7 +189,7 @@ Again, the improvement in speed obtained using Rcpp is clear.
 
 ### Log-normal density after Box-Cox transformation
 
-In this example we use a log transform (Box-Cox parameter $\lambda = 0$) so that the ratio-of-uniforms sampling is based on a normal distribution.  The C++ function to calculate the log-density of a lognormal distribution is:
+In this example, we use a log transform (Box-Cox parameter $\lambda = 0$) so that the ratio-of-uniforms sampling is based on a normal distribution.  The C++ function to calculate the log-density of a lognormal distribution is:
 
     // Lognormal(mu, sigma).
 
@@ -314,7 +314,7 @@ lambda
 
 ### Generalized Pareto posterior density: example for `find_lambda_rcpp`
 
-In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function `phi_to_theta` must have the same structure as the function used to calculate $\log f$. See [Providing a C++ function to `ru_rcpp`](#cpp_fun) for details. See the [Introducing rust](rust-vignette.html) vignette for the form of the transformation.
+In this example, we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function `phi_to_theta` must have the same structure as the function used to calculate $\log f$. See [Providing a C++ function to `ru_rcpp`](#cpp_fun) for details. See the [Introducing rust](rust-vignette.html) vignette for the form of the transformation.
 
 ```{r}
 temp <- do.call(gpd_init, ss)

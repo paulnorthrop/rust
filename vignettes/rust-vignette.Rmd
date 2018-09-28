@@ -33,7 +33,7 @@ The main function in the rust package is `ru`, which implments the generalized r
 
 ## The multivariate generalized ratio-of-uniforms method
 
-This description follows @WGS1991.  Suppose that we wish to simulate values of a $d$-dimensional continuous random variable $X = (X_1, \ldots, X_d)$ with density function proportional to a positive integrable function $f(x)$ over a subset $\chi$ of $\mathbb{R}^k$, where $x =(x_1, \ldots, x_d)$.  If variables $(u, v_1, \ldots, v_d)$ are uniformly distributed over
+This description follows @WGS1991.  Suppose that we wish to simulate values of a $d$-dimensional continuous random variable $X = (X_1, \ldots, X_d)$ with density function proportional to a positive integrable function $f(x)$ over a subset $\chi$ of $\mathbb{R}^d$, where $x =(x_1, \ldots, x_d)$.  If variables $(u, v_1, \ldots, v_d)$ are uniformly distributed over
 $$ C(r) = \left\{ (u, v_1, \ldots, v_d): 0 < u \leq \left[ f\left( \frac{v_1}{u^r}, \ldots, \frac{v_d}{u^r} \right) \right] ^ {1/(r d + 1)} \right\} $$
 for some $r \geq 0$, then $(v_1 / u ^r, \ldots, v_d / u ^ r)$ has density $f(x) / \int f(x) {\rm ~d}x$.  Typically, it is not possible directly to simulate $(u, v_1, \ldots, v_d)$ uniformly over $C(r)$.  Instead we simulate uniformly over a simpler region that encloses $C(r)$ accepting only those values for which the inequality in the definition of $C(r)$ holds.  If, over $\chi$, $f(x)$ and $x_i^{r d +1} f(x)^r$, $i = 1, \ldots, d$, are bounded then we can enclose $C(r)$ within the $(d+1)$-dimensional bounding box $\{ 0 < u \leq a(r), \, b_i^-(r) \leq v_i \leq b_i^+(r), \, i = 1, \ldots, d \}$, where the parameters of the bounding box are given by 
 $$
@@ -49,11 +49,11 @@ $$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{
 
 ### Example: the multivariate normal distribution
 
-To study how the efficiency of the ratio-of-uniforms method deceases with dimension $d$ a useful benchmark is provided by the zero-mean $d$-dimensional normal distribution with independent components.
+To study how the efficiency of the ratio-of-uniforms method decreases with dimension $d$ a useful benchmark is provided by the zero-mean $d$-dimensional normal distribution with independent components.
 Without loss of generality we work with the case with unit marginal variances, i.e.
 $$ f(x) \propto \exp\left( -\frac12 \sum_{i=1}^d x_i^2 \right).$$
 
-For all dimensions $d$ the maximal probabilty of acceptance occurs when $r = 1/2$, giving
+For all dimensions $d$ the maximal probability of acceptance occurs when $r = 1/2$, giving
 $$ p_a(d, 1/2) = \frac{(\pi e)^{d/2}}{2^d (1+d/2)^{1+d/2}}. $$
 The maximal probabilty of acceptance decreases rapidly as $d$ increases, as the following table shows.
 
@@ -97,15 +97,15 @@ We demonstrate how to use the code with four examples.  We start with the genera
 
 ### Example 1: posterior density from a generalized Pareto extreme value analysis
 
-The generalized Pareto (GP) distribution is used in extreme value analyses as a model for excesses over a high threshold.  It has two parameters: a scale parameter $\sigma$ and a shape parameter $\xi$.  For $\xi \neq 0$ it has density function
-$g_Z(z) = \sigma^{-1} \, \left(1 + \xi z / \sigma\right)_{+}^{-(1+1/\xi)}, \, z > 0,$
-where $x_+\!=\!\max(x,0)$.  In the limit as $\xi \rightarrow 0$ we obtain the density of exponential distribution with mean $\sigma$. Suppose that we have available a random sample $z = (z_1, \ldots, z_m)$  of threshold excesses.  The likelihood for $\theta = (\sigma, \xi)$ is 
+The generalized Pareto (GP) distribution is used in extreme value analyses as a model for excesses over a high threshold.  It has two parameters: a scale parameter $\sigma$ and a shape parameter $\xi$.  For $\xi \neq 0$, it has density function
+$$g_Z(z) = \sigma^{-1} \, \left(1 + \xi z / \sigma\right)_{+}^{-(1+1/\xi)}, \, z > 0,$$
+where $x_+\!=\!\max(x,0)$.  In the limit as $\xi \rightarrow 0$, we obtain the density of exponential distribution with mean $\sigma$. Suppose that we have available a random sample $z = (z_1, \ldots, z_m)$  of threshold excesses.  The likelihood for $\theta = (\sigma, \xi)$ is 
 $L(\theta; z) = \prod_{i=1}^m g_Z(z_i; \theta).$
 
 In a Bayesian analysis a prior density $\pi(\theta)$ is placed on $\theta$.  Information from the prior and likelihood are combined using Bayes' theorem to form a posterior density
 $\pi(\theta \mid z) \propto L(\theta; z) \pi(\theta).$  The target density to be $f(\theta) = \pi(\theta \mid z)$, which is positive for $\sigma > 0, \, \xi > - \sigma / x_{(m)}$, where $x_{(m)} = \max(z_1, \ldots, z_m)$.
-The particular prior density that we use here is 
-$\pi(\theta) \propto \sigma^{-1} \exp[-(\xi+1)], \,\sigma > 0, \, \xi \geq -1$ [@NA2016].
+The particular prior density that we use here is [@NA2016]
+$$\pi(\theta) \propto \sigma^{-1} \exp[-(\xi+1)], \,\sigma > 0, \, \xi \geq -1.$$
 For a review of Bayesian extreme value modelling see @Stephenson2016 and for an application based on the GP distribution see @NAJ2016.
 
 We simulate some data from a GP(1, -1/2) distribution.  We choose $\xi=-1/2$ because this tends to result in a posterior distribution with strong negative posterior association between $\sigma$ and $\xi$, making the benefit of transformation more apparent.  We also calculate some sample properties that feature in the likelihood, so that they can be passed to the log-density `logf` rather than being recalculated, and set an initial estimate at which `logf` is positive.
@@ -189,7 +189,7 @@ plot(x4, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75,
   main = paste("Box-Cox, mode relocation and rotation \n pa = ", round(x4$pa, 3)))
 ```
 
-The figure shows how the transformations affect with shape of the density from which we simulate.  In the bottom right plot the density contours suggests little dependence between the transformed components.  The estimate of the probability of acceptance is approximately equal to the 0.534 obtained for a 2-dimensional normal distribution with independent components.
+The figure shows how the transformations affect with shape of the density from which we simulate.  In the bottom right plot, the density contours suggests little dependence between the transformed components.  The estimate of the probability of acceptance is approximately equal to the 0.534 obtained for a 2-dimensional normal distribution with independent components.
 
 Finally, we show a plot of the sample and contours on the original $(\sigma, \xi$)-scale.  
 ```{r, fig.align='center'}
@@ -204,7 +204,7 @@ summary(x4)
 
 ### Example 2: log-normal density
 
-If $X$ has a log-normal distribution with parameters $\mu$ and $\sigma$ then $Z = \log X$ has a normal distributon with mean $\mu$ and variance $\sigma^2$.  Therefore, we know that a log transformation, i.e. a Box-Cox transformation with $\lambda =0$, produces exact normality and we find that the estimated probability of acceptance if greater when when transform than when we don't.
+If $X$ has a log-normal distribution with parameters $\mu$ and $\sigma$ then $Z = \log X$ has a normal distributon with mean $\mu$ and variance $\sigma^2$.  Therefore, we know that a log transformation, i.e. a Box-Cox transformation with $\lambda =0$, produces exact normality and we find that the estimated probability of acceptance if greater when we transform than when we don't.
 
 ```{r}
 # Sampling on original scale ----------------
@@ -262,7 +262,7 @@ x1 <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n, lower = 0,
 x1$pa
 ```
 
-We get a warning because when $\alpha = 1$ the mode of a gamma distribution is at zero, the lower end point of the distribution.  In this example it doesn't matter because the density is finite at the mode and we are not relying on the mode being at a turning point of the density.  However, if we are using rotation of axes in a multidimensional example then we may have a problem because the rotation is based on an estimate of the Hessian of the density at the mode.
+We get a warning because when $\alpha = 1$ the mode of a gamma distribution is at zero, the lower end point of the distribution.  In this example, it doesn't matter because the density is finite at the mode and we are not relying on the mode being at a turning point of the density.  However, if we are using rotation of axes in a multidimensional example then we may have a problem because the rotation is based on an estimate of the Hessian of the density at the mode.
 
 Now we use a cube root transformation.
 
@@ -292,7 +292,7 @@ x3$pa
 
 We could also use `find_lambda_one_d` to set $\lambda$: see the examples in the documentation for `find_lambda_one_d` for details.
 
-For $\alpha < 1$ the gamma density is very skewed and the density increases without limit at the origin.  A cube root transformation tends not to be sufficiently strong to produce a distribution for which the density is finite at its mode.
+For $\alpha < 1$, the gamma density is very skewed and the density increases without limit at the origin.  A cube root transformation tends not to be sufficiently strong to produce a distribution for which the density is finite at its mode.
 We use `find_lambda_one_d` to estimate a suitable value of $\lambda$.  We need to set a range of values over which to evaluate the gamma density in order to estimate $\lambda$.  Here we cheat by using the gamma quantile function, something that wouldn't usually be available.
 
 ```{r}
@@ -311,7 +311,7 @@ x4 <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n, trans = "BC",
 x4$pa
 ```
 
-For a value of $\alpha$ so close to 0 the density is very peaked at the origin (see the plot on the left below).  After a transformation that is close to a log transformation the target density (see the plot on the right) is bounded above and the estimated probability of acceptance is simiilar to that of a normal distribution.
+For a value of $\alpha$ so close to 0, the density is very peaked at the origin (see the plot on the left below).  After a transformation that is close to a log transformation, the target density (see the plot on the right) is bounded above and the estimated probability of acceptance is similar to that of a normal distribution.
 
 ```{r, fig.show='hold'}
 plot(x4)
