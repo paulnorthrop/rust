@@ -21,19 +21,19 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
   knitr::opts_chunk$set(eval = FALSE)
 ```
 
-The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-when-to-use-vignette.html). 
+The **rust** package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-when-to-use-vignette.html). 
 
 The user can provide either an R function (to `ru`) or, from version 1.2.0, a (pointer to a) C++ function (to `ru_rcpp`).  This vignette gives examples of the former.  For examples of the latter see the vignette [Rusting faster: Speedy Simulation using Rcpp](rust-using-rcpp-vignette.html). 
 
-The ratio-of-uniforms method has been used to simulate from low-dimensional distributions in Bayesian analyses, either as part of a Gibbs sampler, a Markov Chain Monte Carlo (MCMC) algorithm, [@WSRG1994] or to simulate directly from a posterior distribution [@NAJ2016].  **rust** is unlikely to be of direct use in high-dimensional problems because it's efficiency decreases with dimension, but it may provide an alternative to MCMC methods in Bayesian analyses of models with small numbers of parameters.  **rust** is used by the package **revdbayes** package [@revdbayes] to perform Bayesian extreme value anlayses.  Potential advantages over MCMC methods are that it produces a random sample of the desired size rather than a dependent sample and avoids the need for MCMC convergence diagostics.  
+The ratio-of-uniforms method has been used to simulate from low-dimensional distributions in Bayesian analyses, either as part of a Gibbs sampler, a Markov Chain Monte Carlo (MCMC) algorithm, [@WSRG1994] or to simulate directly from a posterior distribution [@NAJ2016].  **rust** is unlikely to be of direct use in high-dimensional problems because it's efficiency decreases with dimension, but it may provide an alternative to MCMC methods in Bayesian analyses of models with small numbers of parameters.  **rust** is used by the package **revdbayes** package [@revdbayes] to perform Bayesian extreme value analyses.  Potential advantages over MCMC methods are that it produces a random sample of the desired size rather than a dependent sample and avoids the need for MCMC convergence diagnostics.  
 
 The generalized ratio-of-uniforms method is an acceptance-rejection algorithm: proposals are simulated uniformly over a $(d+1)$-dimensional region, typically a box, that bounds an acceptance region $C(r)$, where $r \geq 0$ is a tuning parameter.  The *probability of acceptance* $p_a(d, r)$, i.e. the probability that an arbitrary proposal is accepted, is given by the ratio of the volume of $C(r)$ to the volume of the bounding region.  @WGS1991 suggest the strategy of relocating the mode of $f$ to the origin as a means of increasing efficiency, in the sense of increasing $p_a(d, r)$.  However, $p_a(d, r)$ may still be low even after mode relocation.  In some cases it is not possible to find a simple region to bound $C(r)$, which means that the ratio-of-uniforms method cannot be used.  Transformation of variable, such as the Box-Cox family [@BC1964] provided in **rust**, can be helpful in these instances. In the multi-dimensional cases strong association between the variables tends to result in a low $p_a(d, r)$. **rust** finds a rotation of variable axes that reduces the association to increase $p_a(d, r)$.  The user can also specify their own variable transformation.
 
-The main function in the rust package is `ru`, which implments the generalized ratio-of-uniforms algorithm. Also provided are two functions, `find_lambda` and `find_lambda_one_d`, that may be used to set a suitable value for the parameter `lambda` if Box-Cox transformation is used prior to simulation.  These are somewhat *ad hoc* but they work well on the examples studied so far.  Basic plot and summary methods are also provided.
+The main function in the rust package is `ru`, which implements the generalized ratio-of-uniforms algorithm. Also provided are two functions, `find_lambda` and `find_lambda_one_d`, that may be used to set a suitable value for the parameter `lambda` if Box-Cox transformation is used prior to simulation.  These are somewhat *ad hoc* but they work well on the examples studied so far.  Basic plot and summary methods are also provided.
 
 ## The multivariate generalized ratio-of-uniforms method
 
-This description follows @WGS1991.  Suppose that we wish to simulate values of a $d$-dimensional continuous random variable $X = (X_1, \ldots, X_d)$ with density function proportional to a positive integrable function $f(x)$ over a subset $\chi$ of $\mathbb{R}^k$, where $x =(x_1, \ldots, x_d)$.  If variables $(u, v_1, \ldots, v_d)$ are uniformly distributed over
+This description follows @WGS1991.  Suppose that we wish to simulate values of a $d$-dimensional continuous random variable $X = (X_1, \ldots, X_d)$ with density function proportional to a positive integrable function $f(x)$ over a subset $\chi$ of $\mathbb{R}^d$, where $x =(x_1, \ldots, x_d)$.  If variables $(u, v_1, \ldots, v_d)$ are uniformly distributed over
 $$ C(r) = \left\{ (u, v_1, \ldots, v_d): 0 < u \leq \left[ f\left( \frac{v_1}{u^r}, \ldots, \frac{v_d}{u^r} \right) \right] ^ {1/(r d + 1)} \right\} $$
 for some $r \geq 0$, then $(v_1 / u ^r, \ldots, v_d / u ^ r)$ has density $f(x) / \int f(x) {\rm ~d}x$.  Typically, it is not possible directly to simulate $(u, v_1, \ldots, v_d)$ uniformly over $C(r)$.  Instead we simulate uniformly over a simpler region that encloses $C(r)$ accepting only those values for which the inequality in the definition of $C(r)$ holds.  If, over $\chi$, $f(x)$ and $x_i^{r d +1} f(x)^r$, $i = 1, \ldots, d$, are bounded then we can enclose $C(r)$ within the $(d+1)$-dimensional bounding box $\{ 0 < u \leq a(r), \, b_i^-(r) \leq v_i \leq b_i^+(r), \, i = 1, \ldots, d \}$, where the parameters of the bounding box are given by 
 $$
@@ -49,13 +49,13 @@ $$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{
 
 ### Example: the multivariate normal distribution
 
-To study how the efficiency of the ratio-of-uniforms method deceases with dimension $d$ a useful benchmark is provided by the zero-mean $d$-dimensional normal distribution with independent components.
+To study how the efficiency of the ratio-of-uniforms method decreases with dimension $d$ a useful benchmark is provided by the zero-mean $d$-dimensional normal distribution with independent components.
 Without loss of generality we work with the case with unit marginal variances, i.e.
 $$ f(x) \propto \exp\left( -\frac12 \sum_{i=1}^d x_i^2 \right).$$
 
-For all dimensions $d$ the maximal probabilty of acceptance occurs when $r = 1/2$, giving
+For all dimensions $d$ the maximal probability of acceptance occurs when $r = 1/2$, giving
 $$ p_a(d, 1/2) = \frac{(\pi e)^{d/2}}{2^d (1+d/2)^{1+d/2}}. $$
-The maximal probabilty of acceptance decreases rapidly as $d$ increases, as the following table shows.
+The maximal probability of acceptance decreases rapidly as $d$ increases, as the following table shows.
 
 ```{r, echo=FALSE, results='asis'}
 d <- 1:6
@@ -204,7 +204,7 @@ summary(x4)
 
 ### Example 2: log-normal density
 
-If $X$ has a log-normal distribution with parameters $\mu$ and $\sigma$ then $Z = \log X$ has a normal distributon with mean $\mu$ and variance $\sigma^2$.  Therefore, we know that a log transformation, i.e. a Box-Cox transformation with $\lambda =0$, produces exact normality and we find that the estimated probability of acceptance if greater when when transform than when we don't.
+If $X$ has a log-normal distribution with parameters $\mu$ and $\sigma$ then $Z = \log X$ has a normal distribution with mean $\mu$ and variance $\sigma^2$.  Therefore, we know that a log transformation, i.e. a Box-Cox transformation with $\lambda =0$, produces exact normality and we find that the estimated probability of acceptance if greater when we transform than when we don't.
 
 ```{r}
 # Sampling on original scale ----------------
@@ -311,7 +311,7 @@ x4 <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n, trans = "BC",
 x4$pa
 ```
 
-For a value of $\alpha$ so close to 0 the density is very peaked at the origin (see the plot on the left below).  After a transformation that is close to a log transformation the target density (see the plot on the right) is bounded above and the estimated probability of acceptance is simiilar to that of a normal distribution.
+For a value of $\alpha$ so close to 0 the density is very peaked at the origin (see the plot on the left below).  After a transformation that is close to a log transformation the target density (see the plot on the right) is bounded above and the estimated probability of acceptance is similar to that of a normal distribution.
 
 ```{r, fig.show='hold'}
 plot(x4)
