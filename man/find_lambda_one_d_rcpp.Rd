@@ -6,9 +6,9 @@
 C++ via Rcpp}
 \usage{
 find_lambda_one_d_rcpp(logf, ..., ep_bc = 1e-04, min_phi = ep_bc,
-  max_phi = 10, num = 1001L, xdiv = 100, probs = seq(0.01, 0.99, by =
-  0.01), lambda_range = c(-3, 3), phi_to_theta = NULL, log_j = NULL,
-  user_args = list())
+  max_phi = 10, num = 1001L, xdiv = 100, probs = seq(0.01, 0.99, by
+  = 0.01), lambda_range = c(-3, 3), phi_to_theta = NULL,
+  log_j = NULL, user_args = list())
 }
 \arguments{
 \item{logf}{A pointer to a compiled C++ function returning the log

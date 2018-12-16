@@ -4,9 +4,10 @@
 \alias{find_lambda_one_d}
 \title{Selecting Box-Cox parameter lambda in the one-dimensional case}
 \usage{
-find_lambda_one_d(logf, ..., ep_bc = 1e-04, min_phi = ep_bc, max_phi = 10,
-  num = 1001, xdiv = 100, probs = seq(0.01, 0.99, by = 0.01),
-  lambda_range = c(-3, 3), phi_to_theta = NULL, log_j = NULL)
+find_lambda_one_d(logf, ..., ep_bc = 1e-04, min_phi = ep_bc,
+  max_phi = 10, num = 1001, xdiv = 100, probs = seq(0.01, 0.99, by
+  = 0.01), lambda_range = c(-3, 3), phi_to_theta = NULL,
+  log_j = NULL)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density f.}
