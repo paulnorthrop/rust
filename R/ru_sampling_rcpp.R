@@ -1,4 +1,4 @@
-# =========================== ru_rucpp ===========================
+# =========================== ru_rcpp ===========================
 
 #' Generalized ratio-of-uniforms sampling using C++ via Rcpp
 #'
