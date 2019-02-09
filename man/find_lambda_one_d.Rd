@@ -135,7 +135,7 @@ Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 
 Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
  Transformations of Multivariate Data, Biometrics, 27(4),
- \url{https://dx.doi.org/10.2307/2528821}.
+ \href{https://www.jstor.org/stable/2528821?origin=crossref&seq=1#page_scan_tab_contents}{https://dx.doi.org/10.2307/2528821}.
 }
 \seealso{
 \code{\link{ru}} and \code{\link{ru_rcpp}} to perform
