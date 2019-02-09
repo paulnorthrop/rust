@@ -12,7 +12,7 @@ before_install:
 
 os:
   - linux
-#  - osx
+  - osx
 
 addons:
   apt:
@@ -23,7 +23,7 @@ addons:
 
 r:
   - release
-  - devel
+#  - devel
 #  - oldrel
 
 env:

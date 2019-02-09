@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* Further steps are taken in the opimizations used to set up the ratio-of-uniforms bounding box (specifically in find_a() and in cpp_find_a()) to avoid erroneous (lack of) convergence warnings. These can occur if we start the optimization algorithm too close to the solution.
+* Further steps are taken in the opimisations used to set up the ratio-of-uniforms bounding box (specifically in find_a() and in cpp_find_a()) to avoid erroneous (lack of) convergence warnings. These can occur if we start the optimisation algorithm too close to the solution.
 
 * LF line endings used in inst/include/rust.h and inst/include/rust_RcppExports.h to avoid CRAN NOTE
 
