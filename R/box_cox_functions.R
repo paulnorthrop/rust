@@ -64,7 +64,7 @@
 #'
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
-#'  211-252, \url{http://www.jstor.org/stable/2984418}.
+#'  211-252, \href{https://www.jstor.org/stable/2984418?seq=1#page_scan_tab_contents}{http://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
 #'  \url{https://dx.doi.org/10.2307/2528821}.
@@ -264,7 +264,7 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'  \item{log_j}{as detailed above (only if \code{log_j} is supplied)}
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
-#'  211-252, \url{http://www.jstor.org/stable/2984418}.
+#'  211-252, \href{https://www.jstor.org/stable/2984418?seq=1#page_scan_tab_contents}{http://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
 #'  \url{https://dx.doi.org/10.2307/2528821}.
