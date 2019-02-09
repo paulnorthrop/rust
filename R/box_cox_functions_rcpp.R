@@ -71,10 +71,10 @@
 #'
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
-#'  211-252, \href{https://www.jstor.org/stable/2984418?seq=1#page_scan_tab_contents}{https://www.jstor.org/stable/2984418}.
+#'  211-252, \url{https://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
-#'  \href{https://www.jstor.org/stable/2528821?origin=crossref&seq=1#page_scan_tab_contents}{https://dx.doi.org/10.2307/2528821}.
+#'  \url{https://dx.doi.org/10.2307/2528821}.
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
 #'  \strong{40}(8), 1-18.
@@ -325,10 +325,10 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'  \item{user_args}{as detailed above (only if \code{user_args} is supplied)}
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
-#'  211-252, \href{https://www.jstor.org/stable/2984418?seq=1#page_scan_tab_contents}{https://www.jstor.org/stable/2984418}.
+#'  211-252, \url{https://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
-#'  \href{https://www.jstor.org/stable/2528821?origin=crossref&seq=1#page_scan_tab_contents}{https://dx.doi.org/10.2307/2528821}.
+#'  \url{https://dx.doi.org/10.2307/2528821}.
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
 #'  \strong{40}(8), 1-18.

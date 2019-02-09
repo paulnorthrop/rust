@@ -26,7 +26,7 @@
 #'  \url{http://dx.doi.org/10.1007/BF01889987}.
 #' @references Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
 #'  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
-#'  211-252, \href{https://www.jstor.org/stable/2984418?seq=1#page_scan_tab_contents}{https://www.jstor.org/stable/2984418}.
+#'  211-252, \url{https://www.jstor.org/stable/2984418}.
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless R and
 #'   C++ Integration. Journal of Statistical Software, 40(8), 1-18.
 #'   \url{http://www.jstatsoft.org/v40/i08/}.
