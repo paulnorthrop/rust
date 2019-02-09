@@ -115,7 +115,7 @@
 #'   If \code{d} is greater than one and \code{rotate = TRUE} then a rotation
 #'   of the variable axes is performed \emph{after} mode relocation.  The
 #'   rotation is based on the Choleski decomposition (see \link{chol}) of the
-#'   estimated Hessian (computed using \code{\link[stats]{optimHess}}
+#'   estimated Hessian (computed using \code{\link[stats:optim]{optimHess}}
 #'   of the negated
 #'   log-density after any user-supplied transformation or Box-Cox
 #'   transformation.  If any of the eigenvalues of the estimated Hessian are
@@ -361,7 +361,7 @@
 #'   \code{a_method}, \code{b_method}, \code{a_control} and \code{b_control}.
 #' @seealso \code{\link[stats]{nlminb}} for choices of the arguments
 #'   \code{a_control} and \code{b_control}.
-#' @seealso \code{\link[stats]{optimHess}} for Hessian estimation.
+#' @seealso \code{\link[stats:optim]{optimHess}} for Hessian estimation.
 #' @seealso \code{\link[base]{chol}} for the Choleski decomposition.
 #'
 #' @export
