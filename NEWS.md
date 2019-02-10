@@ -1,3 +1,5 @@
+# rust 1.3.6.9000
+
 # rust 1.3.6
 
 ## Bug fixes and minor improvements
