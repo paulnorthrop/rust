@@ -12,7 +12,8 @@ ru(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   "nlminb" else "optim", b_algor = c("nlminb", "optim"),
   a_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
   b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
-  a_control = list(), b_control = list(), var_names = NULL)
+  a_control = list(), b_control = list(), var_names = NULL,
+  shoof = 0.1)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density \eqn{f}.
@@ -113,6 +114,18 @@ is the chosen algorithm.  If \code{d} = 1 then \code{a_method} and
 
 \item{var_names}{A character vector.  Names to give to the column(s) of
 the simulated values.}
+
+\item{shoof}{A numeric scalar in [0, 1].  Sometimes a spurious
+non-zero convergence indicator is returned from
+\code{\link[stats]{optim}} or \code{\link[stats]{nlminb}}).
+In this event we try to check that a minimum has indeed been found using
+different algorithm.  \code{shoof} controls the starting value provided
+to this algorithm.
+If \code{shoof = 0} then we start from the current solution.
+If \code{shoof = 1} then we start from the initial estimate provided
+to the previous minimisation.  Otherwise, \code{shoof} interpolates
+between these two extremes, with a value close to zero giving a starting
+value that is close to the current solution.}
 }
 \value{
 An object of class "ru" is a list containing the following

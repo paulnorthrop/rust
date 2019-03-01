@@ -93,6 +93,17 @@
 #'   \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.
 #' @param var_names A character vector.  Names to give to the column(s) of
 #'   the simulated values.
+#' @param shoof A numeric scalar in [0, 1].  Sometimes a spurious
+#'   non-zero convergence indicator is returned from
+#'   \code{\link[stats]{optim}} or \code{\link[stats]{nlminb}}).
+#'   In this event we try to check that a minimum has indeed been found using
+#'   different algorithm.  \code{shoof} controls the starting value provided
+#'   to this algorithm.
+#'   If \code{shoof = 0} then we start from the current solution.
+#'   If \code{shoof = 1} then we start from the initial estimate provided
+#'   to the previous minimisation.  Otherwise, \code{shoof} interpolates
+#'   between these two extremes, with a value close to zero giving a starting
+#'   value that is close to the current solution.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -378,7 +389,12 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
-               a_control = list(), b_control = list(), var_names = NULL) {
+               a_control = list(), b_control = list(), var_names = NULL,
+               shoof = 0.1) {
+  # Check that shoof is in [0, 1]
+  if (shoof < 0 || shoof > 1) {
+    stop("''shoof'' must be in [0, 1]")
+  }
   # Check that logf is an external pointer.
   is_pointer <- (class(logf) == "externalptr")
   if (!is_pointer) {
@@ -658,7 +674,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   ru_args <- c(ru_args, logf_args)
   for_find_a <- list(init_psi = init_psi, lower = lower, upper = upper,
                      algor = a_algor, method = a_method, control = a_control,
-                     a_obj_fun = a_obj_fun, ru_args = ru_args)
+                     a_obj_fun = a_obj_fun, ru_args = ru_args,
+                     shoof = shoof)
   temp <- do.call("cpp_find_a", for_find_a)
   #
   # Check that logf is finite at 0
@@ -743,7 +760,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                       conv = conv,
                       algor = b_algor, method = b_method, control = b_control,
                       lower_box_fun = lower_box_fun,
-                      upper_box_fun = upper_box_fun, ru_args = ru_args)
+                      upper_box_fun = upper_box_fun, ru_args = ru_args,
+                      shoof = shoof)
   temp <- do.call("cpp_find_bs", for_find_bs)
   vals <- temp$vals
   conv <- temp$conv
@@ -788,7 +806,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
 
 
 cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
-                        a_obj_fun, ru_args) {
+                        a_obj_fun, ru_args, shoof) {
   #
   # Finds the value of a(r).
   #
@@ -840,7 +858,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
       if (temp$convergence == 10) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
-        new_start <- (init_psi + 9 * temp$par) / 10
+        new_start <- shoof * init_psi + (1 - shoof) * temp$par
         add_args <- list(par = new_start, fn = a_obj_fun, method = "L-BFGS-B",
                          control = control, big_val = big_val,
                          lower = lower, upper = upper)
@@ -865,7 +883,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
     # it has.  Try to check this, and avoid a non-zero convergence indicator
     # by using optim with method="L-BFGS-B", again starting from new_start.
     if (temp$convergence > 0) {
-      new_start <- (init_psi + 9 * temp$par) / 10
+      new_start <- shoof * init_psi + (1 - shoof) * temp$par
       add_args <- list(par = new_start, fn = a_obj_fun, hessian = FALSE,
                        method = "L-BFGS-B", big_val = big_val,
                        lower = lower, upper = upper)
@@ -884,7 +902,8 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
 # =========================== cpp_find_bs ===========================
 
 cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
-                         control, lower_box_fun, upper_box_fun, ru_args) {
+                         control, lower_box_fun, upper_box_fun, ru_args,
+                         shoof) {
   # Finds the values of b-(r) and b+(r).
   #
   # Args:
@@ -958,7 +977,8 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
+        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        add_args <- list(par = new_start, fn = lower_box_fun, j = j - 1,
                          method = "L-BFGS-B", big_val = big_val,
                          upper = t_upper, lower = lower - f_mode)
         temp <- do.call(stats::optim, c(ru_args, add_args))
@@ -981,7 +1001,8 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          add_args <- list(par = temp$par, fn = lower_box_fun, j = j - 1,
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          add_args <- list(par = new_start, fn = lower_box_fun, j = j - 1,
                            control = control, method = "L-BFGS-B",
                            big_val = big_val, upper = t_upper,
                            lower = lower - f_mode)
@@ -990,7 +1011,8 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          add_args <- list(start = temp$par, objective = lower_box_fun,
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          add_args <- list(start = new_start, objective = lower_box_fun,
                            upper = t_upper, lower = lower - f_mode, j = j - 1,
                            big_val = Inf)
           temp <- do.call(stats::nlminb, c(ru_args, add_args))
@@ -1017,7 +1039,8 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
+        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        add_args <- list(par = new_start, fn = upper_box_fun, j = j - 1,
                          method = "L-BFGS-B", big_val = big_val,
                          lower = t_lower, upper = upper - f_mode)
         temp <- do.call(stats::optim, c(ru_args, add_args))
@@ -1040,7 +1063,8 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          add_args <- list(par = temp$par, fn = upper_box_fun, j = j - 1,
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          add_args <- list(par = new_start, fn = upper_box_fun, j = j - 1,
                            control = control, method = "L-BFGS-B",
                            big_val = big_val, lower = t_lower,
                            upper = upper - f_mode)
@@ -1049,7 +1073,8 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          add_args <- list(start = rho_init, objective = upper_box_fun,
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          add_args <- list(start = new_start, objective = upper_box_fun,
                            lower = t_lower, upper = upper - f_mode, j = j - 1,
                            big_val = Inf)
           temp <- do.call(stats::nlminb, c(ru_args, add_args))

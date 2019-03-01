@@ -1,5 +1,9 @@
 # rust 1.3.6.9000
 
+## Bug fixes and minor improvements
+
+* An extra argument `shoof` has been added to `ru()` and `ru_rcpp()` to enable the user to have control over the initial value used to check that a non-zero convergence indicator is indeed spurious.
+
 # rust 1.3.6
 
 ## Bug fixes and minor improvements

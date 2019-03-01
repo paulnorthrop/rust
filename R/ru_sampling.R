@@ -85,6 +85,17 @@
 #'   \code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.
 #' @param var_names A character vector.  Names to give to the column(s) of
 #'   the simulated values.
+#' @param shoof A numeric scalar in [0, 1].  Sometimes a spurious
+#'   non-zero convergence indicator is returned from
+#'   \code{\link[stats]{optim}} or \code{\link[stats]{nlminb}}).
+#'   In this event we try to check that a minimum has indeed been found using
+#'   different algorithm.  \code{shoof} controls the starting value provided
+#'   to this algorithm.
+#'   If \code{shoof = 0} then we start from the current solution.
+#'   If \code{shoof = 1} then we start from the initial estimate provided
+#'   to the previous minimisation.  Otherwise, \code{shoof} interpolates
+#'   between these two extremes, with a value close to zero giving a starting
+#'   value that is close to the current solution.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -356,7 +367,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
-               a_control = list(), b_control = list(), var_names = NULL) {
+               a_control = list(), b_control = list(), var_names = NULL,
+               shoof = 0.1) {
   #
   # Check that the values of key arguments are suitable
   if (r < 0) {
@@ -579,7 +591,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   # Create list of arguments for find_a()
   for_find_a <- list(neg_logf_rho = neg_logf_rho, init_psi = init_psi, d = d,
                      r = r, lower = lower, upper = upper, algor = a_algor,
-                     method = a_method, control = a_control, ...)
+                     method = a_method, control = a_control, shoof = shoof,
+                     ...)
   temp <- do.call("find_a", for_find_a)
   #
   # Check that logf is finite at 0
@@ -657,7 +670,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   for_find_bs <- list(f_rho = f_rho, d = d, r = r, lower = lower,
                       upper = upper, f_mode = f_mode, ep = ep, vals = vals,
                       conv = conv, algor = b_algor, method = b_method,
-                      control = b_control, ...)
+                      control = b_control, shoof = shoof, ...)
   temp <- do.call("find_bs", for_find_bs)
   vals <- temp$vals
   conv <- temp$conv
@@ -716,7 +729,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
 
 
 find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
-                    method, control, ...) {
+                    method, control, shoof, ...) {
   #
   # Finds the value of a(r).
   #
@@ -771,7 +784,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
       if (temp$convergence == 10) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
-        new_start <- (init_psi + 9 * temp$par) / 10
+        new_start <- shoof * init_psi + (1 - shoof) * temp$par
         temp <- stats::optim(par = new_start, fn = a_obj_no_inf, ...,
                              control = control, hessian = FALSE,
                              method = "L-BFGS-B", lower = lower, upper = upper)
@@ -801,7 +814,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   # but don't use the control argument in case of conflict between
   # optim() and nlminb().
   if (temp$convergence > 0) {
-    new_start <- (init_psi + 9 * temp$par) / 10
+    new_start <- shoof * init_psi + (1 - shoof) * temp$par
     temp <- stats::optim(par = new_start, fn = a_obj_no_inf, ...,
                          hessian = FALSE, method = "L-BFGS-B", lower = lower,
                          upper = upper)
@@ -817,7 +830,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
 # =========================== find_bs ===========================
 
 find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
-                     method, control, ...) {
+                     method, control, shoof, ...) {
   # Finds the values of b-(r) and b+(r).
   #
   # Args:
@@ -916,7 +929,8 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(par = temp$par, fn = lower_box_no_inf, j = j, ...,
+        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        temp <- stats::optim(par = new_start, fn = lower_box_no_inf, j = j, ...,
                              hessian = FALSE, method = "L-BFGS-B",
                              upper = t_upper, lower = lower - f_mode)
         l_box[j] <- temp$value
@@ -937,7 +951,8 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          temp <- stats::optim(par = temp$par, fn = lower_box_no_inf, j = j,
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          temp <- stats::optim(par = new_start, fn = lower_box_no_inf, j = j,
                                ..., control = control, method = "L-BFGS-B",
                                hessian = FALSE,
                                upper = t_upper, lower = lower - f_mode)
@@ -945,8 +960,9 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          temp <- stats::nlminb(start = temp$par, objective = lower_box, j = j,
-                                ..., upper = t_upper, lower = lower - f_mode)
+          temp <- stats::nlminb(start = new_start, objective = lower_box,
+                                j = j, ..., upper = t_upper,
+                                lower = lower - f_mode)
           l_box[j] <- temp$objective
         }
       }
@@ -969,8 +985,9 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        temp <- stats::optim(par = temp$par, fn = upper_box_no_inf, j = j, ...,
-                             hessian = FALSE, method = "L-BFGS-B",
+        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        temp <- stats::optim(par = new_start, fn = upper_box_no_inf, j = j,
+                             ..., hessian = FALSE, method = "L-BFGS-B",
                              lower = t_lower, upper = upper - f_mode)
         u_box[j] <- -temp$value
       }
@@ -988,15 +1005,17 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          temp <- stats::optim(par = temp$par, fn = upper_box_no_inf, j = j,
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          temp <- stats::optim(par = new_start, fn = upper_box_no_inf, j = j,
                                ..., control = control, method = "L-BFGS-B",
                                lower = t_lower, upper = upper - f_mode)
           u_box[j] <- -temp$value
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          temp <- stats::nlminb(start = temp$par, objective = upper_box, j = j,
-                                ..., lower = t_lower, upper = upper - f_mode)
+          temp <- stats::nlminb(start = new_start, objective = upper_box,
+                                j = j, ..., lower = t_lower,
+                                upper = upper - f_mode)
           u_box[j] <- -temp$objective
         }
       }
