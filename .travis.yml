@@ -11,7 +11,7 @@ before_install:
   - source before-install.sh
 
 os:
-  - linux
+   - linux
 #  - osx
 
 addons:
