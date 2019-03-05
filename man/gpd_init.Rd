@@ -85,15 +85,15 @@ do.call(gpd_init, ss)
 \references{
 Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-  and Computing (1991) 1, 129-133. \url{http://dx.doi.org/10.1007/BF01889987}.
+  and Computing (1991) 1, 129-133. \url{https://doi.org/10.1007/BF01889987}.
 
 Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and Quantile
   Estimation for the Generalized Pareto Distribution. Technometrics, 29(3),
-  339-349. \url{http://dx.doi.org/10.2307/1269343}.
+  339-349. \url{https://doi.org/10.2307/1269343}.
 
 Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
   with Applications to Insurance, Finance, Hydrology and Other Fields.Birkhauser.
-  \url{http://dx.doi.org/10.1007/978-3-7643-7399-3}.
+  \url{https://doi.org/10.1007/978-3-7643-7399-3}.
 }
 \seealso{
 \code{\link{gpd_sum_stats}} to calculate summary statistics for

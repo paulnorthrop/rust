@@ -374,7 +374,7 @@ x$pa
 Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
  Efficient generation of random variates via the ratio-of-uniforms method.
  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
- \url{http://dx.doi.org/10.1007/BF01889987}.
+ \url{https://doi.org/10.1007/BF01889987}.
 }
 \seealso{
 \code{\link{ru_rcpp}} for a version of \code{\link{ru}} that uses

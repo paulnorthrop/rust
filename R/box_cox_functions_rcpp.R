@@ -74,7 +74,7 @@
 #'  211-252, \url{https://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
-#'  \url{https://dx.doi.org/10.2307/2528821}.
+#'  \url{https://doi.org/10.2307/2528821}.
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
 #'  \strong{40}(8), 1-18.
@@ -328,7 +328,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'  211-252, \url{https://www.jstor.org/stable/2984418}.
 #' @references Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 #'  Transformations of Multivariate Data, Biometrics, 27(4),
-#'  \url{https://dx.doi.org/10.2307/2528821}.
+#'  \url{https://doi.org/10.2307/2528821}.
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
 #'  \strong{40}(8), 1-18.

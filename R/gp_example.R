@@ -56,7 +56,7 @@ gpd_sum_stats <- function(gpd_data) {
 #' @seealso \code{\link{rgpd}} for simulation from a generalized Pareto
 #' @references Northrop, P. J. and Attalides, N. (2016) Posterior propriety in
 #' Bayesian extreme value analyses using reference priors. Statistica Sinica,
-#' 26(2), 721-743, \url{http://dx.doi.org/10.5705/ss.2014.034}.
+#' 26(2), 721-743, \url{https://doi.org/10.5705/ss.2014.034}.
 #' @examples
 #' \dontrun{
 #' # Sample data from a GP(sigma, xi) distribution
@@ -162,13 +162,13 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #'   \code{init_phi} is returned.
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-#'   and Computing (1991) 1, 129-133. \url{http://dx.doi.org/10.1007/BF01889987}.
+#'   and Computing (1991) 1, 129-133. \url{https://doi.org/10.1007/BF01889987}.
 #' @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and Quantile
 #'   Estimation for the Generalized Pareto Distribution. Technometrics, 29(3),
-#'   339-349. \url{http://dx.doi.org/10.2307/1269343}.
+#'   339-349. \url{https://doi.org/10.2307/1269343}.
 #' @references Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
 #'   with Applications to Insurance, Finance, Hydrology and Other Fields.Birkhauser.
-#'   \url{http://dx.doi.org/10.1007/978-3-7643-7399-3}.
+#'   \url{https://doi.org/10.1007/978-3-7643-7399-3}.
 #' @seealso \code{\link{gpd_sum_stats}} to calculate summary statistics for
 #'   use in \code{gpd_loglik}.
 #' @seealso \code{\link{rgpd}} for simulation from a generalized Pareto
@@ -336,7 +336,7 @@ gpd_mle <- function(gpd_data) {
   #
   # Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   #   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-  #   and Computing (1991) 1, 129-133. http://dx.doi.org/10.1007/BF01889987.
+  #   and Computing (1991) 1, 129-133. https://doi.org/10.1007/BF01889987.
   #
   # Args:
   #   gpd_data : A numeric vector containing positive values, assumed to be a
