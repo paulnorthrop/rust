@@ -864,7 +864,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
                          lower = lower, upper = upper)
         temp <- do.call(stats::optim, c(ru_args, add_args))
       }
-      # In some cases optim with method = "L-BFGS-B" may reach it's iteration
+      # In some cases optim with method = "L-BFGS-B" may reach its iteration
       # limit without the convergence criteria being satisfied.  Then try
       # nlminb as a further check, but don't use the control argument in
       # case of conflict between optim() and nlminb().

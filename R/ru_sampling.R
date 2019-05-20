@@ -789,7 +789,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
                              control = control, hessian = FALSE,
                              method = "L-BFGS-B", lower = lower, upper = upper)
       }
-      # In some cases optim with method = "L-BFGS-B" may reach it's iteration
+      # In some cases optim with method = "L-BFGS-B" may reach its iteration
       # limit without the convergence criteria being satisfied.  Then try
       # nlminb as a further check, but don't use the control argument in
       # case of conflict between optim() and nlminb().
