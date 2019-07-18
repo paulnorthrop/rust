@@ -13,7 +13,7 @@ ru(logf, ..., n = 1, d = 1, init = NULL, trans = c("none", "BC",
   a_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
   b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
   a_control = list(), b_control = list(), var_names = NULL,
-  shoof = 0.1)
+  shoof = 0.2)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density \eqn{f}.
@@ -127,7 +127,7 @@ to the previous minimisation.  Otherwise, \code{shoof} interpolates
 between these two extremes, with a value close to zero giving a starting
 value that is close to the current solution.
 The exception to this is when the initial and current solutions are equal.
-Then we start from the current solution multiplied by \code{shoof}.}
+Then we start from the current solution multiplied by \code{1 - shoof}.}
 }
 \value{
 An object of class "ru" is a list containing the following

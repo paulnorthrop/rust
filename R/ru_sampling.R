@@ -97,7 +97,7 @@
 #'   between these two extremes, with a value close to zero giving a starting
 #'   value that is close to the current solution.
 #'   The exception to this is when the initial and current solutions are equal.
-#'   Then we start from the current solution multiplied by \code{shoof}.
+#'   Then we start from the current solution multiplied by \code{1 - shoof}.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -370,7 +370,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN",
                             "Brent"),
                a_control = list(), b_control = list(), var_names = NULL,
-               shoof = 0.1) {
+               shoof = 0.2) {
   #
   # Check that the values of key arguments are suitable
   if (r < 0) {
@@ -786,7 +786,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
       if (temp$convergence == 10) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
-        # If init_psi = temp$par then multiply temp$par by shoof
+        # If init_psi = temp$par then multiply temp$par by 1 - shoof
         if (sum(abs(init_psi - temp$par)) > .Machine$double.eps) {
           new_start <- shoof * init_psi + (1 - shoof) * temp$par
         } else {
