@@ -17,8 +17,8 @@ os:
 addons:
   apt:
     packages:
-      - gcc-4.4
-      - g++-4.4
+      - gcc-4.9
+      - g++-4.9
       - clang
 
 r:
