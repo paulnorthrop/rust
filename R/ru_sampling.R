@@ -96,6 +96,8 @@
 #'   to the previous minimisation.  Otherwise, \code{shoof} interpolates
 #'   between these two extremes, with a value close to zero giving a starting
 #'   value that is close to the current solution.
+#'   The exception to this is when the initial and current solutions are equal.
+#'   Then we start from the current solution multiplied by \code{shoof}.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -784,7 +786,12 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
       if (temp$convergence == 10) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
-        new_start <- shoof * init_psi + (1 - shoof) * temp$par
+        # If init_psi = temp$par then multiply temp$par by shoof
+        if (sum(abs(init_psi - temp$par)) > .Machine$double.eps) {
+          new_start <- shoof * init_psi + (1 - shoof) * temp$par
+        } else {
+          new_start <- temp$par * (1 - shoof)
+        }
         temp <- stats::optim(par = new_start, fn = a_obj_no_inf, ...,
                              control = control, hessian = FALSE,
                              method = "L-BFGS-B", lower = lower, upper = upper)
@@ -814,7 +821,11 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   # but don't use the control argument in case of conflict between
   # optim() and nlminb().
   if (temp$convergence > 0) {
-    new_start <- shoof * init_psi + (1 - shoof) * temp$par
+    if (sum(abs(init_psi - temp$par)) > .Machine$double.eps) {
+      new_start <- shoof * init_psi + (1 - shoof) * temp$par
+    } else {
+      new_start <- temp$par * (1 - shoof)
+    }
     temp <- stats::optim(par = new_start, fn = a_obj_no_inf, ...,
                          hessian = FALSE, method = "L-BFGS-B", lower = lower,
                          upper = upper)
@@ -929,7 +940,11 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        } else {
+          new_start <- temp$par * (1 - shoof)
+        }
         temp <- stats::optim(par = new_start, fn = lower_box_no_inf, j = j, ...,
                              hessian = FALSE, method = "L-BFGS-B",
                              upper = t_upper, lower = lower - f_mode)
@@ -951,7 +966,11 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           temp <- stats::optim(par = new_start, fn = lower_box_no_inf, j = j,
                                ..., control = control, method = "L-BFGS-B",
                                hessian = FALSE,
@@ -960,6 +979,11 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           temp <- stats::nlminb(start = new_start, objective = lower_box,
                                 j = j, ..., upper = t_upper,
                                 lower = lower - f_mode)
@@ -985,7 +1009,11 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        } else {
+          new_start <- temp$par * (1 - shoof)
+        }
         temp <- stats::optim(par = new_start, fn = upper_box_no_inf, j = j,
                              ..., hessian = FALSE, method = "L-BFGS-B",
                              lower = t_lower, upper = upper - f_mode)
@@ -1005,7 +1033,11 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           temp <- stats::optim(par = new_start, fn = upper_box_no_inf, j = j,
                                ..., control = control, method = "L-BFGS-B",
                                lower = t_lower, upper = upper - f_mode)
@@ -1013,6 +1045,11 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           temp <- stats::nlminb(start = new_start, objective = upper_box,
                                 j = j, ..., lower = t_lower,
                                 upper = upper - f_mode)

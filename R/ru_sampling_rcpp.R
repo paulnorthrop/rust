@@ -104,6 +104,8 @@
 #'   to the previous minimisation.  Otherwise, \code{shoof} interpolates
 #'   between these two extremes, with a value close to zero giving a starting
 #'   value that is close to the current solution.
+#'   The exception to this is when the initial and current solutions are equal.
+#'   Then we start from the current solution multiplied by \code{shoof}.
 #' @details If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
 #'   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -858,7 +860,12 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
       if (temp$convergence == 10) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
-        new_start <- shoof * init_psi + (1 - shoof) * temp$par
+        # If init_psi = temp$par then multiply temp$par by shoof
+        if (sum(abs(init_psi - temp$par)) > .Machine$double.eps) {
+          new_start <- shoof * init_psi + (1 - shoof) * temp$par
+        } else {
+          new_start <- temp$par * (1 - shoof)
+        }
         add_args <- list(par = new_start, fn = a_obj_fun, method = "L-BFGS-B",
                          control = control, big_val = big_val,
                          lower = lower, upper = upper)
@@ -883,7 +890,11 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
     # it has.  Try to check this, and avoid a non-zero convergence indicator
     # by using optim with method="L-BFGS-B", again starting from new_start.
     if (temp$convergence > 0) {
-      new_start <- shoof * init_psi + (1 - shoof) * temp$par
+      if (sum(abs(init_psi - temp$par)) > .Machine$double.eps) {
+        new_start <- shoof * init_psi + (1 - shoof) * temp$par
+      } else {
+        new_start <- temp$par * (1 - shoof)
+      }
       add_args <- list(par = new_start, fn = a_obj_fun, hessian = FALSE,
                        method = "L-BFGS-B", big_val = big_val,
                        lower = lower, upper = upper)
@@ -977,7 +988,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        } else {
+          new_start <- temp$par * (1 - shoof)
+        }
         add_args <- list(par = new_start, fn = lower_box_fun, j = j - 1,
                          method = "L-BFGS-B", big_val = big_val,
                          upper = t_upper, lower = lower - f_mode)
@@ -1001,7 +1016,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           add_args <- list(par = new_start, fn = lower_box_fun, j = j - 1,
                            control = control, method = "L-BFGS-B",
                            big_val = big_val, upper = t_upper,
@@ -1011,7 +1030,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           add_args <- list(start = new_start, objective = lower_box_fun,
                            upper = t_upper, lower = lower - f_mode, j = j - 1,
                            big_val = Inf)
@@ -1039,7 +1062,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
       # it has.  Try to check this, and avoid a non-zero convergence indicator
       # by using optim with method="L-BFGS-B", starting from nlminb's solution.
       if (temp$convergence > 0) {
-        new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+        } else {
+          new_start <- temp$par * (1 - shoof)
+        }
         add_args <- list(par = new_start, fn = upper_box_fun, j = j - 1,
                          method = "L-BFGS-B", big_val = big_val,
                          lower = t_lower, upper = upper - f_mode)
@@ -1063,7 +1090,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
         if (temp$convergence == 10) {
-          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           add_args <- list(par = new_start, fn = upper_box_fun, j = j - 1,
                            control = control, method = "L-BFGS-B",
                            big_val = big_val, lower = t_lower,
@@ -1073,7 +1104,11 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         }
         # Check using nlminb() if optim's iteration limit is reached.
         if (temp$convergence == 1) {
-          new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
+            new_start <- shoof * rho_init + (1 - shoof) * temp$par
+          } else {
+            new_start <- temp$par * (1 - shoof)
+          }
           add_args <- list(start = new_start, objective = upper_box_fun,
                            lower = t_lower, upper = upper - f_mode, j = j - 1,
                            big_val = Inf)

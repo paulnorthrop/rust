@@ -125,7 +125,9 @@ If \code{shoof = 0} then we start from the current solution.
 If \code{shoof = 1} then we start from the initial estimate provided
 to the previous minimisation.  Otherwise, \code{shoof} interpolates
 between these two extremes, with a value close to zero giving a starting
-value that is close to the current solution.}
+value that is close to the current solution.
+The exception to this is when the initial and current solutions are equal.
+Then we start from the current solution multiplied by \code{shoof}.}
 }
 \value{
 An object of class "ru" is a list containing the following
