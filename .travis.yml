@@ -27,7 +27,7 @@ r:
 #  - oldrel
 
 env:
-#  - COMPILER=gcc-4.4
+#  - COMPILER=gcc-4.9
   - COMPILER=gcc
 #  - COMPILER=clang
 
