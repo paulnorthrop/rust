@@ -15,7 +15,7 @@
 #'     \item{sum_gp}{A numeric scalar. The sum of the non-missing sample
 #'     values.}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 #' # Calculate summary statistics for use in the log-likelihood
@@ -58,7 +58,7 @@ gpd_sum_stats <- function(gpd_data) {
 #' Bayesian extreme value analyses using reference priors. Statistica Sinica,
 #' 26(2), 721-743, \url{http://dx.doi.org/10.5705/ss.2014.034}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 #' # Calculate summary statistics for use in the log-likelihood
@@ -84,7 +84,7 @@ gpd_logpost <- function(pars, ss) {
 #' @param xi A numeric scalar.  The generalized Pareto shape parameter.
 #' @return A numeric vector.  A generalized Pareto sample of size \code{m}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 #' }
@@ -175,7 +175,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #' @seealso \code{\link{find_lambda}} to produce (somewhat) automatically
 #'   a list for the argument \code{lambda} of \code{ru}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 #' # Calculate summary statistics for use in the log-likelihood

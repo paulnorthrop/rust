@@ -101,7 +101,7 @@ lambda
 x <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = 1000,
         trans = "BC", lambda = lambda)
 
-\dontrun{
+\donttest{
 # Generalized Pareto posterior distribution ===================
 
 # Sample data from a GP(sigma, xi) distribution

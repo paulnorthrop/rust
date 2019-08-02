@@ -107,7 +107,7 @@
 #' x <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = 1000,
 #'         trans = "BC", lambda = lambda)
 #'
-#' \dontrun{
+#' \donttest{
 #' plot(x)
 #' plot(x, ru_scale = TRUE)
 #' }
@@ -291,7 +291,7 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' x <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = 1000,
 #'         trans = "BC", lambda = lambda)
 #'
-#' \dontrun{
+#' \donttest{
 #' # Generalized Pareto posterior distribution ===================
 #'
 #' # Sample data from a GP(sigma, xi) distribution

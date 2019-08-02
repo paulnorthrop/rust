@@ -20,7 +20,7 @@ A numeric vector.  A generalized Pareto sample of size \code{m}.
 Simulates a sample of size \code{m} from a generalized Pareto distribution.
 }
 \examples{
-\dontrun{
+\donttest{
 # Sample data from a GP(sigma, xi) distribution
 gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 }

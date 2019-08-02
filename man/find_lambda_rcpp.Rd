@@ -112,7 +112,7 @@ lambda
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
              lambda = lambda)
 
-\dontrun{
+\donttest{
 # Generalized Pareto posterior distribution ===================
 
 # Sample data from a GP(sigma, xi) distribution

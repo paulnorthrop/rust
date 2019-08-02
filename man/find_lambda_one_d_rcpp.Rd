@@ -135,7 +135,7 @@ lambda <- find_lambda_one_d_rcpp(logf = ptr_gam, alpha = alpha,
 lambda
 x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1000, trans = "BC",
              lambda = lambda)
-\dontrun{
+\donttest{
 plot(x)
 plot(x, ru_scale = TRUE)
 }

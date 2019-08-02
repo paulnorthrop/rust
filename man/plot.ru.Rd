@@ -57,12 +57,12 @@ depicting the simulated values. Only relevant when \code{d = 2}.}
 # Log-normal density ----------------
 x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 1)
 
-\dontrun{
+\donttest{
 plot(x)
 }
 
 # Improve appearance using arguments to plot() and hist()
-\dontrun{
+\donttest{
 plot(x, breaks = seq(0, ceiling(max(x$sim_vals)), by = 0.25),
   xlim = c(0, 10))
 }
@@ -77,7 +77,7 @@ log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
 }
 x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
 
-\dontrun{
+\donttest{
 plot(x)
 }
 }

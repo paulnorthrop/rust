@@ -314,7 +314,7 @@ x <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = n,
   user_args = list(lambda = lambda), init = alpha)
 summary(x)
 
-\dontrun{
+\donttest{
 # Generalized Pareto posterior distribution ===================
 
 # Sample data from a GP(sigma, xi) distribution

@@ -73,7 +73,7 @@ The main aim is to calculate an admissible estimate of theta,
   estimate sigma conditional on this.
 }
 \examples{
-\dontrun{
+\donttest{
 # Sample data from a GP(sigma, xi) distribution
 gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 # Calculate summary statistics for use in the log-likelihood

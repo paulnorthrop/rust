@@ -260,7 +260,7 @@
 #'         user_args = list(lambda = lambda), init = alpha)
 #' summary(x)
 #'
-#' \dontrun{
+#' \donttest{
 #' # Generalized Pareto posterior distribution ===================
 #'
 #' # Sample data from a GP(sigma, xi) distribution

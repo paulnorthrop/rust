@@ -23,7 +23,7 @@ prior for the generalized Pareto parameters, a Maximal Data Information
 density that is proper.
 }
 \examples{
-\dontrun{
+\donttest{
 # Sample data from a GP(sigma, xi) distribution
 gpd_data <- rgpd(m = 100, xi = 0, sigma = 1)
 # Calculate summary statistics for use in the log-likelihood

@@ -123,7 +123,7 @@ lambda
 x <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = 1000,
         trans = "BC", lambda = lambda)
 
-\dontrun{
+\donttest{
 plot(x)
 plot(x, ru_scale = TRUE)
 }
