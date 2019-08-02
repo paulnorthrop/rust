@@ -361,7 +361,7 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'   main = "Box-Cox and mode relocation")
 #' plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
 #'   main = "Box-Cox, mode relocation and rotation")
-#' par(def_par)
+#' graphics::par(def_par)
 #' }
 #' @seealso \code{\link{ru}} and \code{\link{ru_rcpp}} to perform
 #'   ratio-of-uniforms sampling.

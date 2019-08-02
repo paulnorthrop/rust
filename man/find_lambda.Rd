@@ -171,7 +171,7 @@ plot(x3, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
   main = "Box-Cox and mode relocation")
 plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE,
   main = "Box-Cox, mode relocation and rotation")
-par(def_par)
+graphics::par(def_par)
 }
 }
 \references{
