@@ -190,8 +190,8 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
         ylabs <- rep(NA, x$d)
       }
     }
-    def.par <- graphics::par(no.readonly = TRUE)
-    graphics::par(mfrow = c(rows, cols))
+    oldpar <- graphics::par(mfrow = c(rows, cols))
+    on.exit(par(oldpar))
     pairwise_plots <- function(x) {
       for (i in 1:(ncol(x) - 1)) {
         for (j in (i + 1):ncol(x)) {
@@ -202,7 +202,6 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
       }
     }
     pairwise_plots(plot_data)
-    graphics::par(def.par)
   }
 }
 
