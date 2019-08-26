@@ -729,7 +729,6 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
 
 # =========================== find_a ===========================
 
-
 find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
                     method, control, shoof, ...) {
   #
