@@ -7,6 +7,15 @@
 \alias{optim_box_cox}
 \alias{n_grid_fn}
 \alias{init_psi_calc}
+\alias{log_gpd_mdi_prior}
+\alias{gpd_loglik}
+\alias{gpd_mle}
+\alias{fallback_gp_mle}
+\alias{gpd_obs_info}
+\alias{find_a}
+\alias{find_bs}
+\alias{cpp_find_a}
+\alias{cpp_find_bs}
 \title{Internal rust functions}
 \usage{
 box_cox(x, lambda = 1, gm = 1, lambda_tol = 1e-06)
@@ -19,6 +28,28 @@ optim_box_cox(x, w, lambda_range = c(-3, 3), start = NULL,
 n_grid_fn(d)
 
 init_psi_calc(phi_to_psi, phi, lambda, gm, w, which_lam)
+
+log_gpd_mdi_prior(pars)
+
+gpd_loglik(pars, gpd_data, m, xm, sum_gp)
+
+gpd_mle(gpd_data)
+
+fallback_gp_mle(init, ...)
+
+gpd_obs_info(gpd_pars, y)
+
+find_a(neg_logf_rho, init_psi, d, r, lower, upper, algor, method, control,
+  shoof, ...)
+
+find_bs(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor, method,
+  control, shoof, ...)
+
+cpp_find_a(init_psi, lower, upper, algor, method, control, a_obj_fun,
+  ru_args, shoof)
+
+cpp_find_bs(lower, upper, ep, vals, conv, algor, method, control,
+  lower_box_fun, upper_box_fun, ru_args, shoof)
 }
 \description{
 Internal rust functions
