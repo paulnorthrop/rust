@@ -473,7 +473,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   #                transformed.
   #   lambda     : A numeric scalar.  Transformation parameter.
   #   gm         : A numeric scalar.  Optional scaling parameter.
-  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
+  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda_tol use
   #                a Taylor series expansion.
   #
   # Returns:
