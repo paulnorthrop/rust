@@ -322,7 +322,6 @@ gpd_obs_info <- function(gpd_pars, y) {
   return(i)
 }
 
-
 # =========================== find_a ===========================
 
 #' @keywords internal
