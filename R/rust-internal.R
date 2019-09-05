@@ -379,7 +379,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
                            hessian = FALSE, method = method)
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator by using L-BFGS-B instead.
-      if (temp$convergence == 10) {
+      if (temp$convergence > 0) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
         # If init_psi = temp$par then multiply temp$par by 1 - shoof
@@ -563,7 +563,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         l_box[j] <- temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
-        if (temp$convergence == 10) {
+        if (temp$convergence > 0) {
           if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
             new_start <- shoof * rho_init + (1 - shoof) * temp$par
           } else {
@@ -630,7 +630,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
         u_box[j] <- -temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
-        if (temp$convergence == 10) {
+        if (temp$convergence > 0) {
           if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
             new_start <- shoof * rho_init + (1 - shoof) * temp$par
           } else {
@@ -715,7 +715,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
       temp <- do.call(stats::optim, c(ru_args, add_args))
       # Sometimes Nelder-Mead fails if the initial estimate is too good.
       # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
-      if (temp$convergence == 10) {
+      if (temp$convergence > 0) {
         # Start a little away from the optimum, to avoid erroneous
         # convergence warnings, using init_psi as a benchmark
         # If init_psi = temp$par then multiply temp$par by  1 - shoof
@@ -875,7 +875,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         l_box[j] <- temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
-        if (temp$convergence == 10) {
+        if (temp$convergence > 0) {
           if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
             new_start <- shoof * rho_init + (1 - shoof) * temp$par
           } else {
@@ -949,7 +949,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
         u_box[j] <- -temp$value
         # Sometimes Nelder-Mead fails if the initial estimate is too good.
         # ... so avoid non-zero convergence indicator using L-BFGS-B instead.
-        if (temp$convergence == 10) {
+        if (temp$convergence > 0) {
           if (sum(abs(rho_init - temp$par)) > .Machine$double.eps) {
             new_start <- shoof * rho_init + (1 - shoof) * temp$par
           } else {
