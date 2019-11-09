@@ -1,0 +1,45 @@
+destination: docs
+
+development:
+  mode: release
+
+template:
+  params:
+    bootswatch: paper
+
+reference:
+  - title: Package
+    desc: ~
+    contents:
+      - "rust"
+  - title: Ratio-of-uniforms simulation
+    desc: ~
+    contents:
+      - "ru"
+      - "ru_rcpp"
+  - title: Box-Cox parameter selection
+    desc: ~
+    contents:
+      - "find_lambda"
+      - "find_lambda_rcpp"
+      - "find_lambda_one_d"
+      - "find_lambda_one_d_rcpp"
+  - title: Generics
+    desc: ~
+    contents:
+      - "plot.ru"
+      - "summary.ru"
+      - "print.summary.ru"
+  - title: GP example
+    desc: ~
+    contents:
+      - "gpd_init"
+      - "gpd_logpost"
+      - "gpd_sum_stats"
+      - "rgpd"
+  - title: Miscellaneous
+    desc: ~
+    contents:
+      - "create_xptr"
+      - "create_log_j_xptr"
+      - "create_phi_to_theta_xptr"
