@@ -6,6 +6,8 @@
 
 * Functions that are not intended to be called by the user have been moved to rust-internal.R
 
+* Use `inherits()` to check the class of objects returned from `try()`, rather than `class()`.
+
 # rust 1.3.6
 
 ## Bug fixes and minor improvements
