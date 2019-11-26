@@ -614,7 +614,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   vals[1, ] <- rep(0, d)
   conv[1] <- temp$convergence
   pos_def <- TRUE
-  if (class(temp$hessian) == "try-error") {
+  if (inherits(temp$hessian, "try-error")) {
     pos_def <- FALSE
   } else {
     hess_mat <- temp$hessian
