@@ -8,6 +8,8 @@
 
 * Use `inherits()` to check the class of objects returned from `try()`, rather than `class()`.
 
+* pkgdown documentation at https://paulnorthrop.github.io/rust/
+
 # rust 1.3.6
 
 ## Bug fixes and minor improvements
