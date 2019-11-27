@@ -1,4 +1,4 @@
-# rust 1.3.6.9000
+# rust 1.3.7
 
 ## Bug fixes and minor improvements
 
