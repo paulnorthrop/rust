@@ -21,11 +21,11 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
   knitr::opts_chunk$set(eval = FALSE)
 ```
 
-The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f(x)$ proportional to the density function of the distribution.  For an introduction to *rust* see the vignette [Introducing rust](rust-vignette.html). 
+The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f(x)$ proportional to the density function of the distribution.  For an introduction to *rust* see the vignette [Introducing rust](rust-a-vignette.html). 
 
 This vignette describes a new feature of **rust**: the option for the user to provide a C++ function to evaluate the target log-density, rather than an R function.  The **Rcpp** [@Rcpp, @RcppDEbook] and **RcppArmadillo** [@arma] packages are used to speed up simulation from the target density.  The improvement results from faster function evaluations and (in particular) from performing using C++ the looping in the ratio-of-uniforms algorithm.  The new function `ru_rcpp` requires the target log-density to be specified using (externals pointers to) C++ functions, whereas the existing `ru` requires input R functions.  Otherwise, the functionality of these two functions is the same.  There are also Rcpp-based versions of functions for setting Box-Cox transformation parameters: `find_lambda_rcpp` and `find_lambda_one_d_rcpp`
 
-In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use.  For more information about these examples see the vignette [Introducing rust](rust-vignette.html)
+In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use.  For more information about these examples see the vignette [Introducing rust](rust-a-vignette.html)
 
 ## Providing a C++ function to `ru_rcpp` {#cpp_fun}
 
@@ -92,7 +92,7 @@ to create an external pointer for `new_name` using `create_xptr`.  The following
     
 ## Examples : `ru_rcpp`
 
-All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.  We use the **microbenchmark** package [@microbenchmark] to make the comparison.
+All the examples in the documentation for `ru` are replicated in the documentation for `ru_rcpp`.  Here we consider a subset of the examples from the [Introducing rust](rust-a-vignette.html) vignette, to illustrate how to provide user-supplied C++ functions to `ru_rcpp` and to compare the performances of `ru` and `ru_rcpp`.  We use the **microbenchmark** package [@microbenchmark] to make the comparison.
 
 ```{r}
 library(rust)
@@ -288,7 +288,7 @@ if (got_microbenchmark) {
 
 ## Examples : `find_lambda_one_d_rcpp` and `find_lambda_rcpp`
 
-We repeat two examples from the [Introducing rust](rust-vignette.html) vignette.
+We repeat two examples from the [Introducing rust](rust-a-vignette.html) vignette.
 
 ### Gamma density: example for `find_lambda_one_d_rcpp`
 
@@ -314,7 +314,7 @@ lambda
 
 ### Generalized Pareto posterior density: example for `find_lambda_rcpp`
 
-In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function `phi_to_theta` must have the same structure as the function used to calculate $\log f$. See [Providing a C++ function to `ru_rcpp`](#cpp_fun) for details. See the [Introducing rust](rust-vignette.html) vignette for the form of the transformation.
+In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function `phi_to_theta` must have the same structure as the function used to calculate $\log f$. See [Providing a C++ function to `ru_rcpp`](#cpp_fun) for details. See the [Introducing rust](rust-a-vignette.html) vignette for the form of the transformation.
 
 ```{r}
 temp <- do.call(gpd_init, ss)

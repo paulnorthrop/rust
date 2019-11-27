@@ -21,7 +21,7 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
   knitr::opts_chunk$set(eval = FALSE)
 ```
 
-The generalized ratio-of-uniforms can be used to simulate from a wide range of $d$-dimensional multivariate probability densities, provided that $d$ is not so large that its efficiency is prohibitively low (see the vignette [Introducing rust](rust-vignette.html)).  However, there are conditions that the target density $f$ must satisfy for this method to be applicable.  This vignette considers instances when these conditions do *not* hold and suggests strategies that may overcome this difficulty.  Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently **rust** is designed to work effectively with unimodal densities.  This vignette illustrates this using a simple 1-dimensional example.
+The generalized ratio-of-uniforms can be used to simulate from a wide range of $d$-dimensional multivariate probability densities, provided that $d$ is not so large that its efficiency is prohibitively low (see the vignette [Introducing rust](rust-a-vignette.html)).  However, there are conditions that the target density $f$ must satisfy for this method to be applicable.  This vignette considers instances when these conditions do *not* hold and suggests strategies that may overcome this difficulty.  Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently **rust** is designed to work effectively with unimodal densities.  This vignette illustrates this using a simple 1-dimensional example.
 
 ## Conditions on $f$
 
@@ -34,7 +34,7 @@ b_i^-(r) &=& \inf_{\chi_i^-} \, x_i \, f(x)^{r / (r d + 1)}, \\
 b_i^+(r) &=& \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},  
 \end{eqnarray}
 $$
-$x =(x_1, \ldots, x_d)$, $\chi \subseteq \mathbb{R}^d$, $\chi_i^- = \{ x \in \chi, x_i \leq 0 \}$ and $\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}$.  See the vignette [Introducing rust](rust-vignette.html) for more details.
+$x =(x_1, \ldots, x_d)$, $\chi \subseteq \mathbb{R}^d$, $\chi_i^- = \{ x \in \chi, x_i \leq 0 \}$ and $\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}$.  See the vignette [Introducing rust](rust-a-vignette.html) for more details.
 
 For a given value of the non-negative tuning parameter $r$ we need $f(x)$ and $x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d$ to be bounded.  If $f(x)$ is unbounded then we could use a transformation of variable to obtain a density that *is* bounded.  For bounded $f(x)$ one or more of $x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d$ can be unbounded if $f(x)$ has heavy-tails.  Again, we could use a transformation of variable to avoid this problem.  For this issue the value of $r$ matters and we may be able to achieve boundedness if a sufficiently large value of $r$ is used.  In **rust** $r = 1/2$ is used by default because this is optimal in the Gaussian case.  For heavy-tailed densities $r$ needs to be larger, perhaps larger than 1. We consider these strategies in the next two sections.
 
@@ -57,7 +57,7 @@ plot(gam, xlab = "x")
 plot(gam, ru_scale = TRUE, xlab = "y")
 ```
 
-Here we have used `find_lambda_one_d_rcpp` and `ru_rcpp` (see the vignette [Rusting faster: Speedy Simulation using Rcpp](rust-using-rcpp-vignette.html)) but we could equally have used `ru` and `find_lambda_one_d`: this example appears in the help file for `find_lambda_one_d`.
+Here we have used `find_lambda_one_d_rcpp` and `ru_rcpp` (see the vignette [Rusting faster: Speedy Simulation using Rcpp](rust-c-using-rcpp-vignette.html)) but we could equally have used `ru` and `find_lambda_one_d`: this example appears in the help file for `find_lambda_one_d`.
  
 ## Heavy-tailed densities
 

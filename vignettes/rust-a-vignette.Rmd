@@ -21,9 +21,9 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
   knitr::opts_chunk$set(eval = FALSE)
 ```
 
-The **rust** package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-when-to-use-vignette.html). 
+The **rust** package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-b-when-to-use-vignette.html). 
 
-The user can provide either an R function (to `ru`) or, from version 1.2.0, a (pointer to a) C++ function (to `ru_rcpp`).  This vignette gives examples of the former.  For examples of the latter see the vignette [Rusting faster: Speedy Simulation using Rcpp](rust-using-rcpp-vignette.html). 
+The user can provide either an R function (to `ru`) or, from version 1.2.0, a (pointer to a) C++ function (to `ru_rcpp`).  This vignette gives examples of the former.  For examples of the latter see the vignette [Rusting faster: Speedy Simulation using Rcpp](rust-c-using-rcpp-vignette.html). 
 
 The ratio-of-uniforms method has been used to simulate from low-dimensional distributions in Bayesian analyses, either as part of a Gibbs sampler, a Markov Chain Monte Carlo (MCMC) algorithm, [@WSRG1994] or to simulate directly from a posterior distribution [@NAJ2016].  **rust** is unlikely to be of direct use in high-dimensional problems because its efficiency decreases with dimension, but it may provide an alternative to MCMC methods in Bayesian analyses of models with small numbers of parameters.  **rust** is used by the package **revdbayes** package [@revdbayes] to perform Bayesian extreme value analyses.  Potential advantages over MCMC methods are that it produces a random sample of the desired size rather than a dependent sample and avoids the need for MCMC convergence diagnostics.  
 
