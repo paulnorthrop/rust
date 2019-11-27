@@ -36,6 +36,6 @@ Suggests: bang,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-URL: http://github.com/paulnorthrop/rust
+URL: https://paulnorthrop.github.io/rust/, http://github.com/paulnorthrop/rust
 BugReports: http://github.com/paulnorthrop/rust/issues
 LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo 
