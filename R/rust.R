@@ -50,7 +50,6 @@
 #'
 #' @docType package
 #' @name rust
-#' @import methods
 #' @importFrom stats runif
 #' @useDynLib rust, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
