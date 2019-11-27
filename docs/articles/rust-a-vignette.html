@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
       <h1>Introducing rust: Ratio-of-Uniforms Simulation with Transformation</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2019-11-09</h4>
+            <h4 class="date">2019-11-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-a-vignette.Rmd"><code>vignettes/rust-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-a-vignette.Rmd</code></div>
@@ -100,8 +100,8 @@
 
     
     
-<p>The <strong>rust</strong> package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a <span class="math inline">\(d\)</span>-dimensional continuous distribution. The user specifies (the log of) a positive target function <span class="math inline">\(f\)</span> that is proportional to the density function of the distribution. For guidance on which target functions are suitable see the vignette <a href="rust-when-to-use-vignette.html">When can rust be used?</a>.</p>
-<p>The user can provide either an R function (to <code>ru</code>) or, from version 1.2.0, a (pointer to a) C++ function (to <code>ru_rcpp</code>). This vignette gives examples of the former. For examples of the latter see the vignette <a href="rust-using-rcpp-vignette.html">Rusting faster: Speedy Simulation using Rcpp</a>.</p>
+<p>The <strong>rust</strong> package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a <span class="math inline">\(d\)</span>-dimensional continuous distribution. The user specifies (the log of) a positive target function <span class="math inline">\(f\)</span> that is proportional to the density function of the distribution. For guidance on which target functions are suitable see the vignette <a href="rust-b-when-to-use-vignette.html">When can rust be used?</a>.</p>
+<p>The user can provide either an R function (to <code>ru</code>) or, from version 1.2.0, a (pointer to a) C++ function (to <code>ru_rcpp</code>). This vignette gives examples of the former. For examples of the latter see the vignette <a href="rust-c-using-rcpp-vignette.html">Rusting faster: Speedy Simulation using Rcpp</a>.</p>
 <p>The ratio-of-uniforms method has been used to simulate from low-dimensional distributions in Bayesian analyses, either as part of a Gibbs sampler, a Markov Chain Monte Carlo (MCMC) algorithm, <span class="citation">(Wakefield et al. 1994)</span> or to simulate directly from a posterior distribution <span class="citation">(Northrop, Attalides, and Jonathan 2016)</span>. <strong>rust</strong> is unlikely to be of direct use in high-dimensional problems because its efficiency decreases with dimension, but it may provide an alternative to MCMC methods in Bayesian analyses of models with small numbers of parameters. <strong>rust</strong> is used by the package <strong>revdbayes</strong> package <span class="citation">(Northrop 2017)</span> to perform Bayesian extreme value analyses. Potential advantages over MCMC methods are that it produces a random sample of the desired size rather than a dependent sample and avoids the need for MCMC convergence diagnostics.</p>
 <p>The generalized ratio-of-uniforms method is an acceptance-rejection algorithm: proposals are simulated uniformly over a <span class="math inline">\((d+1)\)</span>-dimensional region, typically a box, that bounds an acceptance region <span class="math inline">\(C(r)\)</span>, where <span class="math inline">\(r \geq 0\)</span> is a tuning parameter. The <em>probability of acceptance</em> <span class="math inline">\(p_a(d, r)\)</span>, i.e. the probability that an arbitrary proposal is accepted, is given by the ratio of the volume of <span class="math inline">\(C(r)\)</span> to the volume of the bounding region. <span class="citation">Wakefield, Gelfand, and Smith (1991)</span> suggest the strategy of relocating the mode of <span class="math inline">\(f\)</span> to the origin as a means of increasing efficiency, in the sense of increasing <span class="math inline">\(p_a(d, r)\)</span>. However, <span class="math inline">\(p_a(d, r)\)</span> may still be low even after mode relocation. In some cases it is not possible to find a simple region to bound <span class="math inline">\(C(r)\)</span>, which means that the ratio-of-uniforms method cannot be used. Transformation of variable, such as the Box-Cox family <span class="citation">(Box and Cox 1964)</span> provided in <strong>rust</strong>, can be helpful in these instances. In the multi-dimensional cases strong association between the variables tends to result in a low <span class="math inline">\(p_a(d, r)\)</span>. <strong>rust</strong> finds a rotation of variable axes that reduces the association to increase <span class="math inline">\(p_a(d, r)\)</span>. The user can also specify their own variable transformation.</p>
 <p>The main function in the rust package is <code>ru</code>, which implements the generalized ratio-of-uniforms algorithm. Also provided are two functions, <code>find_lambda</code> and <code>find_lambda_one_d</code>, that may be used to set a suitable value for the parameter <code>lambda</code> if Box-Cox transformation is used prior to simulation. These are somewhat <em>ad hoc</em> but they work well on the examples studied so far. Basic plot and summary methods are also provided.</p>
@@ -235,11 +235,11 @@ lambda
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
 <span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000000f80b810&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x00000000096ad8b8&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
 <span class="co">#&gt; function(x) 0</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000000faab750&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x0000000009140058&gt;</span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sample on Box-Cox transformed, without rotation</span>
 x3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> gpd_logpost, <span class="dt">ss =</span> ss, <span class="dt">d =</span> <span class="dv">2</span>, <span class="dt">n =</span> n, <span class="dt">trans =</span> <span class="st">"BC"</span>,
@@ -251,84 +251,84 @@ x4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html"
 <p>We plot the samples obtained on the scales used for the ratio-of-uniforms algorithm and contours of the corresponding target density <span class="math inline">\(f_\rho\!(\rho)\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x1, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>, <span class="dt">cex.main =</span> <span class="fl">0.75</span>, <span class="dt">cex.lab =</span> <span class="fl">0.75</span>, 
   <span class="dt">main =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"mode relocation </span><span class="ch">\n</span><span class="st"> pa = "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(x1<span class="op">$</span>pa, <span class="dv">3</span>)))
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x2, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>, <span class="dt">cex.main =</span> <span class="fl">0.75</span>, <span class="dt">cex.lab =</span> <span class="fl">0.75</span>, 
   <span class="dt">main =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"mode relocation and rotation </span><span class="ch">\n</span><span class="st"> pa = "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(x2<span class="op">$</span>pa, <span class="dv">3</span>)))
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x3, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>, <span class="dt">cex.main =</span> <span class="fl">0.75</span>, <span class="dt">cex.lab =</span> <span class="fl">0.75</span>, 
   <span class="dt">main =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Box-Cox and mode relocation </span><span class="ch">\n</span><span class="st"> pa = "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(x3<span class="op">$</span>pa, <span class="dv">3</span>)))
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x4, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>, <span class="dt">cex.main =</span> <span class="fl">0.75</span>, <span class="dt">cex.lab =</span> <span class="fl">0.75</span>,
   <span class="dt">main =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Box-Cox, mode relocation and rotation </span><span class="ch">\n</span><span class="st"> pa = "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(x4<span class="op">$</span>pa, <span class="dv">3</span>)))
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span></code></pre></div>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span></code></pre></div>
 <p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-1.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-2.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-3.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-4.png" width="700"></p>
 <p>The figure shows how the transformations affect with shape of the density from which we simulate. In the bottom right plot the density contours suggests little dependence between the transformed components. The estimate of the probability of acceptance is approximately equal to the 0.534 obtained for a 2-dimensional normal distribution with independent components.</p>
 <p>Finally, we show a plot of the sample and contours on the original <span class="math inline">\((\sigma, \xi\)</span>)-scale.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x4, <span class="dt">xlab =</span> <span class="st">"sigma"</span>, <span class="dt">ylab =</span> <span class="st">"xi"</span>)
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span>
 
-<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to</span>
-<span class="co">#&gt; unique 'x' values</span></code></pre></div>
+<span class="co">#&gt; Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique</span>
+<span class="co">#&gt; 'x' values</span></code></pre></div>
 <p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>and an example of the output from <code>summary.ru</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(x4)
@@ -562,6 +562,7 @@ x4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html"
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>

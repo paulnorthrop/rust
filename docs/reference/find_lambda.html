@@ -8,10 +8,12 @@
 
 <title>Selecting Box-Cox parameter lambda for general d. — find_lambda • rust</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,14 +34,15 @@
 
 
 
-<meta property="og:title" content="Selecting Box-Cox parameter lambda for general d. — find_lambda" />
 
+<meta property="og:title" content="Selecting Box-Cox parameter lambda for general d. — find_lambda" />
 <meta property="og:description" content="Finds a value of the Box-Cox transformation parameter lambda for which
 the (positive) random variable with log-density logf has a density
 closer to that of a Gaussian random variable.
 In the following we use theta to denote the argument of
 logf on the original scale and phi on the Box-Cox transformed scale." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -70,7 +73,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
       </span>
     </div>
 
@@ -107,7 +110,6 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/rust">
@@ -134,20 +136,28 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
     </div>
 
     <div class="ref-description">
-    
     <p>Finds a value of the Box-Cox transformation parameter lambda for which
 the (positive) random variable with log-density logf has a density
 closer to that of a Gaussian random variable.
 In the following we use theta to denote the argument of
 logf on the original scale and phi on the Box-Cox transformed scale.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>find_lambda</span>(<span class='no'>logf</span>, <span class='no'>...</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n_grid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ep_bc</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
-  <span class='kw'>min_phi</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>ep_bc</span>, <span class='no'>d</span>), <span class='kw'>max_phi</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>10</span>, <span class='no'>d</span>), <span class='kw'>which_lam</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>d</span>,
-  <span class='kw'>lambda_range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>3</span>, <span class='fl'>3</span>), <span class='kw'>init_lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>find_lambda</span>(
+  <span class='no'>logf</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>n_grid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ep_bc</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>min_phi</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>ep_bc</span>, <span class='no'>d</span>),
+  <span class='kw'>max_phi</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>10</span>, <span class='no'>d</span>),
+  <span class='kw'>which_lam</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>d</span>,
+  <span class='kw'>lambda_range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>3</span>, <span class='fl'>3</span>),
+  <span class='kw'>init_lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -211,7 +221,7 @@ transformation from theta to phi, i.e. based on derivatives of phi with
 respect to theta. Takes theta as its argument.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list containing the following components</p>
@@ -227,7 +237,6 @@ respect to theta. Takes theta as its argument.</p></td>
    supplied)</p></dd>
  <dt>log_j</dt><dd><p>as detailed above (only if <code>log_j</code> is supplied)</p></dd>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The general idea is to evaluate the density f on a d-dimensional
@@ -238,7 +247,6 @@ respect to theta. Takes theta as its argument.</p></td>
  at that point.  The vectors <code>min_phi</code> and <code>max_phi</code> define the
  limits of the grid and <code>which_lam</code> can be used to specify that only
  certain components of phi are to be transformed.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
@@ -247,7 +255,6 @@ respect to theta. Takes theta as its argument.</p></td>
 <p>Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
  Transformations of Multivariate Data, Biometrics, 27(4),
  <a href='https://dx.doi.org/10.2307/2528821'>https://dx.doi.org/10.2307/2528821</a>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ru.html'>ru</a></code> and <code><a href='ru_rcpp.html'>ru_rcpp</a></code> to perform
@@ -259,7 +266,6 @@ respect to theta. Takes theta as its argument.</p></td>
 <p><code><a href='find_lambda_rcpp.html'>find_lambda_rcpp</a></code> for a version of
   <code>find_lambda</code> that uses the Rcpp package to improve
   efficiency.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Log-normal density ===================</span>
@@ -357,11 +363,11 @@ respect to theta. Takes theta as its argument.</p></td>
 #&gt; 
 #&gt; $phi_to_theta
 #&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)
-#&gt; &lt;environment: 0x0000000012d0fe08&gt;
+#&gt; &lt;environment: 0x000000000b3eedf8&gt;
 #&gt; 
 #&gt; $log_j
 #&gt; function(x) 0
-#&gt; &lt;environment: 0x0000000012d0fe08&gt;
+#&gt; &lt;environment: 0x000000000b3eedf8&gt;
 #&gt; </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, without rotation</span>
 <span class='no'>x3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>,
@@ -382,15 +388,10 @@ respect to theta. Takes theta as its argument.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

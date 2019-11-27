@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
       <h1>When can rust be used?</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2019-11-09</h4>
+            <h4 class="date">2019-11-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-b-when-to-use-vignette.Rmd"><code>vignettes/rust-b-when-to-use-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-b-when-to-use-vignette.Rmd</code></div>
@@ -100,7 +100,7 @@
 
     
     
-<p>The generalized ratio-of-uniforms can be used to simulate from a wide range of <span class="math inline">\(d\)</span>-dimensional multivariate probability densities, provided that <span class="math inline">\(d\)</span> is not so large that its efficiency is prohibitively low (see the vignette <a href="rust-vignette.html">Introducing rust</a>). However, there are conditions that the target density <span class="math inline">\(f\)</span> must satisfy for this method to be applicable. This vignette considers instances when these conditions do <em>not</em> hold and suggests strategies that may overcome this difficulty. Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently <strong>rust</strong> is designed to work effectively with unimodal densities. This vignette illustrates this using a simple 1-dimensional example.</p>
+<p>The generalized ratio-of-uniforms can be used to simulate from a wide range of <span class="math inline">\(d\)</span>-dimensional multivariate probability densities, provided that <span class="math inline">\(d\)</span> is not so large that its efficiency is prohibitively low (see the vignette <a href="rust-a-vignette.html">Introducing rust</a>). However, there are conditions that the target density <span class="math inline">\(f\)</span> must satisfy for this method to be applicable. This vignette considers instances when these conditions do <em>not</em> hold and suggests strategies that may overcome this difficulty. Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently <strong>rust</strong> is designed to work effectively with unimodal densities. This vignette illustrates this using a simple 1-dimensional example.</p>
 <div id="conditions-on-f" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conditions-on-f" class="anchor"></a>Conditions on <span class="math inline">\(f\)</span>
@@ -111,7 +111,7 @@ a(r) &amp;=&amp; \sup_\chi \, f(x)^{1 / (r d + 1)}, \\
 b_i^-(r) &amp;=&amp; \inf_{\chi_i^-} \, x_i \, f(x)^{r / (r d + 1)}, \\  
 b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},  
 \end{eqnarray}
-\]</span> <span class="math inline">\(x =(x_1, \ldots, x_d)\)</span>, <span class="math inline">\(\chi \subseteq \mathbb{R}^d\)</span>, <span class="math inline">\(\chi_i^- = \{ x \in \chi, x_i \leq 0 \}\)</span> and <span class="math inline">\(\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}\)</span>. See the vignette <a href="rust-vignette.html">Introducing rust</a> for more details.</p>
+\]</span> <span class="math inline">\(x =(x_1, \ldots, x_d)\)</span>, <span class="math inline">\(\chi \subseteq \mathbb{R}^d\)</span>, <span class="math inline">\(\chi_i^- = \{ x \in \chi, x_i \leq 0 \}\)</span> and <span class="math inline">\(\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}\)</span>. See the vignette <a href="rust-a-vignette.html">Introducing rust</a> for more details.</p>
 <p>For a given value of the non-negative tuning parameter <span class="math inline">\(r\)</span> we need <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d\)</span> to be bounded. If <span class="math inline">\(f(x)\)</span> is unbounded then we could use a transformation of variable to obtain a density that <em>is</em> bounded. For bounded <span class="math inline">\(f(x)\)</span> one or more of <span class="math inline">\(x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d\)</span> can be unbounded if <span class="math inline">\(f(x)\)</span> has heavy-tails. Again, we could use a transformation of variable to avoid this problem. For this issue the value of <span class="math inline">\(r\)</span> matters and we may be able to achieve boundedness if a sufficiently large value of <span class="math inline">\(r\)</span> is used. In <strong>rust</strong> <span class="math inline">\(r = 1/2\)</span> is used by default because this is optimal in the Gaussian case. For heavy-tailed densities <span class="math inline">\(r\)</span> needs to be larger, perhaps larger than 1. We consider these strategies in the next two sections.</p>
 </div>
 <div id="unbounded-densities" class="section level2">
@@ -132,7 +132,7 @@ gam &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru_rcpp
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(gam, <span class="dt">xlab =</span> <span class="st">"x"</span>)
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(gam, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>, <span class="dt">xlab =</span> <span class="st">"y"</span>)</code></pre></div>
 <p><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-2-1.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
-<p>Here we have used <code>find_lambda_one_d_rcpp</code> and <code>ru_rcpp</code> (see the vignette <a href="rust-using-rcpp-vignette.html">Rusting faster: Speedy Simulation using Rcpp</a>) but we could equally have used <code>ru</code> and <code>find_lambda_one_d</code>: this example appears in the help file for <code>find_lambda_one_d</code>.</p>
+<p>Here we have used <code>find_lambda_one_d_rcpp</code> and <code>ru_rcpp</code> (see the vignette <a href="rust-c-using-rcpp-vignette.html">Rusting faster: Speedy Simulation using Rcpp</a>) but we could equally have used <code>ru</code> and <code>find_lambda_one_d</code>: this example appears in the help file for <code>find_lambda_one_d</code>.</p>
 </div>
 <div id="heavy-tailed-densities" class="section level2">
 <h2 class="hasAnchor">
@@ -151,7 +151,7 @@ cauchy126 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
 <span class="co">#&gt; b1minus -0.9999999 -2509.398    0 -0.8310221 -2.948272    0</span>
 <span class="co">#&gt; b1plus   0.9999999  2509.398    0  0.8310221  2.948272    0</span>
 <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(cauchy1<span class="op">$</span>pa, cauchy126<span class="op">$</span>pa)
-<span class="co">#&gt; [1] 0.7905138 0.8319468</span></code></pre></div>
+<span class="co">#&gt; [1] 0.7968127 0.8271299</span></code></pre></div>
 <p>For <span class="math inline">\(r = 1\)</span> the algorithm finds essentially the correct values of <span class="math inline">\(b_1^-\)</span> and <span class="math inline">\(b_1^+\)</span> even though these do not occur at a turning point of the objective functions. The estimated probability of acceptance is indeed larger for <span class="math inline">\(r = 1.26\)</span>.</p>
 </div>
 <div id="hierarchical-1-way-anova-with-few-groups" class="section level3">
@@ -175,28 +175,28 @@ all1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/b
 all2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(coag2<span class="op">$</span>theta_sim_vals, coag2<span class="op">$</span>sim_vals)
 <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(all1, <span class="dv">2</span>, quantile, <span class="dt">probs =</span> probs)), <span class="dv">1</span>)
 <span class="co">#&gt;              2.5%  25%  50%  75% 97.5%</span>
-<span class="co">#&gt; theta[1]     58.8 60.4 61.2 62.0  63.7</span>
+<span class="co">#&gt; theta[1]     58.8 60.4 61.2 62.1  63.7</span>
 <span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.6  67.9</span>
 <span class="co">#&gt; theta[3]     65.7 67.1 67.8 68.5  69.8</span>
 <span class="co">#&gt; theta[4]     59.4 60.5 61.1 61.7  62.9</span>
-<span class="co">#&gt; mu           54.6 62.2 64.0 65.7  72.9</span>
-<span class="co">#&gt; sigma[alpha]  2.0  3.5  5.1  7.9  27.2</span>
+<span class="co">#&gt; mu           54.4 62.2 64.0 65.8  72.8</span>
+<span class="co">#&gt; sigma[alpha]  2.0  3.5  5.0  7.9  27.2</span>
 <span class="co">#&gt; sigma         1.8  2.2  2.4  2.7   3.4</span>
 <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(all2, <span class="dv">2</span>, quantile, <span class="dt">probs =</span> probs)), <span class="dv">1</span>)
 <span class="co">#&gt;              2.5%  25%  50%  75% 97.5%</span>
-<span class="co">#&gt; theta[1]     58.9 60.4 61.2 62.1  63.7</span>
-<span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.6  67.8</span>
-<span class="co">#&gt; theta[3]     65.7 67.1 67.8 68.5  69.8</span>
+<span class="co">#&gt; theta[1]     58.8 60.4 61.2 62.0  63.7</span>
+<span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.6  67.9</span>
+<span class="co">#&gt; theta[3]     65.7 67.1 67.8 68.4  69.8</span>
 <span class="co">#&gt; theta[4]     59.4 60.6 61.1 61.7  62.9</span>
-<span class="co">#&gt; mu           54.9 62.2 64.0 65.7  73.7</span>
-<span class="co">#&gt; sigma[alpha]  2.0  3.5  5.1  8.1  27.0</span>
+<span class="co">#&gt; mu           54.3 62.2 64.0 65.8  73.3</span>
+<span class="co">#&gt; sigma[alpha]  2.0  3.5  5.1  8.1  27.9</span>
 <span class="co">#&gt; sigma         1.8  2.2  2.4  2.7   3.4</span></code></pre></div>
 <p>These posterior summaries are similar to those presented in Table 11.3 of <span class="citation">Gelman et al. (2014)</span> (where <span class="math inline">\(\sigma_\alpha\)</span> is denoted <span class="math inline">\(\tau\)</span>), which were obtained using Gibbs sampling.</p>
 <p>The reparameterization strategy has the higher estimated probability of acceptance.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">coag1<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.5034486</span>
+<span class="co">#&gt; [1] 0.5006258</span>
 coag2<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.3159657</span></code></pre></div>
+<span class="co">#&gt; [1] 0.3090999</span></code></pre></div>
 </div>
 </div>
 <div id="multimodal-densities" class="section level2">
@@ -214,7 +214,7 @@ res2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.htm
 res3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> normal_mixture, <span class="dt">mu =</span> <span class="dv">4</span>, <span class="dt">p =</span> <span class="fl">0.25</span>, <span class="dt">init =</span> <span class="dv">5</span>, <span class="dt">n =</span> <span class="dv">10000</span>)
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(res3, <span class="dt">main =</span> <span class="st">"(c)"</span>)
 res3<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.5502063</span>
+<span class="co">#&gt; [1] 0.5494505</span>
 res4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> normal_mixture, <span class="dt">mu =</span> <span class="dv">4</span>, <span class="dt">p =</span> <span class="fl">0.25</span>, <span class="dt">init =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">10000</span>)
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(res4, <span class="dt">main =</span> <span class="st">"(d)"</span>)</code></pre></div>
 <p><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-1.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-2.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-3.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-4.png" width="700"></p>
@@ -244,6 +244,7 @@ res4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.htm
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>

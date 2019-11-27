@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
       <h1>Rusting Faster: Simulation using Rcpp</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2019-11-09</h4>
+            <h4 class="date">2019-11-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-c-using-rcpp-vignette.Rmd"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-c-using-rcpp-vignette.Rmd</code></div>
@@ -100,9 +100,9 @@
 
     
     
-<p>The <strong>rust</strong> package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a <span class="math inline">\(d\)</span>-dimensional continuous distribution. The user specifies (the log of) a positive target function <span class="math inline">\(f(x)\)</span> proportional to the density function of the distribution. For an introduction to <em>rust</em> see the vignette <a href="rust-vignette.html">Introducing rust</a>.</p>
+<p>The <strong>rust</strong> package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a <span class="math inline">\(d\)</span>-dimensional continuous distribution. The user specifies (the log of) a positive target function <span class="math inline">\(f(x)\)</span> proportional to the density function of the distribution. For an introduction to <em>rust</em> see the vignette <a href="rust-a-vignette.html">Introducing rust</a>.</p>
 <p>This vignette describes a new feature of <strong>rust</strong>: the option for the user to provide a C++ function to evaluate the target log-density, rather than an R function. The <strong>Rcpp</strong> <span class="citation">(Eddelbuettel and Francois 2011, <span class="citation">Eddelbuettel (2013)</span>)</span> and <strong>RcppArmadillo</strong> <span class="citation">(Eddelbuettel and Sanderson 2014)</span> packages are used to speed up simulation from the target density. The improvement results from faster function evaluations and (in particular) from performing using C++ the looping in the ratio-of-uniforms algorithm. The new function <code>ru_rcpp</code> requires the target log-density to be specified using (externals pointers to) C++ functions, whereas the existing <code>ru</code> requires input R functions. Otherwise, the functionality of these two functions is the same. There are also Rcpp-based versions of functions for setting Box-Cox transformation parameters: <code>find_lambda_rcpp</code> and <code>find_lambda_one_d_rcpp</code></p>
-<p>In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use. For more information about these examples see the vignette <a href="rust-vignette.html">Introducing rust</a></p>
+<p>In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use. For more information about these examples see the vignette <a href="rust-a-vignette.html">Introducing rust</a></p>
 <div id="cpp_fun" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cpp_fun" class="anchor"></a>Providing a C++ function to <code>ru_rcpp</code>
@@ -167,7 +167,7 @@ ptr_N01 &lt;- create_xptr("logdN01")
 <h2 class="hasAnchor">
 <a href="#examples-ru_rcpp" class="anchor"></a>Examples : <code>ru_rcpp</code>
 </h2>
-<p>All the examples in the documentation for <code>ru</code> are replicated in the documentation for <code>ru_rcpp</code>. Here we consider a subset of the examples from the <a href="rust-vignette.html">Introducing rust</a> vignette, to illustrate how to provide user-supplied C++ functions to <code>ru_rcpp</code> and to compare the performances of <code>ru</code> and <code>ru_rcpp</code>. We use the <strong>microbenchmark</strong> package <span class="citation">(Mersmann 2015)</span> to make the comparison.</p>
+<p>All the examples in the documentation for <code>ru</code> are replicated in the documentation for <code>ru_rcpp</code>. Here we consider a subset of the examples from the <a href="rust-a-vignette.html">Introducing rust</a> vignette, to illustrate how to provide user-supplied C++ functions to <code>ru_rcpp</code> and to compare the performances of <code>ru</code> and <code>ru_rcpp</code>. We use the <strong>microbenchmark</strong> package <span class="citation">(Mersmann 2015)</span> to make the comparison.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rust)
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(Rcpp)
 <span class="co"># Is microbenchmark available?</span>
@@ -220,9 +220,9 @@ x_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru_rc
   <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq   mean median    uq    max neval</span>
-<span class="co">#&gt;   old 18.970 21.100 23.670  22.70 25.37 33.360   100</span>
-<span class="co">#&gt;   new  1.981  2.196  2.598   2.35  2.55  7.659   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span>
+<span class="co">#&gt;   old 18.770 21.170 23.750 22.490 25.220 38.98   100</span>
+<span class="co">#&gt;   new  2.008  2.288  2.849  2.443  2.635  8.64   100</span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
@@ -264,9 +264,9 @@ ptr_mvn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cre
   <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 }  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr     min      lq    mean  median     uq    max neval</span>
-<span class="co">#&gt;   old 212.800 224.700 241.200 233.700 247.10 309.60   100</span>
-<span class="co">#&gt;   new   7.495   7.972   9.196   8.473  10.42  15.15   100</span></code></pre></div>
+<span class="co">#&gt;  expr     min      lq    mean  median      uq    max neval</span>
+<span class="co">#&gt;   old 209.100 219.600 233.000 229.300 243.300 309.50   100</span>
+<span class="co">#&gt;   new   7.335   7.802   8.902   8.374   8.831  17.27   100</span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -295,9 +295,9 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
   <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 }  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span>
-<span class="co">#&gt;   old 29.000 30.680 33.150 32.840 34.880 43.59   100</span>
-<span class="co">#&gt;   new  3.993  4.276  5.389  4.526  4.767 63.58   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq  mean median     uq    max neval</span>
+<span class="co">#&gt;   old 28.520 30.010 33.50 32.310 34.240 101.40   100</span>
+<span class="co">#&gt;   new  4.037  4.269  5.02  4.539  4.832  11.54   100</span></code></pre></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3 class="hasAnchor">
@@ -361,16 +361,16 @@ for_ru_rcpp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr
   <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(res, <span class="dt">signif =</span> <span class="dv">4</span>)
 }  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr   min    lq  mean median    uq    max neval</span>
-<span class="co">#&gt;   old 81.28 85.65 88.83  87.90 90.93 136.70   100</span>
-<span class="co">#&gt;   new 16.91 17.83 19.41  18.82 19.91  28.61   100</span></code></pre></div>
+<span class="co">#&gt;  expr   min    lq  mean median     uq    max neval</span>
+<span class="co">#&gt;   old 80.36 85.39 94.06  91.18 100.80 137.70   100</span>
+<span class="co">#&gt;   new 17.02 18.34 20.42  19.88  21.77  30.37   100</span></code></pre></div>
 </div>
 </div>
 <div id="examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="anchor"></a>Examples : <code>find_lambda_one_d_rcpp</code> and <code>find_lambda_rcpp</code>
 </h2>
-<p>We repeat two examples from the <a href="rust-vignette.html">Introducing rust</a> vignette.</p>
+<p>We repeat two examples from the <a href="rust-a-vignette.html">Introducing rust</a> vignette.</p>
 <div id="gamma-density-example-for-find_lambda_one_d_rcpp" class="section level3">
 <h3 class="hasAnchor">
 <a href="#gamma-density-example-for-find_lambda_one_d_rcpp" class="anchor"></a>Gamma density: example for <code>find_lambda_one_d_rcpp</code>
@@ -408,7 +408,7 @@ lambda
 <h3 class="hasAnchor">
 <a href="#generalized-pareto-posterior-density-example-for-find_lambda_rcpp" class="anchor"></a>Generalized Pareto posterior density: example for <code>find_lambda_rcpp</code>
 </h3>
-<p>In this example we supply an external pointer to a C++ function <code>phi_to_theta</code> that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function <code>phi_to_theta</code> must have the same structure as the function used to calculate <span class="math inline">\(\log f\)</span>. See <a href="#cpp_fun">Providing a C++ function to <code>ru_rcpp</code></a> for details. See the <a href="rust-vignette.html">Introducing rust</a> vignette for the form of the transformation.</p>
+<p>In this example we supply an external pointer to a C++ function <code>phi_to_theta</code> that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function <code>phi_to_theta</code> must have the same structure as the function used to calculate <span class="math inline">\(\log f\)</span>. See <a href="#cpp_fun">Providing a C++ function to <code>ru_rcpp</code></a> for details. See the <a href="rust-a-vignette.html">Introducing rust</a> vignette for the form of the transformation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(gpd_init, ss)
 min_phi &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span>(<span class="dv">0</span>, temp<span class="op">$</span>init_phi <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>temp<span class="op">$</span>se_phi)
 max_phi &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span>(<span class="dv">0</span>, temp<span class="op">$</span>init_phi <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>temp<span class="op">$</span>se_phi)
@@ -435,10 +435,10 @@ lambda
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x000000000c491b60&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000088ac260&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x000000000c491ad0&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000088ac550&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>
@@ -471,6 +471,7 @@ lambda
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>

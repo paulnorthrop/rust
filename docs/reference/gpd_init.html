@@ -8,10 +8,12 @@
 
 <title>Initial estimates for Generalized Pareto parameters — gpd_init • rust</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,14 +34,15 @@
 
 
 
-<meta property="og:title" content="Initial estimates for Generalized Pareto parameters — gpd_init" />
 
+<meta property="og:title" content="Initial estimates for Generalized Pareto parameters — gpd_init" />
 <meta property="og:description" content="Calculates initial estimates and estimated standard errors (SEs) for the
 generalized Pareto parameters sigma and xi based on an
 assumed random sample from this distribution.  Also, calculates
 initial estimates and estimated standard errors for
 phi1 = sigma and phi2 = xi + sigma / xm." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -70,7 +73,7 @@ phi1 = sigma and phi2 = xi + sigma / xm." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
       </span>
     </div>
 
@@ -107,7 +110,6 @@ phi1 = sigma and phi2 = xi + sigma / xm." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/rust">
@@ -134,18 +136,15 @@ phi1 = sigma and phi2 = xi + sigma / xm." />
     </div>
 
     <div class="ref-description">
-    
     <p>Calculates initial estimates and estimated standard errors (SEs) for the
 generalized Pareto parameters sigma and xi based on an
 assumed random sample from this distribution.  Also, calculates
 initial estimates and estimated standard errors for
 phi1 = sigma and phi2 = xi + sigma / xm.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>gpd_init</span>(<span class='no'>gpd_data</span>, <span class='no'>m</span>, <span class='no'>xm</span>, <span class='kw'>sum_gp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xi_eq_zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>init_ests</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>gpd_init</span>(<span class='no'>gpd_data</span>, <span class='no'>m</span>, <span class='no'>xm</span>, <span class='kw'>sum_gp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xi_eq_zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>init_ests</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -177,7 +176,7 @@ theta = (sigma, xi).  If supplied <code>gpd_init()</code> just
 returns the corresponding initial estimate of phi = (phi1, phi2).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>If <code>init_ests</code> is not supplied by the user, a list is returned
@@ -194,7 +193,6 @@ returns the corresponding initial estimate of phi = (phi1, phi2).</p></td>
   If init_ests is supplied then only the numeric vector
   init_phi is returned.
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The main aim is to calculate an admissible estimate of theta,
@@ -219,7 +217,6 @@ returns the corresponding initial estimate of phi = (phi1, phi2).</p></td>
   the estimate is still not OK then we try LRS.  As a last resort, which
   will tend to occur only when xi is strongly negative, we set xi = -1 and
   estimate sigma conditional on this.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
@@ -231,7 +228,6 @@ returns the corresponding initial estimate of phi = (phi1, phi2).</p></td>
 <p>Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
   with Applications to Insurance, Finance, Hydrology and Other Fields.Birkhauser.
   <a href='http://dx.doi.org/10.1007/978-3-7643-7399-3'>http://dx.doi.org/10.1007/978-3-7643-7399-3</a>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='gpd_sum_stats.html'>gpd_sum_stats</a></code> to calculate summary statistics for
@@ -239,7 +235,6 @@ returns the corresponding initial estimate of phi = (phi1, phi2).</p></td>
 <p><code><a href='rgpd.html'>rgpd</a></code> for simulation from a generalized Pareto</p>
 <p><code><a href='find_lambda.html'>find_lambda</a></code> to produce (somewhat) automatically
   a list for the argument <code>lambda</code> of <code>ru</code>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
@@ -266,15 +261,10 @@ returns the corresponding initial estimate of phi = (phi1, phi2).</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
