@@ -1,3 +1,5 @@
+# rust 1.3.7.9000
+
 # rust 1.3.7
 
 ## Bug fixes and minor improvements
@@ -10,7 +12,7 @@
 
 * Hyperlinks corrected in vignettes.
 
-* pkgdown documentation at https://paulnorthrop.github.io/rust/
+* pkgdown documentation at [https://paulnorthrop.github.io/rust/](https://paulnorthrop.github.io/rust/)
 
 # rust 1.3.6
 
