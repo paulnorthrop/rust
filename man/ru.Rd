@@ -221,7 +221,7 @@ If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
   likely to be close to optimal in many cases, particularly if
   \code{trans = "BC"}.
 
-See \code{vignette("rust-vignette", package = "rust")} for full details.
+See \code{vignette("rust-a-vignette", package = "rust")} for full details.
 }
 \examples{
 # Normal density ===================

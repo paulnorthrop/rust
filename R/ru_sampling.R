@@ -133,7 +133,7 @@
 #'   likely to be close to optimal in many cases, particularly if
 #'   \code{trans = "BC"}.
 #'
-#' See \code{vignette("rust-vignette", package = "rust")} for full details.
+#' See \code{vignette("rust-a-vignette", package = "rust")} for full details.
 #'
 #' @return An object of class "ru" is a list containing the following
 #'   components:

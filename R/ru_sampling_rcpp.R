@@ -12,7 +12,7 @@
 #' @param logf An external pointer to a compiled C++ function returning the
 #'   log of the target density \eqn{f}.
 #'   This function should return \code{-Inf} when the density is zero.
-#'   See the \code{vignette("rust-using-rcpp-vignette", package = "rust")},
+#'   See the \code{vignette("rust-c-using-rcpp-vignette", package = "rust")},
 #'   particularly the Section
 #'   \strong{Providing a C++ function to \code{ru_rcpp}}, for details.
 #' @param ... Further arguments to be passed to \code{logf} and related
@@ -141,8 +141,8 @@
 #'   likely to be close to optimal in many cases, particularly if
 #'   \code{trans = "BC"}.
 #'
-#' See \code{vignette("rust-using-rcpp-vignette", package = "rust")} and
-#' \code{vignette("rust-vignette", package = "rust")} for full details.
+#' See \code{vignette("rust-b-using-rcpp-vignette", package = "rust")} and
+#' \code{vignette("rust-a-vignette", package = "rust")} for full details.
 #'
 #' @return An object of class "ru" is a list containing the following
 #'   components:
