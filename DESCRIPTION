@@ -28,7 +28,6 @@ Depends:
     R (>= 3.3.0)
 RoxygenNote: 7.0.1
 Suggests: bang,
-    inline,
     knitr,
     microbenchmark,
     revdbayes,
