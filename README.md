@@ -46,4 +46,4 @@ install.packages("rust")
 
 ### Vignettes
 
-See `vignette("rust-vignette", package = "rust")` for an overview of the package, `vignette("rust-when-to-use-vignette", package = "rust")` for guidance on when `rust` can be used and `vignette("rust-using-rcpp-vignette", package = "rust")` for information on how to take advantage of the Rcpp package.
+See `vignette("rust-a-vignette", package = "rust")` for an overview of the package, `vignette("rust-b-when-to-use-vignette", package = "rust")` for guidance on when `rust` can be used and `vignette("rust-c-using-rcpp-vignette", package = "rust")` for information on how to take advantage of the Rcpp package.
