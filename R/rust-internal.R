@@ -7,7 +7,7 @@
 #' @keywords internal
 NULL
 
-# =========================== box_cox ===========================
+# ==================================== box_cox ================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -37,7 +37,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   retval
 }
 
-# =========================== box_cox_vec ===========================
+# ================================ box_cox_vec ================================
 
 # Version of box_cox vectorized for lambda and gm.
 
@@ -45,7 +45,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
 #' @rdname rust-internal
 box_cox_vec <- Vectorize(box_cox, vectorize.args = c("lambda", "gm"))
 
-# =========================== optim_box_cox ===========================
+# =============================== optim_box_cox ===============================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -120,7 +120,7 @@ optim_box_cox <- function(x, w, lambda_range = c(-3,3), start = NULL,
   list(lambda = ret$par, gm = gm_w)
 }
 
-# =========================== n_grid_fun ===========================
+# ================================ n_grid_fun =================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -136,7 +136,7 @@ n_grid_fn <- function(d) {
   return(ceiling(2501 ^ (1 / d)))
 }
 
-# =========================== init_ps_calc ===========================
+# =============================== init_ps_calc ================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -176,7 +176,7 @@ init_psi_calc <- function(phi_to_psi, phi, lambda, gm, w, which_lam){
   list(init_psi = init_psi, sd_psi = sd_psi)
 }
 
-# =========================== log_gpd_mdi_prior ===========================
+# ============================= log_gpd_mdi_prior =============================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -200,7 +200,7 @@ log_gpd_mdi_prior <- function(pars) {
   return(-log(pars[1]) - pars[2] - 1)
 }
 
-# =========================== gpd_loglik ===========================
+# ================================ gpd_loglik =================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -238,7 +238,7 @@ gpd_loglik <- function(pars, gpd_data, m, xm, sum_gp) {
   return(val)
 }
 
-# =========================== gpd_mle ===========================
+# ================================== gpd_mle ==================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -280,7 +280,7 @@ gpd_mle <- function(gpd_data) {
   return(temp)
 }
 
-# =========================== fallback_gp_mle ===========================
+# ============================== fallback_gp_mle ==============================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -293,7 +293,7 @@ fallback_gp_mle <- function(init, ...){
   return(temp)
 }
 
-# =========================== gpd_obs_info ===========================
+# =============================== gpd_obs_info ================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -322,7 +322,7 @@ gpd_obs_info <- function(gpd_pars, y) {
   return(i)
 }
 
-# =========================== find_a ===========================
+# =================================== find_a ==================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -434,7 +434,7 @@ find_a <-  function(neg_logf_rho, init_psi, d, r, lower, upper, algor,
   return(temp)
 }
 
-# =========================== find_bs ===========================
+# ================================== find_bs ==================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -661,7 +661,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
   return(list(l_box = l_box, u_box = u_box, vals = vals, conv = conv))
 }
 
-# =========================== cpp_find_a ===========================
+# ================================ cpp_find_a =================================
 
 #' @keywords internal
 #' @rdname rust-internal
@@ -768,7 +768,7 @@ cpp_find_a <-  function(init_psi, lower, upper, algor, method, control,
   return(temp)
 }
 
-# =========================== cpp_find_bs ===========================
+# ================================ cpp_find_bs ================================
 
 #' @keywords internal
 #' @rdname rust-internal
