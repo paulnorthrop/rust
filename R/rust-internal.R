@@ -982,3 +982,21 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
   }
   return(list(l_box = l_box, u_box = u_box, vals = vals, conv = conv))
 }
+
+# ================================= wecdf =====================================
+
+wecdf <- function (x, weights = rep(1, length(x))) {
+  # Sort x and reorder the weights
+  w <- weights[order(x)]
+  x <- sort(x)
+  # The sum of the weights for each unique value in xs
+  ws <- tapply(w, x, sum)
+  vals <- unique(x)
+  rval <- approxfun(vals, cumsum(ws) / sum(ws),
+                    method = "constant", yleft = 0, yright = 1, f = 0,
+                    ties = "ordered")
+  class(rval) <- c("ecdf", "stepfun", class(rval))
+  assign("nobs", length(x), envir = environment(rval))
+  attr(rval, "call") <- sys.call()
+  rval
+}

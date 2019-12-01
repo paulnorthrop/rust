@@ -19,7 +19,6 @@ Description: Uses the generalized ratio-of-uniforms (RU) method to simulate
     <https://cran.r-project.org/package=Rcpp> can be used to improve efficiency.
 Imports: graphics,
     Rcpp (>= 0.12.10),
-    spatstat,
     stats
 License: GPL (>= 2)
 LazyData: TRUE
