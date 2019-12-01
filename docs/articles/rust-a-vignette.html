@@ -91,7 +91,7 @@
       <h1>Introducing rust: Ratio-of-Uniforms Simulation with Transformation</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2019-11-27</h4>
+            <h4 class="date">2019-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-a-vignette.Rmd"><code>vignettes/rust-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-a-vignette.Rmd</code></div>
@@ -235,11 +235,11 @@ lambda
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
 <span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="co">#&gt; &lt;bytecode: 0x00000000096ad8b8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x000000000e54c548&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
 <span class="co">#&gt; function(x) 0</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000009140058&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x000000000e5e9c60&gt;</span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sample on Box-Cox transformed, without rotation</span>
 x3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> gpd_logpost, <span class="dt">ss =</span> ss, <span class="dt">d =</span> <span class="dv">2</span>, <span class="dt">n =</span> n, <span class="dt">trans =</span> <span class="st">"BC"</span>,
@@ -401,20 +401,20 @@ x3<span class="op">$</span>pa
 lambda &lt;-<span class="st"> </span><span class="kw"><a href="../reference/find_lambda_one_d.html">find_lambda_one_d</a></span>(<span class="dt">logf =</span> dlnorm, <span class="dt">log =</span> <span class="ot">TRUE</span>)
 lambda
 <span class="co">#&gt; $lambda</span>
-<span class="co">#&gt; [1] 0.06371055</span>
+<span class="co">#&gt; [1] 0.06564725</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $gm</span>
-<span class="co">#&gt; [1] 0.9536964</span>
+<span class="co">#&gt; [1] 0.9535484</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $init_psi</span>
-<span class="co">#&gt; [1] -0.06346005</span>
+<span class="co">#&gt; [1] -0.06345259</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $sd_psi</span>
 <span class="co">#&gt; [1] 0.9753502</span></code></pre></div>
 <p>We get a value of <span class="math inline">\(\lambda\)</span> that is close to zero and an estimated probability of acceptance that is similar to before.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> dlnorm, <span class="dt">log =</span> <span class="ot">TRUE</span>, <span class="dt">d =</span> <span class="dv">1</span>, <span class="dt">n =</span> n, <span class="dt">trans =</span> <span class="st">"BC"</span>, <span class="dt">lambda =</span> lambda)
 x4<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.791703</span></code></pre></div>
+<span class="co">#&gt; [1] 0.7914523</span></code></pre></div>
 </div>
 <div id="example-3-gamma-density" class="section level3">
 <h3 class="hasAnchor">
@@ -429,7 +429,7 @@ x1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html"
 <span class="co">#&gt;             function is unbounded.</span>
 <span class="co">#&gt;   It might be worth using the option trans = ``BC''.</span>
 x1<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.6044122</span></code></pre></div>
+<span class="co">#&gt; [1] 0.6043757</span></code></pre></div>
 <p>We get a warning because when <span class="math inline">\(\alpha = 1\)</span> the mode of a gamma distribution is at zero, the lower end point of the distribution. In this example it doesn’t matter because the density is finite at the mode and we are not relying on the mode being at a turning point of the density. However, if we are using rotation of axes in a multidimensional example then we may have a problem because the rotation is based on an estimate of the Hessian of the density at the mode.</p>
 <p>Now we use a cube root transformation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Box-Cox transform with lambda = 1/3 works well for shape &gt;= 1. -----------</span>
@@ -450,7 +450,7 @@ x3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html"
        <span class="dt">phi_to_theta =</span> phi_to_theta, <span class="dt">log_j =</span> log_j, <span class="dt">user_args =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">lambda =</span> lambda),
        <span class="dt">init =</span> alpha)
 x3<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.7968127</span></code></pre></div>
+<span class="co">#&gt; [1] 0.7968762</span></code></pre></div>
 <p>We could also use <code>find_lambda_one_d</code> to set <span class="math inline">\(\lambda\)</span>: see the examples in the documentation for <code>find_lambda_one_d</code> for details.</p>
 <p>For <span class="math inline">\(\alpha &lt; 1\)</span> the gamma density is very skewed and the density increases without limit at the origin. A cube root transformation tends not to be sufficiently strong to produce a distribution for which the density is finite at its mode. We use <code>find_lambda_one_d</code> to estimate a suitable value of <span class="math inline">\(\lambda\)</span>. We need to set a range of values over which to evaluate the gamma density in order to estimate <span class="math inline">\(\lambda\)</span>. Here we cheat by using the gamma quantile function, something that wouldn’t usually be available.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha &lt;-<span class="st"> </span><span class="fl">0.1</span>
@@ -464,20 +464,20 @@ lambda &lt;-<span class="st"> </span><span class="kw"><a href="../reference/find
   <span class="dt">max_phi =</span> max_phi)
 lambda
 <span class="co">#&gt; $lambda</span>
-<span class="co">#&gt; [1] 0.06777767</span>
+<span class="co">#&gt; [1] 0.06758891</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $gm</span>
-<span class="co">#&gt; [1] 0.008053051</span>
+<span class="co">#&gt; [1] 0.008056577</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $init_psi</span>
-<span class="co">#&gt; [1] -0.03426831</span>
+<span class="co">#&gt; [1] -0.0342618</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $sd_psi</span>
-<span class="co">#&gt; [1] 0.009354108</span>
+<span class="co">#&gt; [1] 0.009372876</span>
 x4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> dgamma, <span class="dt">shape =</span> alpha, <span class="dt">log =</span> <span class="ot">TRUE</span>, <span class="dt">d =</span> <span class="dv">1</span>, <span class="dt">n =</span> n, <span class="dt">trans =</span> <span class="st">"BC"</span>,
   <span class="dt">lambda =</span> lambda)
 x4<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.7532389</span></code></pre></div>
+<span class="co">#&gt; [1] 0.7531822</span></code></pre></div>
 <p>For a value of <span class="math inline">\(\alpha\)</span> so close to 0 the density is very peaked at the origin (see the plot on the left below). After a transformation that is close to a log transformation the target density (see the plot on the right) is bounded above and the estimated probability of acceptance is similar to that of a normal distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x4)
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x4, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
@@ -501,7 +501,7 @@ x1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html"
 <span class="co"># With rotation.</span>
 x2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> log_dmvnorm, <span class="dt">sigma =</span> covmat, <span class="dt">d =</span> <span class="dv">2</span>, <span class="dt">n =</span> n, <span class="dt">init =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>))
 <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(x1<span class="op">$</span>pa, x2<span class="op">$</span>pa)
-<span class="co">#&gt; [1] 0.2348134 0.5319432</span></code></pre></div>
+<span class="co">#&gt; [1] 0.2353273 0.5368839</span></code></pre></div>
 <p>The probability of acceptance is increased by the rotation of axes. These plots show why.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x1, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x2, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
@@ -516,7 +516,7 @@ x3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html"
 x4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> log_dmvnorm, <span class="dt">sigma =</span> covmat, <span class="dt">d =</span> <span class="dv">3</span>, <span class="dt">n =</span> n,
   <span class="dt">init =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
 <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(x3<span class="op">$</span>pa, x4<span class="op">$</span>pa)
-<span class="co">#&gt; [1] 0.05320253 0.31279324</span></code></pre></div>
+<span class="co">#&gt; [1] 0.05319488 0.31257814</span></code></pre></div>
 <p>Again, pairwise plots of the simulated values illustrate the effect of the rotation of axes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(x3, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>

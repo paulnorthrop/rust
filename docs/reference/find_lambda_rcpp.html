@@ -354,22 +354,22 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                box      vals1      vals2 conv
 #&gt; a        1.0000000  0.0000000  0.0000000    0
-#&gt; b1minus -0.1578065 -0.2479152  0.1685644    0
-#&gt; b2minus -0.1213084  0.3486472 -0.2104575    0
-#&gt; b1plus   0.2012655  0.3573298 -0.2150341    0
-#&gt; b2plus   0.1155637 -0.2481278  0.1980573    0
+#&gt; b1minus -0.1523185 -0.2390846  0.1681619    0
+#&gt; b2minus -0.1197140  0.3336063 -0.2059090    0
+#&gt; b1plus   0.1945137  0.3447002 -0.2115116    0
+#&gt; b2plus   0.1171696 -0.2375358  0.2023353    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.1017708
+#&gt; [1] 0.1175088
 #&gt; 
 #&gt; sample summary 
 #&gt;        V1               V2         
-#&gt;  Min.   :0.7572   Min.   :-0.9198  
-#&gt;  1st Qu.:1.1056   1st Qu.:-0.7061  
-#&gt;  Median :1.1980   Median :-0.6442  
-#&gt;  Mean   :1.1989   Mean   :-0.6448  
-#&gt;  3rd Qu.:1.2841   3rd Qu.:-0.5830  
-#&gt;  Max.   :1.6263   Max.   :-0.2728  </div><div class='input'>
+#&gt;  Min.   :0.6653   Min.   :-0.8656  
+#&gt;  1st Qu.:1.0410   1st Qu.:-0.6623  
+#&gt;  Median :1.1270   Median :-0.6050  
+#&gt;  Mean   :1.1351   Mean   :-0.6018  
+#&gt;  3rd Qu.:1.2269   3rd Qu.:-0.5408  
+#&gt;  Max.   :1.5530   Max.   :-0.1557  </div><div class='input'>
 <span class='co'># Sample on original scale, with rotation ----------------</span>
 <span class='no'>for_ru_rcpp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
                       <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>)), <span class='no'>ss</span>)
@@ -377,22 +377,22 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box       vals1       vals2 conv
 #&gt; a        1.00000000  0.00000000  0.00000000    0
-#&gt; b1minus -0.04262400 -0.06304431  0.03781478    0
-#&gt; b2minus -0.06515295  0.05075335 -0.11303361    0
-#&gt; b1plus   0.11944368  0.27495890  0.08907143    0
-#&gt; b2plus   0.06206756  0.10114611  0.10637354    0
+#&gt; b1minus -0.04787813 -0.07141518  0.03574879    0
+#&gt; b2minus -0.06832986  0.05611931 -0.11752794    0
+#&gt; b1plus   0.11667492  0.26263473  0.09361231    0
+#&gt; b2plus   0.06687760  0.10302636  0.11548814    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.4180602
+#&gt; [1] 0.4226543
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1              V2         
-#&gt;  Min.   :0.839   Min.   :-0.9658  
-#&gt;  1st Qu.:1.105   1st Qu.:-0.7043  
-#&gt;  Median :1.187   Median :-0.6410  
-#&gt;  Mean   :1.198   Mean   :-0.6434  
-#&gt;  3rd Qu.:1.284   3rd Qu.:-0.5817  
-#&gt;  Max.   :1.710   Max.   :-0.3099  </div><div class='input'>
+#&gt;        V1               V2         
+#&gt;  Min.   :0.7783   Min.   :-0.9306  
+#&gt;  1st Qu.:1.0433   1st Qu.:-0.6694  
+#&gt;  Median :1.1359   Median :-0.6070  
+#&gt;  Mean   :1.1413   Mean   :-0.6063  
+#&gt;  3rd Qu.:1.2290   3rd Qu.:-0.5367  
+#&gt;  Max.   :1.6493   Max.   :-0.2547  </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed scale ----------------</span>
 
 <span class='co'># Find initial estimates for phi = (phi1, phi2),</span>
@@ -414,23 +414,23 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
                            <span class='kw'>max_phi</span> <span class='kw'>=</span> <span class='no'>max_phi</span>, <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>xm</span> <span class='kw'>=</span> <span class='no'>ss</span>$<span class='no'>xm</span>),
                            <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='no'>ptr_phi_to_theta_gp</span>)
 <span class='no'>lambda</span></div><div class='output co'>#&gt; $lambda
-#&gt; [1] 0.1241592 0.3839627
+#&gt; [1] 0.1588094 0.3873855
 #&gt; 
 #&gt; $gm
-#&gt; [1] 1.18969366 0.02455704
+#&gt; [1] 1.13032514 0.02985621
 #&gt; 
 #&gt; $init_psi
-#&gt; [1]  0.2056616 -0.1984693
+#&gt; [1]  0.1368381 -0.2210673
 #&gt; 
 #&gt; $sd_psi
 #&gt;       Var1       Var2 
-#&gt; 0.13691463 0.02095785 
+#&gt; 0.13113564 0.02384088 
 #&gt; 
 #&gt; $phi_to_theta
-#&gt; &lt;pointer: 0x0000000014420310&gt;
+#&gt; &lt;pointer: 0x0000000014582b60&gt;
 #&gt; 
 #&gt; $log_j
-#&gt; &lt;pointer: 0x0000000014420070&gt;
+#&gt; &lt;pointer: 0x0000000014582c20&gt;
 #&gt; 
 #&gt; $user_args
 #&gt; $user_args$xm
@@ -443,44 +443,44 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x3</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box      vals1       vals2 conv
 #&gt; a        1.00000000  0.0000000  0.00000000    0
-#&gt; b1minus -0.16947925 -0.2799390  0.02312765    0
-#&gt; b2minus -0.02726586  0.1022127 -0.04222704    0
-#&gt; b1plus   0.17331331  0.2890352 -0.01680542    0
-#&gt; b2plus   0.02859512 -0.1229228  0.04734018    0
+#&gt; b1minus -0.16335279 -0.2694435  0.02696156    0
+#&gt; b2minus -0.03144925  0.1075533 -0.04942895    0
+#&gt; b1plus   0.16796432  0.2804794 -0.02043026    0
+#&gt; b2plus   0.03246222 -0.1226702  0.05378713    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.5005005
+#&gt; [1] 0.4741584
 #&gt; 
 #&gt; sample summary 
 #&gt;        V1               V2         
-#&gt;  Min.   :0.7265   Min.   :-0.9336  
-#&gt;  1st Qu.:1.1033   1st Qu.:-0.7073  
-#&gt;  Median :1.1950   Median :-0.6497  
-#&gt;  Mean   :1.1988   Mean   :-0.6453  
-#&gt;  3rd Qu.:1.2907   3rd Qu.:-0.5857  
-#&gt;  Max.   :1.6646   Max.   :-0.2523  </div><div class='input'>
+#&gt;  Min.   :0.7464   Min.   :-0.9419  
+#&gt;  1st Qu.:1.0449   1st Qu.:-0.6736  
+#&gt;  Median :1.1428   Median :-0.6121  
+#&gt;  Mean   :1.1445   Mean   :-0.6071  
+#&gt;  3rd Qu.:1.2316   3rd Qu.:-0.5439  
+#&gt;  Max.   :1.6599   Max.   :-0.2722  </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, with rotation</span>
 <span class='no'>x4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru_rcpp.html'>ru_rcpp</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>,
               <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x4</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box        vals1        vals2 conv
 #&gt; a        1.00000000  0.000000000  0.000000000    0
-#&gt; b1minus -0.06369684 -0.103086310  0.006407120    0
-#&gt; b2minus -0.06351512 -0.001679177 -0.098366861    0
-#&gt; b1plus   0.06948626  0.117417006  0.005208634    0
-#&gt; b2plus   0.06661162 -0.001694906  0.110277748    0
+#&gt; b1minus -0.06614592 -0.106874864  0.006370877    0
+#&gt; b2minus -0.06727477 -0.001449866 -0.105736129    0
+#&gt; b1plus   0.07264976  0.122991265  0.005330690    0
+#&gt; b2plus   0.06944168 -0.001056007  0.115058941    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.536193
+#&gt; [1] 0.5376344
 #&gt; 
 #&gt; sample summary 
 #&gt;        V1               V2         
-#&gt;  Min.   :0.8286   Min.   :-0.9184  
-#&gt;  1st Qu.:1.0951   1st Qu.:-0.7047  
-#&gt;  Median :1.1881   Median :-0.6442  
-#&gt;  Mean   :1.1967   Mean   :-0.6427  
-#&gt;  3rd Qu.:1.2861   3rd Qu.:-0.5797  
-#&gt;  Max.   :1.7091   Max.   :-0.2813  </div><div class='input'>
+#&gt;  Min.   :0.7633   Min.   :-0.8951  
+#&gt;  1st Qu.:1.0441   1st Qu.:-0.6599  
+#&gt;  Median :1.1319   Median :-0.6029  
+#&gt;  Mean   :1.1349   Mean   :-0.6007  
+#&gt;  3rd Qu.:1.2169   3rd Qu.:-0.5412  
+#&gt;  Max.   :1.6019   Max.   :-0.1564  </div><div class='input'>
 <span class='no'>def_par</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>), <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='fl'>1.5</span>, <span class='fl'>1</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,

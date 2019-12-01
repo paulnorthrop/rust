@@ -277,16 +277,15 @@ If this is not supplied then a constant Jacobian is used.</p></td>
 <span class='co'># Note: the default value of max_phi = 10 is OK here but this will not</span>
 <span class='co'># always be the case.</span>
 
-<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fu'>find_lambda_one_d</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dlnorm</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'spatstat':</span>
-#&gt; <span class='message'>  method     from</span>
-#&gt; <span class='message'>  print.boxx cli </span></div><div class='input'><span class='no'>lambda</span></div><div class='output co'>#&gt; $lambda
-#&gt; [1] 0.06371055
+<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fu'>find_lambda_one_d</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dlnorm</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>lambda</span></div><div class='output co'>#&gt; $lambda
+#&gt; [1] 0.06564725
 #&gt; 
 #&gt; $gm
-#&gt; [1] 0.9536964
+#&gt; [1] 0.9535484
 #&gt; 
 #&gt; $init_psi
-#&gt; [1] -0.06346005
+#&gt; [1] -0.06345259
 #&gt; 
 #&gt; $sd_psi
 #&gt; [1] 0.9753502
@@ -305,16 +304,16 @@ If this is not supplied then a constant Jacobian is used.</p></td>
 <span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fu'>find_lambda_one_d</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                             <span class='kw'>max_phi</span> <span class='kw'>=</span> <span class='no'>max_phi</span>)
 <span class='no'>lambda</span></div><div class='output co'>#&gt; $lambda
-#&gt; [1] 0.2719394
+#&gt; [1] 0.2727968
 #&gt; 
 #&gt; $gm
-#&gt; [1] 0.5686779
+#&gt; [1] 0.5689906
 #&gt; 
 #&gt; $init_psi
-#&gt; [1] -0.2015393
+#&gt; [1] -0.2016904
 #&gt; 
 #&gt; $sd_psi
-#&gt; [1] 0.7820847
+#&gt; [1] 0.7835109
 #&gt; </div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)
 
@@ -328,16 +327,16 @@ If this is not supplied then a constant Jacobian is used.</p></td>
 <span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fu'>find_lambda_one_d</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                             <span class='kw'>max_phi</span> <span class='kw'>=</span> <span class='no'>max_phi</span>)
 <span class='no'>lambda</span></div><div class='output co'>#&gt; $lambda
-#&gt; [1] 0.06777767
+#&gt; [1] 0.06758891
 #&gt; 
 #&gt; $gm
-#&gt; [1] 0.008053051
+#&gt; [1] 0.008056577
 #&gt; 
 #&gt; $init_psi
-#&gt; [1] -0.03426831
+#&gt; [1] -0.0342618
 #&gt; 
 #&gt; $sd_psi
-#&gt; [1] 0.009354108
+#&gt; [1] 0.009372876
 #&gt; </div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)
 
