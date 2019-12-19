@@ -373,6 +373,10 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                shoof = 0.2) {
   #
   Call <- match.call(expand.dots = TRUE)
+  # Check that shoof is in [0, 1]
+  if (shoof < 0 || shoof > 1) {
+    stop("''shoof'' must be in [0, 1]")
+  }
   # Check that the values of key arguments are suitable
   if (r < 0) {
     stop("r must be non-negative")
