@@ -4,6 +4,8 @@
 
 * Dependence on the spatstat package has been removed.
 
+* In `plot.ru()` warnings, stemming from stats::regularize.values(), which is called by stats::approx(), have been suppressed.
+
 # rust 1.3.7
 
 ## Bug fixes and minor improvements
