@@ -47,8 +47,7 @@ summary(x)
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 
-\code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-  and \code{d} = 2 only).
+\code{\link{plot.ru}} for a diagnostic plot.
 
 \code{\link{ru}} for descriptions of \code{object$sim_vals} and
   \code{object$box}.

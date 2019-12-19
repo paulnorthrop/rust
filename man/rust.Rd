@@ -48,8 +48,7 @@ Eddelbuettel, D. (2013) Seamless R and C++ Integration with
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 
-\code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-  and \code{d} = 2 only).
+\code{\link{plot.ru}} for a diagnostic plot.
 
 \code{\link{find_lambda_one_d}} and
   \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat) automatically

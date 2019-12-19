@@ -426,8 +426,7 @@ Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 
-\code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-  and \code{d} = 2 only).
+\code{\link{plot.ru}} for a diagnostic plot.
 
 \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat)
   automatically a list for the argument \code{lambda} of \code{ru} for the

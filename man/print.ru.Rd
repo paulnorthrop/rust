@@ -26,6 +26,5 @@ Simply prints the call to \code{ru} or \code{ru_rcpp}.
 \code{\link{summary.ru}} for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.
 
-\code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-  and \code{d} = 2 only).
+\code{\link{plot.ru}} for a diagnostic plot.
 }

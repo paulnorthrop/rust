@@ -362,8 +362,7 @@
 #'   accepts R functions as arguments.
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-#'   and \code{d} = 2 only).
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @seealso \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat)
 #'   automatically a list for the argument \code{lambda} of \code{ru} for the
 #'   \code{d} = 1 case.

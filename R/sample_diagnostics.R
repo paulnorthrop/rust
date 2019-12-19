@@ -240,8 +240,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' summary(x)
 #' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
 #'   \code{object$box}.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-#'   and \code{d} = 2 only).
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @export
 summary.ru <- function(object, ...) {
   if (!inherits(object, "ru")) {
@@ -291,8 +290,7 @@ summary.ru <- function(object, ...) {
 #' summary(x)
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-#'   and \code{d} = 2 only).
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
 #'   \code{object$box}.
 #' @export
@@ -327,8 +325,7 @@ print.summary.ru <- function(x, ...) {
 #'   \code{\link[base]{print}} methods.
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
-#'   and \code{d} = 2 only).
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @export
 print.ru <- function(x, ...) {
   if (!inherits(x, "ru")) {
