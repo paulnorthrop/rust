@@ -393,6 +393,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
                             "Brent"),
                a_control = list(), b_control = list(), var_names = NULL,
                shoof = 0.2) {
+  #
+  Call <- match.call(expand.dots = TRUE)
   # Check that shoof is in [0, 1]
   if (shoof < 0 || shoof > 1) {
     stop("''shoof'' must be in [0, 1]")
@@ -800,6 +802,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_rho <- logf_fun
   res$logf_rho_args <- logf_args
   res$f_mode <- f_mode
+  res$call <- Call
   class(res) <- "ru"
   return(res)
 }

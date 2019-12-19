@@ -372,6 +372,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
                a_control = list(), b_control = list(), var_names = NULL,
                shoof = 0.2) {
   #
+  Call <- match.call(expand.dots = TRUE)
   # Check that the values of key arguments are suitable
   if (r < 0) {
     stop("r must be non-negative")
@@ -723,6 +724,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_args <- list(...)
   res$logf_rho <- logf_rho
   res$f_mode <- f_mode
+  res$call <- Call
   class(res) <- "ru"
   return(res)
 }
