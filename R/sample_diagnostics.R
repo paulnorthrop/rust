@@ -240,7 +240,8 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' summary(x)
 #' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
 #'   \code{object$box}.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
+#'   and \code{d} = 2 only).
 #' @export
 summary.ru <- function(object, ...) {
   if (!inherits(object, "ru")) {
@@ -288,9 +289,12 @@ summary.ru <- function(object, ...) {
 #' }
 #' x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
 #' summary(x)
+#' @seealso \code{\link{summary.ru}} for summaries of the simulated values
+#'   and properties of the ratio-of-uniforms algorithm.
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
+#'   and \code{d} = 2 only).
 #' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
 #'   \code{object$box}.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @export
 print.summary.ru <- function(x, ...) {
   if (!inherits(x, "summary.ru")) {
@@ -307,4 +311,30 @@ print.summary.ru <- function(x, ...) {
   cat("sample summary", "\n")
   print(x$sim_summary, ...)
   invisible(x)
+}
+
+# ============================= print.ru() ================================== #
+
+#' Print method for an \code{"ru"} object
+#'
+#' \code{print} method for class \code{"ru"}.
+#'
+#' @param x an object of class \code{"ru"}, a result of a call to
+#'   \code{\link{ru}} or \code{\link{ru_rcpp}}.
+#' @param ... Additional arguments.  None are used in this function.
+#' @details Simply prints the call to \code{ru} or \code{ru_rcpp}.
+#' @return The argument \code{x}, invisibly, as for all
+#'   \code{\link[base]{print}} methods.
+#' @seealso \code{\link{summary.ru}} for summaries of the simulated values
+#'   and properties of the ratio-of-uniforms algorithm.
+#' @seealso \code{\link{plot.ru}} for a diagnostic plot (for \code{d} = 1
+#'   and \code{d} = 2 only).
+#' @export
+print.ru <- function(x, ...) {
+  if (!inherits(x, "ru")) {
+    stop("use only with \"ru\" objects")
+  }
+  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
+      "\n\n", sep = "")
+  return(invisible(x))
 }
