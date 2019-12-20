@@ -208,8 +208,7 @@ Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
  211-252.
 
 Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
- Transformations of Multivariate Data, Biometrics, 27(4),
- \url{https://dx.doi.org/10.2307/2528821}.
+ Transformations of Multivariate Data, Biometrics, 27(4).
 
 Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
  R and C++ Integration. \emph{Journal of Statistical Software},
