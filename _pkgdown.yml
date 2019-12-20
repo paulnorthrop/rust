@@ -30,6 +30,7 @@ reference:
       - "plot.ru"
       - "summary.ru"
       - "print.summary.ru"
+      - "print.ru"
   - title: GP example
     desc: ~
     contents:
