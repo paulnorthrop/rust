@@ -153,7 +153,7 @@ plot(x, ru_scale = TRUE)
 \references{
 Box, G. and Cox, D. R. (1964) An Analysis of Transformations.
  Journal of the Royal Statistical Society. Series B (Methodological), 26(2),
- 211-252, \url{https://www.jstor.org/stable/2984418}.
+ 211-252.
 
 Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
  Transformations of Multivariate Data, Biometrics, 27(4),
