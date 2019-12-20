@@ -992,9 +992,8 @@ wecdf <- function (x, weights = rep(1, length(x))) {
   # The sum of the weights for each unique value in xs
   ws <- tapply(w, x, sum)
   vals <- unique(x)
-  rval <- approxfun(vals, cumsum(ws) / sum(ws),
-                    method = "constant", yleft = 0, yright = 1, f = 0,
-                    ties = "ordered")
+  rval <- stats::approxfun(vals, cumsum(ws) / sum(ws), method = "constant",
+                           yleft = 0, yright = 1, f = 0, ties = "ordered")
   class(rval) <- c("ecdf", "stepfun", class(rval))
   assign("nobs", length(x), envir = environment(rval))
   attr(rval, "call") <- sys.call()

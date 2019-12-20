@@ -244,7 +244,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
   areas <- wbar * xdiff
   w <- areas / sum(areas)
   # Estimate the 100*probs% quantiles of the density
-  qs <- quantile(wecdf(xmid, w), probs = probs)
+  qs <- stats::quantile(wecdf(xmid, w), probs = probs)
   qs <- matrix(qs, ncol = 1)
   # Use the quantiles qs as a sample of data to estimate lambda
   # Set to 1 all the input weights associated with the quantiles
