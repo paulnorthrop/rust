@@ -71,7 +71,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
       </span>
     </div>
 
@@ -402,8 +402,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
   the Rcpp package to improve efficiency.</p>
 <p><code><a href='summary.ru.html'>summary.ru</a></code> for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.</p>
-<p><code><a href='plot.ru.html'>plot.ru</a></code> for a diagnostic plot (for <code>d</code> = 1
-  and <code>d</code> = 2 only).</p>
+<p><code><a href='plot.ru.html'>plot.ru</a></code> for a diagnostic plot.</p>
 <p><code><a href='find_lambda_one_d.html'>find_lambda_one_d</a></code> to produce (somewhat) automatically
   a list for the argument <code>lambda</code> of <code>ru</code> for the
   <code>d</code> = 1 case.</p>
@@ -492,7 +491,12 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ru(logf = dgamma, shape = alpha, log = TRUE, n = 1000, d = 1, 
+#&gt;     init = alpha, trans = "BC", lambda = 1/3)
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
@@ -521,7 +525,13 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"user"</span>, <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='no'>phi_to_theta</span>, <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='no'>log_j</span>,
         <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>), <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ru(logf = dgamma, shape = alpha, log = TRUE, n = 1000, d = 1, 
+#&gt;     init = alpha, trans = "user", phi_to_theta = phi_to_theta, 
+#&gt;     log_j = log_j, user_args = list(lambda = lambda))
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
@@ -552,9 +562,14 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
 <span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
          <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>), <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
 <span class='co'># [This may not appear if the sample is far from the constraint.]</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ru(logf = gpd_logpost, ss = ss, n = n, d = 2, init = init, rotate = FALSE, 
+#&gt;     lower = c(0, -Inf))
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;                 box      vals1      vals2 conv
 #&gt; a        1.00000000  0.0000000  0.0000000    0
 #&gt; b1minus -0.13938523 -0.2200697  0.1316894    0
@@ -576,7 +591,12 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='co'># Rotation of axes plus mode relocation ----------------</span>
 <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
          <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ru(logf = gpd_logpost, ss = ss, n = n, d = 2, init = init, lower = c(0, 
+#&gt;     -Inf))
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;                 box       vals1       vals2 conv
 #&gt; a        1.00000000  0.00000000  0.00000000    0
 #&gt; b1minus -0.03839164 -0.05587456  0.03656057    0

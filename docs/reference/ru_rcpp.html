@@ -74,7 +74,7 @@ https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
       </span>
     </div>
 
@@ -423,8 +423,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
   accepts R functions as arguments.</p>
 <p><code><a href='summary.ru.html'>summary.ru</a></code> for summaries of the simulated values
   and properties of the ratio-of-uniforms algorithm.</p>
-<p><code><a href='plot.ru.html'>plot.ru</a></code> for a diagnostic plot (for <code>d</code> = 1
-  and <code>d</code> = 2 only).</p>
+<p><code><a href='plot.ru.html'>plot.ru</a></code> for a diagnostic plot.</p>
 <p><code><a href='find_lambda_one_d_rcpp.html'>find_lambda_one_d_rcpp</a></code> to produce (somewhat)
   automatically a list for the argument <code>lambda</code> of <code>ru</code> for the
   <code>d</code> = 1 case.</p>
@@ -523,7 +522,12 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru_rcpp</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gam</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
   <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ru_rcpp(logf = ptr_gam, alpha = alpha, n = n, d = 1, init = alpha, 
+#&gt;     trans = "BC", lambda = 1/3)
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
@@ -549,7 +553,13 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru_rcpp</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gam</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
   <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"user"</span>, <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='no'>ptr_phi_to_theta_bc</span>, <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='no'>ptr_log_j_bc</span>,
   <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>), <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ru_rcpp(logf = ptr_gam, alpha = alpha, n = n, d = 1, init = alpha, 
+#&gt;     trans = "user", phi_to_theta = ptr_phi_to_theta_bc, log_j = ptr_log_j_bc, 
+#&gt;     user_args = list(lambda = lambda))
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
@@ -582,9 +592,380 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>for_ru_rcpp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
                  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>)), <span class='no'>ss</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>ru_rcpp</span>, <span class='no'>for_ru_rcpp</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
 <span class='co'># [This may not appear if the sample is far from the constraint.]</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru_rcpp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru_rcpp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; (function (logf, ..., n = 1, d = 1, init = NULL, trans = c("none", 
+#&gt;     "BC", "user"), phi_to_theta = NULL, log_j = NULL, user_args = list(), 
+#&gt;     lambda = rep(1L, d), lambda_tol = 1e-06, gm = NULL, rotate = ifelse(d == 
+#&gt;         1, FALSE, TRUE), lower = rep(-Inf, d), upper = rep(Inf, 
+#&gt;         d), r = 1/2, ep = 0L, a_algor = if (d == 1) "nlminb" else "optim", 
+#&gt;     b_algor = c("nlminb", "optim"), a_method = c("Nelder-Mead", 
+#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), b_method = c("Nelder-Mead", 
+#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), a_control = list(), 
+#&gt;     b_control = list(), var_names = NULL, shoof = 0.2) 
+#&gt; {
+#&gt;     Call &lt;- match.call(expand.dots = TRUE)
+#&gt;     if (shoof &lt; 0 || shoof &gt; 1) {
+#&gt;         stop("''shoof'' must be in [0, 1]")
+#&gt;     }
+#&gt;     is_pointer &lt;- (class(logf) == "externalptr")
+#&gt;     if (!is_pointer) {
+#&gt;         stop("logf must be an external pointer to a function")
+#&gt;     }
+#&gt;     pars &lt;- list(...)
+#&gt;     list_depth &lt;- function(x) {
+#&gt;         ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
+#&gt;     }
+#&gt;     if (length(pars) &gt; 0) {
+#&gt;         pars_depth &lt;- list_depth(pars)
+#&gt;     }
+#&gt;     else {
+#&gt;         pars_depth &lt;- 0
+#&gt;     }
+#&gt;     if (pars_depth &gt; 1) {
+#&gt;         par_names &lt;- names(pars)
+#&gt;         pars &lt;- unlist(pars, recursive = FALSE)
+#&gt;         if (!is.null(par_names)) {
+#&gt;             keep_name &lt;- nchar(par_names) + 2
+#&gt;             names(pars) &lt;- substring(names(pars), keep_name)
+#&gt;         }
+#&gt;     }
+#&gt;     if (r &lt; 0) {
+#&gt;         stop("r must be non-negative")
+#&gt;     }
+#&gt;     a_algor &lt;- match.arg(a_algor, c("optim", "nlminb"))
+#&gt;     a_method &lt;- match.arg(a_method)
+#&gt;     b_algor &lt;- match.arg(b_algor)
+#&gt;     b_method &lt;- match.arg(b_method)
+#&gt;     if (any(upper &lt;= lower)) {
+#&gt;         stop("upper must be greater than lower, componentwise.")
+#&gt;     }
+#&gt;     trans &lt;- match.arg(trans)
+#&gt;     if (is.null(gm)) {
+#&gt;         gm &lt;- rep(1, d)
+#&gt;     }
+#&gt;     if (trans == "BC") {
+#&gt;         lambda_type &lt;- "numeric"
+#&gt;         if (is.list(lambda)) {
+#&gt;             lambda_type &lt;- "list"
+#&gt;             if (is.null(lambda$lambda)) {
+#&gt;                 stop("The list lambda must contain the object lambda$lambda")
+#&gt;             }
+#&gt;             if (!is.null(lambda$gm)) {
+#&gt;                 gm &lt;- lambda$gm
+#&gt;             }
+#&gt;             if (!is.null(lambda$init_psi)) {
+#&gt;                 init &lt;- lambda$init_psi
+#&gt;             }
+#&gt;             if (a_algor == "optim" &amp; is.null(a_control$parscale)) {
+#&gt;                 a_control &lt;- c(a_control, list(parscale = lambda$sd_psi))
+#&gt;             }
+#&gt;             if (!is.null(lambda$phi_to_theta)) {
+#&gt;                 phi_to_theta &lt;- lambda$phi_to_theta
+#&gt;             }
+#&gt;             if (!is.null(lambda$log_j)) {
+#&gt;                 log_j &lt;- lambda$log_j
+#&gt;             }
+#&gt;             if (!is.null(lambda$user_args)) {
+#&gt;                 user_args &lt;- lambda$user_args
+#&gt;             }
+#&gt;             lambda &lt;- lambda$lambda
+#&gt;         }
+#&gt;         lambda &lt;- ifelse(abs(lambda) &lt; lambda_tol, 0L, lambda)
+#&gt;         if (!is.vector(lambda)) {
+#&gt;             stop("lambda must be a numeric vector")
+#&gt;         }
+#&gt;         if (!(length(lambda) %in% c(1, d))) {
+#&gt;             if (lambda_type == "numeric") {
+#&gt;                 stop("lambda must be a numeric vector of length d")
+#&gt;             }
+#&gt;             if (lambda_type == "list") {
+#&gt;                 stop("lambda$lambda must be a numeric vector of length d")
+#&gt;             }
+#&gt;         }
+#&gt;         if (length(lambda) == 1) {
+#&gt;             lambda &lt;- rep(lambda, d)
+#&gt;         }
+#&gt;         if (any(upper &lt;= 0)) {
+#&gt;             stop("when trans = ``BC'' all elements of upper must be positive")
+#&gt;         }
+#&gt;         lower &lt;- pmax(0, lower)
+#&gt;         lower &lt;- ifelse(lambda == 0, gm * log(lower), (lower^lambda - 
+#&gt;             1)/(lambda * gm^(lambda - 1)))
+#&gt;         upper &lt;- ifelse(lambda == 0, gm * log(upper), (upper^lambda - 
+#&gt;             1)/(lambda * gm^(lambda - 1)))
+#&gt;     }
+#&gt;     if (d == 1 &amp; a_algor == "optim" &amp; any(is.infinite(c(lower, 
+#&gt;         upper)))) {
+#&gt;         a_algor = "nlminb"
+#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using a_algor = `optim'.  a_algor has been changed to `nlminb'")
+#&gt;     }
+#&gt;     if (d == 1 &amp; b_algor == "optim" &amp; any(is.infinite(c(lower, 
+#&gt;         upper)))) {
+#&gt;         b_algor = "nlminb"
+#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using b_algor = `optim'.  b_algor has been changed to `nlminb'")
+#&gt;     }
+#&gt;     if (b_algor == "optim") {
+#&gt;         if (b_method == "BFGS" | b_method == "CG") {
+#&gt;             warning("Using optim with b_method==`BFGS' or `CG' can produce the error\n              message `non-finite finite-difference value'.  If you really want\n              to use BFGS or CG try setting ep to be positive but small, e.g.\n              ep=0.001.", 
+#&gt;                 immediate. = TRUE, noBreaks. = TRUE)
+#&gt;         }
+#&gt;     }
+#&gt;     if (d == 1) {
+#&gt;         a_method &lt;- "Brent"
+#&gt;         b_method &lt;- "Brent"
+#&gt;     }
+#&gt;     if (d == 1) {
+#&gt;         which_lam &lt;- 1L
+#&gt;     }
+#&gt;     else {
+#&gt;         which_lam &lt;- which(lambda != 1L)
+#&gt;     }
+#&gt;     if (is.null(init)) {
+#&gt;         init &lt;- rep(1, d)
+#&gt;         warning("No initial estimate of the mode given: a vector of ones has\n            been used", 
+#&gt;             noBreaks. = TRUE)
+#&gt;     }
+#&gt;     len_init &lt;- length(init)
+#&gt;     if (len_init == 1 &amp; d &gt; 1) {
+#&gt;         init &lt;- rep(init, length.out = d)
+#&gt;         warning("d &gt; 1 but init has length 1: a d-vector of inits has been used")
+#&gt;     }
+#&gt;     if (len_init != d &amp; len_init != 1) {
+#&gt;         stop("the length of init is incompatible with d")
+#&gt;     }
+#&gt;     if (d == 1 &amp; rotate) {
+#&gt;         rotate &lt;- FALSE
+#&gt;         warning("rotation is not relevant when d=1: no rotation is used")
+#&gt;     }
+#&gt;     ep &lt;- abs(ep)
+#&gt;     vals &lt;- matrix(NA, ncol = d, nrow = 2 * d + 1)
+#&gt;     colnames(vals) &lt;- paste("vals", 1:d, sep = "")
+#&gt;     conv &lt;- rep(NA, 2 * d + 1)
+#&gt;     big_val &lt;- Inf
+#&gt;     hscale &lt;- 0
+#&gt;     psi_mode &lt;- rep(0, d)
+#&gt;     is_pointer &lt;- (class(phi_to_theta) == "externalptr")
+#&gt;     if (trans == "none" &amp; is_pointer) {
+#&gt;         warning("phi_to_theta() not used when trans = ``none'': identity fn used")
+#&gt;     }
+#&gt;     if (!is_pointer &amp; !is.null(phi_to_theta)) {
+#&gt;         stop("phi_to_theta must be an external pointer to a function or NULL")
+#&gt;     }
+#&gt;     if (trans == "user" &amp; is.null(phi_to_theta)) {
+#&gt;         stop("When trans = ``user'' phi_to_theta must be supplied")
+#&gt;     }
+#&gt;     is_pointer &lt;- (class(log_j) == "externalptr")
+#&gt;     if (!is_pointer &amp; !is.null(log_j)) {
+#&gt;         stop("log_j must be an external pointer to a function or NULL")
+#&gt;     }
+#&gt;     rot_mat &lt;- diag(d)
+#&gt;     init_psi &lt;- init
+#&gt;     if (trans == "none") {
+#&gt;         logf_fun &lt;- cpp_logf_rho
+#&gt;         a_obj_fun &lt;- cpp_a_obj
+#&gt;         lower_box_fun &lt;- cpp_lower_box
+#&gt;         upper_box_fun &lt;- cpp_upper_box
+#&gt;         ru_fun &lt;- ru_cpp
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars)
+#&gt;         ru_args &lt;- list(d = d, r = r)
+#&gt;     }
+#&gt;     else if (trans == "BC" &amp; is.null(phi_to_theta)) {
+#&gt;         logf_fun &lt;- cpp_logf_rho_2
+#&gt;         a_obj_fun &lt;- cpp_a_obj_2
+#&gt;         lower_box_fun &lt;- cpp_lower_box_2
+#&gt;         upper_box_fun &lt;- cpp_upper_box_2
+#&gt;         ru_fun &lt;- ru_cpp_2
+#&gt;         con &lt;- lambda * gm^(lambda - 1)
+#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
+#&gt;             gm = gm, con = con)
+#&gt;         tfun &lt;- create_trans_xptr("case_2")
+#&gt;         if (all(lambda != 0)) {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
+#&gt;         }
+#&gt;         else {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
+#&gt;         }
+#&gt;         phi_to_theta &lt;- null_phi_to_theta_xptr("no_trans")
+#&gt;         log_j &lt;- create_log_jac_xptr("log_none_jac")
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
+#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
+#&gt;             user_args = user_args)
+#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
+#&gt;     }
+#&gt;     else if (trans == "BC" &amp; !is.null(phi_to_theta)) {
+#&gt;         logf_fun &lt;- cpp_logf_rho_3
+#&gt;         a_obj_fun &lt;- cpp_a_obj_2
+#&gt;         lower_box_fun &lt;- cpp_lower_box_2
+#&gt;         upper_box_fun &lt;- cpp_upper_box_2
+#&gt;         ru_fun &lt;- ru_cpp_3
+#&gt;         con &lt;- lambda * gm^(lambda - 1)
+#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
+#&gt;             gm = gm, con = con)
+#&gt;         tfun &lt;- create_trans_xptr("case_3")
+#&gt;         if (all(lambda != 0)) {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
+#&gt;         }
+#&gt;         else {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
+#&gt;         }
+#&gt;         if (is.null(log_j)) {
+#&gt;             log_j &lt;- create_log_jac_xptr("case_3")
+#&gt;         }
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
+#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
+#&gt;             user_args = user_args)
+#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
+#&gt;     }
+#&gt;     else {
+#&gt;         logf_fun &lt;- cpp_logf_rho_4
+#&gt;         a_obj_fun &lt;- cpp_a_obj_2
+#&gt;         lower_box_fun &lt;- cpp_lower_box_2
+#&gt;         upper_box_fun &lt;- cpp_upper_box_2
+#&gt;         ru_fun &lt;- ru_cpp_4
+#&gt;         tpars &lt;- list()
+#&gt;         tfun &lt;- create_trans_xptr("case_4")
+#&gt;         ptpfun &lt;- create_psi_to_phi_xptr("no_trans")
+#&gt;         if (is.null(log_j)) {
+#&gt;             log_j &lt;- create_log_jac_xptr("case_4")
+#&gt;         }
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
+#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
+#&gt;             user_args = user_args)
+#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
+#&gt;     }
+#&gt;     logf_args$hscale &lt;- do.call(logf_fun, c(list(rho = init_psi), 
+#&gt;         logf_args))
+#&gt;     if (is.infinite(logf_args$hscale)) {
+#&gt;         stop("The target density is zero at initial parameter values")
+#&gt;     }
+#&gt;     ru_args &lt;- c(ru_args, logf_args)
+#&gt;     for_find_a &lt;- list(init_psi = init_psi, lower = lower, upper = upper, 
+#&gt;         algor = a_algor, method = a_method, control = a_control, 
+#&gt;         a_obj_fun = a_obj_fun, ru_args = ru_args, shoof = shoof)
+#&gt;     temp &lt;- do.call("cpp_find_a", for_find_a)
+#&gt;     check_finite &lt;- do.call(logf_fun, c(list(rho = temp$par), 
+#&gt;         logf_args))
+#&gt;     if (!is.finite(check_finite)) {
+#&gt;         stop(paste("The target log-density is not finite at its mode: mode = ", 
+#&gt;             paste(temp$par, collapse = ","), ",\n               function value = ", 
+#&gt;             check_finite, ".", sep = ""))
+#&gt;     }
+#&gt;     ru_args$hscale &lt;- check_finite + logf_args$hscale
+#&gt;     logf_args$hscale &lt;- ru_args$hscale
+#&gt;     a_box &lt;- 1
+#&gt;     f_mode &lt;- temp$par
+#&gt;     vals[1, ] &lt;- rep(0, d)
+#&gt;     conv[1] &lt;- temp$convergence
+#&gt;     pos_def &lt;- TRUE
+#&gt;     if (inherits(temp$hessian, "try-error")) {
+#&gt;         pos_def &lt;- FALSE
+#&gt;     }
+#&gt;     else {
+#&gt;         hess_mat &lt;- temp$hessian
+#&gt;         e_vals &lt;- eigen(hess_mat, symmetric = TRUE, only.values = TRUE)$values
+#&gt;         if (any(e_vals &lt; 1e-06)) {
+#&gt;             pos_def &lt;- FALSE
+#&gt;         }
+#&gt;     }
+#&gt;     if (!pos_def) {
+#&gt;         warning("The Hessian of the target log-density at its mode is not positive\n            definite. This may not be a problem, but it may be that a mode\n            at/near a parameter boundary has been found and/or that the target\n            function is unbounded.", 
+#&gt;             immediate. = TRUE, noBreaks. = TRUE)
+#&gt;         if (trans != "BC") {
+#&gt;             cat("  It might be worth using the option trans = ``BC''.", 
+#&gt;                 "\n")
+#&gt;         }
+#&gt;         if (rotate) {
+#&gt;             rotate &lt;- FALSE
+#&gt;             warning("rotate has been changed to FALSE.", immediate. = TRUE)
+#&gt;         }
+#&gt;     }
+#&gt;     if (rotate) {
+#&gt;         rot_mat &lt;- solve(t(chol(hess_mat)))
+#&gt;         rot_mat &lt;- rot_mat/exp(-mean(log(e_vals))/2)
+#&gt;     }
+#&gt;     ru_args$rot_mat &lt;- t(rot_mat)
+#&gt;     ru_args$psi_mode &lt;- f_mode
+#&gt;     logf_args$rot_mat &lt;- t(rot_mat)
+#&gt;     logf_args$psi_mode &lt;- f_mode
+#&gt;     if (rotate) {
+#&gt;         lower &lt;- rep(-Inf, d)
+#&gt;         upper &lt;- rep(Inf, d)
+#&gt;     }
+#&gt;     for_find_bs &lt;- list(lower = lower, upper = upper, ep = ep, 
+#&gt;         vals = vals, conv = conv, algor = b_algor, method = b_method, 
+#&gt;         control = b_control, lower_box_fun = lower_box_fun, upper_box_fun = upper_box_fun, 
+#&gt;         ru_args = ru_args, shoof = shoof)
+#&gt;     temp &lt;- do.call("cpp_find_bs", for_find_bs)
+#&gt;     vals &lt;- temp$vals
+#&gt;     conv &lt;- temp$conv
+#&gt;     l_box &lt;- temp$l_box
+#&gt;     u_box &lt;- temp$u_box
+#&gt;     box_args &lt;- list(n = n, a_box = a_box, l_box = l_box, u_box = u_box)
+#&gt;     ru_args &lt;- c(box_args, ru_args)
+#&gt;     ru_args$tfun &lt;- NULL
+#&gt;     res &lt;- do.call(ru_fun, ru_args)
+#&gt;     res$pa &lt;- n/res$ntry
+#&gt;     res$ntry &lt;- NULL
+#&gt;     colnames(res$sim_vals) &lt;- var_names
+#&gt;     colnames(res$sim_vals_rho) &lt;- paste("rho[", 1:d, "]", sep = "")
+#&gt;     box &lt;- c(a_box, l_box, u_box)
+#&gt;     res$box &lt;- cbind(box, vals, conv)
+#&gt;     bs &lt;- paste(paste("b", 1:d, sep = ""), rep(c("minus", "plus"), 
+#&gt;         each = d), sep = "")
+#&gt;     rownames(res$box) &lt;- c("a", bs)
+#&gt;     if (any(conv != 0)) {
+#&gt;         warning("One or more convergence indicators are non-zero.", 
+#&gt;             immediate. = TRUE)
+#&gt;         print(res$box)
+#&gt;     }
+#&gt;     res$d &lt;- d
+#&gt;     pars$hscale &lt;- logf_args$hscale
+#&gt;     res$logf &lt;- cpp_logf_scaled
+#&gt;     res$logf_args &lt;- list(logf = logf, pars = pars)
+#&gt;     res$logf_rho &lt;- logf_fun
+#&gt;     res$logf_rho_args &lt;- logf_args
+#&gt;     res$f_mode &lt;- f_mode
+#&gt;     res$call &lt;- Call
+#&gt;     class(res) &lt;- "ru"
+#&gt;     return(res)
+#&gt; })(logf = &lt;pointer: 0x000000001411db50&gt;, gpd_data = c(1.50184253817097, 
+#&gt; 1.30289117655487, 0.906480856548376, 0.301646979857262, 0.501343639411626, 
+#&gt; 0.754046306364323, 1.82120758361078, 0.0141794017113837, 0.867751494994211, 
+#&gt; 0.850167873930924, 0.120898541174046, 0.145802761118517, 0.391640325456331, 
+#&gt; 0.606982675582009, 0.427735599968481, 0.442846953028009, 0.0403027329325576, 
+#&gt; 0.0846203611301306, 0.253973940053462, 0.879453936969232, 0.445024345135643, 
+#&gt; 0.883519885545969, 0.0132779192774286, 1.0542699281954, 0.87107214527608, 
+#&gt; 0.576171375596562, 0.721538786788678, 0.827357994587985, 0.279283842402439, 
+#&gt; 0.00146683614510001, 0.384418406956634, 0.751102923655188, 0.519388148208475, 
+#&gt; 0.422825783388111, 0.789373520061578, 0.884546662162046, 0.0397330324890039, 
+#&gt; 0.567106122847919, 0.233302354394235, 0.0719618790212879, 1.02573801595829, 
+#&gt; 0.0974836618707373, 1.40224975658106, 1.83276043915915, 0.916915198879196, 
+#&gt; 1.41431021443003, 1.3587829771107, 1.13029999517592, 0.658674127393547, 
+#&gt; 0.729090327175799, 1.33738285731477, 1.48458047286345, 0.338881910648367, 
+#&gt; 0.512128464895616, 0.762316324142132, 1.49536172491273, 1.34528420891811, 
+#&gt; 0.702514306410403, 0.160484420427475, 0.653030393174268, 1.4359614226416, 
+#&gt; 0.381425193411293, 0.717848874413276, 1.0610668323601, 0.0950116378623873, 
+#&gt; 1.48400157394743, 1.12268989857653, 0.080437644885252, 0.431417050626335, 
+#&gt; 0.494386196987683, 0.376419206844792, 0.153362097625377, 0.0299206140941028, 
+#&gt; 0.109931372014104, 0.766765215337313, 0.946548729013078, 0.216753531133548, 
+#&gt; 1.73420492000501, 0.323256878147928, 0.688900857494275, 1.2776657364307, 
+#&gt; 0.109215735954564, 1.9364028462236, 1.31388920220179, 0.701714812012815, 
+#&gt; 0.836975500446711, 0.589425493422259, 0.918235073949817, 1.17130204500185, 
+#&gt; 0.815213008218658, 0.657506069837183, 0.152297591126686, 0.391905086554524, 
+#&gt; 1.65507104374388, 0.263679874511541, 0.375680344609566, 1.02317554887697, 
+#&gt; 0.0155198714552447, 0.38167304465788, 1.12187155596129), m = 100L, 
+#&gt;     xm = 1.9364028462236, sum_gp = 70.269556600764, n = 1000, 
+#&gt;     d = 2, init = c(0.70269556600764, 0), rotate = FALSE, lower = c(0, 
+#&gt;     -Inf))
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;                box      vals1      vals2 conv
 #&gt; a        1.0000000  0.0000000  0.0000000    0
 #&gt; b1minus -0.1419071 -0.2245924  0.1556840    0
@@ -607,7 +988,377 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>for_ru_rcpp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
                  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>)), <span class='no'>ss</span>)
 <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>ru_rcpp</span>, <span class='no'>for_ru_rcpp</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='output co'>#&gt; <span class='warning'>Warning: collapsing to unique 'x' values</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru_rcpp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru_rcpp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; (function (logf, ..., n = 1, d = 1, init = NULL, trans = c("none", 
+#&gt;     "BC", "user"), phi_to_theta = NULL, log_j = NULL, user_args = list(), 
+#&gt;     lambda = rep(1L, d), lambda_tol = 1e-06, gm = NULL, rotate = ifelse(d == 
+#&gt;         1, FALSE, TRUE), lower = rep(-Inf, d), upper = rep(Inf, 
+#&gt;         d), r = 1/2, ep = 0L, a_algor = if (d == 1) "nlminb" else "optim", 
+#&gt;     b_algor = c("nlminb", "optim"), a_method = c("Nelder-Mead", 
+#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), b_method = c("Nelder-Mead", 
+#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), a_control = list(), 
+#&gt;     b_control = list(), var_names = NULL, shoof = 0.2) 
+#&gt; {
+#&gt;     Call &lt;- match.call(expand.dots = TRUE)
+#&gt;     if (shoof &lt; 0 || shoof &gt; 1) {
+#&gt;         stop("''shoof'' must be in [0, 1]")
+#&gt;     }
+#&gt;     is_pointer &lt;- (class(logf) == "externalptr")
+#&gt;     if (!is_pointer) {
+#&gt;         stop("logf must be an external pointer to a function")
+#&gt;     }
+#&gt;     pars &lt;- list(...)
+#&gt;     list_depth &lt;- function(x) {
+#&gt;         ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
+#&gt;     }
+#&gt;     if (length(pars) &gt; 0) {
+#&gt;         pars_depth &lt;- list_depth(pars)
+#&gt;     }
+#&gt;     else {
+#&gt;         pars_depth &lt;- 0
+#&gt;     }
+#&gt;     if (pars_depth &gt; 1) {
+#&gt;         par_names &lt;- names(pars)
+#&gt;         pars &lt;- unlist(pars, recursive = FALSE)
+#&gt;         if (!is.null(par_names)) {
+#&gt;             keep_name &lt;- nchar(par_names) + 2
+#&gt;             names(pars) &lt;- substring(names(pars), keep_name)
+#&gt;         }
+#&gt;     }
+#&gt;     if (r &lt; 0) {
+#&gt;         stop("r must be non-negative")
+#&gt;     }
+#&gt;     a_algor &lt;- match.arg(a_algor, c("optim", "nlminb"))
+#&gt;     a_method &lt;- match.arg(a_method)
+#&gt;     b_algor &lt;- match.arg(b_algor)
+#&gt;     b_method &lt;- match.arg(b_method)
+#&gt;     if (any(upper &lt;= lower)) {
+#&gt;         stop("upper must be greater than lower, componentwise.")
+#&gt;     }
+#&gt;     trans &lt;- match.arg(trans)
+#&gt;     if (is.null(gm)) {
+#&gt;         gm &lt;- rep(1, d)
+#&gt;     }
+#&gt;     if (trans == "BC") {
+#&gt;         lambda_type &lt;- "numeric"
+#&gt;         if (is.list(lambda)) {
+#&gt;             lambda_type &lt;- "list"
+#&gt;             if (is.null(lambda$lambda)) {
+#&gt;                 stop("The list lambda must contain the object lambda$lambda")
+#&gt;             }
+#&gt;             if (!is.null(lambda$gm)) {
+#&gt;                 gm &lt;- lambda$gm
+#&gt;             }
+#&gt;             if (!is.null(lambda$init_psi)) {
+#&gt;                 init &lt;- lambda$init_psi
+#&gt;             }
+#&gt;             if (a_algor == "optim" &amp; is.null(a_control$parscale)) {
+#&gt;                 a_control &lt;- c(a_control, list(parscale = lambda$sd_psi))
+#&gt;             }
+#&gt;             if (!is.null(lambda$phi_to_theta)) {
+#&gt;                 phi_to_theta &lt;- lambda$phi_to_theta
+#&gt;             }
+#&gt;             if (!is.null(lambda$log_j)) {
+#&gt;                 log_j &lt;- lambda$log_j
+#&gt;             }
+#&gt;             if (!is.null(lambda$user_args)) {
+#&gt;                 user_args &lt;- lambda$user_args
+#&gt;             }
+#&gt;             lambda &lt;- lambda$lambda
+#&gt;         }
+#&gt;         lambda &lt;- ifelse(abs(lambda) &lt; lambda_tol, 0L, lambda)
+#&gt;         if (!is.vector(lambda)) {
+#&gt;             stop("lambda must be a numeric vector")
+#&gt;         }
+#&gt;         if (!(length(lambda) %in% c(1, d))) {
+#&gt;             if (lambda_type == "numeric") {
+#&gt;                 stop("lambda must be a numeric vector of length d")
+#&gt;             }
+#&gt;             if (lambda_type == "list") {
+#&gt;                 stop("lambda$lambda must be a numeric vector of length d")
+#&gt;             }
+#&gt;         }
+#&gt;         if (length(lambda) == 1) {
+#&gt;             lambda &lt;- rep(lambda, d)
+#&gt;         }
+#&gt;         if (any(upper &lt;= 0)) {
+#&gt;             stop("when trans = ``BC'' all elements of upper must be positive")
+#&gt;         }
+#&gt;         lower &lt;- pmax(0, lower)
+#&gt;         lower &lt;- ifelse(lambda == 0, gm * log(lower), (lower^lambda - 
+#&gt;             1)/(lambda * gm^(lambda - 1)))
+#&gt;         upper &lt;- ifelse(lambda == 0, gm * log(upper), (upper^lambda - 
+#&gt;             1)/(lambda * gm^(lambda - 1)))
+#&gt;     }
+#&gt;     if (d == 1 &amp; a_algor == "optim" &amp; any(is.infinite(c(lower, 
+#&gt;         upper)))) {
+#&gt;         a_algor = "nlminb"
+#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using a_algor = `optim'.  a_algor has been changed to `nlminb'")
+#&gt;     }
+#&gt;     if (d == 1 &amp; b_algor == "optim" &amp; any(is.infinite(c(lower, 
+#&gt;         upper)))) {
+#&gt;         b_algor = "nlminb"
+#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using b_algor = `optim'.  b_algor has been changed to `nlminb'")
+#&gt;     }
+#&gt;     if (b_algor == "optim") {
+#&gt;         if (b_method == "BFGS" | b_method == "CG") {
+#&gt;             warning("Using optim with b_method==`BFGS' or `CG' can produce the error\n              message `non-finite finite-difference value'.  If you really want\n              to use BFGS or CG try setting ep to be positive but small, e.g.\n              ep=0.001.", 
+#&gt;                 immediate. = TRUE, noBreaks. = TRUE)
+#&gt;         }
+#&gt;     }
+#&gt;     if (d == 1) {
+#&gt;         a_method &lt;- "Brent"
+#&gt;         b_method &lt;- "Brent"
+#&gt;     }
+#&gt;     if (d == 1) {
+#&gt;         which_lam &lt;- 1L
+#&gt;     }
+#&gt;     else {
+#&gt;         which_lam &lt;- which(lambda != 1L)
+#&gt;     }
+#&gt;     if (is.null(init)) {
+#&gt;         init &lt;- rep(1, d)
+#&gt;         warning("No initial estimate of the mode given: a vector of ones has\n            been used", 
+#&gt;             noBreaks. = TRUE)
+#&gt;     }
+#&gt;     len_init &lt;- length(init)
+#&gt;     if (len_init == 1 &amp; d &gt; 1) {
+#&gt;         init &lt;- rep(init, length.out = d)
+#&gt;         warning("d &gt; 1 but init has length 1: a d-vector of inits has been used")
+#&gt;     }
+#&gt;     if (len_init != d &amp; len_init != 1) {
+#&gt;         stop("the length of init is incompatible with d")
+#&gt;     }
+#&gt;     if (d == 1 &amp; rotate) {
+#&gt;         rotate &lt;- FALSE
+#&gt;         warning("rotation is not relevant when d=1: no rotation is used")
+#&gt;     }
+#&gt;     ep &lt;- abs(ep)
+#&gt;     vals &lt;- matrix(NA, ncol = d, nrow = 2 * d + 1)
+#&gt;     colnames(vals) &lt;- paste("vals", 1:d, sep = "")
+#&gt;     conv &lt;- rep(NA, 2 * d + 1)
+#&gt;     big_val &lt;- Inf
+#&gt;     hscale &lt;- 0
+#&gt;     psi_mode &lt;- rep(0, d)
+#&gt;     is_pointer &lt;- (class(phi_to_theta) == "externalptr")
+#&gt;     if (trans == "none" &amp; is_pointer) {
+#&gt;         warning("phi_to_theta() not used when trans = ``none'': identity fn used")
+#&gt;     }
+#&gt;     if (!is_pointer &amp; !is.null(phi_to_theta)) {
+#&gt;         stop("phi_to_theta must be an external pointer to a function or NULL")
+#&gt;     }
+#&gt;     if (trans == "user" &amp; is.null(phi_to_theta)) {
+#&gt;         stop("When trans = ``user'' phi_to_theta must be supplied")
+#&gt;     }
+#&gt;     is_pointer &lt;- (class(log_j) == "externalptr")
+#&gt;     if (!is_pointer &amp; !is.null(log_j)) {
+#&gt;         stop("log_j must be an external pointer to a function or NULL")
+#&gt;     }
+#&gt;     rot_mat &lt;- diag(d)
+#&gt;     init_psi &lt;- init
+#&gt;     if (trans == "none") {
+#&gt;         logf_fun &lt;- cpp_logf_rho
+#&gt;         a_obj_fun &lt;- cpp_a_obj
+#&gt;         lower_box_fun &lt;- cpp_lower_box
+#&gt;         upper_box_fun &lt;- cpp_upper_box
+#&gt;         ru_fun &lt;- ru_cpp
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars)
+#&gt;         ru_args &lt;- list(d = d, r = r)
+#&gt;     }
+#&gt;     else if (trans == "BC" &amp; is.null(phi_to_theta)) {
+#&gt;         logf_fun &lt;- cpp_logf_rho_2
+#&gt;         a_obj_fun &lt;- cpp_a_obj_2
+#&gt;         lower_box_fun &lt;- cpp_lower_box_2
+#&gt;         upper_box_fun &lt;- cpp_upper_box_2
+#&gt;         ru_fun &lt;- ru_cpp_2
+#&gt;         con &lt;- lambda * gm^(lambda - 1)
+#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
+#&gt;             gm = gm, con = con)
+#&gt;         tfun &lt;- create_trans_xptr("case_2")
+#&gt;         if (all(lambda != 0)) {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
+#&gt;         }
+#&gt;         else {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
+#&gt;         }
+#&gt;         phi_to_theta &lt;- null_phi_to_theta_xptr("no_trans")
+#&gt;         log_j &lt;- create_log_jac_xptr("log_none_jac")
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
+#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
+#&gt;             user_args = user_args)
+#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
+#&gt;     }
+#&gt;     else if (trans == "BC" &amp; !is.null(phi_to_theta)) {
+#&gt;         logf_fun &lt;- cpp_logf_rho_3
+#&gt;         a_obj_fun &lt;- cpp_a_obj_2
+#&gt;         lower_box_fun &lt;- cpp_lower_box_2
+#&gt;         upper_box_fun &lt;- cpp_upper_box_2
+#&gt;         ru_fun &lt;- ru_cpp_3
+#&gt;         con &lt;- lambda * gm^(lambda - 1)
+#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
+#&gt;             gm = gm, con = con)
+#&gt;         tfun &lt;- create_trans_xptr("case_3")
+#&gt;         if (all(lambda != 0)) {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
+#&gt;         }
+#&gt;         else {
+#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
+#&gt;         }
+#&gt;         if (is.null(log_j)) {
+#&gt;             log_j &lt;- create_log_jac_xptr("case_3")
+#&gt;         }
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
+#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
+#&gt;             user_args = user_args)
+#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
+#&gt;     }
+#&gt;     else {
+#&gt;         logf_fun &lt;- cpp_logf_rho_4
+#&gt;         a_obj_fun &lt;- cpp_a_obj_2
+#&gt;         lower_box_fun &lt;- cpp_lower_box_2
+#&gt;         upper_box_fun &lt;- cpp_upper_box_2
+#&gt;         ru_fun &lt;- ru_cpp_4
+#&gt;         tpars &lt;- list()
+#&gt;         tfun &lt;- create_trans_xptr("case_4")
+#&gt;         ptpfun &lt;- create_psi_to_phi_xptr("no_trans")
+#&gt;         if (is.null(log_j)) {
+#&gt;             log_j &lt;- create_log_jac_xptr("case_4")
+#&gt;         }
+#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
+#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
+#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
+#&gt;             user_args = user_args)
+#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
+#&gt;     }
+#&gt;     logf_args$hscale &lt;- do.call(logf_fun, c(list(rho = init_psi), 
+#&gt;         logf_args))
+#&gt;     if (is.infinite(logf_args$hscale)) {
+#&gt;         stop("The target density is zero at initial parameter values")
+#&gt;     }
+#&gt;     ru_args &lt;- c(ru_args, logf_args)
+#&gt;     for_find_a &lt;- list(init_psi = init_psi, lower = lower, upper = upper, 
+#&gt;         algor = a_algor, method = a_method, control = a_control, 
+#&gt;         a_obj_fun = a_obj_fun, ru_args = ru_args, shoof = shoof)
+#&gt;     temp &lt;- do.call("cpp_find_a", for_find_a)
+#&gt;     check_finite &lt;- do.call(logf_fun, c(list(rho = temp$par), 
+#&gt;         logf_args))
+#&gt;     if (!is.finite(check_finite)) {
+#&gt;         stop(paste("The target log-density is not finite at its mode: mode = ", 
+#&gt;             paste(temp$par, collapse = ","), ",\n               function value = ", 
+#&gt;             check_finite, ".", sep = ""))
+#&gt;     }
+#&gt;     ru_args$hscale &lt;- check_finite + logf_args$hscale
+#&gt;     logf_args$hscale &lt;- ru_args$hscale
+#&gt;     a_box &lt;- 1
+#&gt;     f_mode &lt;- temp$par
+#&gt;     vals[1, ] &lt;- rep(0, d)
+#&gt;     conv[1] &lt;- temp$convergence
+#&gt;     pos_def &lt;- TRUE
+#&gt;     if (inherits(temp$hessian, "try-error")) {
+#&gt;         pos_def &lt;- FALSE
+#&gt;     }
+#&gt;     else {
+#&gt;         hess_mat &lt;- temp$hessian
+#&gt;         e_vals &lt;- eigen(hess_mat, symmetric = TRUE, only.values = TRUE)$values
+#&gt;         if (any(e_vals &lt; 1e-06)) {
+#&gt;             pos_def &lt;- FALSE
+#&gt;         }
+#&gt;     }
+#&gt;     if (!pos_def) {
+#&gt;         warning("The Hessian of the target log-density at its mode is not positive\n            definite. This may not be a problem, but it may be that a mode\n            at/near a parameter boundary has been found and/or that the target\n            function is unbounded.", 
+#&gt;             immediate. = TRUE, noBreaks. = TRUE)
+#&gt;         if (trans != "BC") {
+#&gt;             cat("  It might be worth using the option trans = ``BC''.", 
+#&gt;                 "\n")
+#&gt;         }
+#&gt;         if (rotate) {
+#&gt;             rotate &lt;- FALSE
+#&gt;             warning("rotate has been changed to FALSE.", immediate. = TRUE)
+#&gt;         }
+#&gt;     }
+#&gt;     if (rotate) {
+#&gt;         rot_mat &lt;- solve(t(chol(hess_mat)))
+#&gt;         rot_mat &lt;- rot_mat/exp(-mean(log(e_vals))/2)
+#&gt;     }
+#&gt;     ru_args$rot_mat &lt;- t(rot_mat)
+#&gt;     ru_args$psi_mode &lt;- f_mode
+#&gt;     logf_args$rot_mat &lt;- t(rot_mat)
+#&gt;     logf_args$psi_mode &lt;- f_mode
+#&gt;     if (rotate) {
+#&gt;         lower &lt;- rep(-Inf, d)
+#&gt;         upper &lt;- rep(Inf, d)
+#&gt;     }
+#&gt;     for_find_bs &lt;- list(lower = lower, upper = upper, ep = ep, 
+#&gt;         vals = vals, conv = conv, algor = b_algor, method = b_method, 
+#&gt;         control = b_control, lower_box_fun = lower_box_fun, upper_box_fun = upper_box_fun, 
+#&gt;         ru_args = ru_args, shoof = shoof)
+#&gt;     temp &lt;- do.call("cpp_find_bs", for_find_bs)
+#&gt;     vals &lt;- temp$vals
+#&gt;     conv &lt;- temp$conv
+#&gt;     l_box &lt;- temp$l_box
+#&gt;     u_box &lt;- temp$u_box
+#&gt;     box_args &lt;- list(n = n, a_box = a_box, l_box = l_box, u_box = u_box)
+#&gt;     ru_args &lt;- c(box_args, ru_args)
+#&gt;     ru_args$tfun &lt;- NULL
+#&gt;     res &lt;- do.call(ru_fun, ru_args)
+#&gt;     res$pa &lt;- n/res$ntry
+#&gt;     res$ntry &lt;- NULL
+#&gt;     colnames(res$sim_vals) &lt;- var_names
+#&gt;     colnames(res$sim_vals_rho) &lt;- paste("rho[", 1:d, "]", sep = "")
+#&gt;     box &lt;- c(a_box, l_box, u_box)
+#&gt;     res$box &lt;- cbind(box, vals, conv)
+#&gt;     bs &lt;- paste(paste("b", 1:d, sep = ""), rep(c("minus", "plus"), 
+#&gt;         each = d), sep = "")
+#&gt;     rownames(res$box) &lt;- c("a", bs)
+#&gt;     if (any(conv != 0)) {
+#&gt;         warning("One or more convergence indicators are non-zero.", 
+#&gt;             immediate. = TRUE)
+#&gt;         print(res$box)
+#&gt;     }
+#&gt;     res$d &lt;- d
+#&gt;     pars$hscale &lt;- logf_args$hscale
+#&gt;     res$logf &lt;- cpp_logf_scaled
+#&gt;     res$logf_args &lt;- list(logf = logf, pars = pars)
+#&gt;     res$logf_rho &lt;- logf_fun
+#&gt;     res$logf_rho_args &lt;- logf_args
+#&gt;     res$f_mode &lt;- f_mode
+#&gt;     res$call &lt;- Call
+#&gt;     class(res) &lt;- "ru"
+#&gt;     return(res)
+#&gt; })(logf = &lt;pointer: 0x000000001411db50&gt;, gpd_data = c(1.50184253817097, 
+#&gt; 1.30289117655487, 0.906480856548376, 0.301646979857262, 0.501343639411626, 
+#&gt; 0.754046306364323, 1.82120758361078, 0.0141794017113837, 0.867751494994211, 
+#&gt; 0.850167873930924, 0.120898541174046, 0.145802761118517, 0.391640325456331, 
+#&gt; 0.606982675582009, 0.427735599968481, 0.442846953028009, 0.0403027329325576, 
+#&gt; 0.0846203611301306, 0.253973940053462, 0.879453936969232, 0.445024345135643, 
+#&gt; 0.883519885545969, 0.0132779192774286, 1.0542699281954, 0.87107214527608, 
+#&gt; 0.576171375596562, 0.721538786788678, 0.827357994587985, 0.279283842402439, 
+#&gt; 0.00146683614510001, 0.384418406956634, 0.751102923655188, 0.519388148208475, 
+#&gt; 0.422825783388111, 0.789373520061578, 0.884546662162046, 0.0397330324890039, 
+#&gt; 0.567106122847919, 0.233302354394235, 0.0719618790212879, 1.02573801595829, 
+#&gt; 0.0974836618707373, 1.40224975658106, 1.83276043915915, 0.916915198879196, 
+#&gt; 1.41431021443003, 1.3587829771107, 1.13029999517592, 0.658674127393547, 
+#&gt; 0.729090327175799, 1.33738285731477, 1.48458047286345, 0.338881910648367, 
+#&gt; 0.512128464895616, 0.762316324142132, 1.49536172491273, 1.34528420891811, 
+#&gt; 0.702514306410403, 0.160484420427475, 0.653030393174268, 1.4359614226416, 
+#&gt; 0.381425193411293, 0.717848874413276, 1.0610668323601, 0.0950116378623873, 
+#&gt; 1.48400157394743, 1.12268989857653, 0.080437644885252, 0.431417050626335, 
+#&gt; 0.494386196987683, 0.376419206844792, 0.153362097625377, 0.0299206140941028, 
+#&gt; 0.109931372014104, 0.766765215337313, 0.946548729013078, 0.216753531133548, 
+#&gt; 1.73420492000501, 0.323256878147928, 0.688900857494275, 1.2776657364307, 
+#&gt; 0.109215735954564, 1.9364028462236, 1.31388920220179, 0.701714812012815, 
+#&gt; 0.836975500446711, 0.589425493422259, 0.918235073949817, 1.17130204500185, 
+#&gt; 0.815213008218658, 0.657506069837183, 0.152297591126686, 0.391905086554524, 
+#&gt; 1.65507104374388, 0.263679874511541, 0.375680344609566, 1.02317554887697, 
+#&gt; 0.0155198714552447, 0.38167304465788, 1.12187155596129), m = 100L, 
+#&gt;     xm = 1.9364028462236, sum_gp = 70.269556600764, n = 1000, 
+#&gt;     d = 2, init = c(0.70269556600764, 0), lower = c(0, -Inf))
+#&gt; 
+#&gt; ru bounding box:  
 #&gt;                 box       vals1       vals2 conv
 #&gt; a        1.00000000  0.00000000  0.00000000    0
 #&gt; b1minus -0.05206984 -0.07814713  0.03480988    0
