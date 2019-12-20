@@ -235,11 +235,11 @@ lambda
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
 <span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000009c56348&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x000000000942c660&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
 <span class="co">#&gt; function(x) 0</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000009ba0818&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x0000000009392490&gt;</span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sample on Box-Cox transformed, without rotation</span>
 x3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ru.html">ru</a></span>(<span class="dt">logf =</span> gpd_logpost, <span class="dt">ss =</span> ss, <span class="dt">d =</span> <span class="dv">2</span>, <span class="dt">n =</span> n, <span class="dt">trans =</span> <span class="st">"BC"</span>,
