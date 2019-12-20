@@ -21,7 +21,7 @@
 #'   are set to ep_bc.
 #' @param num A numeric scalar. Number of values at which to evaluate logf.
 #' @param xdiv A numeric scalar.  Only values of phi at which the density f is
-#'   greater than the (maximum of f)/xdiv are used.
+#'   greater than the (maximum of f) / \code{xdiv} are used.
 #' @param probs A numeric scalar. Probabilities at which to estimate the
 #'   quantiles of that will be used as data to find lambda.
 #' @param lambda_range A numeric vector of length 2.  Range of lambda over

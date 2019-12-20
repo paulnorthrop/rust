@@ -35,7 +35,7 @@ are set to ep_bc.}
 \item{num}{A numeric scalar. Number of values at which to evaluate logf.}
 
 \item{xdiv}{A numeric scalar.  Only values of phi at which the density f is
-greater than the (maximum of f)/xdiv are used.}
+greater than the (maximum of f) / \code{xdiv} are used.}
 
 \item{probs}{A numeric scalar. Probabilities at which to estimate the
 quantiles of that will be used as data to find lambda.}
