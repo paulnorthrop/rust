@@ -60,7 +60,7 @@
 #'   (for \code{d} = 1) or \code{\link{find_lambda_rcpp}} (for any \code{d}).
 #' }
 #' @param lambda_tol A numeric scalar.  Any values in lambda that are less
-#'  than lambda_tol in magnitude are set to zero.
+#'  than \code{lambda_tol} in magnitude are set to zero.
 #' @param gm A numeric vector. Box-cox scaling parameters (optional). If
 #'   \code{lambda$gm} is supplied in input list \code{lambda} then
 #'   \code{lambda$gm} is used, not \code{gm}.

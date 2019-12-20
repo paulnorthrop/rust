@@ -94,7 +94,7 @@ functions \code{phi_to_theta} and \code{log_j}.}
 }}
 
 \item{lambda_tol}{A numeric scalar.  Any values in lambda that are less
-than lambda_tol in magnitude are set to zero.}
+than \code{lambda_tol} in magnitude are set to zero.}
 
 \item{gm}{A numeric vector. Box-cox scaling parameters (optional). If
 \code{lambda$gm} is supplied in input list \code{lambda} then
