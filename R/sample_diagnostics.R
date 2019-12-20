@@ -247,7 +247,7 @@ summary.ru <- function(object, ...) {
     stop("use only with \"ru\" objects")
   }
   sim_summary <- summary(object$sim_vals, ...)
-  object <- object[c("box", "pa", "call")]
+  object <- object[c("box", "pa")]
   object$sim_summary <- sim_summary
   class(object) <- "summary.ru"
   return(object)
@@ -298,8 +298,6 @@ print.summary.ru <- function(x, ...) {
   if (!inherits(x, "summary.ru")) {
     stop("use only with \"summary.ru\" objects")
   }
-  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
-      "\n\n", sep = "")
   cat("ru bounding box: ", "\n")
   print(x$box, ...)
   cat("\n")
