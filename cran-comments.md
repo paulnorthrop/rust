@@ -1,3 +1,5 @@
+I have fixed something that caused an error in a test in the bang package. (Sorry!)
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
