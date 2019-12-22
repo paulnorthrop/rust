@@ -1,3 +1,5 @@
+# rust 1.3.8.9000
+
 # rust 1.3.8
 
 ## Bug fixes and minor improvements
@@ -5,8 +7,6 @@
 * Dependence on the spatstat package has been removed.
 
 * In the S3 plot method `plot.ru()` warnings, stemming from stats::regularize.values(), which is called by stats::approx(), have been suppressed.
-
-* The call, to `ru()` or `ru_rcpp()` has been added to the output from `summary.ru()`.
 
 * A very basic S3 print method `print.ru()` has been added, which simply prints the call to `ru()` or `ru_rcpp()`.
 
