@@ -4,16 +4,33 @@
 \alias{ru_rcpp}
 \title{Generalized ratio-of-uniforms sampling using C++ via Rcpp}
 \usage{
-ru_rcpp(logf, ..., n = 1, d = 1, init = NULL, trans = c("none",
-  "BC", "user"), phi_to_theta = NULL, log_j = NULL,
-  user_args = list(), lambda = rep(1L, d), lambda_tol = 1e-06,
-  gm = NULL, rotate = ifelse(d == 1, FALSE, TRUE), lower = rep(-Inf,
-  d), upper = rep(Inf, d), r = 1/2, ep = 0L, a_algor = if (d == 1)
-  "nlminb" else "optim", b_algor = c("nlminb", "optim"),
+ru_rcpp(
+  logf,
+  ...,
+  n = 1,
+  d = 1,
+  init = NULL,
+  trans = c("none", "BC", "user"),
+  phi_to_theta = NULL,
+  log_j = NULL,
+  user_args = list(),
+  lambda = rep(1L, d),
+  lambda_tol = 1e-06,
+  gm = NULL,
+  rotate = ifelse(d == 1, FALSE, TRUE),
+  lower = rep(-Inf, d),
+  upper = rep(Inf, d),
+  r = 1/2,
+  ep = 0L,
+  a_algor = if (d == 1) "nlminb" else "optim",
+  b_algor = c("nlminb", "optim"),
   a_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
   b_method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
-  a_control = list(), b_control = list(), var_names = NULL,
-  shoof = 0.2)
+  a_control = list(),
+  b_control = list(),
+  var_names = NULL,
+  shoof = 0.2
+)
 }
 \arguments{
 \item{logf}{An external pointer to a compiled C++ function returning the

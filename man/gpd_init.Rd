@@ -4,8 +4,7 @@
 \alias{gpd_init}
 \title{Initial estimates for Generalized Pareto parameters}
 \usage{
-gpd_init(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE,
-  init_ests = NULL)
+gpd_init(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE, init_ests = NULL)
 }
 \arguments{
 \item{gpd_data}{A numeric vector containing positive sample values.}
