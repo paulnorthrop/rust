@@ -4,20 +4,10 @@
 \alias{find_lambda}
 \title{Selecting Box-Cox parameter lambda for general d.}
 \usage{
-find_lambda(
-  logf,
-  ...,
-  d = 1,
-  n_grid = NULL,
-  ep_bc = 1e-04,
-  min_phi = rep(ep_bc, d),
-  max_phi = rep(10, d),
-  which_lam = 1:d,
-  lambda_range = c(-3, 3),
-  init_lambda = NULL,
-  phi_to_theta = NULL,
-  log_j = NULL
-)
+find_lambda(logf, ..., d = 1, n_grid = NULL, ep_bc = 1e-04,
+  min_phi = rep(ep_bc, d), max_phi = rep(10, d), which_lam = 1:d,
+  lambda_range = c(-3, 3), init_lambda = NULL, phi_to_theta = NULL,
+  log_j = NULL)
 }
 \arguments{
 \item{logf}{A function returning the log of the target density f.}

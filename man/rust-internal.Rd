@@ -22,13 +22,8 @@ box_cox(x, lambda = 1, gm = 1, lambda_tol = 1e-06)
 
 box_cox_vec(x, lambda = 1, gm = 1, lambda_tol = 1e-06)
 
-optim_box_cox(
-  x,
-  w,
-  lambda_range = c(-3, 3),
-  start = NULL,
-  which_lam = 1:ncol(x)
-)
+optim_box_cox(x, w, lambda_range = c(-3, 3), start = NULL,
+  which_lam = 1:ncol(x))
 
 n_grid_fn(d)
 
@@ -44,63 +39,17 @@ fallback_gp_mle(init, ...)
 
 gpd_obs_info(gpd_pars, y)
 
-find_a(
-  neg_logf_rho,
-  init_psi,
-  d,
-  r,
-  lower,
-  upper,
-  algor,
-  method,
-  control,
-  shoof,
-  ...
-)
+find_a(neg_logf_rho, init_psi, d, r, lower, upper, algor, method, control,
+  shoof, ...)
 
-find_bs(
-  f_rho,
-  d,
-  r,
-  lower,
-  upper,
-  f_mode,
-  ep,
-  vals,
-  conv,
-  algor,
-  method,
-  control,
-  shoof,
-  ...
-)
+find_bs(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor, method,
+  control, shoof, ...)
 
-cpp_find_a(
-  init_psi,
-  lower,
-  upper,
-  algor,
-  method,
-  control,
-  a_obj_fun,
-  ru_args,
-  shoof
-)
+cpp_find_a(init_psi, lower, upper, algor, method, control, a_obj_fun,
+  ru_args, shoof)
 
-cpp_find_bs(
-  lower,
-  upper,
-  ep,
-  vals,
-  conv,
-  algor,
-  method,
-  control,
-  lower_box_fun,
-  upper_box_fun,
-  ru_args,
-  shoof
-)
+cpp_find_bs(lower, upper, ep, vals, conv, algor, method, control,
+  lower_box_fun, upper_box_fun, ru_args, shoof)
 }
 \description{
 Internal rust functions

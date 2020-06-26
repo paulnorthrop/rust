@@ -3,6 +3,7 @@
 \docType{package}
 \name{rust}
 \alias{rust}
+\alias{rust-package}
 \title{rust: Ratio-of-Uniforms Simulation with Transformation}
 \description{
 Uses the multivariate generalized ratio-of-uniforms method to simulate from a
