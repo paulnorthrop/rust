@@ -363,6 +363,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #' \donttest{
 #' # Generalized Pareto posterior distribution ===================
 #'
+#' n <- 1000
 #' # Sample data from a GP(sigma, xi) distribution
 #' gpd_data <- rgpd(m = 100, xi = -0.5, sigma = 1)
 #' # Calculate summary statistics for use in the log-likelihood
