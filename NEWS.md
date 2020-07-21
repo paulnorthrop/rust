@@ -1,4 +1,6 @@
-# rust 1.3.8.9000
+# rust 1.3.9
+
+* This is a patch to avoid CRAN package check warnings on some platforms.
 
 # rust 1.3.8
 
