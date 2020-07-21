@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -41,7 +45,6 @@ the (positive) random variable with log-density logf has a density
 closer to that of a Gaussian random variable.
 In the following we use theta to denote the argument of
 logf on the original scale and phi on the Box-Cox transformed scale." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -59,7 +62,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,7 +76,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -112,7 +115,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/paulnorthrop/rust">
+  <a href="http://github.com/paulnorthrop/rust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -131,7 +134,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Selecting Box-Cox parameter lambda for general d using C++ via Rcpp.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/paulnorthrop/rust/blob/master/R/box_cox_functions_rcpp.R'><code>R/box_cox_functions_rcpp.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/paulnorthrop/rust/blob/master/R/box_cox_functions_rcpp.R'><code>R/box_cox_functions_rcpp.R</code></a></small>
     <div class="hidden name"><code>find_lambda_rcpp.Rd</code></div>
     </div>
 
@@ -335,6 +338,7 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class='co'># \donttest{</span>
 <span class='co'># Generalized Pareto posterior distribution ===================</span>
 
+<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
 <span class='co'># Sample data from a GP(sigma, xi) distribution</span>
 <span class='no'>gpd_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rgpd.html'>rgpd</a></span>(<span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>xi</span> <span class='kw'>=</span> -<span class='fl'>0.5</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='co'># Calculate summary statistics for use in the log-likelihood</span>
@@ -348,791 +352,50 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class='no'>for_ru_rcpp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
                      <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>)), <span class='no'>ss</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>ru_rcpp</span>, <span class='no'>for_ru_rcpp</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
 <span class='co'># [This may not appear if the sample is far from the constraint.]</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; (function (logf, ..., n = 1, d = 1, init = NULL, trans = c("none", 
-#&gt;     "BC", "user"), phi_to_theta = NULL, log_j = NULL, user_args = list(), 
-#&gt;     lambda = rep(1L, d), lambda_tol = 1e-06, gm = NULL, rotate = ifelse(d == 
-#&gt;         1, FALSE, TRUE), lower = rep(-Inf, d), upper = rep(Inf, 
-#&gt;         d), r = 1/2, ep = 0L, a_algor = if (d == 1) "nlminb" else "optim", 
-#&gt;     b_algor = c("nlminb", "optim"), a_method = c("Nelder-Mead", 
-#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), b_method = c("Nelder-Mead", 
-#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), a_control = list(), 
-#&gt;     b_control = list(), var_names = NULL, shoof = 0.2) 
-#&gt; {
-#&gt;     Call &lt;- match.call(expand.dots = TRUE)
-#&gt;     if (shoof &lt; 0 || shoof &gt; 1) {
-#&gt;         stop("''shoof'' must be in [0, 1]")
-#&gt;     }
-#&gt;     is_pointer &lt;- (class(logf) == "externalptr")
-#&gt;     if (!is_pointer) {
-#&gt;         stop("logf must be an external pointer to a function")
-#&gt;     }
-#&gt;     pars &lt;- list(...)
-#&gt;     list_depth &lt;- function(x) {
-#&gt;         ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
-#&gt;     }
-#&gt;     if (length(pars) &gt; 0) {
-#&gt;         pars_depth &lt;- list_depth(pars)
-#&gt;     }
-#&gt;     else {
-#&gt;         pars_depth &lt;- 0
-#&gt;     }
-#&gt;     if (pars_depth &gt; 1) {
-#&gt;         par_names &lt;- names(pars)
-#&gt;         pars &lt;- unlist(pars, recursive = FALSE)
-#&gt;         if (!is.null(par_names)) {
-#&gt;             keep_name &lt;- nchar(par_names) + 2
-#&gt;             names(pars) &lt;- substring(names(pars), keep_name)
-#&gt;         }
-#&gt;     }
-#&gt;     if (r &lt; 0) {
-#&gt;         stop("r must be non-negative")
-#&gt;     }
-#&gt;     a_algor &lt;- match.arg(a_algor, c("optim", "nlminb"))
-#&gt;     a_method &lt;- match.arg(a_method)
-#&gt;     b_algor &lt;- match.arg(b_algor)
-#&gt;     b_method &lt;- match.arg(b_method)
-#&gt;     if (any(upper &lt;= lower)) {
-#&gt;         stop("upper must be greater than lower, componentwise.")
-#&gt;     }
-#&gt;     trans &lt;- match.arg(trans)
-#&gt;     if (is.null(gm)) {
-#&gt;         gm &lt;- rep(1, d)
-#&gt;     }
-#&gt;     if (trans == "BC") {
-#&gt;         lambda_type &lt;- "numeric"
-#&gt;         if (is.list(lambda)) {
-#&gt;             lambda_type &lt;- "list"
-#&gt;             if (is.null(lambda$lambda)) {
-#&gt;                 stop("The list lambda must contain the object lambda$lambda")
-#&gt;             }
-#&gt;             if (!is.null(lambda$gm)) {
-#&gt;                 gm &lt;- lambda$gm
-#&gt;             }
-#&gt;             if (!is.null(lambda$init_psi)) {
-#&gt;                 init &lt;- lambda$init_psi
-#&gt;             }
-#&gt;             if (a_algor == "optim" &amp; is.null(a_control$parscale)) {
-#&gt;                 a_control &lt;- c(a_control, list(parscale = lambda$sd_psi))
-#&gt;             }
-#&gt;             if (!is.null(lambda$phi_to_theta)) {
-#&gt;                 phi_to_theta &lt;- lambda$phi_to_theta
-#&gt;             }
-#&gt;             if (!is.null(lambda$log_j)) {
-#&gt;                 log_j &lt;- lambda$log_j
-#&gt;             }
-#&gt;             if (!is.null(lambda$user_args)) {
-#&gt;                 user_args &lt;- lambda$user_args
-#&gt;             }
-#&gt;             lambda &lt;- lambda$lambda
-#&gt;         }
-#&gt;         lambda &lt;- ifelse(abs(lambda) &lt; lambda_tol, 0L, lambda)
-#&gt;         if (!is.vector(lambda)) {
-#&gt;             stop("lambda must be a numeric vector")
-#&gt;         }
-#&gt;         if (!(length(lambda) %in% c(1, d))) {
-#&gt;             if (lambda_type == "numeric") {
-#&gt;                 stop("lambda must be a numeric vector of length d")
-#&gt;             }
-#&gt;             if (lambda_type == "list") {
-#&gt;                 stop("lambda$lambda must be a numeric vector of length d")
-#&gt;             }
-#&gt;         }
-#&gt;         if (length(lambda) == 1) {
-#&gt;             lambda &lt;- rep(lambda, d)
-#&gt;         }
-#&gt;         if (any(upper &lt;= 0)) {
-#&gt;             stop("when trans = ``BC'' all elements of upper must be positive")
-#&gt;         }
-#&gt;         lower &lt;- pmax(0, lower)
-#&gt;         lower &lt;- ifelse(lambda == 0, gm * log(lower), (lower^lambda - 
-#&gt;             1)/(lambda * gm^(lambda - 1)))
-#&gt;         upper &lt;- ifelse(lambda == 0, gm * log(upper), (upper^lambda - 
-#&gt;             1)/(lambda * gm^(lambda - 1)))
-#&gt;     }
-#&gt;     if (d == 1 &amp; a_algor == "optim" &amp; any(is.infinite(c(lower, 
-#&gt;         upper)))) {
-#&gt;         a_algor = "nlminb"
-#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using a_algor = `optim'.  a_algor has been changed to `nlminb'")
-#&gt;     }
-#&gt;     if (d == 1 &amp; b_algor == "optim" &amp; any(is.infinite(c(lower, 
-#&gt;         upper)))) {
-#&gt;         b_algor = "nlminb"
-#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using b_algor = `optim'.  b_algor has been changed to `nlminb'")
-#&gt;     }
-#&gt;     if (b_algor == "optim") {
-#&gt;         if (b_method == "BFGS" | b_method == "CG") {
-#&gt;             warning("Using optim with b_method==`BFGS' or `CG' can produce the error\n              message `non-finite finite-difference value'.  If you really want\n              to use BFGS or CG try setting ep to be positive but small, e.g.\n              ep=0.001.", 
-#&gt;                 immediate. = TRUE, noBreaks. = TRUE)
-#&gt;         }
-#&gt;     }
-#&gt;     if (d == 1) {
-#&gt;         a_method &lt;- "Brent"
-#&gt;         b_method &lt;- "Brent"
-#&gt;     }
-#&gt;     if (d == 1) {
-#&gt;         which_lam &lt;- 1L
-#&gt;     }
-#&gt;     else {
-#&gt;         which_lam &lt;- which(lambda != 1L)
-#&gt;     }
-#&gt;     if (is.null(init)) {
-#&gt;         init &lt;- rep(1, d)
-#&gt;         warning("No initial estimate of the mode given: a vector of ones has\n            been used", 
-#&gt;             noBreaks. = TRUE)
-#&gt;     }
-#&gt;     len_init &lt;- length(init)
-#&gt;     if (len_init == 1 &amp; d &gt; 1) {
-#&gt;         init &lt;- rep(init, length.out = d)
-#&gt;         warning("d &gt; 1 but init has length 1: a d-vector of inits has been used")
-#&gt;     }
-#&gt;     if (len_init != d &amp; len_init != 1) {
-#&gt;         stop("the length of init is incompatible with d")
-#&gt;     }
-#&gt;     if (d == 1 &amp; rotate) {
-#&gt;         rotate &lt;- FALSE
-#&gt;         warning("rotation is not relevant when d=1: no rotation is used")
-#&gt;     }
-#&gt;     ep &lt;- abs(ep)
-#&gt;     vals &lt;- matrix(NA, ncol = d, nrow = 2 * d + 1)
-#&gt;     colnames(vals) &lt;- paste("vals", 1:d, sep = "")
-#&gt;     conv &lt;- rep(NA, 2 * d + 1)
-#&gt;     big_val &lt;- Inf
-#&gt;     hscale &lt;- 0
-#&gt;     psi_mode &lt;- rep(0, d)
-#&gt;     is_pointer &lt;- (class(phi_to_theta) == "externalptr")
-#&gt;     if (trans == "none" &amp; is_pointer) {
-#&gt;         warning("phi_to_theta() not used when trans = ``none'': identity fn used")
-#&gt;     }
-#&gt;     if (!is_pointer &amp; !is.null(phi_to_theta)) {
-#&gt;         stop("phi_to_theta must be an external pointer to a function or NULL")
-#&gt;     }
-#&gt;     if (trans == "user" &amp; is.null(phi_to_theta)) {
-#&gt;         stop("When trans = ``user'' phi_to_theta must be supplied")
-#&gt;     }
-#&gt;     is_pointer &lt;- (class(log_j) == "externalptr")
-#&gt;     if (!is_pointer &amp; !is.null(log_j)) {
-#&gt;         stop("log_j must be an external pointer to a function or NULL")
-#&gt;     }
-#&gt;     rot_mat &lt;- diag(d)
-#&gt;     init_psi &lt;- init
-#&gt;     if (trans == "none") {
-#&gt;         logf_fun &lt;- cpp_logf_rho
-#&gt;         a_obj_fun &lt;- cpp_a_obj
-#&gt;         lower_box_fun &lt;- cpp_lower_box
-#&gt;         upper_box_fun &lt;- cpp_upper_box
-#&gt;         ru_fun &lt;- ru_cpp
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars)
-#&gt;         ru_args &lt;- list(d = d, r = r)
-#&gt;     }
-#&gt;     else if (trans == "BC" &amp; is.null(phi_to_theta)) {
-#&gt;         logf_fun &lt;- cpp_logf_rho_2
-#&gt;         a_obj_fun &lt;- cpp_a_obj_2
-#&gt;         lower_box_fun &lt;- cpp_lower_box_2
-#&gt;         upper_box_fun &lt;- cpp_upper_box_2
-#&gt;         ru_fun &lt;- ru_cpp_2
-#&gt;         con &lt;- lambda * gm^(lambda - 1)
-#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
-#&gt;             gm = gm, con = con)
-#&gt;         tfun &lt;- create_trans_xptr("case_2")
-#&gt;         if (all(lambda != 0)) {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
-#&gt;         }
-#&gt;         else {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
-#&gt;         }
-#&gt;         phi_to_theta &lt;- null_phi_to_theta_xptr("no_trans")
-#&gt;         log_j &lt;- create_log_jac_xptr("log_none_jac")
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
-#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
-#&gt;             user_args = user_args)
-#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
-#&gt;     }
-#&gt;     else if (trans == "BC" &amp; !is.null(phi_to_theta)) {
-#&gt;         logf_fun &lt;- cpp_logf_rho_3
-#&gt;         a_obj_fun &lt;- cpp_a_obj_2
-#&gt;         lower_box_fun &lt;- cpp_lower_box_2
-#&gt;         upper_box_fun &lt;- cpp_upper_box_2
-#&gt;         ru_fun &lt;- ru_cpp_3
-#&gt;         con &lt;- lambda * gm^(lambda - 1)
-#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
-#&gt;             gm = gm, con = con)
-#&gt;         tfun &lt;- create_trans_xptr("case_3")
-#&gt;         if (all(lambda != 0)) {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
-#&gt;         }
-#&gt;         else {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
-#&gt;         }
-#&gt;         if (is.null(log_j)) {
-#&gt;             log_j &lt;- create_log_jac_xptr("case_3")
-#&gt;         }
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
-#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
-#&gt;             user_args = user_args)
-#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
-#&gt;     }
-#&gt;     else {
-#&gt;         logf_fun &lt;- cpp_logf_rho_4
-#&gt;         a_obj_fun &lt;- cpp_a_obj_2
-#&gt;         lower_box_fun &lt;- cpp_lower_box_2
-#&gt;         upper_box_fun &lt;- cpp_upper_box_2
-#&gt;         ru_fun &lt;- ru_cpp_4
-#&gt;         tpars &lt;- list()
-#&gt;         tfun &lt;- create_trans_xptr("case_4")
-#&gt;         ptpfun &lt;- create_psi_to_phi_xptr("no_trans")
-#&gt;         if (is.null(log_j)) {
-#&gt;             log_j &lt;- create_log_jac_xptr("case_4")
-#&gt;         }
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
-#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
-#&gt;             user_args = user_args)
-#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
-#&gt;     }
-#&gt;     logf_args$hscale &lt;- do.call(logf_fun, c(list(rho = init_psi), 
-#&gt;         logf_args))
-#&gt;     if (is.infinite(logf_args$hscale)) {
-#&gt;         stop("The target density is zero at initial parameter values")
-#&gt;     }
-#&gt;     ru_args &lt;- c(ru_args, logf_args)
-#&gt;     for_find_a &lt;- list(init_psi = init_psi, lower = lower, upper = upper, 
-#&gt;         algor = a_algor, method = a_method, control = a_control, 
-#&gt;         a_obj_fun = a_obj_fun, ru_args = ru_args, shoof = shoof)
-#&gt;     temp &lt;- do.call("cpp_find_a", for_find_a)
-#&gt;     check_finite &lt;- do.call(logf_fun, c(list(rho = temp$par), 
-#&gt;         logf_args))
-#&gt;     if (!is.finite(check_finite)) {
-#&gt;         stop(paste("The target log-density is not finite at its mode: mode = ", 
-#&gt;             paste(temp$par, collapse = ","), ",\n               function value = ", 
-#&gt;             check_finite, ".", sep = ""))
-#&gt;     }
-#&gt;     ru_args$hscale &lt;- check_finite + logf_args$hscale
-#&gt;     logf_args$hscale &lt;- ru_args$hscale
-#&gt;     a_box &lt;- 1
-#&gt;     f_mode &lt;- temp$par
-#&gt;     vals[1, ] &lt;- rep(0, d)
-#&gt;     conv[1] &lt;- temp$convergence
-#&gt;     pos_def &lt;- TRUE
-#&gt;     if (inherits(temp$hessian, "try-error")) {
-#&gt;         pos_def &lt;- FALSE
-#&gt;     }
-#&gt;     else {
-#&gt;         hess_mat &lt;- temp$hessian
-#&gt;         e_vals &lt;- eigen(hess_mat, symmetric = TRUE, only.values = TRUE)$values
-#&gt;         if (any(e_vals &lt; 1e-06)) {
-#&gt;             pos_def &lt;- FALSE
-#&gt;         }
-#&gt;     }
-#&gt;     if (!pos_def) {
-#&gt;         warning("The Hessian of the target log-density at its mode is not positive\n            definite. This may not be a problem, but it may be that a mode\n            at/near a parameter boundary has been found and/or that the target\n            function is unbounded.", 
-#&gt;             immediate. = TRUE, noBreaks. = TRUE)
-#&gt;         if (trans != "BC") {
-#&gt;             cat("  It might be worth using the option trans = ``BC''.", 
-#&gt;                 "\n")
-#&gt;         }
-#&gt;         if (rotate) {
-#&gt;             rotate &lt;- FALSE
-#&gt;             warning("rotate has been changed to FALSE.", immediate. = TRUE)
-#&gt;         }
-#&gt;     }
-#&gt;     if (rotate) {
-#&gt;         rot_mat &lt;- solve(t(chol(hess_mat)))
-#&gt;         rot_mat &lt;- rot_mat/exp(-mean(log(e_vals))/2)
-#&gt;     }
-#&gt;     ru_args$rot_mat &lt;- t(rot_mat)
-#&gt;     ru_args$psi_mode &lt;- f_mode
-#&gt;     logf_args$rot_mat &lt;- t(rot_mat)
-#&gt;     logf_args$psi_mode &lt;- f_mode
-#&gt;     if (rotate) {
-#&gt;         lower &lt;- rep(-Inf, d)
-#&gt;         upper &lt;- rep(Inf, d)
-#&gt;     }
-#&gt;     for_find_bs &lt;- list(lower = lower, upper = upper, ep = ep, 
-#&gt;         vals = vals, conv = conv, algor = b_algor, method = b_method, 
-#&gt;         control = b_control, lower_box_fun = lower_box_fun, upper_box_fun = upper_box_fun, 
-#&gt;         ru_args = ru_args, shoof = shoof)
-#&gt;     temp &lt;- do.call("cpp_find_bs", for_find_bs)
-#&gt;     vals &lt;- temp$vals
-#&gt;     conv &lt;- temp$conv
-#&gt;     l_box &lt;- temp$l_box
-#&gt;     u_box &lt;- temp$u_box
-#&gt;     box_args &lt;- list(n = n, a_box = a_box, l_box = l_box, u_box = u_box)
-#&gt;     ru_args &lt;- c(box_args, ru_args)
-#&gt;     ru_args$tfun &lt;- NULL
-#&gt;     res &lt;- do.call(ru_fun, ru_args)
-#&gt;     res$pa &lt;- n/res$ntry
-#&gt;     res$ntry &lt;- NULL
-#&gt;     colnames(res$sim_vals) &lt;- var_names
-#&gt;     colnames(res$sim_vals_rho) &lt;- paste("rho[", 1:d, "]", sep = "")
-#&gt;     box &lt;- c(a_box, l_box, u_box)
-#&gt;     res$box &lt;- cbind(box, vals, conv)
-#&gt;     bs &lt;- paste(paste("b", 1:d, sep = ""), rep(c("minus", "plus"), 
-#&gt;         each = d), sep = "")
-#&gt;     rownames(res$box) &lt;- c("a", bs)
-#&gt;     if (any(conv != 0)) {
-#&gt;         warning("One or more convergence indicators are non-zero.", 
-#&gt;             immediate. = TRUE)
-#&gt;         print(res$box)
-#&gt;     }
-#&gt;     res$d &lt;- d
-#&gt;     pars$hscale &lt;- logf_args$hscale
-#&gt;     res$logf &lt;- cpp_logf_scaled
-#&gt;     res$logf_args &lt;- list(logf = logf, pars = pars)
-#&gt;     res$logf_rho &lt;- logf_fun
-#&gt;     res$logf_rho_args &lt;- logf_args
-#&gt;     res$f_mode &lt;- f_mode
-#&gt;     res$call &lt;- Call
-#&gt;     class(res) &lt;- "ru"
-#&gt;     return(res)
-#&gt; })(logf = &lt;pointer: 0x0000000014197020&gt;, gpd_data = c(0.611212744254912, 
-#&gt; 0.213651879170392, 0.0792329679945691, 1.34853834625623, 0.665409511725368, 
-#&gt; 0.191351972996863, 0.107224795029674, 0.777837360483618, 0.0240345945500755, 
-#&gt; 0.59031958167642, 1.34670604451064, 0.00764348639508738, 0.662596156624963, 
-#&gt; 1.07064911180334, 0.738881752658923, 0.779292888266398, 1.48122671212626, 
-#&gt; 0.674351689859161, 0.881834124687365, 0.776227736370579, 0.200631263023917, 
-#&gt; 1.05535896854853, 0.358996155178852, 0.125044896246074, 0.67836034235601, 
-#&gt; 1.15701925223937, 0.311046681990721, 0.735606656340175, 0.651855011428529, 
-#&gt; 0.90464294853428, 0.862346422363348, 1.70658891374237, 0.0311165892204892, 
-#&gt; 0.214706512254768, 0.556568303713478, 1.46046652152762, 1.09267590824235, 
-#&gt; 0.495181841633185, 0.102292195691018, 1.30363497740451, 0.629963924459724, 
-#&gt; 0.762931728518903, 0.188825536291731, 0.578140784838545, 1.10294314142686, 
-#&gt; 0.719061706969681, 0.17028870411758, 0.156199268305578, 0.712755274762013, 
-#&gt; 0.0323101553675693, 1.46707034224474, 0.573576343914504, 1.40828316351649, 
-#&gt; 0.379099171122334, 0.594664102528121, 0.358553808951062, 0.617187727642617, 
-#&gt; 0.774009929659686, 1.21928132243222, 0.485968315681201, 0.675567413184536, 
-#&gt; 0.879887537646096, 0.599840886938747, 0.0404766746644281, 1.49393923176775, 
-#&gt; 1.73103376364672, 1.01102889102417, 1.76008617845361, 0.477258301038126, 
-#&gt; 1.02852098725667, 1.31973269613481, 0.970252408983678, 1.19902214393636, 
-#&gt; 0.889294877309343, 0.873382996566122, 0.261317865650087, 0.7237603084145, 
-#&gt; 0.127510160591829, 0.911045050629635, 0.366913536972545, 0.167474510137506, 
-#&gt; 1.25504686879249, 1.71375857712236, 0.440621773038927, 1.48054512753854, 
-#&gt; 0.0653123034292638, 0.993115327776908, 1.06041063287437, 1.03445273634326, 
-#&gt; 0.359356912928328, 0.0370764618876338, 0.580989025293662, 0.0245966356909644, 
-#&gt; 0.562051059891893, 0.0387451480439389, 0.663816593867638, 0.104389238917651, 
-#&gt; 0.131476811939359, 1.1506542225583, 0.72870498080762), m = 100L, 
-#&gt;     xm = 1.76008617845361, sum_gp = 69.895945131562, n = 1000, 
-#&gt;     d = 2, init = c(0.69895945131562, 0), rotate = FALSE, lower = c(0, 
-#&gt;     -Inf))
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                box      vals1      vals2 conv
 #&gt; a        1.0000000  0.0000000  0.0000000    0
-#&gt; b1minus -0.1523185 -0.2390846  0.1681619    0
-#&gt; b2minus -0.1197140  0.3336063 -0.2059090    0
-#&gt; b1plus   0.1945137  0.3447002 -0.2115116    0
-#&gt; b2plus   0.1171696 -0.2375358  0.2023353    0
+#&gt; b1minus -0.1366634 -0.2148084  0.1986321    0
+#&gt; b2minus -0.1184264  0.2655576 -0.1932687    0
+#&gt; b1plus   0.1648891  0.2868122 -0.2032960    0
+#&gt; b2plus   0.1447393 -0.2095940  0.2554156    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.1175088
+#&gt; [1] 0.1635056
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1               V2         
-#&gt;  Min.   :0.6653   Min.   :-0.8656  
-#&gt;  1st Qu.:1.0410   1st Qu.:-0.6623  
-#&gt;  Median :1.1270   Median :-0.6050  
-#&gt;  Mean   :1.1351   Mean   :-0.6018  
-#&gt;  3rd Qu.:1.2269   3rd Qu.:-0.5408  
-#&gt;  Max.   :1.5530   Max.   :-0.1557  </div><div class='input'>
+#&gt;        V1               V2          
+#&gt;  Min.   :0.5008   Min.   :-0.80645  
+#&gt;  1st Qu.:0.8039   1st Qu.:-0.53251  
+#&gt;  Median :0.8865   Median :-0.46438  
+#&gt;  Mean   :0.8905   Mean   :-0.45756  
+#&gt;  3rd Qu.:0.9696   3rd Qu.:-0.38948  
+#&gt;  Max.   :1.3565   Max.   :-0.03939  </div><div class='input'>
 <span class='co'># Sample on original scale, with rotation ----------------</span>
 <span class='no'>for_ru_rcpp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>,
                       <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>)), <span class='no'>ss</span>)
 <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>ru_rcpp</span>, <span class='no'>for_ru_rcpp</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; (function (logf, ..., n = 1, d = 1, init = NULL, trans = c("none", 
-#&gt;     "BC", "user"), phi_to_theta = NULL, log_j = NULL, user_args = list(), 
-#&gt;     lambda = rep(1L, d), lambda_tol = 1e-06, gm = NULL, rotate = ifelse(d == 
-#&gt;         1, FALSE, TRUE), lower = rep(-Inf, d), upper = rep(Inf, 
-#&gt;         d), r = 1/2, ep = 0L, a_algor = if (d == 1) "nlminb" else "optim", 
-#&gt;     b_algor = c("nlminb", "optim"), a_method = c("Nelder-Mead", 
-#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), b_method = c("Nelder-Mead", 
-#&gt;         "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"), a_control = list(), 
-#&gt;     b_control = list(), var_names = NULL, shoof = 0.2) 
-#&gt; {
-#&gt;     Call &lt;- match.call(expand.dots = TRUE)
-#&gt;     if (shoof &lt; 0 || shoof &gt; 1) {
-#&gt;         stop("''shoof'' must be in [0, 1]")
-#&gt;     }
-#&gt;     is_pointer &lt;- (class(logf) == "externalptr")
-#&gt;     if (!is_pointer) {
-#&gt;         stop("logf must be an external pointer to a function")
-#&gt;     }
-#&gt;     pars &lt;- list(...)
-#&gt;     list_depth &lt;- function(x) {
-#&gt;         ifelse(is.list(x), 1L + max(sapply(x, list_depth)), 0L)
-#&gt;     }
-#&gt;     if (length(pars) &gt; 0) {
-#&gt;         pars_depth &lt;- list_depth(pars)
-#&gt;     }
-#&gt;     else {
-#&gt;         pars_depth &lt;- 0
-#&gt;     }
-#&gt;     if (pars_depth &gt; 1) {
-#&gt;         par_names &lt;- names(pars)
-#&gt;         pars &lt;- unlist(pars, recursive = FALSE)
-#&gt;         if (!is.null(par_names)) {
-#&gt;             keep_name &lt;- nchar(par_names) + 2
-#&gt;             names(pars) &lt;- substring(names(pars), keep_name)
-#&gt;         }
-#&gt;     }
-#&gt;     if (r &lt; 0) {
-#&gt;         stop("r must be non-negative")
-#&gt;     }
-#&gt;     a_algor &lt;- match.arg(a_algor, c("optim", "nlminb"))
-#&gt;     a_method &lt;- match.arg(a_method)
-#&gt;     b_algor &lt;- match.arg(b_algor)
-#&gt;     b_method &lt;- match.arg(b_method)
-#&gt;     if (any(upper &lt;= lower)) {
-#&gt;         stop("upper must be greater than lower, componentwise.")
-#&gt;     }
-#&gt;     trans &lt;- match.arg(trans)
-#&gt;     if (is.null(gm)) {
-#&gt;         gm &lt;- rep(1, d)
-#&gt;     }
-#&gt;     if (trans == "BC") {
-#&gt;         lambda_type &lt;- "numeric"
-#&gt;         if (is.list(lambda)) {
-#&gt;             lambda_type &lt;- "list"
-#&gt;             if (is.null(lambda$lambda)) {
-#&gt;                 stop("The list lambda must contain the object lambda$lambda")
-#&gt;             }
-#&gt;             if (!is.null(lambda$gm)) {
-#&gt;                 gm &lt;- lambda$gm
-#&gt;             }
-#&gt;             if (!is.null(lambda$init_psi)) {
-#&gt;                 init &lt;- lambda$init_psi
-#&gt;             }
-#&gt;             if (a_algor == "optim" &amp; is.null(a_control$parscale)) {
-#&gt;                 a_control &lt;- c(a_control, list(parscale = lambda$sd_psi))
-#&gt;             }
-#&gt;             if (!is.null(lambda$phi_to_theta)) {
-#&gt;                 phi_to_theta &lt;- lambda$phi_to_theta
-#&gt;             }
-#&gt;             if (!is.null(lambda$log_j)) {
-#&gt;                 log_j &lt;- lambda$log_j
-#&gt;             }
-#&gt;             if (!is.null(lambda$user_args)) {
-#&gt;                 user_args &lt;- lambda$user_args
-#&gt;             }
-#&gt;             lambda &lt;- lambda$lambda
-#&gt;         }
-#&gt;         lambda &lt;- ifelse(abs(lambda) &lt; lambda_tol, 0L, lambda)
-#&gt;         if (!is.vector(lambda)) {
-#&gt;             stop("lambda must be a numeric vector")
-#&gt;         }
-#&gt;         if (!(length(lambda) %in% c(1, d))) {
-#&gt;             if (lambda_type == "numeric") {
-#&gt;                 stop("lambda must be a numeric vector of length d")
-#&gt;             }
-#&gt;             if (lambda_type == "list") {
-#&gt;                 stop("lambda$lambda must be a numeric vector of length d")
-#&gt;             }
-#&gt;         }
-#&gt;         if (length(lambda) == 1) {
-#&gt;             lambda &lt;- rep(lambda, d)
-#&gt;         }
-#&gt;         if (any(upper &lt;= 0)) {
-#&gt;             stop("when trans = ``BC'' all elements of upper must be positive")
-#&gt;         }
-#&gt;         lower &lt;- pmax(0, lower)
-#&gt;         lower &lt;- ifelse(lambda == 0, gm * log(lower), (lower^lambda - 
-#&gt;             1)/(lambda * gm^(lambda - 1)))
-#&gt;         upper &lt;- ifelse(lambda == 0, gm * log(upper), (upper^lambda - 
-#&gt;             1)/(lambda * gm^(lambda - 1)))
-#&gt;     }
-#&gt;     if (d == 1 &amp; a_algor == "optim" &amp; any(is.infinite(c(lower, 
-#&gt;         upper)))) {
-#&gt;         a_algor = "nlminb"
-#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using a_algor = `optim'.  a_algor has been changed to `nlminb'")
-#&gt;     }
-#&gt;     if (d == 1 &amp; b_algor == "optim" &amp; any(is.infinite(c(lower, 
-#&gt;         upper)))) {
-#&gt;         b_algor = "nlminb"
-#&gt;         warning("For d = 1 finite lower and upper bounds must be supplied when\n            using b_algor = `optim'.  b_algor has been changed to `nlminb'")
-#&gt;     }
-#&gt;     if (b_algor == "optim") {
-#&gt;         if (b_method == "BFGS" | b_method == "CG") {
-#&gt;             warning("Using optim with b_method==`BFGS' or `CG' can produce the error\n              message `non-finite finite-difference value'.  If you really want\n              to use BFGS or CG try setting ep to be positive but small, e.g.\n              ep=0.001.", 
-#&gt;                 immediate. = TRUE, noBreaks. = TRUE)
-#&gt;         }
-#&gt;     }
-#&gt;     if (d == 1) {
-#&gt;         a_method &lt;- "Brent"
-#&gt;         b_method &lt;- "Brent"
-#&gt;     }
-#&gt;     if (d == 1) {
-#&gt;         which_lam &lt;- 1L
-#&gt;     }
-#&gt;     else {
-#&gt;         which_lam &lt;- which(lambda != 1L)
-#&gt;     }
-#&gt;     if (is.null(init)) {
-#&gt;         init &lt;- rep(1, d)
-#&gt;         warning("No initial estimate of the mode given: a vector of ones has\n            been used", 
-#&gt;             noBreaks. = TRUE)
-#&gt;     }
-#&gt;     len_init &lt;- length(init)
-#&gt;     if (len_init == 1 &amp; d &gt; 1) {
-#&gt;         init &lt;- rep(init, length.out = d)
-#&gt;         warning("d &gt; 1 but init has length 1: a d-vector of inits has been used")
-#&gt;     }
-#&gt;     if (len_init != d &amp; len_init != 1) {
-#&gt;         stop("the length of init is incompatible with d")
-#&gt;     }
-#&gt;     if (d == 1 &amp; rotate) {
-#&gt;         rotate &lt;- FALSE
-#&gt;         warning("rotation is not relevant when d=1: no rotation is used")
-#&gt;     }
-#&gt;     ep &lt;- abs(ep)
-#&gt;     vals &lt;- matrix(NA, ncol = d, nrow = 2 * d + 1)
-#&gt;     colnames(vals) &lt;- paste("vals", 1:d, sep = "")
-#&gt;     conv &lt;- rep(NA, 2 * d + 1)
-#&gt;     big_val &lt;- Inf
-#&gt;     hscale &lt;- 0
-#&gt;     psi_mode &lt;- rep(0, d)
-#&gt;     is_pointer &lt;- (class(phi_to_theta) == "externalptr")
-#&gt;     if (trans == "none" &amp; is_pointer) {
-#&gt;         warning("phi_to_theta() not used when trans = ``none'': identity fn used")
-#&gt;     }
-#&gt;     if (!is_pointer &amp; !is.null(phi_to_theta)) {
-#&gt;         stop("phi_to_theta must be an external pointer to a function or NULL")
-#&gt;     }
-#&gt;     if (trans == "user" &amp; is.null(phi_to_theta)) {
-#&gt;         stop("When trans = ``user'' phi_to_theta must be supplied")
-#&gt;     }
-#&gt;     is_pointer &lt;- (class(log_j) == "externalptr")
-#&gt;     if (!is_pointer &amp; !is.null(log_j)) {
-#&gt;         stop("log_j must be an external pointer to a function or NULL")
-#&gt;     }
-#&gt;     rot_mat &lt;- diag(d)
-#&gt;     init_psi &lt;- init
-#&gt;     if (trans == "none") {
-#&gt;         logf_fun &lt;- cpp_logf_rho
-#&gt;         a_obj_fun &lt;- cpp_a_obj
-#&gt;         lower_box_fun &lt;- cpp_lower_box
-#&gt;         upper_box_fun &lt;- cpp_upper_box
-#&gt;         ru_fun &lt;- ru_cpp
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars)
-#&gt;         ru_args &lt;- list(d = d, r = r)
-#&gt;     }
-#&gt;     else if (trans == "BC" &amp; is.null(phi_to_theta)) {
-#&gt;         logf_fun &lt;- cpp_logf_rho_2
-#&gt;         a_obj_fun &lt;- cpp_a_obj_2
-#&gt;         lower_box_fun &lt;- cpp_lower_box_2
-#&gt;         upper_box_fun &lt;- cpp_upper_box_2
-#&gt;         ru_fun &lt;- ru_cpp_2
-#&gt;         con &lt;- lambda * gm^(lambda - 1)
-#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
-#&gt;             gm = gm, con = con)
-#&gt;         tfun &lt;- create_trans_xptr("case_2")
-#&gt;         if (all(lambda != 0)) {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
-#&gt;         }
-#&gt;         else {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
-#&gt;         }
-#&gt;         phi_to_theta &lt;- null_phi_to_theta_xptr("no_trans")
-#&gt;         log_j &lt;- create_log_jac_xptr("log_none_jac")
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
-#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
-#&gt;             user_args = user_args)
-#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
-#&gt;     }
-#&gt;     else if (trans == "BC" &amp; !is.null(phi_to_theta)) {
-#&gt;         logf_fun &lt;- cpp_logf_rho_3
-#&gt;         a_obj_fun &lt;- cpp_a_obj_2
-#&gt;         lower_box_fun &lt;- cpp_lower_box_2
-#&gt;         upper_box_fun &lt;- cpp_upper_box_2
-#&gt;         ru_fun &lt;- ru_cpp_3
-#&gt;         con &lt;- lambda * gm^(lambda - 1)
-#&gt;         tpars &lt;- list(which_lam = which_lam - 1, lambda = lambda, 
-#&gt;             gm = gm, con = con)
-#&gt;         tfun &lt;- create_trans_xptr("case_3")
-#&gt;         if (all(lambda != 0)) {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("no_zero")
-#&gt;         }
-#&gt;         else {
-#&gt;             ptpfun &lt;- create_psi_to_phi_xptr("has_zero")
-#&gt;         }
-#&gt;         if (is.null(log_j)) {
-#&gt;             log_j &lt;- create_log_jac_xptr("case_3")
-#&gt;         }
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
-#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
-#&gt;             user_args = user_args)
-#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
-#&gt;     }
-#&gt;     else {
-#&gt;         logf_fun &lt;- cpp_logf_rho_4
-#&gt;         a_obj_fun &lt;- cpp_a_obj_2
-#&gt;         lower_box_fun &lt;- cpp_lower_box_2
-#&gt;         upper_box_fun &lt;- cpp_upper_box_2
-#&gt;         ru_fun &lt;- ru_cpp_4
-#&gt;         tpars &lt;- list()
-#&gt;         tfun &lt;- create_trans_xptr("case_4")
-#&gt;         ptpfun &lt;- create_psi_to_phi_xptr("no_trans")
-#&gt;         if (is.null(log_j)) {
-#&gt;             log_j &lt;- create_log_jac_xptr("case_4")
-#&gt;         }
-#&gt;         logf_args &lt;- list(psi_mode = rep(0, d), rot_mat = diag(d), 
-#&gt;             hscale = 0, logf = logf, pars = pars, tpars = tpars, 
-#&gt;             ptpfun = ptpfun, phi_to_theta = phi_to_theta, log_j = log_j, 
-#&gt;             user_args = user_args)
-#&gt;         ru_args &lt;- list(d = d, r = r, tfun = tfun)
-#&gt;     }
-#&gt;     logf_args$hscale &lt;- do.call(logf_fun, c(list(rho = init_psi), 
-#&gt;         logf_args))
-#&gt;     if (is.infinite(logf_args$hscale)) {
-#&gt;         stop("The target density is zero at initial parameter values")
-#&gt;     }
-#&gt;     ru_args &lt;- c(ru_args, logf_args)
-#&gt;     for_find_a &lt;- list(init_psi = init_psi, lower = lower, upper = upper, 
-#&gt;         algor = a_algor, method = a_method, control = a_control, 
-#&gt;         a_obj_fun = a_obj_fun, ru_args = ru_args, shoof = shoof)
-#&gt;     temp &lt;- do.call("cpp_find_a", for_find_a)
-#&gt;     check_finite &lt;- do.call(logf_fun, c(list(rho = temp$par), 
-#&gt;         logf_args))
-#&gt;     if (!is.finite(check_finite)) {
-#&gt;         stop(paste("The target log-density is not finite at its mode: mode = ", 
-#&gt;             paste(temp$par, collapse = ","), ",\n               function value = ", 
-#&gt;             check_finite, ".", sep = ""))
-#&gt;     }
-#&gt;     ru_args$hscale &lt;- check_finite + logf_args$hscale
-#&gt;     logf_args$hscale &lt;- ru_args$hscale
-#&gt;     a_box &lt;- 1
-#&gt;     f_mode &lt;- temp$par
-#&gt;     vals[1, ] &lt;- rep(0, d)
-#&gt;     conv[1] &lt;- temp$convergence
-#&gt;     pos_def &lt;- TRUE
-#&gt;     if (inherits(temp$hessian, "try-error")) {
-#&gt;         pos_def &lt;- FALSE
-#&gt;     }
-#&gt;     else {
-#&gt;         hess_mat &lt;- temp$hessian
-#&gt;         e_vals &lt;- eigen(hess_mat, symmetric = TRUE, only.values = TRUE)$values
-#&gt;         if (any(e_vals &lt; 1e-06)) {
-#&gt;             pos_def &lt;- FALSE
-#&gt;         }
-#&gt;     }
-#&gt;     if (!pos_def) {
-#&gt;         warning("The Hessian of the target log-density at its mode is not positive\n            definite. This may not be a problem, but it may be that a mode\n            at/near a parameter boundary has been found and/or that the target\n            function is unbounded.", 
-#&gt;             immediate. = TRUE, noBreaks. = TRUE)
-#&gt;         if (trans != "BC") {
-#&gt;             cat("  It might be worth using the option trans = ``BC''.", 
-#&gt;                 "\n")
-#&gt;         }
-#&gt;         if (rotate) {
-#&gt;             rotate &lt;- FALSE
-#&gt;             warning("rotate has been changed to FALSE.", immediate. = TRUE)
-#&gt;         }
-#&gt;     }
-#&gt;     if (rotate) {
-#&gt;         rot_mat &lt;- solve(t(chol(hess_mat)))
-#&gt;         rot_mat &lt;- rot_mat/exp(-mean(log(e_vals))/2)
-#&gt;     }
-#&gt;     ru_args$rot_mat &lt;- t(rot_mat)
-#&gt;     ru_args$psi_mode &lt;- f_mode
-#&gt;     logf_args$rot_mat &lt;- t(rot_mat)
-#&gt;     logf_args$psi_mode &lt;- f_mode
-#&gt;     if (rotate) {
-#&gt;         lower &lt;- rep(-Inf, d)
-#&gt;         upper &lt;- rep(Inf, d)
-#&gt;     }
-#&gt;     for_find_bs &lt;- list(lower = lower, upper = upper, ep = ep, 
-#&gt;         vals = vals, conv = conv, algor = b_algor, method = b_method, 
-#&gt;         control = b_control, lower_box_fun = lower_box_fun, upper_box_fun = upper_box_fun, 
-#&gt;         ru_args = ru_args, shoof = shoof)
-#&gt;     temp &lt;- do.call("cpp_find_bs", for_find_bs)
-#&gt;     vals &lt;- temp$vals
-#&gt;     conv &lt;- temp$conv
-#&gt;     l_box &lt;- temp$l_box
-#&gt;     u_box &lt;- temp$u_box
-#&gt;     box_args &lt;- list(n = n, a_box = a_box, l_box = l_box, u_box = u_box)
-#&gt;     ru_args &lt;- c(box_args, ru_args)
-#&gt;     ru_args$tfun &lt;- NULL
-#&gt;     res &lt;- do.call(ru_fun, ru_args)
-#&gt;     res$pa &lt;- n/res$ntry
-#&gt;     res$ntry &lt;- NULL
-#&gt;     colnames(res$sim_vals) &lt;- var_names
-#&gt;     colnames(res$sim_vals_rho) &lt;- paste("rho[", 1:d, "]", sep = "")
-#&gt;     box &lt;- c(a_box, l_box, u_box)
-#&gt;     res$box &lt;- cbind(box, vals, conv)
-#&gt;     bs &lt;- paste(paste("b", 1:d, sep = ""), rep(c("minus", "plus"), 
-#&gt;         each = d), sep = "")
-#&gt;     rownames(res$box) &lt;- c("a", bs)
-#&gt;     if (any(conv != 0)) {
-#&gt;         warning("One or more convergence indicators are non-zero.", 
-#&gt;             immediate. = TRUE)
-#&gt;         print(res$box)
-#&gt;     }
-#&gt;     res$d &lt;- d
-#&gt;     pars$hscale &lt;- logf_args$hscale
-#&gt;     res$logf &lt;- cpp_logf_scaled
-#&gt;     res$logf_args &lt;- list(logf = logf, pars = pars)
-#&gt;     res$logf_rho &lt;- logf_fun
-#&gt;     res$logf_rho_args &lt;- logf_args
-#&gt;     res$f_mode &lt;- f_mode
-#&gt;     res$call &lt;- Call
-#&gt;     class(res) &lt;- "ru"
-#&gt;     return(res)
-#&gt; })(logf = &lt;pointer: 0x0000000014197020&gt;, gpd_data = c(0.611212744254912, 
-#&gt; 0.213651879170392, 0.0792329679945691, 1.34853834625623, 0.665409511725368, 
-#&gt; 0.191351972996863, 0.107224795029674, 0.777837360483618, 0.0240345945500755, 
-#&gt; 0.59031958167642, 1.34670604451064, 0.00764348639508738, 0.662596156624963, 
-#&gt; 1.07064911180334, 0.738881752658923, 0.779292888266398, 1.48122671212626, 
-#&gt; 0.674351689859161, 0.881834124687365, 0.776227736370579, 0.200631263023917, 
-#&gt; 1.05535896854853, 0.358996155178852, 0.125044896246074, 0.67836034235601, 
-#&gt; 1.15701925223937, 0.311046681990721, 0.735606656340175, 0.651855011428529, 
-#&gt; 0.90464294853428, 0.862346422363348, 1.70658891374237, 0.0311165892204892, 
-#&gt; 0.214706512254768, 0.556568303713478, 1.46046652152762, 1.09267590824235, 
-#&gt; 0.495181841633185, 0.102292195691018, 1.30363497740451, 0.629963924459724, 
-#&gt; 0.762931728518903, 0.188825536291731, 0.578140784838545, 1.10294314142686, 
-#&gt; 0.719061706969681, 0.17028870411758, 0.156199268305578, 0.712755274762013, 
-#&gt; 0.0323101553675693, 1.46707034224474, 0.573576343914504, 1.40828316351649, 
-#&gt; 0.379099171122334, 0.594664102528121, 0.358553808951062, 0.617187727642617, 
-#&gt; 0.774009929659686, 1.21928132243222, 0.485968315681201, 0.675567413184536, 
-#&gt; 0.879887537646096, 0.599840886938747, 0.0404766746644281, 1.49393923176775, 
-#&gt; 1.73103376364672, 1.01102889102417, 1.76008617845361, 0.477258301038126, 
-#&gt; 1.02852098725667, 1.31973269613481, 0.970252408983678, 1.19902214393636, 
-#&gt; 0.889294877309343, 0.873382996566122, 0.261317865650087, 0.7237603084145, 
-#&gt; 0.127510160591829, 0.911045050629635, 0.366913536972545, 0.167474510137506, 
-#&gt; 1.25504686879249, 1.71375857712236, 0.440621773038927, 1.48054512753854, 
-#&gt; 0.0653123034292638, 0.993115327776908, 1.06041063287437, 1.03445273634326, 
-#&gt; 0.359356912928328, 0.0370764618876338, 0.580989025293662, 0.0245966356909644, 
-#&gt; 0.562051059891893, 0.0387451480439389, 0.663816593867638, 0.104389238917651, 
-#&gt; 0.131476811939359, 1.1506542225583, 0.72870498080762), m = 100L, 
-#&gt;     xm = 1.76008617845361, sum_gp = 69.895945131562, n = 1000, 
-#&gt;     d = 2, init = c(0.69895945131562, 0), lower = c(0, -Inf))
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box       vals1       vals2 conv
 #&gt; a        1.00000000  0.00000000  0.00000000    0
-#&gt; b1minus -0.04787813 -0.07141518  0.03574879    0
-#&gt; b2minus -0.06832986  0.05611931 -0.11752794    0
-#&gt; b1plus   0.11667492  0.26263473  0.09361231    0
-#&gt; b2plus   0.06687760  0.10302636  0.11548814    0
+#&gt; b1minus -0.06491404 -0.09936675  0.02749827    0
+#&gt; b2minus -0.07270271  0.08233540 -0.11864887    0
+#&gt; b1plus   0.11638501  0.24619095  0.12003623    0
+#&gt; b2plus   0.08885635  0.12144488  0.15680121    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.4226543
+#&gt; [1] 0.4416961
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1               V2         
-#&gt;  Min.   :0.7783   Min.   :-0.9306  
-#&gt;  1st Qu.:1.0433   1st Qu.:-0.6694  
-#&gt;  Median :1.1359   Median :-0.6070  
-#&gt;  Mean   :1.1413   Mean   :-0.6063  
-#&gt;  3rd Qu.:1.2290   3rd Qu.:-0.5367  
-#&gt;  Max.   :1.6493   Max.   :-0.2547  </div><div class='input'>
+#&gt;        V1               V2          
+#&gt;  Min.   :0.5310   Min.   :-0.76570  
+#&gt;  1st Qu.:0.8067   1st Qu.:-0.52827  
+#&gt;  Median :0.8796   Median :-0.45648  
+#&gt;  Mean   :0.8868   Mean   :-0.45535  
+#&gt;  3rd Qu.:0.9575   3rd Qu.:-0.38710  
+#&gt;  Max.   :1.2879   Max.   : 0.04962  </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed scale ----------------</span>
 
 <span class='co'># Find initial estimates for phi = (phi1, phi2),</span>
@@ -1154,105 +417,89 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
                            <span class='kw'>max_phi</span> <span class='kw'>=</span> <span class='no'>max_phi</span>, <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>xm</span> <span class='kw'>=</span> <span class='no'>ss</span>$<span class='no'>xm</span>),
                            <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='no'>ptr_phi_to_theta_gp</span>)
 <span class='no'>lambda</span></div><div class='output co'>#&gt; $lambda
-#&gt; [1] 0.1588094 0.3873855
+#&gt; [1] 0.1955879 0.4524698
 #&gt; 
 #&gt; $gm
-#&gt; [1] 1.13032514 0.02985621
+#&gt; [1] 0.88139009 0.05558434
 #&gt; 
 #&gt; $init_psi
-#&gt; [1]  0.1368381 -0.2210673
+#&gt; [1] -0.1175793 -0.3262958
 #&gt; 
 #&gt; $sd_psi
 #&gt;       Var1       Var2 
-#&gt; 0.13113564 0.02384088 
+#&gt; 0.10593629 0.03726044 
 #&gt; 
 #&gt; $phi_to_theta
-#&gt; &lt;pointer: 0x0000000014197200&gt;
+#&gt; &lt;pointer: 0x000000000a6fa1c0&gt;
 #&gt; 
 #&gt; $log_j
-#&gt; &lt;pointer: 0x0000000014197110&gt;
+#&gt; &lt;pointer: 0x000000000a6fa150&gt;
 #&gt; 
 #&gt; $user_args
 #&gt; $user_args$xm
-#&gt; [1] 1.760086
+#&gt; [1] 1.674712
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, without rotation</span>
 <span class='no'>x3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru_rcpp.html'>ru_rcpp</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>,
               <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x3</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ru_rcpp(logf = ptr_gp, ss = ss, n = n, d = 2, trans = "BC", lambda = lambda, 
-#&gt;     rotate = FALSE)
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x3</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box      vals1       vals2 conv
 #&gt; a        1.00000000  0.0000000  0.00000000    0
-#&gt; b1minus -0.16335279 -0.2694435  0.02696156    0
-#&gt; b2minus -0.03144925  0.1075533 -0.04942895    0
-#&gt; b1plus   0.16796432  0.2804794 -0.02043026    0
-#&gt; b2plus   0.03246222 -0.1226702  0.05378713    0
+#&gt; b1minus -0.14699944 -0.2436505  0.05671949    0
+#&gt; b2minus -0.05131768  0.1118800 -0.07913945    0
+#&gt; b1plus   0.14402134  0.2373468 -0.04200666    0
+#&gt; b2plus   0.05536588 -0.1391027  0.09176593    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.4741584
+#&gt; [1] 0.4516712
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1               V2         
-#&gt;  Min.   :0.7464   Min.   :-0.9419  
-#&gt;  1st Qu.:1.0449   1st Qu.:-0.6736  
-#&gt;  Median :1.1428   Median :-0.6121  
-#&gt;  Mean   :1.1445   Mean   :-0.6071  
-#&gt;  3rd Qu.:1.2316   3rd Qu.:-0.5439  
-#&gt;  Max.   :1.6599   Max.   :-0.2722  </div><div class='input'>
+#&gt;        V1               V2          
+#&gt;  Min.   :0.5475   Min.   :-0.81123  
+#&gt;  1st Qu.:0.8105   1st Qu.:-0.52867  
+#&gt;  Median :0.8815   Median :-0.46143  
+#&gt;  Mean   :0.8892   Mean   :-0.45743  
+#&gt;  3rd Qu.:0.9613   3rd Qu.:-0.38979  
+#&gt;  Max.   :1.3666   Max.   : 0.08857  </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, with rotation</span>
 <span class='no'>x4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru_rcpp.html'>ru_rcpp</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>ptr_gp</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>,
               <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x4</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ru_rcpp(logf = ptr_gp, ss = ss, n = n, d = 2, trans = "BC", lambda = lambda)
-#&gt; 
-#&gt; ru bounding box:  
-#&gt;                 box        vals1        vals2 conv
-#&gt; a        1.00000000  0.000000000  0.000000000    0
-#&gt; b1minus -0.06614592 -0.106874864  0.006370877    0
-#&gt; b2minus -0.06727477 -0.001449866 -0.105736129    0
-#&gt; b1plus   0.07264976  0.122991265  0.005330690    0
-#&gt; b2plus   0.06944168 -0.001056007  0.115058941    0
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda_rcpp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x4</span>)</div><div class='output co'>#&gt; ru bounding box:  
+#&gt;                 box         vals1        vals2 conv
+#&gt; a        1.00000000  0.0000000000  0.000000000    0
+#&gt; b1minus -0.07732752 -0.1250767041  0.011010952    0
+#&gt; b2minus -0.07577703 -0.0053428258 -0.116859374    0
+#&gt; b1plus   0.08518781  0.1445238315  0.008795646    0
+#&gt; b2plus   0.08175471 -0.0001517266  0.135503729    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.5376344
+#&gt; [1] 0.5299417
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1               V2         
-#&gt;  Min.   :0.7633   Min.   :-0.8951  
-#&gt;  1st Qu.:1.0441   1st Qu.:-0.6599  
-#&gt;  Median :1.1319   Median :-0.6029  
-#&gt;  Mean   :1.1349   Mean   :-0.6007  
-#&gt;  3rd Qu.:1.2169   3rd Qu.:-0.5412  
-#&gt;  Max.   :1.6019   Max.   :-0.1564  </div><div class='input'>
+#&gt;        V1               V2          
+#&gt;  Min.   :0.5229   Min.   :-0.80265  
+#&gt;  1st Qu.:0.7928   1st Qu.:-0.52858  
+#&gt;  Median :0.8742   Median :-0.45096  
+#&gt;  Mean   :0.8844   Mean   :-0.44975  
+#&gt;  3rd Qu.:0.9648   3rd Qu.:-0.37963  
+#&gt;  Max.   :1.3647   Max.   :-0.02729  </div><div class='input'>
 <span class='no'>def_par</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>), <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='fl'>1.5</span>, <span class='fl'>1</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"mode relocation"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"mode relocation and rotation"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Box-Cox and mode relocation"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Box-Cox, mode relocation and rotation"</span>)</div><div class='img'><img src='find_lambda_rcpp-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>def_par</span>)
 <span class='co'># }</span></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -1263,7 +510,7 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

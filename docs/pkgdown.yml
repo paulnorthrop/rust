@@ -1,8 +1,9 @@
-pandoc: 1.19.2.1
-pkgdown: 1.4.1
+pandoc: 2.7.3
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   rust-a-vignette: rust-a-vignette.html
   rust-b-when-to-use-vignette: rust-b-when-to-use-vignette.html
   rust-c-using-rcpp-vignette: rust-c-using-rcpp-vignette.html
+last_built: 2020-07-21T11:08Z
 

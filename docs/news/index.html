@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -106,7 +110,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/paulnorthrop/rust">
+  <a href="http://github.com/paulnorthrop/rust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -124,13 +128,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/paulnorthrop/rust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='http://github.com/paulnorthrop/rust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="rust-1-3-8" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-3-8" class="anchor"></a>rust 1.3.8<small> Unreleased </small>
+    <div id="rust-139" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.9">
+<a href="#rust-139" class="anchor"></a>rust 1.3.9<small> Unreleased </small>
+</h1>
+<ul>
+<li>This is a patch to avoid CRAN package check warnings on some platforms.</li>
+</ul>
+</div>
+    <div id="rust-138" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.8">
+<a href="#rust-138" class="anchor"></a>rust 1.3.8<small> 2019-12-20 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements" class="section level2">
 <h2 class="hasAnchor">
@@ -138,14 +150,13 @@
 <ul>
 <li><p>Dependence on the spatstat package has been removed.</p></li>
 <li><p>In the S3 plot method <code><a href="../reference/plot.ru.html">plot.ru()</a></code> warnings, stemming from stats::regularize.values(), which is called by stats::approx(), have been suppressed.</p></li>
-<li><p>The call, to <code><a href="../reference/ru.html">ru()</a></code> or <code><a href="../reference/ru_rcpp.html">ru_rcpp()</a></code> has been added to the output from <code><a href="../reference/summary.ru.html">summary.ru()</a></code>.</p></li>
 <li><p>A very basic S3 print method <code><a href="../reference/print.ru.html">print.ru()</a></code> has been added, which simply prints the call to <code><a href="../reference/ru.html">ru()</a></code> or <code><a href="../reference/ru_rcpp.html">ru_rcpp()</a></code>.</p></li>
 </ul>
 </div>
 </div>
-    <div id="rust-1-3-7" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-3-7" class="anchor"></a>rust 1.3.7<small> 2019-11-27 </small>
+    <div id="rust-137" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.7">
+<a href="#rust-137" class="anchor"></a>rust 1.3.7<small> 2019-11-27 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-1" class="section level2">
 <h2 class="hasAnchor">
@@ -155,13 +166,13 @@
 <li><p>Functions that are not intended to be called by the user have been moved to rust-internal.R</p></li>
 <li><p>Use <code><a href="https://rdrr.io/r/base/class.html">inherits()</a></code> to check the class of objects returned from <code><a href="https://rdrr.io/r/base/try.html">try()</a></code>, rather than <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>.</p></li>
 <li><p>Hyperlinks corrected in vignettes.</p></li>
-<li><p>pkgdown documentation at <a href="https://paulnorthrop.github.io/rust/" class="uri">https://paulnorthrop.github.io/rust/</a></p></li>
+<li><p>pkgdown documentation at <a href="https://paulnorthrop.github.io/rust/">https://paulnorthrop.github.io/rust/</a></p></li>
 </ul>
 </div>
 </div>
-    <div id="rust-1-3-6" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-3-6" class="anchor"></a>rust 1.3.6<small> 2019-02-10 </small>
+    <div id="rust-136" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.6">
+<a href="#rust-136" class="anchor"></a>rust 1.3.6<small> 2019-02-10 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-2" class="section level2">
 <h2 class="hasAnchor">
@@ -172,9 +183,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-3-5" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-3-5" class="anchor"></a>rust 1.3.5<small> 2018-05-16 </small>
+    <div id="rust-135" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.5">
+<a href="#rust-135" class="anchor"></a>rust 1.3.5<small> 2018-05-16 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-3" class="section level2">
 <h2 class="hasAnchor">
@@ -186,9 +197,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-3-4" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-3-4" class="anchor"></a>rust 1.3.4<small> 2017-12-22 </small>
+    <div id="rust-134" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.4">
+<a href="#rust-134" class="anchor"></a>rust 1.3.4<small> 2017-12-22 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-4" class="section level2">
 <h2 class="hasAnchor">
@@ -198,9 +209,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-3-3" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-3-3" class="anchor"></a>rust 1.3.3<small> 2017-12-17 </small>
+    <div id="rust-133" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.3">
+<a href="#rust-133" class="anchor"></a>rust 1.3.3<small> 2017-12-17 </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
@@ -210,9 +221,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-2-3" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-2-3" class="anchor"></a>rust 1.2.3<small> 2017-08-28 </small>
+    <div id="rust-123" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.3">
+<a href="#rust-123" class="anchor"></a>rust 1.2.3<small> 2017-08-28 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-5" class="section level2">
 <h2 class="hasAnchor">
@@ -229,9 +240,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-2-2" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-2-2" class="anchor"></a>rust 1.2.2<small> 2017-06-01 </small>
+    <div id="rust-122" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.2">
+<a href="#rust-122" class="anchor"></a>rust 1.2.2<small> 2017-06-01 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-6" class="section level2">
 <h2 class="hasAnchor">
@@ -241,9 +252,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-2-1" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-2-1" class="anchor"></a>rust 1.2.1<small> 2017-06-01 </small>
+    <div id="rust-121" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.1">
+<a href="#rust-121" class="anchor"></a>rust 1.2.1<small> 2017-06-01 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-7" class="section level2">
 <h2 class="hasAnchor">
@@ -255,9 +266,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-2-0" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-2-0" class="anchor"></a>rust 1.2.0<small> 2017-05-27 </small>
+    <div id="rust-120" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.0">
+<a href="#rust-120" class="anchor"></a>rust 1.2.0<small> 2017-05-27 </small>
 </h1>
 <div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
@@ -282,9 +293,9 @@
 </ul>
 </div>
 </div>
-    <div id="rust-1-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#rust-1-1-0" class="anchor"></a>rust 1.1.0<small> 2016-11-18 </small>
+    <div id="rust-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#rust-110" class="anchor"></a>rust 1.1.0<small> 2016-11-18 </small>
 </h1>
 <div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
@@ -310,23 +321,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rust-1-3-8">1.3.8</a></li>
-        <li><a href="#rust-1-3-7">1.3.7</a></li>
-        <li><a href="#rust-1-3-6">1.3.6</a></li>
-        <li><a href="#rust-1-3-5">1.3.5</a></li>
-        <li><a href="#rust-1-3-4">1.3.4</a></li>
-        <li><a href="#rust-1-3-3">1.3.3</a></li>
-        <li><a href="#rust-1-2-3">1.2.3</a></li>
-        <li><a href="#rust-1-2-2">1.2.2</a></li>
-        <li><a href="#rust-1-2-1">1.2.1</a></li>
-        <li><a href="#rust-1-2-0">1.2.0</a></li>
-        <li><a href="#rust-1-1-0">1.1.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -338,7 +336,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

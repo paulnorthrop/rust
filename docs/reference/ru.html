@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="Uses the generalized ratio-of-uniforms method to simulate from a
 distribution with log-density \(log f\) (up to an additive constant).
 The density \(f\) must be bounded, perhaps after a transformation of variable." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +60,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +74,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -110,7 +113,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/paulnorthrop/rust">
+  <a href="http://github.com/paulnorthrop/rust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -129,7 +132,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generalized ratio-of-uniforms sampling</h1>
-    <small class="dont-index">Source: <a href='https://github.com/paulnorthrop/rust/blob/master/R/ru_sampling.R'><code>R/ru_sampling.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/paulnorthrop/rust/blob/master/R/ru_sampling.R'><code>R/ru_sampling.R</code></a></small>
     <div class="hidden name"><code>ru.Rd</code></div>
     </div>
 
@@ -227,7 +230,7 @@ functions <code>phi_to_theta</code> and <code>log_j</code>.</p></td>
       <th>lambda</th>
       <td><p>Either</p><ul>
 <li><p>A numeric vector.  Box-Cox transformation parameters, or</p></li>
-<li><p>A list with components</p><dl class='dl-horizontal'>
+<li><p>A list with components</p><dl'>
     <dt>lambda</dt><dd><p>A numeric vector.  Box-Cox parameters (required).</p></dd>
     <dt>gm</dt><dd><p>A numeric vector.  Box-cox scaling parameters (optional).
       If supplied this overrides any <code>gm</code> supplied by the individual
@@ -333,7 +336,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
     <dt>box</dt><dd><p>A (2 * <code>d</code> + 1) by <code>d</code> + 2 matrix of
       ratio-of-uniforms bounding box information, with row names indicating
       the box parameter.  The columns contain
-      <dl class='dl-horizontal'>
+      <dl'>
         <dt>column 1</dt><dd><p>values of box parameters.</p></dd>
         <dt>columns 2 to (2+<code>d</code>-1)</dt><dd><p>values of variables at which
          these box parameters are obtained.</p></dd>
@@ -491,28 +494,23 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ru(logf = dgamma, shape = alpha, log = TRUE, n = 1000, d = 1, 
-#&gt;     init = alpha, trans = "BC", lambda = 1/3)
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
 #&gt; b1plus   1.096590  1.774103    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.78125
+#&gt; [1] 0.7867821
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1         
-#&gt;  Min.   :0.00455  
-#&gt;  1st Qu.:0.29132  
-#&gt;  Median :0.68732  
-#&gt;  Mean   :1.02478  
-#&gt;  3rd Qu.:1.46138  
-#&gt;  Max.   :7.37866  </div><div class='input'>
+#&gt;        V1          
+#&gt;  Min.   :0.003594  
+#&gt;  1st Qu.:0.270234  
+#&gt;  Median :0.665234  
+#&gt;  Mean   :0.997574  
+#&gt;  3rd Qu.:1.437067  
+#&gt;  Max.   :7.180186  </div><div class='input'>
 <span class='co'># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span>
 <span class='co'># transformation and the log-Jacobian by hand</span>
 
@@ -525,29 +523,23 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"user"</span>, <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='no'>phi_to_theta</span>, <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='no'>log_j</span>,
         <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>), <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ru(logf = dgamma, shape = alpha, log = TRUE, n = 1000, d = 1, 
-#&gt;     init = alpha, trans = "user", phi_to_theta = phi_to_theta, 
-#&gt;     log_j = log_j, user_args = list(lambda = lambda))
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
 #&gt; b1plus   1.096590  1.774103    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.7867821
+#&gt; [1] 0.7843137
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1         
-#&gt;  Min.   :0.00025  
-#&gt;  1st Qu.:0.29870  
-#&gt;  Median :0.69953  
-#&gt;  Mean   :1.01703  
-#&gt;  3rd Qu.:1.38924  
-#&gt;  Max.   :8.12753  </div><div class='input'>
+#&gt;        V1          
+#&gt;  Min.   :0.001022  
+#&gt;  1st Qu.:0.317970  
+#&gt;  Median :0.714403  
+#&gt;  Mean   :0.996170  
+#&gt;  3rd Qu.:1.411107  
+#&gt;  Max.   :8.604777  </div><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># Generalized Pareto posterior distribution ===================</span>
 
@@ -562,59 +554,49 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
 <span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
          <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>), <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
 <span class='co'># [This may not appear if the sample is far from the constraint.]</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ru(logf = gpd_logpost, ss = ss, n = n, d = 2, init = init, rotate = FALSE, 
-#&gt;     lower = c(0, -Inf))
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box      vals1      vals2 conv
 #&gt; a        1.00000000  0.0000000  0.0000000    0
-#&gt; b1minus -0.13938523 -0.2200697  0.1316894    0
-#&gt; b2minus -0.09429005  0.3075168 -0.1647511    0
-#&gt; b1plus   0.17689338  0.3149443 -0.1668779    0
-#&gt; b2plus   0.09549122 -0.2159971  0.1734182    0
+#&gt; b1minus -0.13591750 -0.2166481  0.1619294    0
+#&gt; b2minus -0.09592518  0.2712623 -0.1608983    0
+#&gt; b1plus   0.16400605  0.2888299 -0.1663410    0
+#&gt; b2plus   0.12088682 -0.2100550  0.2233434    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.1301067
+#&gt; [1] 0.1761804
 #&gt; 
 #&gt; sample summary 
 #&gt;        V1               V2         
-#&gt;  Min.   :0.7801   Min.   :-0.8314  
-#&gt;  1st Qu.:1.0666   1st Qu.:-0.5948  
-#&gt;  Median :1.1474   Median :-0.5425  
-#&gt;  Mean   :1.1569   Mean   :-0.5431  
-#&gt;  3rd Qu.:1.2328   3rd Qu.:-0.4947  
-#&gt;  Max.   :1.6678   Max.   :-0.3134  </div><div class='input'>
+#&gt;  Min.   :0.6508   Min.   :-0.6745  
+#&gt;  1st Qu.:0.9084   1st Qu.:-0.5023  
+#&gt;  Median :0.9839   Median :-0.4473  
+#&gt;  Mean   :0.9939   Mean   :-0.4439  
+#&gt;  3rd Qu.:1.0762   3rd Qu.:-0.3890  
+#&gt;  Max.   :1.4127   Max.   :-0.1100  </div><div class='input'>
 <span class='co'># Rotation of axes plus mode relocation ----------------</span>
 <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
          <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ru(logf = gpd_logpost, ss = ss, n = n, d = 2, init = init, lower = c(0, 
-#&gt;     -Inf))
-#&gt; 
-#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box       vals1       vals2 conv
 #&gt; a        1.00000000  0.00000000  0.00000000    0
-#&gt; b1minus -0.03839164 -0.05587456  0.03656057    0
-#&gt; b2minus -0.06174655  0.03803504 -0.10788847    0
-#&gt; b1plus   0.11679606  0.27029349  0.09725044    0
-#&gt; b2plus   0.06253315  0.12442336  0.11356423    0
+#&gt; b1minus -0.05702852 -0.08639437  0.03174509    0
+#&gt; b2minus -0.06882848  0.06918374 -0.11544814    0
+#&gt; b1plus   0.11477808  0.24953859  0.12743843    0
+#&gt; b2plus   0.08673902  0.13599420  0.16025430    0
 #&gt; 
 #&gt; estimated probability of acceptance:  
-#&gt; [1] 0.4096682
+#&gt; [1] 0.4065041
 #&gt; 
 #&gt; sample summary 
-#&gt;        V1               V2         
-#&gt;  Min.   :0.8025   Min.   :-0.7734  
-#&gt;  1st Qu.:1.0743   1st Qu.:-0.5947  
-#&gt;  Median :1.1574   Median :-0.5474  
-#&gt;  Mean   :1.1598   Mean   :-0.5449  
-#&gt;  3rd Qu.:1.2411   3rd Qu.:-0.4945  
-#&gt;  Max.   :1.5680   Max.   :-0.2711  </div><div class='input'>
+#&gt;        V1               V2          
+#&gt;  Min.   :0.6280   Min.   :-0.68718  
+#&gt;  1st Qu.:0.9015   1st Qu.:-0.49523  
+#&gt;  Median :0.9806   Median :-0.44215  
+#&gt;  Mean   :0.9849   Mean   :-0.43776  
+#&gt;  3rd Qu.:1.0603   3rd Qu.:-0.38560  
+#&gt;  Max.   :1.4163   Max.   :-0.06002  </div><div class='input'>
 <span class='co'># Cauchy ========================</span>
 
 <span class='co'># The bounding box cannot be constructed if r &lt; 1.  For r = 1 the</span>
@@ -636,7 +618,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='co'># density so as an alternative we use a log transformation.</span>
 
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_halfcauchy</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
-<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.7541478</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ru-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.7604563</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ru-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example 4 from Wakefield et al. (1991) ===================</span>
 
 <span class='co'># Bivariate normal x bivariate student-t</span>
@@ -655,24 +637,17 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='co'># Case in the top right corner of Table 3</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_norm_t</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>sigma1</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='no'>covmat</span>,
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.2241901</div><div class='input'>
+<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.2273141</div><div class='input'>
 <span class='co'># Rotation increases the probability of acceptance</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_norm_t</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>sigma1</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='no'>covmat</span>,
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.5263158</div><div class='input'># }
+<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.5199938</div><div class='input'># }
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -683,7 +658,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

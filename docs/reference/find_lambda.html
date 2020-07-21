@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -41,7 +45,6 @@ the (positive) random variable with log-density logf has a density
 closer to that of a Gaussian random variable.
 In the following we use theta to denote the argument of
 logf on the original scale and phi on the Box-Cox transformed scale." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -59,7 +62,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,7 +76,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -112,7 +115,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/paulnorthrop/rust">
+  <a href="http://github.com/paulnorthrop/rust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -131,7 +134,7 @@ logf on the original scale and phi on the Box-Cox transformed scale." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Selecting Box-Cox parameter lambda for general d.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/paulnorthrop/rust/blob/master/R/box_cox_functions.R'><code>R/box_cox_functions.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/paulnorthrop/rust/blob/master/R/box_cox_functions.R'><code>R/box_cox_functions.R</code></a></small>
     <div class="hidden name"><code>find_lambda.Rd</code></div>
     </div>
 
@@ -321,14 +324,53 @@ respect to theta. Takes theta as its argument.</p></td>
 <span class='co'># Calculate an initial estimate</span>
 <span class='no'>init</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>gpd_data</span>), <span class='fl'>0</span>)
 
+<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
 <span class='co'># Sample on original scale, with no rotation ----------------</span>
 <span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
-  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>), <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in matrix(NA, ncol = d, nrow = n): object 'n' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x1, xlab = "sigma", ylab = "xi"): object 'x1' not found</span></div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
+  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>), <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
 <span class='co'># [This may not appear if the sample is far from the constraint.]</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='output co'>#&gt; <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(x1): object 'x1' not found</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
+#&gt;                box      vals1      vals2 conv
+#&gt; a        1.0000000  0.0000000  0.0000000    0
+#&gt; b1minus -0.1369021 -0.2167016  0.1440474    0
+#&gt; b2minus -0.1012008  0.3002527 -0.1769293    0
+#&gt; b1plus   0.1723149  0.3066705 -0.1794179    0
+#&gt; b2plus   0.1018379 -0.2157067  0.1827935    0
+#&gt; 
+#&gt; estimated probability of acceptance:  
+#&gt; [1] 0.1229407
+#&gt; 
+#&gt; sample summary 
+#&gt;        V1               V2         
+#&gt;  Min.   :0.7352   Min.   :-0.8565  
+#&gt;  1st Qu.:1.0248   1st Qu.:-0.6404  
+#&gt;  Median :1.1104   Median :-0.5884  
+#&gt;  Mean   :1.1159   Mean   :-0.5854  
+#&gt;  3rd Qu.:1.1990   3rd Qu.:-0.5292  
+#&gt;  Max.   :1.5550   Max.   :-0.2699  </div><div class='input'>
 <span class='co'># Sample on original scale, with rotation ----------------</span>
 <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
-  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>))</div><div class='output co'>#&gt; <span class='error'>Error in matrix(NA, ncol = d, nrow = n): object 'n' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x2, xlab = "sigma", ylab = "xi"): object 'x2' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='output co'>#&gt; <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(x2): object 'x2' not found</span></div><div class='input'>
+  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
+#&gt;                 box       vals1       vals2 conv
+#&gt; a        1.00000000  0.00000000  0.00000000    0
+#&gt; b1minus -0.03663864 -0.05333344  0.03665032    0
+#&gt; b2minus -0.05979424  0.03787947 -0.10453821    0
+#&gt; b1plus   0.11686608  0.27226212  0.09425559    0
+#&gt; b2plus   0.06017065  0.12080097  0.10800305    0
+#&gt; 
+#&gt; estimated probability of acceptance:  
+#&gt; [1] 0.4180602
+#&gt; 
+#&gt; sample summary 
+#&gt;        V1               V2         
+#&gt;  Min.   :0.8027   Min.   :-0.9319  
+#&gt;  1st Qu.:1.0250   1st Qu.:-0.6410  
+#&gt;  Median :1.0987   Median :-0.5759  
+#&gt;  Mean   :1.1114   Mean   :-0.5812  
+#&gt;  3rd Qu.:1.1913   3rd Qu.:-0.5274  
+#&gt;  Max.   :1.6820   Max.   :-0.2435  </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed scale ----------------</span>
 
 <span class='co'># Find initial estimates for phi = (phi1, phi2),</span>
@@ -336,8 +378,7 @@ respect to theta. Takes theta as its argument.</p></td>
 <span class='co'>#   and phi2 = xi + sigma / max(x),</span>
 <span class='co'># and ranges of phi1 and phi2 over over which to evaluate</span>
 <span class='co'># the posterior to find a suitable value of lambda.</span>
-<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>gpd_init</span>, <span class='no'>ss</span>)
-<span class='no'>min_phi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>pmax</a></span>(<span class='fl'>0</span>, <span class='no'>temp</span>$<span class='no'>init_phi</span> - <span class='fl'>2</span> * <span class='no'>temp</span>$<span class='no'>se_phi</span>)
+<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>gpd_init</span>, <span class='no'>ss</span>)</div><div class='img'><img src='find_lambda-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>min_phi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>pmax</a></span>(<span class='fl'>0</span>, <span class='no'>temp</span>$<span class='no'>init_phi</span> - <span class='fl'>2</span> * <span class='no'>temp</span>$<span class='no'>se_phi</span>)
 <span class='no'>max_phi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>pmax</a></span>(<span class='fl'>0</span>, <span class='no'>temp</span>$<span class='no'>init_phi</span> + <span class='fl'>2</span> * <span class='no'>temp</span>$<span class='no'>se_phi</span>)
 
 <span class='co'># Set phi_to_theta() that ensures positivity of phi</span>
@@ -362,38 +403,72 @@ respect to theta. Takes theta as its argument.</p></td>
 #&gt; 
 #&gt; $phi_to_theta
 #&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)
-#&gt; &lt;environment: 0x0000000012f49540&gt;
+#&gt; &lt;environment: 0x000000000b5eed90&gt;
 #&gt; 
 #&gt; $log_j
 #&gt; function(x) 0
-#&gt; &lt;environment: 0x0000000012f49540&gt;
+#&gt; &lt;environment: 0x000000000b5eed90&gt;
 #&gt; </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, without rotation</span>
 <span class='no'>x3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>,
-  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in matrix(NA, ncol = d, nrow = n): object 'n' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x3, xlab = "sigma", ylab = "xi"): object 'x3' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='output co'>#&gt; <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x3</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(x3): object 'x3' not found</span></div><div class='input'>
+  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x3</span>)</div><div class='output co'>#&gt; ru bounding box:  
+#&gt;                 box       vals1       vals2 conv
+#&gt; a        1.00000000  0.00000000  0.00000000    0
+#&gt; b1minus -0.15087781 -0.25064509  0.02252029    0
+#&gt; b2minus -0.02780914  0.07119839 -0.04319687    0
+#&gt; b1plus   0.15335514  0.25612939 -0.01324478    0
+#&gt; b2plus   0.02921024 -0.09995582  0.04787656    0
+#&gt; 
+#&gt; estimated probability of acceptance:  
+#&gt; [1] 0.4873294
+#&gt; 
+#&gt; sample summary 
+#&gt;        V1               V2         
+#&gt;  Min.   :0.7616   Min.   :-0.9059  
+#&gt;  1st Qu.:1.0220   1st Qu.:-0.6337  
+#&gt;  Median :1.0995   Median :-0.5776  
+#&gt;  Mean   :1.1110   Mean   :-0.5813  
+#&gt;  3rd Qu.:1.1927   3rd Qu.:-0.5284  
+#&gt;  Max.   :1.6336   Max.   :-0.2959  </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, with rotation</span>
 <span class='no'>x4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>,
-  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)</div><div class='output co'>#&gt; <span class='error'>Error in matrix(NA, ncol = d, nrow = n): object 'n' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x4, xlab = "sigma", ylab = "xi"): object 'x4' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='output co'>#&gt; <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x4</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(x4): object 'x4' not found</span></div><div class='input'>
+  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='find_lambda-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x4</span>)</div><div class='output co'>#&gt; ru bounding box:  
+#&gt;                 box        vals1        vals2 conv
+#&gt; a        1.00000000  0.000000000  0.000000000    0
+#&gt; b1minus -0.06205059 -0.100623517  0.007615170    0
+#&gt; b2minus -0.06089188 -0.002795403 -0.094585379    0
+#&gt; b1plus   0.06729363  0.113539100  0.004925744    0
+#&gt; b2plus   0.06395978 -0.006512538  0.104832214    0
+#&gt; 
+#&gt; estimated probability of acceptance:  
+#&gt; [1] 0.534188
+#&gt; 
+#&gt; sample summary 
+#&gt;        V1               V2         
+#&gt;  Min.   :0.7522   Min.   :-0.8546  
+#&gt;  1st Qu.:1.0202   1st Qu.:-0.6394  
+#&gt;  Median :1.1066   Median :-0.5808  
+#&gt;  Mean   :1.1142   Mean   :-0.5827  
+#&gt;  3rd Qu.:1.2016   3rd Qu.:-0.5233  
+#&gt;  Max.   :1.5550   Max.   :-0.2895  </div><div class='input'>
 <span class='no'>def_par</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>), <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='fl'>1.5</span>, <span class='fl'>1</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"mode relocation"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x1, xlab = "sigma", ylab = "xi", ru_scale = TRUE, main = "mode relocation"): object 'x1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"mode relocation and rotation"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x2, xlab = "sigma", ylab = "xi", ru_scale = TRUE, main = "mode relocation and rotation"): object 'x2' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Box-Cox and mode relocation"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x3, xlab = "sigma", ylab = "xi", ru_scale = TRUE, main = "Box-Cox and mode relocation"): object 'x3' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Box-Cox, mode relocation and rotation"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(x4, xlab = "sigma", ylab = "xi", ru_scale = TRUE, main = "Box-Cox, mode relocation and rotation"): object 'x4' not found</span></div><div class='input'><span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>def_par</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"mode relocation"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"mode relocation and rotation"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x3</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Box-Cox and mode relocation"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x4</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Box-Cox, mode relocation and rotation"</span>)</div><div class='img'><img src='find_lambda-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>def_par</span>)
 <span class='co'># }</span></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -404,7 +479,7 @@ respect to theta. Takes theta as its argument.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

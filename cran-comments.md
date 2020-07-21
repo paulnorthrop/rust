@@ -1,3 +1,5 @@
+This is a patch to avoid CRAN package check warnings on some platforms.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
