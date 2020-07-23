@@ -1,3 +1,5 @@
+# rust 1.3.9.9000
+
 # rust 1.3.9
 
 * This is a patch aimed at avoiding false positive CRAN package check warnings on some platforms.
