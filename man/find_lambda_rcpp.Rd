@@ -214,7 +214,7 @@ Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
  R and C++ Integration. \emph{Journal of Statistical Software},
  \strong{40}(8), 1-18.
- \url{http://www.jstatsoft.org/v40/i08/}.
+ \url{https://www.jstatsoft.org/v40/i08/}.
 
 Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
