@@ -221,8 +221,8 @@ ptr_N01 &lt;- create_xptr("logdN01")
 }
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span>
-<span class="co">#&gt;   old 18.440 19.300 21.060 20.270 22.840 27.750   100</span>
-<span class="co">#&gt;   new  1.971  2.066  2.384  2.204  2.349  8.728   100</span></pre></body></html></div>
+<span class="co">#&gt;   old 18.960 19.850 21.630 21.060 23.440 26.420   100</span>
+<span class="co">#&gt;   new  1.985  2.138  2.442  2.235  2.352  8.638   100</span></pre></body></html></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
@@ -265,8 +265,8 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
 }
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr     min      lq    mean  median      uq    max neval</span>
-<span class="co">#&gt;   old 207.300 218.200 235.300 228.000 241.200 375.60   100</span>
-<span class="co">#&gt;   new   7.368   7.877   8.905   8.378   8.983  15.23   100</span></pre></body></html></div>
+<span class="co">#&gt;   old 201.700 218.100 225.000 223.900 229.900 291.50   100</span>
+<span class="co">#&gt;   new   7.454   7.913   8.777   8.243   8.684  14.82   100</span></pre></body></html></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -296,8 +296,8 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 }
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span>
-<span class="co">#&gt;   old 29.700 31.170 34.440 34.340 35.590 48.49   100</span>
-<span class="co">#&gt;   new  4.091  4.324  5.192  4.563  5.293 10.81   100</span></pre></body></html></div>
+<span class="co">#&gt;   old 29.890 32.390 34.400 34.360 36.010 41.15   100</span>
+<span class="co">#&gt;   new  4.072  4.376  5.047  4.575  4.793 11.28   100</span></pre></body></html></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3 class="hasAnchor">
@@ -361,9 +361,9 @@ double loggp(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; ss) {
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">4</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr   min    lq  mean median    uq    max neval</span>
-<span class="co">#&gt;   old 83.01 88.29 93.29  90.81 95.06 147.70   100</span>
-<span class="co">#&gt;   new 16.58 17.48 19.21  18.15 19.55  29.81   100</span></pre></body></html></div>
+<span class="co">#&gt;  expr   min    lq  mean median    uq   max neval</span>
+<span class="co">#&gt;   old 84.78 89.70 92.56  91.47 94.08 145.8   100</span>
+<span class="co">#&gt;   new 16.85 17.51 18.96  18.18 19.14  24.8   100</span></pre></body></html></div>
 </div>
 </div>
 <div id="examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="section level2">
@@ -435,10 +435,10 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000006c09d40&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000008923d50&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000006c09bb0&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000008923a90&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>

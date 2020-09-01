@@ -235,11 +235,11 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
 <span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="co">#&gt; &lt;bytecode: 0x00000000096ac4a8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x00000000096a54b0&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
 <span class="co">#&gt; function(x) 0</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000000960f928&gt;</span></pre></body></html></div>
+<span class="co">#&gt; &lt;bytecode: 0x0000000009609118&gt;</span></pre></body></html></div>
 <p>We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Sample on Box-Cox transformed, without rotation</span>
 <span class="no">x3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span>(<span class="kw">logf</span> <span class="kw">=</span> <span class="no">gpd_logpost</span>, <span class="kw">ss</span> <span class="kw">=</span> <span class="no">ss</span>, <span class="kw">d</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">trans</span> <span class="kw">=</span> <span class="st">"BC"</span>,
