@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.10</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/paulnorthrop/rust/">
+  <a href="https://github.com/paulnorthrop/rust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -91,9 +91,9 @@
       <h1 data-toc-skip>When can rust be used?</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2020-07-21</h4>
+            <h4 class="date">2020-09-02</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/paulnorthrop/rust/blob/master/vignettes/rust-b-when-to-use-vignette.Rmd"><code>vignettes/rust-b-when-to-use-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-b-when-to-use-vignette.Rmd"><code>vignettes/rust-b-when-to-use-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-b-when-to-use-vignette.Rmd</code></div>
 
     </div>
@@ -151,7 +151,7 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <span class="co">#&gt; b1minus -0.9999999 -2509.398    0 -0.8310221 -2.948272    0</span>
 <span class="co">#&gt; b1plus   0.9999999  2509.398    0  0.8310221  2.948272    0</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">cauchy1</span>$<span class="no">pa</span>, <span class="no">cauchy126</span>$<span class="no">pa</span>)
-<span class="co">#&gt; [1] 0.7806401 0.8453085</span></pre></body></html></div>
+<span class="co">#&gt; [1] 0.8064516 0.8019246</span></pre></body></html></div>
 <p>For <span class="math inline">\(r = 1\)</span> the algorithm finds essentially the correct values of <span class="math inline">\(b_1^-\)</span> and <span class="math inline">\(b_1^+\)</span> even though these do not occur at a turning point of the objective functions. The estimated probability of acceptance is indeed larger for <span class="math inline">\(r = 1.26\)</span>.</p>
 </div>
 <div id="hierarchical-1-way-anova-with-few-groups" class="section level3">
@@ -174,28 +174,28 @@ j = 1, \ldots, n_i,  \label{eqn:1way}
 <span class="no">all2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="no">coag2</span>$<span class="no">theta_sim_vals</span>, <span class="no">coag2</span>$<span class="no">sim_vals</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">all1</span>, <span class="fl">2</span>, <span class="no">quantile</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="no">probs</span>)), <span class="fl">1</span>)
 <span class="co">#&gt;              2.5%  25%  50%  75% 97.5%</span>
-<span class="co">#&gt; theta[1]     59.0 60.5 61.3 62.0  63.4</span>
-<span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.5  67.8</span>
-<span class="co">#&gt; theta[3]     65.8 67.1 67.8 68.5  69.6</span>
-<span class="co">#&gt; theta[4]     59.3 60.6 61.1 61.7  63.2</span>
-<span class="co">#&gt; mu           54.3 62.3 64.0 65.7  71.7</span>
-<span class="co">#&gt; sigma[alpha]  1.9  3.4  5.1  7.9  25.0</span>
+<span class="co">#&gt; theta[1]     58.9 60.4 61.3 62.0  63.5</span>
+<span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.5  67.9</span>
+<span class="co">#&gt; theta[3]     65.8 67.1 67.7 68.4  69.8</span>
+<span class="co">#&gt; theta[4]     59.4 60.5 61.1 61.7  62.9</span>
+<span class="co">#&gt; mu           54.5 62.3 64.0 65.7  74.6</span>
+<span class="co">#&gt; sigma[alpha]  2.0  3.5  5.1  8.0  30.8</span>
 <span class="co">#&gt; sigma         1.8  2.2  2.4  2.7   3.4</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">all2</span>, <span class="fl">2</span>, <span class="no">quantile</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="no">probs</span>)), <span class="fl">1</span>)
 <span class="co">#&gt;              2.5%  25%  50%  75% 97.5%</span>
-<span class="co">#&gt; theta[1]     58.8 60.5 61.2 62.0  63.6</span>
-<span class="co">#&gt; theta[2]     63.7 65.1 65.8 66.6  67.9</span>
-<span class="co">#&gt; theta[3]     65.7 67.1 67.7 68.4  69.6</span>
-<span class="co">#&gt; theta[4]     59.5 60.6 61.1 61.7  62.9</span>
-<span class="co">#&gt; mu           56.3 62.2 64.0 65.7  75.7</span>
-<span class="co">#&gt; sigma[alpha]  1.9  3.5  5.0  7.9  26.6</span>
+<span class="co">#&gt; theta[1]     58.9 60.4 61.2 62.0  63.7</span>
+<span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.5  67.9</span>
+<span class="co">#&gt; theta[3]     65.6 67.1 67.8 68.5  69.8</span>
+<span class="co">#&gt; theta[4]     59.2 60.6 61.1 61.7  63.0</span>
+<span class="co">#&gt; mu           54.1 62.2 64.0 65.9  72.6</span>
+<span class="co">#&gt; sigma[alpha]  2.1  3.6  5.2  8.2  28.1</span>
 <span class="co">#&gt; sigma         1.8  2.2  2.4  2.7   3.4</span></pre></body></html></div>
 <p>These posterior summaries are similar to those presented in Table 11.3 of <span class="citation">Gelman et al. (2014)</span> (where <span class="math inline">\(\sigma_\alpha\)</span> is denoted <span class="math inline">\(\tau\)</span>), which were obtained using Gibbs sampling.</p>
 <p>The reparameterization strategy has the higher estimated probability of acceptance.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">coag1</span>$<span class="no">pa</span>
-<span class="co">#&gt; [1] 0.5081301</span>
+<span class="co">#&gt; [1] 0.4928536</span>
 <span class="no">coag2</span>$<span class="no">pa</span>
-<span class="co">#&gt; [1] 0.3307972</span></pre></body></html></div>
+<span class="co">#&gt; [1] 0.2928258</span></pre></body></html></div>
 </div>
 </div>
 <div id="multimodal-densities" class="section level2">
@@ -213,7 +213,7 @@ j = 1, \ldots, n_i,  \label{eqn:1way}
 <span class="no">res3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span>(<span class="kw">logf</span> <span class="kw">=</span> <span class="no">normal_mixture</span>, <span class="kw">mu</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">p</span> <span class="kw">=</span> <span class="fl">0.25</span>, <span class="kw">init</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">1000</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">res3</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"(c)"</span>)
 <span class="no">res3</span>$<span class="no">pa</span>
-<span class="co">#&gt; [1] 0.5643341</span>
+<span class="co">#&gt; [1] 0.5387931</span>
 <span class="no">res4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span>(<span class="kw">logf</span> <span class="kw">=</span> <span class="no">normal_mixture</span>, <span class="kw">mu</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">p</span> <span class="kw">=</span> <span class="fl">0.25</span>, <span class="kw">init</span> <span class="kw">=</span> -<span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">1000</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">res4</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"(d)"</span>)</pre></body></html></div>
 <p><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-1.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-2.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-3.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-4.png" width="700"></p>
