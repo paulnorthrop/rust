@@ -1,4 +1,8 @@
-# rust 1.3.9.9000
+# rust 1.3.10
+
+## Bug fixes and minor improvements
+
+* This is a patch that avoids the CRAN package check NOTEs resulting from the use of revdbayes::: instead of revdbayes::.
 
 # rust 1.3.9
 
