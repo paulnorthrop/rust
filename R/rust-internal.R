@@ -262,12 +262,11 @@ gpd_mle <- function(gpd_data) {
   #     mle  : A numeric vector.  MLEs of GP parameters sigma and xi.
   #     nllh : A numeric scalar.  The negated log-likelihood at the MLE.
   #
-  # Call Grimshaw (1993) function, note: k is -xi, a is sigma
-  #  pjn <- grimshaw_gpdmle(gpd_data)
   temp <- list()
   # Use revdbayes function if revdbayes is available, otherwise use fallback
   if (requireNamespace("revdbayes", quietly = TRUE)) {
-    pjn <- revdbayes:::grimshaw_gp_mle(gpd_data)
+    # Call Grimshaw (1993) function, note: k is -xi, a is sigma
+    pjn <- revdbayes::grimshaw_gp_mle(gpd_data)
     temp$mle <- c(pjn$a, -pjn$k)  # mle for (sigma,xi)
   } else {
     temp <- fallback_gp_mle(init = c(mean(gpd_data), 0), gpd_data = gpd_data,
