@@ -701,7 +701,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     rho <- vs / u ^ r
     rhs <- logf_rho(rho, ...)
     n_try <- n_try + 1L
-    if (d_r * log(u) < rhs) {
+    if (isTRUE(d_r * log(u) < rhs)) {
       n_acc <- n_acc + 1L
       res$sim_vals[n_acc, ] <- attr(rhs, "theta")
       res$sim_vals_rho[n_acc, ] <- rho
