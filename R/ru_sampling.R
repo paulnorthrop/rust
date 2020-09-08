@@ -694,7 +694,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   #
   d_box <- u_box - l_box
   d_r <- d * r + 1
-  #----------------------------------# start of while loop  while (n_acc < n) {
+  #----------------------------------# start of while loop while (n_acc < n) {
   while (n_acc < n) {
     u <- runif(1, 0, a_box)
     vs <- d_box * runif(d) + l_box
