@@ -1,8 +1,8 @@
-# rust 1.3.10.9000
+# rust 1.3.11
 
 ## Bug fixes and minor improvements
 
-* In `ru()` if `isTRUE()` is used to deal correctly instances where there are missing values in the generalised ratio-of-uniforms test condition.
+* In `ru()` if `isTRUE()` is used to deal correctly with instances where there are missing values in the generalised ratio-of-uniforms test condition.
 
 # rust 1.3.10
 

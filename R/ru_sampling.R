@@ -170,7 +170,7 @@
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
-#'  \url{https://doi.org/10.1007/BF01889987}.
+#'  \doi{10.1007/BF01889987}.
 #' @examples
 #' # Normal density ===================
 #'

@@ -162,13 +162,13 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #'   \code{init_phi} is returned.
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-#'   and Computing (1991) 1, 129-133. \url{https://doi.org/10.1007/BF01889987}.
+#'   and Computing (1991) 1, 129-133. \doi{10.1007/BF01889987}.
 #' @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and Quantile
 #'   Estimation for the Generalized Pareto Distribution. Technometrics, 29(3),
-#'   339-349. \url{https://doi.org/10.2307/1269343}.
+#'   339-349. \doi{10.2307/1269343}.
 #' @references Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
 #'   with Applications to Insurance, Finance, Hydrology and Other Fields.Birkhauser.
-#'   \url{https://doi.org/10.1007/978-3-7643-7399-3}.
+#'   \doi{10.1007/978-3-7643-7399-3}.
 #' @seealso \code{\link{gpd_sum_stats}} to calculate summary statistics for
 #'   use in \code{gpd_loglik}.
 #' @seealso \code{\link{rgpd}} for simulation from a generalized Pareto
