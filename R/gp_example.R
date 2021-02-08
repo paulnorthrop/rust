@@ -56,7 +56,7 @@ gpd_sum_stats <- function(gpd_data) {
 #' @seealso \code{\link{rgpd}} for simulation from a generalized Pareto
 #' @references Northrop, P. J. and Attalides, N. (2016) Posterior propriety in
 #' Bayesian extreme value analyses using reference priors. Statistica Sinica,
-#' 26(2), 721-743, \url{https://doi.org/10.5705/ss.2014.034}.
+#' 26(2), 721-743, \doi{10.5705/ss.2014.034}.
 #' @examples
 #' \donttest{
 #' # Sample data from a GP(sigma, xi) distribution
