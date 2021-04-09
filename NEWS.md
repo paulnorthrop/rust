@@ -1,3 +1,9 @@
+# rust 1.3.11.9000
+
+## Bug fixes and minor improvements
+
+* `LazyData: TRUE` has been removed from DESCRIPTION, because there is no data/ directory in rust.
+
 # rust 1.3.11
 
 ## Bug fixes and minor improvements

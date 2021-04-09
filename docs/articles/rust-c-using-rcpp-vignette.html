@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Rusting Faster: Simulation using Rcpp</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2021-02-08</h4>
+            <h4 class="date">2021-04-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-c-using-rcpp-vignette.Rmd"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-c-using-rcpp-vignette.Rmd</code></div>
@@ -220,9 +220,9 @@ ptr_N01 &lt;- create_xptr("logdN01")
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">4</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span>
-<span class="co">#&gt;   old 23.290 27.760 31.760 30.700 34.220 50.000   100</span>
-<span class="co">#&gt;   new  2.182  2.387  2.994  2.555  3.366  9.057   100</span></pre></body></html></div>
+<span class="co">#&gt;  expr    min     lq  mean median     uq    max neval</span>
+<span class="co">#&gt;   old 18.420 20.650 23.86 22.930 25.700 41.780   100</span>
+<span class="co">#&gt;   new  1.865  2.167  2.76  2.283  2.515  9.476   100</span></pre></body></html></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
@@ -264,9 +264,9 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">4</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr     min      lq    mean  median      uq    max neval</span>
-<span class="co">#&gt;   old 210.700 221.500 236.600 227.700 239.100 295.00   100</span>
-<span class="co">#&gt;   new   7.653   8.029   9.256   8.391   9.703  16.38   100</span></pre></body></html></div>
+<span class="co">#&gt;  expr     min      lq    mean  median     uq   max neval</span>
+<span class="co">#&gt;   old 208.600 221.400 251.900 229.400 284.70 383.9   100</span>
+<span class="co">#&gt;   new   7.198   7.952   9.809   8.766  11.18  20.4   100</span></pre></body></html></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -295,9 +295,9 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">4</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span>
-<span class="co">#&gt;   old 32.980 34.340 37.790 37.180 38.780 97.130   100</span>
-<span class="co">#&gt;   new  4.344  4.538  5.119  4.647  4.934  9.456   100</span></pre></body></html></div>
+<span class="co">#&gt;  expr   min     lq   mean median     uq    max neval</span>
+<span class="co">#&gt;   old 30.18 34.400 37.710  37.04 40.280 53.550   100</span>
+<span class="co">#&gt;   new  3.96  4.264  5.092   4.59  5.349  9.701   100</span></pre></body></html></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3 class="hasAnchor">
@@ -362,8 +362,8 @@ double loggp(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; ss) {
 }
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr   min    lq   mean median     uq    max neval</span>
-<span class="co">#&gt;   old 90.06 93.36 102.40  98.08 104.30 166.20   100</span>
-<span class="co">#&gt;   new 16.87 17.71  19.24  18.28  19.52  35.01   100</span></pre></body></html></div>
+<span class="co">#&gt;   old 84.07 91.67 100.50  94.89 102.80 153.80   100</span>
+<span class="co">#&gt;   new 16.23 17.24  19.83  18.89  21.97  27.83   100</span></pre></body></html></div>
 </div>
 </div>
 <div id="examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="section level2">
@@ -435,10 +435,10 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x00000000088c2b70&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000088a4f40&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x00000000088c2b20&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000088a5020&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>
