@@ -74,7 +74,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.12.9000</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -114,7 +114,7 @@ The density \(f\) must be bounded, perhaps after a transformation of variable." 
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/rust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,33 +142,33 @@ distribution with log-density \(log f\) (up to an additive constant).
 The density \(f\) must be bounded, perhaps after a transformation of variable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ru</span>(
-  <span class='no'>logf</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>init</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trans</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"BC"</span>, <span class='st'>"user"</span>),
-  <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1L</span>, <span class='no'>d</span>),
-  <span class='kw'>lambda_tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
-  <span class='kw'>gm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>d</span> <span class='kw'>==</span> <span class='fl'>1</span>, <span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>),
-  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(-<span class='fl'>Inf</span>, <span class='no'>d</span>),
-  <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>Inf</span>, <span class='no'>d</span>),
-  <span class='kw'>r</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>,
-  <span class='kw'>ep</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
-  <span class='kw'>a_algor</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='no'>d</span> <span class='kw'>==</span> <span class='fl'>1</span>) <span class='st'>"nlminb"</span> <span class='kw'>else</span> <span class='st'>"optim"</span>,
-  <span class='kw'>b_algor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"nlminb"</span>, <span class='st'>"optim"</span>),
-  <span class='kw'>a_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Nelder-Mead"</span>, <span class='st'>"BFGS"</span>, <span class='st'>"CG"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"SANN"</span>, <span class='st'>"Brent"</span>),
-  <span class='kw'>b_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Nelder-Mead"</span>, <span class='st'>"BFGS"</span>, <span class='st'>"CG"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"SANN"</span>, <span class='st'>"Brent"</span>),
-  <span class='kw'>a_control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>b_control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>shoof</span> <span class='kw'>=</span> <span class='fl'>0.2</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ru</span><span class='op'>(</span>
+  <span class='va'>logf</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='fl'>1</span>,
+  d <span class='op'>=</span> <span class='fl'>1</span>,
+  init <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trans <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"none"</span>, <span class='st'>"BC"</span>, <span class='st'>"user"</span><span class='op'>)</span>,
+  phi_to_theta <span class='op'>=</span> <span class='cn'>NULL</span>,
+  log_j <span class='op'>=</span> <span class='cn'>NULL</span>,
+  user_args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  lambda <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='va'>d</span><span class='op'>)</span>,
+  lambda_tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  gm <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rotate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>d</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='op'>-</span><span class='cn'>Inf</span>, <span class='va'>d</span><span class='op'>)</span>,
+  upper <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>Inf</span>, <span class='va'>d</span><span class='op'>)</span>,
+  r <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span>,
+  ep <span class='op'>=</span> <span class='fl'>0L</span>,
+  a_algor <span class='op'>=</span> <span class='kw'>if</span> <span class='op'>(</span><span class='va'>d</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span> <span class='st'>"nlminb"</span> <span class='kw'>else</span> <span class='st'>"optim"</span>,
+  b_algor <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nlminb"</span>, <span class='st'>"optim"</span><span class='op'>)</span>,
+  a_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Nelder-Mead"</span>, <span class='st'>"BFGS"</span>, <span class='st'>"CG"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"SANN"</span>, <span class='st'>"Brent"</span><span class='op'>)</span>,
+  b_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Nelder-Mead"</span>, <span class='st'>"BFGS"</span>, <span class='st'>"CG"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"SANN"</span>, <span class='st'>"Brent"</span><span class='op'>)</span>,
+  a_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  b_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  var_names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  shoof <span class='op'>=</span> <span class='fl'>0.2</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,7 +230,7 @@ functions <code>phi_to_theta</code> and <code>log_j</code>.</p></td>
       <th>lambda</th>
       <td><p>Either</p><ul>
 <li><p>A numeric vector.  Box-Cox transformation parameters, or</p></li>
-<li><p>A list with components</p><dl'>
+<li><p>A list with components</p><dl>
     <dt>lambda</dt><dd><p>A numeric vector.  Box-Cox parameters (required).</p></dd>
     <dt>gm</dt><dd><p>A numeric vector.  Box-cox scaling parameters (optional).
       If supplied this overrides any <code>gm</code> supplied by the individual
@@ -336,7 +336,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
     <dt>box</dt><dd><p>A (2 * <code>d</code> + 1) by <code>d</code> + 2 matrix of
       ratio-of-uniforms bounding box information, with row names indicating
       the box parameter.  The columns contain
-      <dl'>
+      <dl>
         <dt>column 1</dt><dd><p>values of box parameters.</p></dd>
         <dt>columns 2 to (2+<code>d</code>-1)</dt><dd><p>values of variables at which
          these box parameters are obtained.</p></dd>
@@ -424,54 +424,54 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
     <pre class="examples"><div class='input'><span class='co'># Normal density ===================</span>
 
 <span class='co'># One-dimensional standard normal ----------------</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) -<span class='no'>x</span> ^ <span class='fl'>2</span> / <span class='fl'>2</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>-</span><span class='va'>x</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>/</span> <span class='fl'>2</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>, init <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
 
 <span class='co'># Two-dimensional standard normal ----------------</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) -(<span class='no'>x</span>[<span class='fl'>1</span>]^<span class='fl'>2</span> + <span class='no'>x</span>[<span class='fl'>2</span>]^<span class='fl'>2</span>) / <span class='fl'>2</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>init</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>))
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>-</span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>2</span>, d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        init <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Two-dimensional normal with positive association ----------------</span>
-<span class='no'>rho</span> <span class='kw'>&lt;-</span> <span class='fl'>0.9</span>
-<span class='no'>covmat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='no'>rho</span>, <span class='no'>rho</span>, <span class='fl'>1</span>), <span class='fl'>2</span>, <span class='fl'>2</span>)
-<span class='no'>log_dmvnorm</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>, <span class='no'>d</span>), <span class='no'>sigma</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='no'>d</span>)) {
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>x</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span>))
-  <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>)
-  - <span class='fl'>0.5</span> * (<span class='no'>x</span> - <span class='no'>mean</span>) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span>(<span class='no'>sigma</span>) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>x</span> - <span class='no'>mean</span>)
-}
+<span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fl'>0.9</span>
+<span class='va'>covmat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>rho</span>, <span class='va'>rho</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>log_dmvnorm</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>mean</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='va'>d</span><span class='op'>)</span>, <span class='va'>sigma</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>x</span>, ncol <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='op'>-</span> <span class='fl'>0.5</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='va'>mean</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='va'>sigma</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='va'>mean</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 <span class='co'># No rotation.</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_dmvnorm</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>),
-        <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_dmvnorm</span>, sigma <span class='op'>=</span> <span class='va'>covmat</span>, d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='fl'>1000</span>, init <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>,
+        rotate <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'># With rotation.</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_dmvnorm</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>))
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_dmvnorm</span>, sigma <span class='op'>=</span> <span class='va'>covmat</span>, d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='fl'>1000</span>, init <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># three-dimensional normal with positive association ----------------</span>
-<span class='no'>covmat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>rho</span>, <span class='fl'>3</span>, <span class='fl'>3</span>) + <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span> - <span class='no'>rho</span>, <span class='fl'>3</span>)
+<span class='va'>covmat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>rho</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>rho</span>, <span class='fl'>3</span><span class='op'>)</span>
 
 <span class='co'># No rotation.  Slow !</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_dmvnorm</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>init</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_dmvnorm</span>, sigma <span class='op'>=</span> <span class='va'>covmat</span>, d <span class='op'>=</span> <span class='fl'>3</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        init <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>, rotate <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'># With rotation.</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_dmvnorm</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>init</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_dmvnorm</span>, sigma <span class='op'>=</span> <span class='va'>covmat</span>, d <span class='op'>=</span> <span class='fl'>3</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        init <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Log-normal density ===================</span>
 
 <span class='co'># Sampling on original scale ----------------</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dlnorm</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dlnorm</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>, lower <span class='op'>=</span> <span class='fl'>0</span>, init <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># Box-Cox transform with lambda = 0 ----------------</span>
-<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fl'>0</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dlnorm</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-        <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>)
+<span class='va'>lambda</span> <span class='op'>&lt;-</span> <span class='fl'>0</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dlnorm</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>, lower <span class='op'>=</span> <span class='fl'>0</span>, init <span class='op'>=</span> <span class='fl'>0.1</span>,
+        trans <span class='op'>=</span> <span class='st'>"BC"</span>, lambda <span class='op'>=</span> <span class='va'>lambda</span><span class='op'>)</span>
 
 <span class='co'># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span>
 <span class='co'># transformation and the log-Jacobian by hand</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dlnorm</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-        <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"user"</span>, <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(<span class='no'>x</span>),
-        <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) -<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>x</span>))
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dlnorm</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>, init <span class='op'>=</span> <span class='fl'>0.1</span>,
+        trans <span class='op'>=</span> <span class='st'>"user"</span>, phi_to_theta <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+        log_j <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Gamma(alpha, 1) density ===================</span>
 
@@ -480,22 +480,24 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 
 <span class='co'># Sampling on original scale ----------------</span>
 
-<span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
+<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dgamma</span>, shape <span class='op'>=</span> <span class='va'>alpha</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        lower <span class='op'>=</span> <span class='fl'>0</span>, init <span class='op'>=</span> <span class='va'>alpha</span><span class='op'>)</span>
 
-<span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The Hessian of the target log-density at its mode is not positive</span>
+<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>1</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dgamma</span>, shape <span class='op'>=</span> <span class='va'>alpha</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        lower <span class='op'>=</span> <span class='fl'>0</span>, init <span class='op'>=</span> <span class='va'>alpha</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The Hessian of the target log-density at its mode is not positive</span>
 #&gt; <span class='warning'>            definite. This may not be a problem, but it may be that a mode</span>
 #&gt; <span class='warning'>            at/near a parameter boundary has been found and/or that the target</span>
 #&gt; <span class='warning'>            function is unbounded.</span></div><div class='output co'>#&gt;   It might be worth using the option trans = ``BC''. </div><div class='input'>
 <span class='co'># Box-Cox transform with lambda = 1/3 works well for shape &gt;= 1. -----------</span>
 
-<span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>1</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dgamma</span>, shape <span class='op'>=</span> <span class='va'>alpha</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        trans <span class='op'>=</span> <span class='st'>"BC"</span>, lambda <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>3</span>, init <span class='op'>=</span> <span class='va'>alpha</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
@@ -516,15 +518,16 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='co'># transformation and the log-Jacobian by hand</span>
 
 <span class='co'># Note: when phi_to_theta is undefined at x this function returns NA</span>
-<span class='no'>phi_to_theta</span>  <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>lambda</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>x</span> * <span class='no'>lambda</span> + <span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, (<span class='no'>x</span> * <span class='no'>lambda</span> + <span class='fl'>1</span>) ^ (<span class='fl'>1</span> / <span class='no'>lambda</span>), <span class='fl'>NA</span>)
-}
-<span class='no'>log_j</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>lambda</span>) (<span class='no'>lambda</span> - <span class='fl'>1</span>) * <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>x</span>)
-<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>/<span class='fl'>3</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-        <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"user"</span>, <span class='kw'>phi_to_theta</span> <span class='kw'>=</span> <span class='no'>phi_to_theta</span>, <span class='kw'>log_j</span> <span class='kw'>=</span> <span class='no'>log_j</span>,
-        <span class='kw'>user_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>lambda</span>), <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>alpha</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='va'>phi_to_theta</span>  <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>*</span> <span class='va'>lambda</span> <span class='op'>+</span> <span class='fl'>1</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='op'>(</span><span class='va'>x</span> <span class='op'>*</span> <span class='va'>lambda</span> <span class='op'>+</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>^</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='va'>lambda</span><span class='op'>)</span>, <span class='cn'>NA</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='va'>log_j</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>(</span><span class='va'>lambda</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='va'>lambda</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>3</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dgamma</span>, shape <span class='op'>=</span> <span class='va'>alpha</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, d <span class='op'>=</span> <span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>1000</span>,
+        trans <span class='op'>=</span> <span class='st'>"user"</span>, phi_to_theta <span class='op'>=</span> <span class='va'>phi_to_theta</span>, log_j <span class='op'>=</span> <span class='va'>log_j</span>,
+        user_args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='va'>lambda</span><span class='op'>)</span>, init <span class='op'>=</span> <span class='va'>alpha</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;               box     vals1 conv
 #&gt; a        1.000000  0.000000    0
 #&gt; b1minus -1.051825 -1.609437    0
@@ -545,19 +548,22 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='co'># Generalized Pareto posterior distribution ===================</span>
 
 <span class='co'># Sample data from a GP(sigma, xi) distribution</span>
-<span class='no'>gpd_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rgpd.html'>rgpd</a></span>(<span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>xi</span> <span class='kw'>=</span> -<span class='fl'>0.5</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='va'>gpd_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rgpd.html'>rgpd</a></span><span class='op'>(</span>m <span class='op'>=</span> <span class='fl'>100</span>, xi <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.5</span>, sigma <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='co'># Calculate summary statistics for use in the log-likelihood</span>
-<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gpd_sum_stats.html'>gpd_sum_stats</a></span>(<span class='no'>gpd_data</span>)
+<span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gpd_sum_stats.html'>gpd_sum_stats</a></span><span class='op'>(</span><span class='va'>gpd_data</span><span class='op'>)</span>
 <span class='co'># Calculate an initial estimate</span>
-<span class='no'>init</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>gpd_data</span>), <span class='fl'>0</span>)
+<span class='va'>init</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>gpd_data</span><span class='op'>)</span>, <span class='fl'>0</span><span class='op'>)</span>
 
 <span class='co'># Mode relocation only ----------------</span>
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
-<span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
-         <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>), <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x1</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
+<span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span>
+<span class='va'>x1</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>gpd_logpost</span>, ss <span class='op'>=</span> <span class='va'>ss</span>, d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='va'>n</span>, init <span class='op'>=</span> <span class='va'>init</span>,
+         lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='op'>-</span><span class='cn'>Inf</span><span class='op'>)</span>, rotate <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x1</span>, xlab <span class='op'>=</span> <span class='st'>"sigma"</span>, ylab <span class='op'>=</span> <span class='st'>"xi"</span><span class='op'>)</span>
+</div><div class='input'><span class='co'># Parameter constraint line xi &gt; -sigma/max(data)</span>
 <span class='co'># [This may not appear if the sample is far from the constraint.]</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>0</span>, b <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span> <span class='op'>/</span> <span class='va'>ss</span><span class='op'>$</span><span class='va'>xm</span><span class='op'>)</span>
+</div><div class='img'><img src='ru-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box      vals1      vals2 conv
 #&gt; a        1.00000000  0.0000000  0.0000000    0
 #&gt; b1minus -0.13591750 -0.2166481  0.1619294    0
@@ -577,9 +583,12 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 #&gt;  3rd Qu.:1.0762   3rd Qu.:-0.3890  
 #&gt;  Max.   :1.4127   Max.   :-0.1100  </div><div class='input'>
 <span class='co'># Rotation of axes plus mode relocation ----------------</span>
-<span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>gpd_logpost</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>init</span>,
-         <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>Inf</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x2</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"sigma"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span> / <span class='no'>ss</span>$<span class='no'>xm</span>)</div><div class='img'><img src='ru-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; ru bounding box:  
+<span class='va'>x2</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>gpd_logpost</span>, ss <span class='op'>=</span> <span class='va'>ss</span>, d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='va'>n</span>, init <span class='op'>=</span> <span class='va'>init</span>,
+         lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='op'>-</span><span class='cn'>Inf</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x2</span>, xlab <span class='op'>=</span> <span class='st'>"sigma"</span>, ylab <span class='op'>=</span> <span class='st'>"xi"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>0</span>, b <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span> <span class='op'>/</span> <span class='va'>ss</span><span class='op'>$</span><span class='va'>xm</span><span class='op'>)</span>
+</div><div class='img'><img src='ru-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ru bounding box:  
 #&gt;                 box       vals1       vals2 conv
 #&gt; a        1.00000000  0.00000000  0.00000000    0
 #&gt; b1minus -0.05702852 -0.08639437  0.03174509    0
@@ -606,43 +615,47 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class='co'># theory but using r &gt; 1 avoids this problem and the largest probability</span>
 <span class='co'># of acceptance is obtained for r approximately equal to 1.26.</span>
 
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>dcauchy</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>r</span> <span class='kw'>=</span> <span class='fl'>1.26</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>dcauchy</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span>, init <span class='op'>=</span> <span class='fl'>0</span>, r <span class='op'>=</span> <span class='fl'>1.26</span>, n <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
 
 <span class='co'># Half-Cauchy ===================</span>
 
-<span class='no'>log_halfcauchy</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>x</span> <span class='kw'>&lt;</span> <span class='fl'>0</span>, -<span class='fl'>Inf</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Cauchy.html'>dcauchy</a></span>(<span class='no'>x</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)))
-}
+<span class='va'>log_halfcauchy</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>0</span>, <span class='op'>-</span><span class='cn'>Inf</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Cauchy.html'>dcauchy</a></span><span class='op'>(</span><span class='va'>x</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 <span class='co'># Like the Cauchy case the bounding box cannot be constructed if r &lt; 1.</span>
 <span class='co'># We could use r &gt; 1 but the mode is on the edge of the support of the</span>
 <span class='co'># density so as an alternative we use a log transformation.</span>
 
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_halfcauchy</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"BC"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
-<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.7604563</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ru-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_halfcauchy</span>, init <span class='op'>=</span> <span class='fl'>0</span>, trans <span class='op'>=</span> <span class='st'>"BC"</span>, lambda <span class='op'>=</span> <span class='fl'>0</span>, n <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='va'>pa</span>
+</div><div class='output co'>#&gt; [1] 0.7604563</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, ru_scale <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='ru-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example 4 from Wakefield et al. (1991) ===================</span>
 
 <span class='co'># Bivariate normal x bivariate student-t</span>
-<span class='no'>log_norm_t</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>, <span class='no'>d</span>), <span class='no'>sigma1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='no'>d</span>), <span class='no'>sigma2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='no'>d</span>)) {
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>x</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span>))
-  <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>)
-  <span class='no'>log_h1</span> <span class='kw'>&lt;-</span> -<span class='fl'>0.5</span> * (<span class='no'>x</span> - <span class='no'>mean</span>) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span>(<span class='no'>sigma1</span>) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>x</span> - <span class='no'>mean</span>)
-  <span class='no'>log_h2</span> <span class='kw'>&lt;-</span> -<span class='fl'>2</span> * <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='fl'>1</span> + <span class='fl'>0.5</span> * <span class='no'>x</span> <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span>(<span class='no'>sigma2</span>) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>x</span>))
-  <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>log_h1</span> + <span class='no'>log_h2</span>)
-}
+<span class='va'>log_norm_t</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>mean</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='va'>d</span><span class='op'>)</span>, <span class='va'>sigma1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>, <span class='va'>sigma2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>x</span>, ncol <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='va'>log_h1</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>0.5</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='va'>mean</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='va'>sigma1</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='va'>mean</span><span class='op'>)</span>
+  <span class='va'>log_h2</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>+</span> <span class='fl'>0.5</span> <span class='op'>*</span> <span class='va'>x</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='va'>sigma2</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>log_h1</span> <span class='op'>+</span> <span class='va'>log_h2</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='no'>rho</span> <span class='kw'>&lt;-</span> <span class='fl'>0.9</span>
-<span class='no'>covmat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='no'>rho</span>, <span class='no'>rho</span>, <span class='fl'>1</span>), <span class='fl'>2</span>, <span class='fl'>2</span>)
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>)
+<span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fl'>0.9</span>
+<span class='va'>covmat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>rho</span>, <span class='va'>rho</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>
 
 <span class='co'># Case in the top right corner of Table 3</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_norm_t</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>sigma1</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='no'>covmat</span>,
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.2273141</div><div class='input'>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_norm_t</span>, mean <span class='op'>=</span> <span class='va'>y</span>, sigma1 <span class='op'>=</span> <span class='va'>covmat</span>, sigma2 <span class='op'>=</span> <span class='va'>covmat</span>,
+  d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='fl'>10000</span>, init <span class='op'>=</span> <span class='va'>y</span>, rotate <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='va'>pa</span>
+</div><div class='output co'>#&gt; [1] 0.2273141</div><div class='input'>
 <span class='co'># Rotation increases the probability of acceptance</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ru</span>(<span class='kw'>logf</span> <span class='kw'>=</span> <span class='no'>log_norm_t</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>sigma1</span> <span class='kw'>=</span> <span class='no'>covmat</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='no'>covmat</span>,
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>x</span>$<span class='no'>pa</span></div><div class='output co'>#&gt; [1] 0.5199938</div><div class='input'># }
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>ru</span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>log_norm_t</span>, mean <span class='op'>=</span> <span class='va'>y</span>, sigma1 <span class='op'>=</span> <span class='va'>covmat</span>, sigma2 <span class='op'>=</span> <span class='va'>covmat</span>,
+  d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='fl'>10000</span>, init <span class='op'>=</span> <span class='va'>y</span>, rotate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='va'>pa</span>
+</div><div class='output co'>#&gt; [1] 0.5199938</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -659,7 +672,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
