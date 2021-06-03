@@ -1,4 +1,4 @@
-# rust 1.3.11.9000
+# rust 1.3.12
 
 ## Bug fixes and minor improvements
 
