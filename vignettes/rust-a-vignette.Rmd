@@ -65,7 +65,7 @@ colnames(pa) <- d
 knitr::kable(round(pa,3), caption = "$p_a(d, 1/2)$ as $d$ varies.")
 ```
 
-It can be shown that introducing any correlation between the components reduces $p_a(d, r)$.  Later we consider using transformations to make the target density function closer to that of a $d$-dimensional normal distribution with independent components.  The closeness of the probability of acceptance that we achieved after doing this is a measure of how successful we have been.
+It can be shown that introducing any correlation between the components reduces $p_a(d, r)$.  Later, we consider using transformations to make the target density function closer to that of a $d$-dimensional normal distribution with independent components.  The closeness of the resulting probability of acceptance to the relevant value in the table above is a measure of how successful we have been.
 
 ## Transformation of variable prior to sampling
 
