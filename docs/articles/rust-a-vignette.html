@@ -239,11 +239,11 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
 <span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000012c80778&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x0000000012c4df40&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
 <span class="co">#&gt; function(x) 0</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000012d75bb8&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x0000000012d44270&gt;</span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sample on Box-Cox transformed, without rotation</span>
@@ -457,7 +457,7 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-22-1.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-22-1.png" width="50%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-22-2.png" width="50%"></p>
 <p>The three-dimensional case.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># three-dimensional normal with positive association ----------------</span>

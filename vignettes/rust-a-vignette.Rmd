@@ -340,7 +340,7 @@ c(x1$pa, x2$pa)
 
 The probability of acceptance is increased by the rotation of axes.  These plots show why.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', out.width="50%"}
 plot(x1, ru_scale = TRUE)
 plot(x2, ru_scale = TRUE)
 ```
