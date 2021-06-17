@@ -413,11 +413,11 @@ respect to theta. Takes theta as its argument.</p></td>
 #&gt; 
 #&gt; $phi_to_theta
 #&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)
-#&gt; &lt;environment: 0x00000000207b1e60&gt;
+#&gt; &lt;environment: 0x0000000020671590&gt;
 #&gt; 
 #&gt; $log_j
 #&gt; function(x) 0
-#&gt; &lt;environment: 0x00000000207b1e60&gt;
+#&gt; &lt;environment: 0x0000000020671590&gt;
 #&gt; </div><div class='input'>
 <span class='co'># Sample on Box-Cox transformed, without rotation</span>
 <span class='va'>x3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ru.html'>ru</a></span><span class='op'>(</span>logf <span class='op'>=</span> <span class='va'>gpd_logpost</span>, ss <span class='op'>=</span> <span class='va'>ss</span>, d <span class='op'>=</span> <span class='fl'>2</span>, n <span class='op'>=</span> <span class='va'>n</span>, trans <span class='op'>=</span> <span class='st'>"BC"</span>,

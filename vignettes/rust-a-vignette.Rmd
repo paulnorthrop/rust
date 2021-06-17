@@ -178,7 +178,7 @@ x4 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, trans = "BC",
 
 We plot the samples obtained on the scales used for the ratio-of-uniforms algorithm and contours of the corresponding target density $f_\rho\!(\rho)$.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', out.width="50%"}
 plot(x1, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75, 
   main = paste("mode relocation \n pa = ", round(x1$pa, 3)))
 plot(x2, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75, 
@@ -231,7 +231,7 @@ x3$pa
 
 Sampling is performed using a normal density before transforming back to the log-normal scale.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', out.width="50%"}
 plot(x3, ru_scale = TRUE, xlab = "z")
 plot(x1, xlab = "x")
 ```
@@ -313,7 +313,7 @@ x4$pa
 
 For a value of $\alpha$ so close to 0 the density is very peaked at the origin (see the plot on the left below).  After a transformation that is close to a log transformation the target density (see the plot on the right) is bounded above and the estimated probability of acceptance is similar to that of a normal distribution.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', out.width="50%"}
 plot(x4)
 plot(x4, ru_scale = TRUE)
 ```

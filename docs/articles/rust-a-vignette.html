@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Introducing rust: Ratio-of-Uniforms Simulation with Transformation</h1>
                         <h4 class="author">Paul Northrop</h4>
             
-            <h4 class="date">2021-06-03</h4>
+            <h4 class="date">2021-06-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-a-vignette.Rmd"><code>vignettes/rust-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-a-vignette.Rmd</code></div>
@@ -140,7 +140,7 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <td align="right">0.038</td>
 </tr></tbody>
 </table>
-<p>It can be shown that introducing any correlation between the components reduces <span class="math inline">\(p_a(d, r)\)</span>. Later we consider using transformations to make the target density function closer to that of a <span class="math inline">\(d\)</span>-dimensional normal distribution with independent components. The closeness of the probability of acceptance that we achieved after doing this is a measure of how successful we have been.</p>
+<p>It can be shown that introducing any correlation between the components reduces <span class="math inline">\(p_a(d, r)\)</span>. Later, we consider using transformations to make the target density function closer to that of a <span class="math inline">\(d\)</span>-dimensional normal distribution with independent components. The closeness of the resulting probability of acceptance to the relevant value in the table above is a measure of how successful we have been.</p>
 </div>
 </div>
 <div id="transformation-of-variable-prior-to-sampling" class="section level2">
@@ -239,11 +239,11 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
 <span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000012c4dea8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x0000000012c80778&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
 <span class="co">#&gt; function(x) 0</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000012d34730&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x0000000012d75bb8&gt;</span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sample on Box-Cox transformed, without rotation</span>
@@ -263,7 +263,7 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Box-Cox and mode relocation \n pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">x3</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x4</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, cex.main <span class="op">=</span> <span class="fl">0.75</span>, cex.lab <span class="op">=</span> <span class="fl">0.75</span>,
   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Box-Cox, mode relocation and rotation \n pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">x4</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-1.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-2.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-3.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-4.png" width="700"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-1.png" width="50%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-2.png" width="50%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-3.png" width="50%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-4.png" width="50%"></p>
 <p>The figure shows how the transformations affect with shape of the density from which we simulate. In the bottom right plot the density contours suggests little dependence between the transformed components. The estimate of the probability of acceptance is approximately equal to the 0.534 obtained for a 2-dimensional normal distribution with independent components.</p>
 <p>Finally, we show a plot of the sample and contours on the original <span class="math inline">\((\sigma, \xi\)</span>)-scale.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -338,7 +338,7 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, xlab <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x1</span>, xlab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-13-1.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-13-2.png" width="700"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-13-1.png" width="50%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-13-2.png" width="50%"></p>
 <p>We could also use <code>find_lambda_one_d</code> to estimate a suitable value of <span class="math inline">\(\lambda\)</span>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Note: the default value of max_phi = 10 is OK here but this will not always be the case.</span>
@@ -431,7 +431,7 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x4</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-20-1.png" width="700"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-20-2.png" width="700"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-20-1.png" width="50%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-20-2.png" width="50%"></p>
 </div>
 <div id="example-4-normal-density" class="section level3">
 <h3 class="hasAnchor">
