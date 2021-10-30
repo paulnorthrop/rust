@@ -222,9 +222,9 @@ ptr_N01 &lt;- create_xptr("logdN01")
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span>
-<span class="co">#&gt;   old 20.320 22.210 24.570 23.360 25.510 62.48   100</span>
-<span class="co">#&gt;   new  2.226  2.399  2.855  2.506  2.707 10.17   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq  mean median     uq    max neval</span>
+<span class="co">#&gt;   old 20.170 21.740 23.16 22.760 24.680 30.390   100</span>
+<span class="co">#&gt;   new  2.226  2.404  2.71  2.503  2.621  6.416   100</span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
 <div id="mvn" class="section level3">
@@ -267,9 +267,9 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr     min      lq    mean  median     uq    max neval</span>
-<span class="co">#&gt;   old 196.000 208.200 224.500 215.300 225.40 367.00   100</span>
-<span class="co">#&gt;   new   8.456   8.936   9.813   9.321   9.75  15.74   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min      lq    mean  median      uq    max neval</span>
+<span class="co">#&gt;   old 194.30 205.300 211.600 211.000 215.900 270.40   100</span>
+<span class="co">#&gt;   new   8.32   8.773   9.497   9.167   9.621  13.34   100</span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div id="log-normal-density-after-box-cox-transformation" class="section level3">
@@ -299,9 +299,9 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr   min     lq  mean median     uq   max neval</span>
-<span class="co">#&gt;   old 32.29 34.790 36.79 36.070 38.950 43.05   100</span>
-<span class="co">#&gt;   new  5.08  5.318  5.90  5.411  5.668 10.38   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span>
+<span class="co">#&gt;   old 32.250 34.390 36.340 35.880 38.360 44.37   100</span>
+<span class="co">#&gt;   new  4.921  5.254  5.873  5.447  5.755 10.57   100</span></code></pre></div>
 </div>
 <div id="generalized-pareto-posterior-density" class="section level3">
 <h3 class="hasAnchor">
@@ -368,8 +368,8 @@ double loggp(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; ss) {
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;  expr   min    lq  mean median    uq    max neval</span>
-<span class="co">#&gt;   old 88.14 92.53 94.81  93.96 95.95 153.20   100</span>
-<span class="co">#&gt;   new 17.64 18.28 19.46  18.82 19.66  27.41   100</span></code></pre></div>
+<span class="co">#&gt;   old 80.39 90.57 94.01  92.50 95.37 158.60   100</span>
+<span class="co">#&gt;   new 17.51 18.26 19.52  19.09 19.97  25.53   100</span></code></pre></div>
 </div>
 </div>
 <div id="examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="section level2">
@@ -443,10 +443,10 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x00000000096fea30&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x0000000009734770&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x00000000096feaf0&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x00000000097348f0&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>
