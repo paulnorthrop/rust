@@ -194,7 +194,7 @@ distribution with log-density \eqn{log f} (up to an additive constant).
 \eqn{f} must be bounded, perhaps after a transformation of variable.
 The file file `user_fns.cpp` that is sourced before running the examples
 below is available at the rust Github page at
-\url{https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp}.
+\url{https://raw.githubusercontent.com/paulnorthrop/rust/master/src/user_fns.cpp}.
 }
 \details{
 If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
@@ -413,8 +413,7 @@ Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 
 Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
  R and C++ Integration. \emph{Journal of Statistical Software},
- \strong{40}(8), 1-18.
- \url{https://www.jstatsoft.org/v40/i08/}.
+ \strong{40}(8), 1-18. \doi{10.18637/jss.v040.i08}
 
 Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.

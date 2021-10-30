@@ -7,7 +7,7 @@
 #' \eqn{f} must be bounded, perhaps after a transformation of variable.
 #' The file file `user_fns.cpp` that is sourced before running the examples
 #' below is available at the rust Github page at
-#' \url{https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp}.
+#' \url{https://raw.githubusercontent.com/paulnorthrop/rust/master/src/user_fns.cpp}.
 #'
 #' @param logf An external pointer to a compiled C++ function returning the
 #'   log of the target density \eqn{f}.
@@ -185,8 +185,7 @@
 #'  \doi{10.1007/BF01889987}.
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
-#'  \strong{40}(8), 1-18.
-#'  \url{https://www.jstatsoft.org/v40/i08/}.
+#'  \strong{40}(8), 1-18. \doi{10.18637/jss.v040.i08}
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples

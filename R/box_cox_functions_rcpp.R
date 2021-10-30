@@ -76,8 +76,7 @@
 #'  Transformations of Multivariate Data, Biometrics, 27(4).
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
-#'  \strong{40}(8), 1-18.
-#'  \url{https://www.jstatsoft.org/v40/i08/}.
+#'  \strong{40}(8), 1-18. \doi{10.18637/jss.v040.i08}
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
@@ -329,8 +328,7 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'  Transformations of Multivariate Data, Biometrics, 27(4).
 #' @references Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
 #'  R and C++ Integration. \emph{Journal of Statistical Software},
-#'  \strong{40}(8), 1-18.
-#'  \url{https://www.jstatsoft.org/v40/i08/}.
+#'  \strong{40}(8), 1-18. \doi{10.18637/jss.v040.i08}
 #' @references Eddelbuettel, D. (2013). \emph{Seamless R and C++ Integration
 #'  with Rcpp}, Springer, New York. ISBN 978-1-4614-6867-7.
 #' @examples
