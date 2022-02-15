@@ -8,6 +8,12 @@
 #'
 #' @param logf A function returning the log of the target density \eqn{f}.
 #'   This function should return \code{-Inf} when the density is zero.
+#'   It is better to use \code{logf = } explicitly, e.g.
+#'   \code{x <- ru(logf = dnorm, log = TRUE, init = 0.1)},
+#'   to avoid argument matching problems.  In contrast,
+#'   \code{x <- ru(dnorm, log = TRUE, init = 0.1)}
+#'   will throw an error because partial matching results in
+#'   \code{logf} being matched to \code{log = TRUE}.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A numeric scalar.  Number of simulated values required.

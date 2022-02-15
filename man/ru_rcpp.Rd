@@ -34,11 +34,18 @@ ru_rcpp(
 }
 \arguments{
 \item{logf}{An external pointer to a compiled C++ function returning the
-log of the target density \eqn{f}.
-This function should return \code{-Inf} when the density is zero.
-See the \code{vignette("rust-c-using-rcpp-vignette", package = "rust")},
-particularly the Section
-\strong{Providing a C++ function to \code{ru_rcpp}}, for details.}
+  log of the target density \eqn{f}.
+  This function should return \code{-Inf} when the density is zero.
+  It is better to use \code{logf = } explicitly, e.g.
+  \code{ru(logf = dnorm, log = TRUE, init = 0.1)},
+  to avoid argument matching problems.  In contrast,
+  \code{ru(dnorm, log = TRUE, init = 0.1)}
+  will throw an error because partial matching results in
+  \code{logf} being matched to \code{log = TRUE}.
+
+  See the \code{vignette("rust-c-using-rcpp-vignette", package = "rust")},
+  particularly the Section
+  \strong{Providing a C++ function to \code{ru_rcpp}}, for details.}
 
 \item{...}{Further arguments to be passed to \code{logf} and related
 functions.}
