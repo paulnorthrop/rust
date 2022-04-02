@@ -24,7 +24,7 @@ License: GPL (>= 2)
 Encoding: UTF-8
 Depends:
     R (>= 3.3.0)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: bang,
     knitr,
     microbenchmark,
@@ -35,3 +35,4 @@ VignetteBuilder: knitr
 URL: https://paulnorthrop.github.io/rust/, https://github.com/paulnorthrop/rust
 BugReports: https://github.com/paulnorthrop/rust/issues
 LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo 
+Config/testthat/edition: 3

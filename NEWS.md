@@ -4,6 +4,8 @@
 
 * In the description of the argument `logf` to `ru()` and `ru_rcpp()` it is advised that `logf = ` should be provided explicitly to avoid the potential for argument matching problems.
 
+* Activated 3rd edition of the `testthat` package
+
 # rust 1.3.13
 
 ## Bug fixes and minor improvements

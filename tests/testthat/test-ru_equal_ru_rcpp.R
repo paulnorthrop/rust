@@ -1,4 +1,4 @@
-context("rpost_rcpp vs rpost")
+#context("rpost_rcpp vs rpost")
 
 # We check that the values simulated using ru() and ru_rcpp() are
 # (close enough to) identical when they are called using the same data,

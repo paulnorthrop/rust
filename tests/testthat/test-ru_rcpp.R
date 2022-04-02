@@ -1,4 +1,4 @@
-context("Bounding box using ru_rcpp")
+#context("Bounding box using ru_rcpp")
 
 # Checks the values in the ratio-of-uniforms bounding box returned by ru_rcpp()
 # for some examples in which these values can be found explicitly.

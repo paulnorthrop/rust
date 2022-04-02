@@ -1,4 +1,4 @@
-context("find_lambda_one_d")
+#context("find_lambda_one_d")
 
 # Checks that find_lambda_one_d() and find_lambda_one_d_rcpp() return the
 # same values.

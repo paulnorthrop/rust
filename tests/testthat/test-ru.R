@@ -1,4 +1,4 @@
-context("Bounding box")
+#context("Bounding box")
 
 # Checks the values in the ratio-of-uniforms bounding box returned by ru()
 # for some examples in which these values can be found explicitly.
