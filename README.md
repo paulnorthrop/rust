@@ -8,6 +8,10 @@ Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/rust?bra
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/rust/coverage.svg?branch=master)](https://codecov.io/github/paulnorthrop/rust?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rust)](https://cran.r-project.org/package=rust)
+[![Downloads
+(monthly)](https://cranlogs.r-pkg.org/badges/rust?color=brightgreen)](https://cran.r-project.org/package=rust)
+[![Downloads
+(total)](https://cranlogs.r-pkg.org/badges/grand-total/rust?color=brightgreen)](https://cran.r-project.org/package=rust)
 
 ## Ratio-of-uniforms simulation with transformation
 
