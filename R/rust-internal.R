@@ -292,32 +292,66 @@ fallback_gp_mle <- function(init, ...){
   return(temp)
 }
 
-# =============================== gpd_obs_info ================================
+# =========================== gpd_obs_info ===========================
 
 #' @keywords internal
 #' @rdname rust-internal
-gpd_obs_info <- function(gpd_pars, y) {
+gpd_obs_info <- function(gpd_pars, y, eps = 1e-5, m = 3) {
   # Observed information for the generalized Pareto distribution
   #
   # Calculates the observed information matrix for a random sample \code{y}
-  # from the generalized Pareto distribution, i.e. the negated Hessian matrix of
-  # the generalized Pareto log-likelihood, evaluated at \code{gpd_pars}.
+  # from the generalized Pareto distribution, i.e. the negated Hessian matrix
+  # of the generalized Pareto log-likelihood, evaluated at \code{gp_pars}.
   #
   # Args:
-  #   gpd_pars : A numeric vector. Parameters sigma and xi of the
-  #   generalized Pareto distribution.
+  #   gp_pars : A numeric vector. Parameters sigma and xi of the
+  #             generalized Pareto distribution.
   #   y       : A numeric vector. A sample of positive data values.
-  #
+  #   eps     : A (small, positive) numeric scalar.  If abs(xi) is smaller than
+  #             eps then we approximate the [2, 2] element of the information
+  #             matrix using a Taylor series approximation.
+  #   m       : A non-negative integer.  The order of the polynomial used to
+  #             make this approximation.
   # Returns:
   #   A 2 by 2 numeric matrix.  The observed information matrix.
   #
+  if (eps <= 0) {
+    stop("'eps' must be positive")
+  }
+  if (m < 0) {
+    stop("'m' must be non-negative")
+  }
+  # sigma
   s <- gpd_pars[1]
+  # xi
   x <- gpd_pars[2]
   i <- matrix(NA, 2, 2)
-  i[1,1] <- -sum((1 - (1 + x) * y * (2 * s + x * y) / (s + x * y) ^ 2) / s ^ 2)
-  i[1,2] <- i[2,1] <- -sum(y * (1 - y / s) / (1 + x * y / s) ^ 2 / s ^ 2)
-  i[2,2] <- sum(2 * log(1 + x * y / s) / x ^ 3 - 2 * y / (s + x * y) / x ^ 2 -
-                  (1 + 1 / x) * y ^ 2 / (s + x * y) ^ 2)
+  i[1, 1] <- -sum((1 - (1 + x) * y * (2 * s + x * y) / (s + x * y) ^ 2) / s ^ 2)
+  i[1, 2] <- i[2, 1] <- -sum(y * (1 - y / s) / (1 + x * y / s) ^ 2 / s ^ 2)
+  # Direct calculation of i22 is unreliable for x close to zero.
+  # If abs(x) < eps then we expand the problematic terms (all but t4 below)
+  # in powers of xi up to xi ^ m. The terms in 1/z and 1/z^2 cancel.
+  z <- x / s
+  t0 <- 1 + z * y
+  t4 <- y ^ 2 / t0 ^ 2
+  if (any(t0 <= 0)) {
+    stop("The log-likelihood is 0 for this combination of data and parameters")
+  }
+  if (abs(x) < eps) {
+    j <- 0:m
+    zy <- z * y
+    sum_fn <- function(zy) {
+      return(sum((-1) ^ j * (j ^ 2 + 3 * j + 2) * zy ^ j / (j + 3)))
+    }
+    tsum <- vapply(zy, sum_fn, 0.0)
+    i[2, 2] <- sum(y ^ 3 * tsum / s ^ 3 - t4 / s ^ 2)
+  } else {
+    t1 <- 2 * log(t0) / z ^ 3
+    t2 <- 2 * y / (z ^ 2 * t0)
+    t3 <- y ^ 2 / (z * t0 ^ 2)
+    i[2, 2] <- sum((t1 - t2 - t3) / s ^ 3 - t4 / s ^ 2)
+  }
+  dimnames(i) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
   return(i)
 }
 
@@ -997,4 +1031,24 @@ wecdf <- function (x, weights = rep(1, length(x))) {
   assign("nobs", length(x), envir = environment(rval))
   attr(rval, "call") <- sys.call()
   rval
+}
+
+# ============================ 3^d factorial design ======================== #
+
+#' @keywords internal
+#' @rdname rust-internal
+fac3 <- function(d) {
+  # Creates a design matrix for a 3^d full factorial design
+  #
+  # Args:
+  #   d : a positive integer scalar
+  #
+  # Returns:
+  #   a 3^d by d integer matrix containing -1, 0, 1 for the levels of the d
+  #   factors.  The first column varies fastest, the second column second
+  #   fastest etc.
+  rep_fn <- function(x) {
+    rep(-1L:1L, times = 3L ^ x, each = 3L ^ (d - 1L - x))
+  }
+  return(vapply((d - 1L):0, rep_fn, numeric(3L ^ d)))
 }

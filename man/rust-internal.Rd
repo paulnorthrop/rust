@@ -16,6 +16,7 @@
 \alias{find_bs}
 \alias{cpp_find_a}
 \alias{cpp_find_bs}
+\alias{fac3}
 \title{Internal rust functions}
 \usage{
 box_cox(x, lambda = 1, gm = 1, lambda_tol = 1e-06)
@@ -42,7 +43,7 @@ gpd_mle(gpd_data)
 
 fallback_gp_mle(init, ...)
 
-gpd_obs_info(gpd_pars, y)
+gpd_obs_info(gpd_pars, y, eps = 1e-05, m = 3)
 
 find_a(
   neg_logf_rho,
@@ -101,6 +102,8 @@ cpp_find_bs(
   ru_args,
   shoof
 )
+
+fac3(d)
 }
 \description{
 Internal rust functions
