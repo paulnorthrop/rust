@@ -275,7 +275,7 @@ gpd_mle <- function(gpd_data) {
   }
   sc <- rep(temp$mle[1], length(gpd_data))
   xi <- temp$mle[2]
-  temp$nllh <- sum(log(sc)) + sum(log(1 + xi * gpd_data / sc) * (1 / xi + 1))
+  temp$nllh <- sum(log(sc)) + sum(log1p(xi * gpd_data / sc) * (1 / xi + 1))
   return(temp)
 }
 
