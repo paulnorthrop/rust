@@ -777,7 +777,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   l_box <- temp$l_box
   u_box <- temp$u_box
   #
-  # Perform ratio-of-uniforms rejection samping ---------------
+  # Perform ratio-of-uniforms rejection sampling ---------------
   # Call C++ function to do this.
   #
   box_args <- list(n = n, a_box = a_box, l_box = l_box, u_box = u_box)

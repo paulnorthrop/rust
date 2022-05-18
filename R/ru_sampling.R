@@ -689,7 +689,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   l_box <- temp$l_box
   u_box <- temp$u_box
   #
-  # Perform ratio-of-uniforms rejection samping ---------------
+  # Perform ratio-of-uniforms rejection sampling ---------------
   #
   n_try <- n_acc <- 0L     # initialize number of tries and accepted values
   res <- list()            # list to return posterior sample and other stuff
