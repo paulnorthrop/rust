@@ -24,8 +24,11 @@
 #'   \strong{Providing a C++ function to \code{ru_rcpp}}, for details.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
-#' @param n A numeric scalar.  Number of simulated values required.
-#' @param d A numeric scalar. Dimension of f.
+#' @param n A non-negative integer scalar.  The number of simulated values
+#'   required. If \code{n = 0} then no simulation is performed but the
+#'   component \code{box} in the return object gives the ratio-of-uniforms
+#'   bounding box that would have been used.
+#' @param d A positive integer scalar. The dimension of \eqn{f}.
 #' @param init A numeric vector. Initial estimates of the mode of \code{logf}.
 #'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
 #'   Box-Cox transformation or user-defined transformation, but \emph{before}
