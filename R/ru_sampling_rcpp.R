@@ -172,7 +172,8 @@
 #'     }
 #'     \item{pa}{A numeric scalar.  An estimate of the probability of
 #'       acceptance.}
-#'     \item{d}{A numeric scalar.  The dimension of \code{logf}.}
+#'     \item{r}{The value of \code{r}.}
+#'     \item{d}{The value of \code{d}.}
 #'     \item{logf}{A function. \code{logf} supplied by the user, but
 #'       with f scaled by the maximum of the target density used in the
 #'       ratio-of-uniforms method (i.e. \code{logf_rho}), to avoid numerical
@@ -811,6 +812,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_rho_args <- logf_args
   res$f_mode <- f_mode
   res$call <- Call
+  res$r <- r
   class(res) <- "ru"
   return(res)
 }
