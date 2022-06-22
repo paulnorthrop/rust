@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* The documentation of the functions `ru()` and `ru_rcpp()` now note that if the argument `n = 0` is passed then the ratio-of-uniforms bounding box is returned but no simulation is performed. This may be useful if the bounding box itself is of interest.
+
 * In the description of the argument `logf` to `ru()` and `ru_rcpp()` it is advised that `logf = ` should be provided explicitly to avoid the potential for argument matching problems.
 
 * Activated 3rd edition of the `testthat` package

@@ -18,7 +18,7 @@
 #'   functions.
 #' @param n A non-negative integer scalar.  The number of simulated values
 #'   required. If \code{n = 0} then no simulation is performed but the
-#'   component \code{box} in the return object gives the ratio-of-uniforms
+#'   component \code{box} in the returned object gives the ratio-of-uniforms
 #'   bounding box that would have been used.
 #' @param d A positive integer scalar. The dimension of \eqn{f}.
 #' @param init A numeric vector. Initial estimates of the mode of \code{logf}.
