@@ -8,7 +8,7 @@ gpd_logpost(pars, ss)
 }
 \arguments{
 \item{pars}{A numeric vector containing the values of the generalized Pareto
-parameters sigma and xi.}
+parameters \eqn{\sigma} and \eqn{\xi}.}
 
 \item{ss}{A numeric list. Summary statistics to be passed to the generalized
 Pareto log-likelihood.  Calculated using \code{gpd_sum_stats}}
@@ -19,8 +19,8 @@ A numeric scalar. The value of the log-likelihood.
 \description{
 Calculates the generalized Pareto posterior log-density based on a particular
 prior for the generalized Pareto parameters, a Maximal Data Information
-(MDI) prior truncated to xi >= -1 in order to produce a posterior
-density that is proper.
+(MDI) prior truncated to \eqn{\xi \geq -1}{\xi >= -1} in order to produce a
+posterior density that is proper.
 }
 \examples{
 \donttest{

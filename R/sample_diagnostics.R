@@ -2,14 +2,14 @@
 
 #' Plot diagnostics for an ru object
 #'
-#' \code{plot} method for class "ru".  For \code{d = 1} a histogram of the
-#'   simulated values is plotted with a the density function superimposed.
-#'   The density is normalized crudely using the trapezium rule.  For
-#'   \code{d = 2} a scatter plot of the simulated values is produced with
-#'   density contours superimposed.  For \code{d > 2} pairwise plots of the
-#'   simulated values are produced.
+#' \code{plot} method for class \code{"ru"}.  For \code{d = 1} a histogram of
+#' the simulated values is plotted with a the density function superimposed.
+#' The density is normalized crudely using the trapezium rule.  For
+#' \code{d = 2} a scatter plot of the simulated values is produced with
+#' density contours superimposed.  For \code{d > 2} pairwise plots of the
+#' simulated values are produced.
 #'
-#' @param x an object of class "ru", a result of a call to \code{ru}.
+#' @param x an object of class \code{"ru"}, a result of a call to \code{ru}.
 #' @param y Not used.
 #' @param ... Additional arguments passed on to \code{hist}, \code{lines},
 #'   \code{contour} or \code{points}.
@@ -20,16 +20,17 @@
 #'      method used to normalize the density.}
 #'   \item {For d = 2 : an n by n regular grid is used to contour the density.}
 #' }
-#' @param prob Numeric vector. Only relevant for d = 2.  The contour lines are
-#'   drawn such that the respective probabilities that the variable lies
-#'   within the contour are approximately prob.
+#' @param prob Numeric vector. Only relevant for \code{d = 2}.  The contour
+#'   lines are drawn such that the respective probabilities that the variable
+#'   lies within the contour are approximately equal to the values in
+#'   \code{prob}.
 #' @param ru_scale A logical scalar.  Should we plot data and density on the
-#'   scale used in the ratio-of-uniforms algorithm (TRUE) or on the original
-#'   scale (FALSE)?
-#' @param rows A numeric scalar.  When \code{d} > 2 this sets the number of
+#'   scale used in the ratio-of-uniforms algorithm (\code{TRUE}) or on the
+#'   original scale (\code{FALSE})?
+#' @param rows A numeric scalar.  When \code{d > 2} this sets the number of
 #'   rows of plots.  If the user doesn't provide this then it is set
 #'   internally.
-#' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
+#' @param xlabs,ylabs Numeric vectors.  When \code{d > 2} these set the labels
 #'   on the x and y axes respectively.  If the user doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
 #' @param points_par A list of arguments to pass to
@@ -210,15 +211,16 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 
 #' Summarizing ratio-of-uniforms samples
 #'
-#' \code{summary} method for class "ru"
+#' \code{summary} method for class \code{"ru"}
 #'
-#' @param object an object of class "ru", a result of a call to \code{ru}.
+#' @param object an object of class \code{"ru"}, a result of a call to
+#'   \code{ru}.
 #' @param ... Additional arguments passed on to \code{summary}.
 #' @return Prints
 #' \itemize{
-#'   \item {information about the ratio-of-uniforms bounding box, i.e.
+#'   \item {information about the ratio-of-uniforms bounding box, i.e.,
 #'     \code{object$box}}
-#'   \item {an estimate of the probability of acceptance, i.e.
+#'   \item {an estimate of the probability of acceptance, i.e.,
 #'     \code{object$pa}}
 #'   \item {a summary of the simulated values, via
 #'     \code{summary(object$sim_vals)}}
@@ -255,16 +257,17 @@ summary.ru <- function(object, ...) {
 
 # =========================== print.summary.ru ===========================
 
-#' Print method for objects of class "summary.ru"
+#' Print method for objects of class \code{"summary.ru"}
 #'
-#' \code{print} method for an object \code{object} of class "summary.ru".
+#' \code{print} method for an object \code{object} of class
+#' \code{"summary.ru"}.
 #'
-#' @param x an object of class "summary.ru", a result of a call to
+#' @param x an object of class \code{"summary.ru"}, a result of a call to
 #'   \code{\link{summary.ru}}.
 #' @param ... Additional optional arguments to be passed to
 #'   \code{\link{print}}.
 #'
-#' @return Prints
+#' @details Prints
 #' \itemize{
 #'   \item {a summary of the simulated values, via
 #'     \code{summary(object$sim_vals)}}
@@ -273,6 +276,7 @@ summary.ru <- function(object, ...) {
 #'   \item {information about the ratio-of-uniforms bounding box, i.e.
 #'     \code{object$box}}
 #' }
+#' @return The argument \code{x}, invisibly.
 #' @examples
 #' # one-dimensional standard normal ----------------
 #' x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0)
@@ -319,8 +323,7 @@ print.summary.ru <- function(x, ...) {
 #'   \code{\link{ru}} or \code{\link{ru_rcpp}}.
 #' @param ... Additional arguments.  None are used in this function.
 #' @details Simply prints the call to \code{ru} or \code{ru_rcpp}.
-#' @return The argument \code{x}, invisibly, as for all
-#'   \code{\link[base]{print}} methods.
+#' @return The argument \code{x}, invisibly.
 #' @seealso \code{\link{summary.ru}} for summaries of the simulated values
 #'   and properties of the ratio-of-uniforms algorithm.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot.

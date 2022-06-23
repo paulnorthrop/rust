@@ -2,7 +2,7 @@
 % Please edit documentation in R/box_cox_functions.R
 \name{find_lambda_one_d}
 \alias{find_lambda_one_d}
-\title{Selecting Box-Cox parameter lambda in the one-dimensional case}
+\title{Selecting the Box-Cox parameter in the 1D case}
 \usage{
 find_lambda_one_d(
   logf,
@@ -19,42 +19,45 @@ find_lambda_one_d(
 )
 }
 \arguments{
-\item{logf}{A function returning the log of the target density f.}
+\item{logf}{A function returning the log of the target density \eqn{f}.}
 
 \item{...}{further arguments to be passed to \code{logf} and related
 functions.}
 
-\item{ep_bc}{A (positive) numeric scalar. Smallest possible value of phi
-to consider.  Used to avoid negative values of phi.}
+\item{ep_bc}{A (positive) numeric scalar. Smallest possible value of
+\code{phi} to consider.  Used to avoid negative values of \code{phi}.}
 
 \item{min_phi, max_phi}{Numeric scalars.  Smallest and largest values
-of phi at which to evaluate logf, i.e. the range of values of phi over
-which to evaluate logf. Any components in min_phi that are not positive
-are set to ep_bc.}
+of \code{phi} at which to evaluate \code{logf}, i.e., the range of values
+of \code{phi} over which to evaluate \code{logf}. Any components in
+\code{min_phi} that are not positive are set to \code{ep_bc}.}
 
-\item{num}{A numeric scalar. Number of values at which to evaluate logf.}
+\item{num}{A numeric scalar. Number of values at which to evaluate
+\code{logf}.}
 
-\item{xdiv}{A numeric scalar.  Only values of phi at which the density f is
-greater than the (maximum of f) / \code{xdiv} are used.}
+\item{xdiv}{A numeric scalar.  Only values of \code{phi} at which the
+density \eqn{f} is greater than the (maximum of \eqn{f}) / \code{xdiv} are
+used.}
 
 \item{probs}{A numeric scalar. Probabilities at which to estimate the
 quantiles of that will be used as data to find lambda.}
 
-\item{lambda_range}{A numeric vector of length 2.  Range of lambda over
-which to optimise.}
+\item{lambda_range}{A numeric vector of length 2.  Range of lambda
+over which to optimise.}
 
 \item{phi_to_theta}{A function returning (inverse) of the transformation
-from theta to phi used to ensure positivity of phi prior to Box-Cox
-transformation.  The argument is phi and the returned value is theta.}
+from \code{theta} to \code{phi} used to ensure positivity of \code{phi}
+prior to Box-Cox transformation.  The argument is \code{phi} and the
+returned value is \code{theta}.}
 
 \item{log_j}{A function returning the log of the Jacobian of the
-transformation from theta to phi, i.e. based on derivatives of phi with
-respect to theta. Takes theta as its argument.
-If this is not supplied then a constant Jacobian is used.}
+transformation from \code{theta} to \code{phi}, i.e. based on derivatives
+of \eqn{phi} with respect to \eqn{theta}. Takes \code{theta} as its
+argument. If this is not supplied then a constant Jacobian is used.}
 }
 \value{
 A list containing the following components
-  \item{lambda}{A numeric scalar.  The value of \code{lambda}.}
+  \item{lambda}{A numeric scalar.  The value of lambda.}
   \item{gm}{A numeric scalar.  Box-cox scaling parameter, estimated by the
     geometric mean of the quantiles used in the optimisation to find the
     value of lambda.}
@@ -67,25 +70,26 @@ A list containing the following components
  \item{log_j}{as detailed above (only if \code{log_j} is supplied)}
 }
 \description{
-Finds a value of the Box-Cox transformation parameter lambda for which
-the (positive univariate) random variable with log-density logf
-has a density closer to that of a Gaussian random variable.
-Works by estimating a set of quantiles of the distribution implied
-by logf and treating those quantiles as data in a standard Box-Cox
-analysis.  In the following we use theta to denote the argument of
-logf on the original scale and phi on the Box-Cox transformed scale.
+Finds a value of the Box-Cox transformation parameter lambda (\eqn{\lambda})
+for which the (positive univariate) random variable with log-density
+\eqn{\log f}{log f} has a density closer to that of a Gaussian random
+variable. Works by estimating a set of quantiles of the distribution implied
+by \eqn{\log f}{log f} and treating those quantiles as data in a standard
+Box-Cox analysis.  In the following we use \code{theta} (\eqn{\theta}) to
+denote the argument of \eqn{\log f}{log f} on the original scale and
+\code{phi} (\eqn{\phi}) on the Box-Cox transformed scale.
 }
 \details{
-The general idea is to estimate quantiles of f corresponding to a
-  set of equally-spaced probabilities in \code{probs} and to use these
+The general idea is to estimate quantiles of \eqn{f} corresponding
+  to a set of equally-spaced probabilities in \code{probs} and to use these
   estimated quantiles as data in a standard estimation of the Box-Cox
-  transformation parameter \code{lambda}.
+  transformation parameter lambda.
 
-  The density f is first evaluated at \code{num} points equally spaced over
-  the interval (\code{min_phi}, \code{max_phi}).  The continuous density f
-  is approximated by attaching trapezium-rule estimates of probabilities
-  to the midpoints of the intervals between the points.  After standardizing
-  to account for the fact that f may not be normalized,
+  The density \code{f} is first evaluated at \code{num} points equally
+  spaced over the interval (\code{min_phi}, \code{max_phi}).  The continuous
+  density \eqn{f} is approximated by attaching trapezium-rule estimates of
+  probabilities to the midpoints of the intervals between the points.  After
+  standardizing to account for the fact that \eqn{f} may not be normalized,
   (\code{min_phi}, \code{max_phi}) is reset so that values with small
   estimated probability (determined by \code{xdiv}) are excluded and the
   procedure is repeated on this new range.  Then the required quantiles are
@@ -151,7 +155,7 @@ Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 
 \code{\link{find_lambda}} and \code{\link{find_lambda_rcpp}}
   to produce (somewhat) automatically
-  a list for the argument \code{lambda} of \code{ru}/\code{ru_rcpp}
+  a list for the argument lambda of \code{ru}/\code{ru_rcpp}
   for any value of \code{d}.
 
 \code{\link{find_lambda_one_d_rcpp}} for a version of

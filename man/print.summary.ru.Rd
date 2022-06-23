@@ -2,18 +2,25 @@
 % Please edit documentation in R/sample_diagnostics.R
 \name{print.summary.ru}
 \alias{print.summary.ru}
-\title{Print method for objects of class "summary.ru"}
+\title{Print method for objects of class \code{"summary.ru"}}
 \usage{
 \method{print}{summary.ru}(x, ...)
 }
 \arguments{
-\item{x}{an object of class "summary.ru", a result of a call to
+\item{x}{an object of class \code{"summary.ru"}, a result of a call to
 \code{\link{summary.ru}}.}
 
 \item{...}{Additional optional arguments to be passed to
 \code{\link{print}}.}
 }
 \value{
+The argument \code{x}, invisibly.
+}
+\description{
+\code{print} method for an object \code{object} of class
+\code{"summary.ru"}.
+}
+\details{
 Prints
 \itemize{
   \item {a summary of the simulated values, via
@@ -23,9 +30,6 @@ Prints
   \item {information about the ratio-of-uniforms bounding box, i.e.
     \code{object$box}}
 }
-}
-\description{
-\code{print} method for an object \code{object} of class "summary.ru".
 }
 \examples{
 # one-dimensional standard normal ----------------

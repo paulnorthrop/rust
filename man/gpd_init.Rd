@@ -9,48 +9,64 @@ gpd_init(gpd_data, m, xm, sum_gp = NULL, xi_eq_zero = FALSE, init_ests = NULL)
 \arguments{
 \item{gpd_data}{A numeric vector containing positive sample values.}
 
-\item{m}{A numeric scalar.  The sample size, i.e. the length of gpd_data.}
+\item{m}{A numeric scalar.  The sample size, i.e., the length of
+\code{gpd_data}.}
 
 \item{xm}{A numeric scalar. The sample maximum.}
 
 \item{sum_gp}{A numeric scalar. The sum of the sample values.}
 
 \item{xi_eq_zero}{A logical scalar.  If TRUE assume that the shape
-parameter xi = 0.}
+parameter \eqn{\xi = 0}.}
 
 \item{init_ests}{A numeric vector.  Initial estimate of
-theta = (sigma, xi).  If supplied \code{gpd_init()} just
-returns the corresponding initial estimate of phi = (phi1, phi2).}
+\eqn{\theta = (\sigma, \xi)}.  If supplied \code{gpd_init()}
+returns the corresponding initial estimate of
+\ifelse{html}{\eqn{\phi} = (\eqn{\phi}\out{<sub>1</sub>},
+\eqn{\phi}\out{<sub>2</sub>})}{\eqn{\phi = (\phi_1, \phi_2)}}.}
 }
 \value{
 If \code{init_ests} is not supplied by the user, a list is returned
   with components
-    \item{init}{A numeric vector. Initial estimates of sigma
-     and xi.}
+    \item{init}{A numeric vector. Initial estimates of \eqn{\sigma}
+     and \eqn{\xi}.}
     \item{se}{A numeric vector. Estimated standard errors of
-     sigma and xi.}
+     \eqn{\sigma} and \eqn{\xi}.}
     \item{init_phi}{A numeric vector. Initial estimates of
-     phi1 = sigma and phi2 = xi + sigma / xm,
-     where xm is the maximum of \code{gpd_data}.}
+     \ifelse{html}{\eqn{\phi}\out{<sub>1</sub>} = \eqn{\sigma}}{
+     \eqn{\phi_1 = \sigma}}
+     and
+    \ifelse{html}{\eqn{\phi}\out{<sub>2</sub>} = \eqn{\xi + \sigma x}
+    \out{<sub>(m)</sub>}}{\eqn{\phi_1 = \xi + \sigma x_{(m)}}}
+    where \ifelse{html}{\eqn{x}\out{<sub>(m)</sub>}}{\eqn{x_{(m)}}}
+    is the maximum of \code{gpd_data}.}
     \item{se_phi}{A numeric vector. Estimated standard errors of
-     phi1 and phi2.}
+     \ifelse{html}{\eqn{\phi}\out{<sub>1</sub>}}{\eqn{\phi_1}}
+     and
+     \ifelse{html}{\eqn{\phi}\out{<sub>1</sub>}}{\eqn{\phi_2}}.}
   If \code{init_ests} is supplied then only the numeric vector
   \code{init_phi} is returned.
 }
 \description{
 Calculates initial estimates and estimated standard errors (SEs) for the
-generalized Pareto parameters sigma and xi based on an
+generalized Pareto parameters \eqn{\sigma} and \eqn{\xi} based on an
 assumed random sample from this distribution.  Also, calculates
 initial estimates and estimated standard errors for
-phi1 = sigma and phi2 = xi + sigma / xm.
+\ifelse{html}{\eqn{\phi}\out{<sub>1</sub>} = \eqn{\sigma}}{
+  \eqn{\phi_1 = \sigma}}
+and
+\ifelse{html}{\eqn{\phi}\out{<sub>2</sub>} = \eqn{\xi + \sigma x}
+\out{<sub>(m)</sub>}}{\eqn{\phi_1 = \xi + \sigma x_{(m)}}}, where
+\ifelse{html}{\eqn{x}\out{<sub>(m)</sub>}}{\eqn{x_{(m)}}} is the sample
+maximum threshold exceedance.
 }
 \details{
-The main aim is to calculate an admissible estimate of theta,
-  i.e. one at which the log-likelihood is finite (necessary for the
-  posterior log-density to be finite) at the estimate, and associated
-  estimated SEs. These are converted into estimates and SEs for phi.  The
-  latter can be used to set values of \code{min_phi} and \code{max_phi}
-  for input to \code{find_lambda}.
+The main aim is to calculate an admissible estimate of
+  \eqn{\theta}, i.e., one at which the log-likelihood is finite (necessary
+  for the posterior log-density to be finite) at the estimate, and
+  associated estimated SEs. These are converted into estimates and SEs for
+  \eqn{\phi}.  The latter can be used to set values of \code{min_phi} and
+  \code{max_phi} for input to \code{find_lambda}.
 
   In the default setting (\code{xi_eq_zero = FALSE} and
   \code{init_ests = NULL}) the methods tried are Maximum Likelihood
@@ -58,18 +74,20 @@ The main aim is to calculate an admissible estimate of theta,
   (Hosking and Wallis, 1987) and Linear Combinations of Ratios of Spacings
   (LRS) (Reiss and Thomas, 2007, page 134) in that order.
 
-  For xi < -1 the likelihood is unbounded, MLE may fail when xi is not
-  greater than -0.5 and the observed Fisher information for (sigma, xi) has
-  finite variance only if xi > -0.25.  We use the ML estimate provided that
-  the estimate of xi returned from \code{gpd_mle} is greater than -1. We only
-  use the SE if the MLE of xi is greater than -0.25.
+  For \eqn{\xi < -1} the likelihood is unbounded, MLE may fail when
+  \eqn{\xi} is not greater than \eqn{-0.5} and the observed Fisher
+  information for \eqn{(sigma, xi)} has finite variance only if
+  \eqn{\xi > -0.25}.  We use the ML estimate provided that
+  the estimate of \eqn{\xi} returned from \code{gpd_mle} is greater than
+  \eqn{-1}. We only use the SE if the MLE of \eqn{\xi} is greater than
+  \eqn{-0.25}.
 
   If either the MLE or the SE are not OK then we try PWM.  We use the PWM
   estimate only if is admissible, and the MLE was not OK.  We use the PWM SE,
-  but this will be \code{c(NA, NA)} is the PWM estimate of xi is > 1/2.  If
-  the estimate is still not OK then we try LRS.  As a last resort, which
-  will tend to occur only when xi is strongly negative, we set xi = -1 and
-  estimate sigma conditional on this.
+  but this will be \code{c(NA, NA)} is the PWM estimate of \eqn{\xi} is
+  \eqn{> 1/2}.  If the estimate is still not OK then we try LRS.  As a last
+  resort, which will tend to occur only when \eqn{\xi} is strongly negative,
+  we set \eqn{\xi = -1} and estimate sigma conditional on this.
 }
 \examples{
 \donttest{

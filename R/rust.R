@@ -10,8 +10,8 @@
 #'   \code{\link{ru_rcpp}}, which implement the generalized ratio-of-uniforms
 #'   algorithm.  The latter uses the Rcpp package to improve efficiency.
 #'   Also provided are two functions,
-#'   \code{find_lambda} and \code{find_lambda_one_d}, that may be used to
-#'   set a suitable value for the parameter \code{lambda} if Box-Cox
+#'   \code{\link{find_lambda}} and \code{\link{find_lambda_one_d}}, that may be
+#'   used to set a suitable value for the parameter \code{lambda} if Box-Cox
 #'   transformation is used prior to simulation.
 #'   If \code{\link{ru_rcpp}} is used the equivalent functions are
 #'   \code{find_lambda_rcpp} and \code{find_lambda_one_d_rcpp}

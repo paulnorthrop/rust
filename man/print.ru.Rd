@@ -13,8 +13,7 @@
 \item{...}{Additional arguments.  None are used in this function.}
 }
 \value{
-The argument \code{x}, invisibly, as for all
-  \code{\link[base]{print}} methods.
+The argument \code{x}, invisibly.
 }
 \description{
 \code{print} method for class \code{"ru"}.

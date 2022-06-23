@@ -2,7 +2,7 @@
 % Please edit documentation in R/box_cox_functions.R
 \name{find_lambda}
 \alias{find_lambda}
-\title{Selecting Box-Cox parameter lambda for general d.}
+\title{Selecting the Box-Cox parameter for general d}
 \usage{
 find_lambda(
   logf,
@@ -20,49 +20,52 @@ find_lambda(
 )
 }
 \arguments{
-\item{logf}{A function returning the log of the target density f.}
+\item{logf}{A function returning the log of the target density \eqn{f}.}
 
 \item{...}{further arguments to be passed to \code{logf} and related
 functions.}
 
-\item{d}{A numeric scalar. Dimension of f.}
+\item{d}{A numeric scalar. Dimension of \eqn{f}.}
 
 \item{n_grid}{A numeric scalar.  Number of ordinates for each variable in
-phi.  If this is not supplied a default value of
-ceiling(2501 ^ (1 / d)) is used.}
+\code{phi}.  If this is not supplied a default value of
+\code{ceiling(2501 ^ (1 / d))} is used.}
 
-\item{ep_bc}{A (positive) numeric scalar. Smallest possible value of phi
-to consider.  Used to avoid negative values of phi.}
+\item{ep_bc}{A (positive) numeric scalar. Smallest possible value of
+\code{phi} to consider.  Used to avoid negative values of \code{phi}.}
 
 \item{min_phi, max_phi}{Numeric vectors.  Smallest and largest values
-of phi at which to evaluate logf, i.e. the range of values of phi over
-which to evaluate logf. Any components in min_phi that are not positive
-are set to ep_bc.}
+of \code{phi} at which to evaluate \code{logf}, i.e. the range of values
+of phi over which to evaluate \code{logf}. Any components in
+\code{min_phi} that are not positive are set to \code{ep_bc}.}
 
 \item{which_lam}{A numeric vector.  Contains the indices of the components
-of phi that ARE to be Box-Cox transformed.}
+of \code{phi} that ARE to be Box-Cox transformed.}
 
 \item{lambda_range}{A numeric vector of length 2.  Range of lambda over
 which to optimise.}
 
-\item{init_lambda}{A numeric vector of length 1 or d.  Initial value of
-lambda used in the search for the best lambda.  If \code{init_lambda}
+\item{init_lambda}{A numeric vector of length 1 or \code{d}.  Initial value
+of lambda used in the search for the best lambda.  If \code{init_lambda}
 is a scalar then \code{rep(init_lambda, d)} is used.}
 
 \item{phi_to_theta}{A function returning (inverse) of the transformation
-from theta to phi used to ensure positivity of phi prior to Box-Cox
-transformation.  The argument is phi and the returned value is theta.}
+from \code{theta} to \code{phi} used to ensure positivity of \code{phi}
+prior to Box-Cox transformation.  The argument is \code{phi} and the
+returned value is \code{theta}.}
 
 \item{log_j}{A function returning the log of the Jacobian of the
-transformation from theta to phi, i.e. based on derivatives of phi with
-respect to theta. Takes theta as its argument.}
+transformation from \code{theta} to \code{phi}, i.e. based on derivatives
+of \code{phi} with respect to \code{theta}. Takes \code{theta} as its
+argument.}
 }
 \value{
 A list containing the following components
-  \item{lambda}{A numeric vector.  The value of \code{lambda}.}
+  \item{lambda}{A numeric vector.  The value of lambda.}
   \item{gm}{A numeric vector.  Box-cox scaling parameter, estimated by the
-    geometric mean of the values of phi used in the optimisation to find
-    the value of lambda, weighted by the values of f evaluated at phi.}
+    geometric mean of the values of \code{phi} used in the optimisation to
+    find the value of lambda, weighted by the values of \eqn{f} evaluated at
+    \code{phi}.}
   \item{init_psi}{A numeric vector.  An initial estimate of the mode of the
     Box-Cox transformed density}
   \item{sd_psi}{A numeric vector.  Estimates of the marginal standard
@@ -73,20 +76,22 @@ A list containing the following components
 }
 \description{
 Finds a value of the Box-Cox transformation parameter lambda for which
-the (positive) random variable with log-density logf has a density
-closer to that of a Gaussian random variable.
-In the following we use theta to denote the argument of
-logf on the original scale and phi on the Box-Cox transformed scale.
+the (positive) random variable with log-density \eqn{\log f}{log f} has a
+density  closer to that of a Gaussian random variable.
+In the following we use \code{theta} (\eqn{\theta}) to denote the argument
+of \eqn{\log f}{log f} on the original scale and \code{phi} (\eqn{\phi}) on
+the Box-Cox transformed scale.
 }
 \details{
-The general idea is to evaluate the density f on a d-dimensional
- grid, with \code{n_grid} ordinates for each of the \code{d} variables.
+The general idea is to evaluate the density \eqn{f} on a
+ \code{d}-dimensional grid, with \code{n_grid} ordinates for each of the
+ \code{d} variables.
  We treat each combination of the variables in the grid as a data point
  and perform an estimation of the Box-Cox transformation parameter
- \code{lambda}, in which each data point is weighted by the density
+ lambda, in which each data point is weighted by the density
  at that point.  The vectors \code{min_phi} and \code{max_phi} define the
  limits of the grid and \code{which_lam} can be used to specify that only
- certain components of phi are to be transformed.
+ certain components of \code{phi} are to be transformed.
 }
 \examples{
 # Log-normal density ===================
@@ -199,7 +204,7 @@ Andrews, D. F. and Gnanadesikan, R. and Warner, J. L. (1971)
 
 \code{\link{find_lambda_one_d}} and
   \code{\link{find_lambda_one_d_rcpp}} to produce (somewhat) automatically
-  a list for the argument \code{lambda} of \code{ru}/\code{ru_rcpp} for the
+  a list for the argument lambda of \code{ru}/\code{ru_rcpp} for the
   \code{d} = 1 case.
 
 \code{\link{find_lambda_rcpp}} for a version of

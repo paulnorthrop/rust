@@ -13,7 +13,7 @@ gpd_sum_stats(gpd_data)
 A list with components
     \item{gpd_data}{A numeric vector. The input vector with any missings
     removed.}
-    \item{m}{A numeric scalar. The sample size, i.e. the number of
+    \item{m}{A numeric scalar. The sample size, i.e., the number of
     non-missing values.}
     \item{xm}{A numeric scalar. The sample maximum}
     \item{sum_gp}{A numeric scalar. The sum of the non-missing sample

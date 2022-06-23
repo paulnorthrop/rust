@@ -125,22 +125,37 @@ transformation are calculated inside \code{ru}.}
 \item{r}{A numeric scalar.  Parameter of generalized ratio-of-uniforms.}
 
 \item{ep}{A numeric scalar.  Controls initial estimates for optimisations
-to find the b-bounding box parameters.  The default (\code{ep}=0)
+to find the \eqn{b}-bounding box parameters.  The default (\code{ep}=0)
 corresponds to starting at the mode of \code{logf} small positive values
 of \code{ep} move the constrained variable slightly away from the mode in
 the correct direction.  If \code{ep} is negative its absolute value is
 used, with no warning given.}
 
-\item{a_algor, b_algor}{Character scalars.  Either "nlminb" or "optim".
-Respective optimisation algorithms used to find a(r) and (bi-(r), bi+(r)).}
+\item{a_algor, b_algor}{Character scalars.  Either \code{"nlminb"} or
+\code{"optim"}.
+Respective optimisation algorithms used to find \eqn{a(r)} and
+(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
+\eqn{b_i^-(r)}},
+\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
+\eqn{b_i^+(r)}}).}
 
 \item{a_method, b_method}{Character scalars.  Respective methods used by
-\code{optim} to find a(r) and (bi-(r), bi+(r)).  Only used if \code{optim}
-is the chosen algorithm.  If \code{d} = 1 then \code{a_method} and
-\code{b_method} are set to \code{"Brent"} without warning.}
+\code{optim} to find \eqn{a(r)} and
+(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
+\eqn{b_i^-(r)}},
+\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
+\eqn{b_i^+(r)}}).
+Only used if \code{optim} is the chosen algorithm.  If \code{d} = 1 then
+\code{a_method} and \code{b_method} are set to \code{"Brent"} without
+warning.}
 
 \item{a_control, b_control}{Lists of control arguments to \code{optim} or
-\code{nlminb} to find a(r) and (bi-(r), bi+(r)) respectively.}
+\code{nlminb} to find \eqn{a(r)} and
+(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
+\eqn{b_i^-(r)}},
+\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
+\eqn{b_i^+(r)}})
+respectively.}
 
 \item{var_names}{A character vector.  Names to give to the column(s) of
 the simulated values.}
@@ -241,8 +256,6 @@ For information about the generalised ratio-of-uniforms method and
   The default value of the tuning parameter \code{r} is 1/2, which is
   likely to be close to optimal in many cases, particularly if
   \code{trans = "BC"}.
-
-See \code{vignette("rust-a-vignette", package = "rust")} for full details.
 }
 \examples{
 # Normal density ===================

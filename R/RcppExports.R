@@ -185,7 +185,7 @@ loggp <- function(x, ss) {
     .Call(`_rust_loggp`, x, ss)
 }
 
-#' Create external pointer to a C++ function for logf
+#' Create external pointer to a C++ function for \code{logf}
 #'
 #' @param fstr A string indicating the C++ function required.
 #'
@@ -202,7 +202,7 @@ bc_log_j <- function(theta, user_args) {
     .Call(`_rust_bc_log_j`, theta, user_args)
 }
 
-#' Create external pointer to a C++ function for log_j
+#' Create external pointer to a C++ function for \code{log_j}
 #'
 #' @param fstr A string indicating the C++ function required.
 #'
@@ -227,7 +227,7 @@ gp_phi_to_theta <- function(phi, user_args) {
     .Call(`_rust_gp_phi_to_theta`, phi, user_args)
 }
 
-#' Create external pointer to a C++ function for phi_to_theta
+#' Create external pointer to a C++ function for \code{phi_to_theta}
 #'
 #' @param fstr A string indicating the C++ function required.
 #'

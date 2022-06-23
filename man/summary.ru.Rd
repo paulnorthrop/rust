@@ -7,23 +7,24 @@
 \method{summary}{ru}(object, ...)
 }
 \arguments{
-\item{object}{an object of class "ru", a result of a call to \code{ru}.}
+\item{object}{an object of class \code{"ru"}, a result of a call to
+\code{ru}.}
 
 \item{...}{Additional arguments passed on to \code{summary}.}
 }
 \value{
 Prints
 \itemize{
-  \item {information about the ratio-of-uniforms bounding box, i.e.
+  \item {information about the ratio-of-uniforms bounding box, i.e.,
     \code{object$box}}
-  \item {an estimate of the probability of acceptance, i.e.
+  \item {an estimate of the probability of acceptance, i.e.,
     \code{object$pa}}
   \item {a summary of the simulated values, via
     \code{summary(object$sim_vals)}}
 }
 }
 \description{
-\code{summary} method for class "ru"
+\code{summary} method for class \code{"ru"}
 }
 \examples{
 # one-dimensional standard normal ----------------

@@ -149,7 +149,7 @@ double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
 // else if (fstr == "new_name")
 //   return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
 
-//' Create external pointer to a C++ function for logf
+//' Create external pointer to a C++ function for \code{logf}
 //'
 //' @param fstr A string indicating the C++ function required.
 //'
@@ -200,7 +200,7 @@ double bc_log_j(const Rcpp::NumericVector& theta,
 
 // A function to create external pointers to functions to evaluate log_j.
 
-//' Create external pointer to a C++ function for log_j
+//' Create external pointer to a C++ function for \code{log_j}
 //'
 //' @param fstr A string indicating the C++ function required.
 //'
@@ -258,7 +258,7 @@ Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
 // A function to create external pointers to functions to evaluate
 // phi_to_theta.
 
-//' Create external pointer to a C++ function for phi_to_theta
+//' Create external pointer to a C++ function for \code{phi_to_theta}
 //'
 //' @param fstr A string indicating the C++ function required.
 //'

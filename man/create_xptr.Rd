@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{create_xptr}
 \alias{create_xptr}
-\title{Create external pointer to a C++ function for logf}
+\title{Create external pointer to a C++ function for \code{logf}}
 \usage{
 create_xptr(fstr)
 }
@@ -10,5 +10,5 @@ create_xptr(fstr)
 \item{fstr}{A string indicating the C++ function required.}
 }
 \description{
-Create external pointer to a C++ function for logf
+Create external pointer to a C++ function for \code{logf}
 }

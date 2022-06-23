@@ -9,9 +9,11 @@ rgpd(m = 1, sigma = 1, xi = 0)
 \arguments{
 \item{m}{A numeric scalar.  The size of sample required.}
 
-\item{sigma}{A numeric scalar.  The generalized Pareto scale parameter.}
+\item{sigma}{A numeric scalar.  The generalized Pareto scale parameter
+\eqn{\sigma}.}
 
-\item{xi}{A numeric scalar.  The generalized Pareto shape parameter.}
+\item{xi}{A numeric scalar.  The generalized Pareto shape parameter
+\eqn{\xi}.}
 }
 \value{
 A numeric vector.  A generalized Pareto sample of size \code{m}.

@@ -1,54 +1,58 @@
 # ========================= find_lambda_one_d_rcpp =========================
 
-#' Selecting Box-Cox parameter lambda in the one-dimensional case using
-#' C++ via Rcpp
+#' Selecting the Box-Cox parameter in the 1D case using Rcpp
 #'
 #' Finds a value of the Box-Cox transformation parameter lambda for which
-#' the (positive univariate) random variable with log-density logf
-#' has a density closer to that of a Gaussian random variable.
-#' Works by estimating a set of quantiles of the distribution implied
-#' by logf and treating those quantiles as data in a standard Box-Cox
-#' analysis.  In the following we use theta to denote the argument of
-#' logf on the original scale and phi on the Box-Cox transformed scale.
+#' the (positive univariate) random variable with log-density
+#' \eqn{\log f}{log f} has a density closer to that of a Gaussian random
+#' variable. Works by estimating a set of quantiles of the distribution implied
+#' by \eqn{\log f}{log f} and treating those quantiles as data in a standard
+#' Box-Cox analysis.  In the following we use \code{theta} (\eqn{\theta}) to
+#' denote the argument of \eqn{\log f}{log f} on the original scale and
+#' \code{phi} (\eqn{\phi}) on the Box-Cox transformed scale.
 #'
 #' @param logf A pointer to a compiled C++ function returning the log
 #'   of the target density \eqn{f}.
 #' @param ... further arguments to be passed to \code{logf} and related
 #'   functions.
-#' @param ep_bc A (positive) numeric scalar. Smallest possible value of phi
-#'   to consider.  Used to avoid negative values of phi.
+#' @param ep_bc A (positive) numeric scalar. Smallest possible value of
+#'   \code{phi} to consider.  Used to avoid negative values of \code{phi}.
 #' @param min_phi,max_phi  Numeric scalars.  Smallest and largest values
-#'   of phi at which to evaluate logf, i.e. the range of values of phi over
-#'   which to evaluate logf. Any components in min_phi that are not positive
-#'   are set to ep_bc.
-#' @param num A numeric scalar. Number of values at which to evaluate logf.
-#' @param xdiv A numeric scalar.  Only values of phi at which the density f is
-#'   greater than the (maximum of f) / \code{xdiv} are used.
+#'   of \code{phi} at which to evaluate \code{logf}, i.e., the range of values
+#'   of \code{phi} over which to evaluate \code{logf}. Any components in
+#'   \code{min_phi} that are not positive are set to \code{ep_bc}.
+#' @param num A numeric scalar. Number of values at which to evaluate
+#'   \code{logf}.
+#' @param xdiv A numeric scalar.  Only values of \code{phi} at which the
+#'   density \eqn{f} is greater than the (maximum of \eqn{f}) / \code{xdiv} are
+#'   used.
 #' @param probs A numeric scalar. Probabilities at which to estimate the
 #'   quantiles of that will be used as data to find lambda.
 #' @param lambda_range A numeric vector of length 2.  Range of lambda over
 #'   which to optimise.
 #' @param phi_to_theta A pointer to a compiled C++ function returning
-#'   (the inverse) of the transformation from theta to phi used to ensure
-#'   positivity of phi prior to Box-Cox transformation.  The argument is
-#'   phi and the returned value is theta.  If \code{phi_to_theta}
-#'   is undefined at the input value then the function should return NA.
+#'   (the inverse) of the transformation from \code{theta} to \code{phi} used
+#'   to ensure positivity of \code{phi} prior to Box-Cox transformation.  The
+#'   argument is \code{phi} and the returned value is \code{theta}.  If
+#'   \code{phi_to_theta} is undefined at the input value then the function
+#'   should return \code{NA}.
 #' @param user_args A list of numeric components providing arguments to
 #'   the user-supplied functions \code{phi_to_theta} and \code{log_j}.
 #' @param log_j A pointer to a compiled C++ function returning the log of
-#'  the Jacobian of the transformation from theta to phi, i.e. based on
-#'  derivatives of phi with respect to theta. Takes theta as its argument.
+#'  the Jacobian of the transformation from \code{theta} to \code{phi}, i.e.,
+#'  based on derivatives of \eqn{phi} with respect to \eqn{theta}. Takes
+#'  \code{theta} as its argument.
 #'  If this is not supplied then a constant Jacobian is used.
-#' @details The general idea is to estimate quantiles of f corresponding to a
-#'   set of equally-spaced probabilities in \code{probs} and to use these
+#' @details The general idea is to estimate quantiles of \eqn{f} corresponding
+#'   to a set of equally-spaced probabilities in \code{probs} and to use these
 #'   estimated quantiles as data in a standard estimation of the Box-Cox
 #'   transformation parameter \code{lambda}.
 #'
-#'   The density f is first evaluated at \code{num} points equally spaced over
-#'   the interval (\code{min_phi}, \code{max_phi}).  The continuous density f
-#'   is approximated by attaching trapezium-rule estimates of probabilities
-#'   to the midpoints of the intervals between the points.  After standardizing
-#'   to account for the fact that f may not be normalized,
+#'   The density \eqn{f} is first evaluated at \code{num} points equally spaced
+#'   over the interval (\code{min_phi}, \code{max_phi}).  The continuous
+#'   density \eqn{f} is approximated by attaching trapezium-rule estimates of
+#'   probabilities to the midpoints of the intervals between the points.  After
+#'   standardizing to account for the fact that \eqn{f} may not be normalized,
 #'   (\code{min_phi}, \code{max_phi}) is reset so that values with small
 #'   estimated probability (determined by \code{xdiv}) are excluded and the
 #'   procedure is repeated on this new range.  Then the required quantiles are
@@ -261,53 +265,57 @@ find_lambda_one_d_rcpp <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 
 # ========================= find_lambda_rcpp =========================
 
-#' Selecting Box-Cox parameter lambda for general d using C++ via Rcpp.
+#' Selecting the Box-Cox parameter for general d using Rcpp
 #'
 #' Finds a value of the Box-Cox transformation parameter lambda for which
-#' the (positive) random variable with log-density logf has a density
-#' closer to that of a Gaussian random variable.
-#' In the following we use theta to denote the argument of
-#' logf on the original scale and phi on the Box-Cox transformed scale.
+#' the (positive) random variable with log-density \eqn{\log f}{log f} has a
+#' density closer to that of a Gaussian random variable.
+#' In the following we use \code{theta} (\eqn{\theta}) to denote the argument
+#' of \code{logf} on the original scale and \code{phi} (\eqn{\phi}) on the
+#' Box-Cox transformed scale.
 #'
 #' @param logf A pointer to a compiled C++ function returning the log
 #'   of the target density \eqn{f}.
 #' @param ... further arguments to be passed to \code{logf} and related
 #'   functions.
-#' @param d A numeric scalar. Dimension of f.
+#' @param d A numeric scalar. Dimension of \eqn{f}.
 #' @param n_grid A numeric scalar.  Number of ordinates for each variable in
-#'   phi.  If this is not supplied a default value of
-#'   ceiling(2501 ^ (1 / d)) is used.
-#' @param ep_bc A (positive) numeric scalar. Smallest possible value of phi
-#'   to consider.  Used to avoid negative values of phi.
+#'   \code{phi}.  If this is not supplied a default value of
+#'   \code{ceiling(2501 ^ (1 / d))} is used.
+#' @param ep_bc A (positive) numeric scalar. Smallest possible value of
+#'   \code{phi} to consider.  Used to avoid negative values of \code{phi}.
 #' @param min_phi,max_phi  Numeric vectors.  Smallest and largest values
-#'   of phi at which to evaluate logf, i.e. the range of values of phi over
-#'   which to evaluate logf. Any components in min_phi that are not positive
-#'   are set to ep_bc.
+#'   of \code{phi} at which to evaluate \code{logf}, i.e., the range of values
+#'   of \code{phi} over which to evaluate \code{logf}. Any components in
+#'   \code{min_phi} that are not positive are set to \code{ep_bc}.
 #' @param which_lam A numeric vector.  Contains the indices of the components
-#'   of phi that ARE to be Box-Cox transformed.
+#'   of \code{phi} that ARE to be Box-Cox transformed.
 #' @param lambda_range A numeric vector of length 2.  Range of lambda over
 #'   which to optimise.
-#' @param init_lambda A numeric vector of length 1 or d.  Initial value of
-#'   lambda used in the search for the best lambda.  If \code{init_lambda}
+#' @param init_lambda A numeric vector of length 1 or \code{d}.  Initial value
+#'   of lambda used in the search for the best lambda.  If \code{init_lambda}
 #'   is a scalar then \code{rep(init_lambda, d)} is used.
 #' @param phi_to_theta A pointer to a compiled C++ function returning
-#'   (the inverse) of the transformation from theta to phi used to ensure
-#'   positivity of phi prior to Box-Cox transformation.  The argument is
-#'   phi and the returned value is theta.  If \code{phi_to_theta}
-#'   is undefined at the input value then the function should return NA.
+#'   (the inverse) of the transformation from \code{theta} to \code{phi} used
+#'   to ensure positivity of \code{phi} prior to Box-Cox transformation.  The
+#'   argument is \code{phi} and the returned value is \code{theta}.  If
+#'   \code{phi_to_theta} is undefined at the input value then the function
+#'   should return \code{NA}.
 #' @param user_args A list of numeric components providing arguments to
 #'   the user-supplied functions \code{phi_to_theta} and \code{log_j}.
 #' @param log_j A pointer to a compiled C++ function returning the log of
-#'  the Jacobian of the transformation from theta to phi, i.e. based on
-#'  derivatives of phi with respect to theta. Takes theta as its argument.
-#' @details The general idea is to evaluate the density f on a d-dimensional
-#'  grid, with \code{n_grid} ordinates for each of the \code{d} variables.
+#'  the Jacobian of the transformation from \code{theta} to \code{phi}, i.e.,
+#'  based on derivatives of \eqn{phi} with respect to \eqn{theta}. Takes
+#'  \code{theta} as its argument.
+#' @details The general idea is to evaluate the density \eqn{f} on a
+#'  \code{d}-dimensional grid, with \code{n_grid} ordinates for each of the
+#'  \code{d} variables.
 #'  We treat each combination of the variables in the grid as a data point
 #'  and perform an estimation of the Box-Cox transformation parameter
 #'  \code{lambda}, in which each data point is weighted by the density
 #'  at that point.  The vectors \code{min_phi} and \code{max_phi} define the
 #'  limits of the grid and \code{which_lam} can be used to specify that only
-#'  certain components of phi are to be transformed.
+#'  certain components of \code{phi} are to be transformed.
 #' @return A list containing the following components
 #'   \item{lambda}{A numeric vector.  The value of \code{lambda}.}
 #'   \item{gm}{A numeric vector.  Box-cox scaling parameter, estimated by the
