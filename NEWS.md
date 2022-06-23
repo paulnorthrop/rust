@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* The rotation matrix used to rotate the log-density about the origin, after mode relocation and any other transformations have been applied has been added to the list returned from `ru()` and from `ru_rcpp()` in the component `rotation_matrix`.  
+
 * The documentation of the functions `ru()` and `ru_rcpp()` now note that if the argument `n = 0` is passed then the ratio-of-uniforms bounding box is returned but no simulation is performed. This may be useful if the bounding box itself is of interest.
 
 * In the description of the argument `logf` to `ru()` and `ru_rcpp()` it is advised that `logf = ` should be provided explicitly to avoid the potential for argument matching problems.
