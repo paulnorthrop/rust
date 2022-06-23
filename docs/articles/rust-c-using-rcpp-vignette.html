@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,7 +66,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paulnorthrop/rust/">
+  <a href="https://github.com/paulnorthrop/rust/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -85,15 +81,15 @@
 
       
 
-      </header><script src="rust-c-using-rcpp-vignette_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Rusting Faster: Simulation using Rcpp</h1>
-                        <h4 class="author">Paul Northrop</h4>
+                        <h4 data-toc-skip class="author">Paul Northrop</h4>
             
-            <h4 class="date">2021-10-30</h4>
+            <h4 data-toc-skip class="date">2022-06-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-c-using-rcpp-vignette.Rmd"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-c-using-rcpp-vignette.Rmd" class="external-link"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-c-using-rcpp-vignette.Rmd</code></div>
 
     </div>
@@ -103,13 +99,12 @@
 <p>The <strong>rust</strong> package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a <span class="math inline">\(d\)</span>-dimensional continuous distribution. The user specifies (the log of) a positive target function <span class="math inline">\(f(x)\)</span> proportional to the density function of the distribution. For an introduction to <em>rust</em> see the vignette <a href="rust-a-vignette.html">Introducing rust</a>.</p>
 <p>This vignette describes a new feature of <strong>rust</strong>: the option for the user to provide a C++ function to evaluate the target log-density, rather than an R function. The <strong>Rcpp</strong> <span class="citation">Eddelbuettel (2013)</span> and <strong>RcppArmadillo</strong> <span class="citation">(Eddelbuettel and Sanderson 2014)</span> packages are used to speed up simulation from the target density. The improvement results from faster function evaluations and (in particular) from performing using C++ the looping in the ratio-of-uniforms algorithm. The new function <code>ru_rcpp</code> requires the target log-density to be specified using (externals pointers to) C++ functions, whereas the existing <code>ru</code> requires input R functions. Otherwise, the functionality of these two functions is the same. There are also Rcpp-based versions of functions for setting Box-Cox transformation parameters: <code>find_lambda_rcpp</code> and <code>find_lambda_one_d_rcpp</code></p>
 <p>In this vignette we describe in general terms the general setup of the Rcpp-based functions and use examples to illustrate their use. For more information about these examples see the vignette <a href="rust-a-vignette.html">Introducing rust</a></p>
-<div id="cpp_fun" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cpp_fun" class="anchor"></a>Providing a C++ function to <code>ru_rcpp</code>
+<div class="section level2">
+<h2 id="cpp_fun">Providing a C++ function to <code>ru_rcpp</code><a class="anchor" aria-label="anchor" href="#cpp_fun"></a>
 </h2>
-<p>The general way that <strong>rust</strong> enables users to provide their own C++ functions uses external pointers and is based on the <a href="https://gallery.rcpp.org/">Rcpp Gallery</a> article <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel. For a detailed case study of the general approach see the <strong>RcppDE</strong> package <span class="citation">(Eddelbuettel 2016)</span> vignette at the <a href="https://CRAN.R-project.org/package=RcppDE">RcppDE page on CRAN</a>.</p>
+<p>The general way that <strong>rust</strong> enables users to provide their own C++ functions uses external pointers and is based on the <a href="https://gallery.rcpp.org/" class="external-link">Rcpp Gallery</a> article <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/" class="external-link">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel. For a detailed case study of the general approach see the <strong>RcppDE</strong> package <span class="citation">(Eddelbuettel 2016)</span> vignette at the <a href="https://CRAN.R-project.org/package=RcppDE" class="external-link">RcppDE page on CRAN</a>.</p>
 <p>The user writes a C++ function to calculate <span class="math inline">\(\log f(x)\)</span>. The current implementation in <strong>rust</strong> requires this function to have a particular structure: it must take a constant reference to an <code>Rcpp::NumericVector</code>, say <code>x</code>, a constant reference to an <code>Rcpp::List</code>, say <code>pars</code>, and return a <code>double</code> precision scalar. <code>x</code> is the argument <span class="math inline">\(x\)</span> of <span class="math inline">\(f(x)\)</span>. <code>pars</code> is a list containing the values of parameters whose values are not specified inside the function. This allows the user to change the values of any parameters in the target density without editing the function. If there are no such parameters then the user must still include the argument <code>pars</code> in their function, even though the list provided to the function when it is called will be empty.</p>
-<p>A simple way for the user to provide their C++ functions to create them in a file, say <code>user_fns.cpp</code>. Example content is provided below. The full file is available on the <a href="https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp">rust Github page</a>. The functions in this file are compiled and made available to R, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp</a></code> function (e.g. <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp("user_fns.cpp")</a></code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_xptr</code>, which creates an external pointer to a C++ function. See <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/">Passing user-supplied C++ functions</a>. It is this external pointer that is passed to <code>ru_rcpp</code> to perform ratio-of-uniforms sampling. If the user has written a C++ function, say <code>new_name</code>, then they need to add to <code>create_xptr</code> two lines of code:</p>
+<p>A simple way for the user to provide their C++ functions to create them in a file, say <code>user_fns.cpp</code>. Example content is provided below. The full file is available on the <a href="https://github.com/paulnorthrop/rust/blob/master/src/user_fns.cpp" class="external-link">rust Github page</a>. The functions in this file are compiled and made available to R, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp</a></code> function (e.g. <code>Rcpp::sourceCpp("user_fns.cpp")</code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_xptr</code>, which creates an external pointer to a C++ function. See <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/" class="external-link">Passing user-supplied C++ functions</a>. It is this external pointer that is passed to <code>ru_rcpp</code> to perform ratio-of-uniforms sampling. If the user has written a C++ function, say <code>new_name</code>, then they need to add to <code>create_xptr</code> two lines of code:</p>
 <pre><code>else if (fstr == "new_name")  
   return(Rcpp::XPtr&lt;funcPtr&gt;(new funcPtr(&amp;new_name))) ;</code></pre>
 <p>to create an external pointer for <code>new_name</code> using <code>create_xptr</code>. The following excerpt from the example <code>user_fns.cpp</code> file contains code for a standard normal density. Note that for this particular example we don’t need RcppArmadillo: we could replace <code>#include &lt;RcppArmadillo.h&gt;</code> with <code>#include &lt;Rcpp.h&gt;</code> and delete <code>using namespace arma;</code>. However, RcppArmadillo is used in the the <a href="#mvn">multivariate normal example</a> below and will be useful in many examples.</p>
@@ -163,25 +158,24 @@ SEXP create_xptr(std::string fstr) {
 ptr_N01 &lt;- create_xptr("logdN01")
 */</code></pre>
 </div>
-<div id="examples-ru_rcpp" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples-ru_rcpp" class="anchor"></a>Examples : <code>ru_rcpp</code>
+<div class="section level2">
+<h2 id="examples-ru_rcpp">Examples : <code>ru_rcpp</code><a class="anchor" aria-label="anchor" href="#examples-ru_rcpp"></a>
 </h2>
 <p>All the examples in the documentation for <code>ru</code> are replicated in the documentation for <code>ru_rcpp</code>. Here we consider a subset of the examples from the <a href="rust-a-vignette.html">Introducing rust</a> vignette, to illustrate how to provide user-supplied C++ functions to <code>ru_rcpp</code> and to compare the performances of <code>ru</code> and <code>ru_rcpp</code>. We use the <strong>microbenchmark</strong> package <span class="citation">(Mersmann 2015)</span> to make the comparison.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/">rust</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rcpp.org">Rcpp</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rcpp.org" class="external-link">Rcpp</a></span><span class="op">)</span>
 <span class="co"># Is microbenchmark available?</span>
-<span class="va">got_microbenchmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"microbenchmark"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">got_microbenchmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"microbenchmark"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/" class="external-link">microbenchmark</a></span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co"># Set the size of the simulated sample</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></code></pre></div>
-<p>It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp</a></code> function (e.g. <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp("user_fns.cpp")</a></code>) or using RStudio’s Source button on the editor toolbar.</p>
-<div id="standard-normal-density" class="section level3">
-<h3 class="hasAnchor">
-<a href="#standard-normal-density" class="anchor"></a>Standard normal density</h3>
+<p>It is assumed that the user has already compiled their C++ functions and made them available to their R session, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp</a></code> function (e.g. <code>Rcpp::sourceCpp("user_fns.cpp")</code>) or using RStudio’s Source button on the editor toolbar.</p>
+<div class="section level3">
+<h3 id="standard-normal-density">Standard normal density<a class="anchor" aria-label="anchor" href="#standard-normal-density"></a>
+</h3>
 <p>We start with a simple example: the (1-dimensional) standard normal density, based on the C++ function <code>logdN01</code> in the example <code>user_fns.cpp</code> file above.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Normal density ===================</span>
@@ -192,9 +186,9 @@ ptr_N01 &lt;- create_xptr("logdN01")
 
 <span class="co"># Use ru and ru_rcpp starting from the same random number seed and check</span>
 <span class="co"># that the simulated values are the same.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">47</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">47</span><span class="op">)</span>
 <span class="va">x_old</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="fl">2</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">x_old</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x_old</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
 <span class="co">#&gt;            [,1]</span>
 <span class="co">#&gt; [1,]  0.7764728</span>
 <span class="co">#&gt; [2,]  0.5310434</span>
@@ -202,9 +196,9 @@ ptr_N01 &lt;- create_xptr("logdN01")
 <span class="co">#&gt; [4,]  1.2111509</span>
 <span class="co">#&gt; [5,]  1.1391379</span>
 <span class="co">#&gt; [6,]  0.5180914</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">47</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">47</span><span class="op">)</span>
 <span class="va">x_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_N01</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">x_new</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x_new</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
 <span class="co">#&gt;            [,1]</span>
 <span class="co">#&gt; [1,]  0.7764728</span>
 <span class="co">#&gt; [2,]  0.5310434</span>
@@ -215,21 +209,21 @@ ptr_N01 &lt;- create_xptr("logdN01")
 
 <span class="co"># Compare performances of ru and ru_rcpp</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>
     old <span class="op">=</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="fl">2</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
     new <span class="op">=</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_N01</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
   <span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq  mean median     uq    max neval</span>
-<span class="co">#&gt;   old 20.170 21.740 23.16 22.760 24.680 30.390   100</span>
-<span class="co">#&gt;   new  2.226  2.404  2.71  2.503  2.621  6.416   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq  mean median    uq   max neval</span>
+<span class="co">#&gt;   old 19.940 20.860 22.19 21.540 22.96 28.82   100</span>
+<span class="co">#&gt;   new  2.174  2.312  2.64  2.393  2.56 11.61   100</span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than <code>ru</code>. If we start from the same random number seed we get the same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
 </div>
-<div id="mvn" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mvn" class="anchor"></a>Multivariate normal density</h3>
+<div class="section level3">
+<h3 id="mvn">Multivariate normal density<a class="anchor" aria-label="anchor" href="#mvn"></a>
+</h3>
 <p>To execute this example we add the following function to <code>user_fns.cpp</code></p>
 <pre><code>// d-dimensional normal with zero-mean and covariance matrix sigma.
 
@@ -247,34 +241,34 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Three-dimensional normal with positive association ----------------</span>
 <span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span>
-<span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">rho</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">rho</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">rho</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">rho</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="co"># R function</span>
-<span class="va">log_dmvnorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span>, <span class="va">sigma</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">x</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">)</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span>
+<span class="va">log_dmvnorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span>, <span class="va">sigma</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">x</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co"># Create a pointer to the logdmvnorm C++ function</span>
 <span class="va">ptr_mvn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdmvnorm"</span><span class="op">)</span>
 
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>
     old <span class="op">=</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="va">n</span>,
-             init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, 
+             init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, 
     new <span class="op">=</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_mvn</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="va">n</span>,
-                  init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+                  init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span>  
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min      lq    mean  median      uq    max neval</span>
-<span class="co">#&gt;   old 194.30 205.300 211.600 211.000 215.900 270.40   100</span>
-<span class="co">#&gt;   new   8.32   8.773   9.497   9.167   9.621  13.34   100</span></code></pre></div>
+<span class="co">#&gt;  expr     min     lq   mean median     uq    max neval</span>
+<span class="co">#&gt;   old 187.000 199.30 206.10 205.40 210.30 277.50   100</span>
+<span class="co">#&gt;   new   9.195   9.62  10.43   9.84  10.67  14.48   100</span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
-<div id="log-normal-density-after-box-cox-transformation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#log-normal-density-after-box-cox-transformation" class="anchor"></a>Log-normal density after Box-Cox transformation</h3>
+<div class="section level3">
+<h3 id="log-normal-density-after-box-cox-transformation">Log-normal density after Box-Cox transformation<a class="anchor" aria-label="anchor" href="#log-normal-density-after-box-cox-transformation"></a>
+</h3>
 <p>In this example we use a log transform (Box-Cox parameter <span class="math inline">\(\lambda = 0\)</span>) so that the ratio-of-uniforms sampling is based on a normal distribution. The C++ function to calculate the log-density of a lognormal distribution is:</p>
 <pre><code>// Lognormal(mu, sigma).
 
@@ -290,22 +284,22 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ptr_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdlnorm"</span><span class="op">)</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>
    old <span class="op">=</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">0.1</span>,
             trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
    new <span class="op">=</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_lnorm</span>, mu <span class="op">=</span> <span class="fl">0</span>, sigma <span class="op">=</span> <span class="fl">1</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>,
                  lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">0.1</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
   <span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span>
-<span class="co">#&gt;   old 32.250 34.390 36.340 35.880 38.360 44.37   100</span>
-<span class="co">#&gt;   new  4.921  5.254  5.873  5.447  5.755 10.57   100</span></code></pre></div>
+<span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span>
+<span class="co">#&gt;   old 30.470 33.200 35.990 34.850 37.270 104.50   100</span>
+<span class="co">#&gt;   new  4.852  5.015  5.616  5.094  5.516  15.51   100</span></code></pre></div>
 </div>
-<div id="generalized-pareto-posterior-density" class="section level3">
-<h3 class="hasAnchor">
-<a href="#generalized-pareto-posterior-density" class="anchor"></a>Generalized Pareto posterior density</h3>
+<div class="section level3">
+<h3 id="generalized-pareto-posterior-density">Generalized Pareto posterior density<a class="anchor" aria-label="anchor" href="#generalized-pareto-posterior-density"></a>
+</h3>
 <p>The C++ function to calculate the log-posterior density is:</p>
 <pre><code>// Generalized Pareto posterior based on an MDI prior truncated to
 // shape parameter xi &gt;= -1.
@@ -344,44 +338,42 @@ double loggp(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; ss) {
 }</code></pre>
 <p>We simulate some data from a Generalized Pareto distribution, calculate summary statistics involved in the likelihood and calculate an initial value in the search for the posterior mode.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">46</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">46</span><span class="op">)</span>
 <span class="co"># Sample data from a GP(sigma, xi) distribution</span>
 <span class="va">gpd_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rgpd.html">rgpd</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">100</span>, xi <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co"># Calculate summary statistics for use in the log-likelihood</span>
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gpd_sum_stats.html">gpd_sum_stats</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span>
 <span class="co"># Calculate an initial estimate</span>
-<span class="va">init</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<span class="va">init</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <p>Again we see that <code>ru_rcpp</code> is substantially faster than <code>ru</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Arguments for ru_rcpp</span>
 <span class="va">ptr_gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"loggp"</span><span class="op">)</span>
-<span class="va">for_ru_rcpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gp</span>, init <span class="op">=</span> <span class="va">init</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>,
-                 lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>, <span class="va">ss</span><span class="op">)</span>
+<span class="va">for_ru_rcpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gp</span>, init <span class="op">=</span> <span class="va">init</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>,
+                 lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>, <span class="va">ss</span><span class="op">)</span>
 
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>
    old <span class="op">=</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,
-            lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>,
-   new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">ru_rcpp</span>, <span class="va">for_ru_rcpp</span><span class="op">)</span>
+            lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>,
+   new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">ru_rcpp</span>, <span class="va">for_ru_rcpp</span><span class="op">)</span>
   <span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;  expr   min    lq  mean median    uq    max neval</span>
-<span class="co">#&gt;   old 80.39 90.57 94.01  92.50 95.37 158.60   100</span>
-<span class="co">#&gt;   new 17.51 18.26 19.52  19.09 19.97  25.53   100</span></code></pre></div>
+<span class="co">#&gt;  expr   min    lq  mean median    uq   max neval</span>
+<span class="co">#&gt;   old 82.18 88.71 91.59  91.05 95.53 99.50   100</span>
+<span class="co">#&gt;   new 17.30 17.89 19.05  18.59 19.56 24.67   100</span></code></pre></div>
 </div>
 </div>
-<div id="examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp" class="anchor"></a>Examples : <code>find_lambda_one_d_rcpp</code> and <code>find_lambda_rcpp</code>
+<div class="section level2">
+<h2 id="examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp">Examples : <code>find_lambda_one_d_rcpp</code> and <code>find_lambda_rcpp</code><a class="anchor" aria-label="anchor" href="#examples-find_lambda_one_d_rcpp-and-find_lambda_rcpp"></a>
 </h2>
 <p>We repeat two examples from the <a href="rust-a-vignette.html">Introducing rust</a> vignette.</p>
-<div id="gamma-density-example-for-find_lambda_one_d_rcpp" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gamma-density-example-for-find_lambda_one_d_rcpp" class="anchor"></a>Gamma density: example for <code>find_lambda_one_d_rcpp</code>
+<div class="section level3">
+<h3 id="gamma-density-example-for-find_lambda_one_d_rcpp">Gamma density: example for <code>find_lambda_one_d_rcpp</code><a class="anchor" aria-label="anchor" href="#gamma-density-example-for-find_lambda_one_d_rcpp"></a>
 </h3>
-<p>We make use of the <a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf">Rcpp sugar</a> function <code>dgamma</code>.</p>
+<p>We make use of the <a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf" class="external-link">Rcpp sugar</a> function <code>dgamma</code>.</p>
 <pre><code>// Gamma(alpha, 1).
 
 // [[Rcpp::export]]
@@ -391,7 +383,7 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 }</code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>
+<span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>
 <span class="va">ptr_gam</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdgamma"</span><span class="op">)</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_lambda_one_d_rcpp.html">find_lambda_one_d_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>,
                                  max_phi <span class="op">=</span> <span class="va">max_phi</span><span class="op">)</span>
@@ -411,22 +403,21 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; list()</span></code></pre></div>
 </div>
-<div id="generalized-pareto-posterior-density-example-for-find_lambda_rcpp" class="section level3">
-<h3 class="hasAnchor">
-<a href="#generalized-pareto-posterior-density-example-for-find_lambda_rcpp" class="anchor"></a>Generalized Pareto posterior density: example for <code>find_lambda_rcpp</code>
+<div class="section level3">
+<h3 id="generalized-pareto-posterior-density-example-for-find_lambda_rcpp">Generalized Pareto posterior density: example for <code>find_lambda_rcpp</code><a class="anchor" aria-label="anchor" href="#generalized-pareto-posterior-density-example-for-find_lambda_rcpp"></a>
 </h3>
 <p>In this example we supply an external pointer to a C++ function <code>phi_to_theta</code> that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function <code>phi_to_theta</code> must have the same structure as the function used to calculate <span class="math inline">\(\log f\)</span>. See <a href="#cpp_fun">Providing a C++ function to <code>ru_rcpp</code></a> for details. See the <a href="rust-a-vignette.html">Introducing rust</a> vignette for the form of the transformation.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">gpd_init</span>, <span class="va">ss</span><span class="op">)</span>
-<span class="va">min_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">temp</span><span class="op">$</span><span class="va">init_phi</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">temp</span><span class="op">$</span><span class="va">se_phi</span><span class="op">)</span>
-<span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">temp</span><span class="op">$</span><span class="va">init_phi</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">temp</span><span class="op">$</span><span class="va">se_phi</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">gpd_init</span>, <span class="va">ss</span><span class="op">)</span>
+<span class="va">min_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">temp</span><span class="op">$</span><span class="va">init_phi</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">temp</span><span class="op">$</span><span class="va">se_phi</span><span class="op">)</span>
+<span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">temp</span><span class="op">$</span><span class="va">init_phi</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">temp</span><span class="op">$</span><span class="va">se_phi</span><span class="op">)</span>
 
 <span class="co"># Create external pointers</span>
 <span class="va">ptr_gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"loggp"</span><span class="op">)</span>
 <span class="va">ptr_phi_to_theta_gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_phi_to_theta_xptr.html">create_phi_to_theta_xptr</a></span><span class="op">(</span><span class="st">"gp"</span><span class="op">)</span>
 <span class="co"># Note: log_j is set to zero by default inside find_lambda_rcpp()</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_lambda_rcpp.html">find_lambda_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gp</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, min_phi <span class="op">=</span> <span class="va">min_phi</span>,
-                           max_phi <span class="op">=</span> <span class="va">max_phi</span>, user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>xm <span class="op">=</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span>,
+                           max_phi <span class="op">=</span> <span class="va">max_phi</span>, user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>xm <span class="op">=</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span>,
                            phi_to_theta <span class="op">=</span> <span class="va">ptr_phi_to_theta_gp</span><span class="op">)</span>
 <span class="va">lambda</span>
 <span class="co">#&gt; $lambda</span>
@@ -443,19 +434,19 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span class="co">#&gt; 0.12670792 0.02477219 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $phi_to_theta</span>
-<span class="co">#&gt; &lt;pointer: 0x0000000009734770&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x000000000a0ded90&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $log_j</span>
-<span class="co">#&gt; &lt;pointer: 0x00000000097348f0&gt;</span>
+<span class="co">#&gt; &lt;pointer: 0x000000000a0debd0&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user_args</span>
 <span class="co">#&gt; $user_args$xm</span>
 <span class="co">#&gt; [1] 1.846219</span></code></pre></div>
 </div>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <script type="text/x-mathjax-config">
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
 </script><div id="refs" class="references csl-bib-body hanging-indent">
@@ -463,16 +454,16 @@ double logdgamma(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 Eddelbuettel, D. 2013. <em>Seamless <span>R</span> and <span>C++</span> Integration with Rcpp</em>. New York: Springer.
 </div>
 <div id="ref-RcppDE" class="csl-entry">
-Eddelbuettel, D. 2016. <em>RcppDE: Global Optimization by Differential Evolution in <span>C++</span></em>. <a href="https://CRAN.R-project.org/package=RcppDE">https://CRAN.R-project.org/package=RcppDE</a>.
+Eddelbuettel, D. 2016. <em>RcppDE: Global Optimization by Differential Evolution in <span>C++</span></em>. <a href="https://CRAN.R-project.org/package=RcppDE" class="external-link">https://CRAN.R-project.org/package=RcppDE</a>.
 </div>
 <div id="ref-Rcpp" class="csl-entry">
-Eddelbuettel, D., and R. Francois. 2011. <span>“Rcpp: Seamless <span>R</span> and <span>C++</span> Integration.”</span> <em>Journal of Statistical Software</em> 40 (8): 1–18. doi:<a href="https://doi.org/10.18637/jss.v040.i08">10.18637/jss.v040.i08</a>.
+Eddelbuettel, D., and R. Francois. 2011. <span>“Rcpp: Seamless <span>R</span> and <span>C++</span> Integration.”</span> <em>Journal of Statistical Software</em> 40 (8): 1–18. doi:<a href="https://doi.org/10.18637/jss.v040.i08" class="external-link">10.18637/jss.v040.i08</a>.
 </div>
 <div id="ref-arma" class="csl-entry">
-Eddelbuettel, D., and C. Sanderson. 2014. <span>“RcppArmadillo: Accelerating <span>R</span> with High-Performance <span>C++</span> Linear Algebra.”</span> <em>Computational Statistics and Data Analysis</em> 71: 1054–1063. doi:<a href="https://doi.org/10.1016/j.csda.2013.02.005">10.1016/j.csda.2013.02.005</a>.
+Eddelbuettel, D., and C. Sanderson. 2014. <span>“RcppArmadillo: Accelerating <span>R</span> with High-Performance <span>C++</span> Linear Algebra.”</span> <em>Computational Statistics and Data Analysis</em> 71: 1054–1063. doi:<a href="https://doi.org/10.1016/j.csda.2013.02.005" class="external-link">10.1016/j.csda.2013.02.005</a>.
 </div>
 <div id="ref-microbenchmark" class="csl-entry">
-Mersmann, Olaf. 2015. <em><span class="nocase">m</span>icrobenchmark: Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=microbenchmark">https://CRAN.R-project.org/package=microbenchmark</a>.
+Mersmann, Olaf. 2015. <em><span class="nocase">m</span>icrobenchmark: Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=microbenchmark" class="external-link">https://CRAN.R-project.org/package=microbenchmark</a>.
 </div>
 </div>
 </div>
@@ -489,11 +480,13 @@ Mersmann, Olaf. 2015. <em><span class="nocase">m</span>icrobenchmark: Accurate T
 
 
       <footer><div class="copyright">
-  <p>Developed by Paul J. Northrop.</p>
+  <p></p>
+<p>Developed by Paul J. Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -501,6 +494,8 @@ Mersmann, Olaf. 2015. <em><span class="nocase">m</span>icrobenchmark: Accurate T
 
   
 
+
+  
 
   </body>
 </html>

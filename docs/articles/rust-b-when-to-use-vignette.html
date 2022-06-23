@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,7 +66,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paulnorthrop/rust/">
+  <a href="https://github.com/paulnorthrop/rust/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -85,15 +81,15 @@
 
       
 
-      </header><script src="rust-b-when-to-use-vignette_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>When can rust be used?</h1>
-                        <h4 class="author">Paul Northrop</h4>
+                        <h4 data-toc-skip class="author">Paul Northrop</h4>
             
-            <h4 class="date">2021-10-30</h4>
+            <h4 data-toc-skip class="date">2022-06-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/master/vignettes/rust-b-when-to-use-vignette.Rmd"><code>vignettes/rust-b-when-to-use-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-b-when-to-use-vignette.Rmd" class="external-link"><code>vignettes/rust-b-when-to-use-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-b-when-to-use-vignette.Rmd</code></div>
 
     </div>
@@ -101,9 +97,8 @@
     
     
 <p>The generalized ratio-of-uniforms can be used to simulate from a wide range of <span class="math inline">\(d\)</span>-dimensional multivariate probability densities, provided that <span class="math inline">\(d\)</span> is not so large that its efficiency is prohibitively low (see the vignette <a href="rust-a-vignette.html">Introducing rust</a>). However, there are conditions that the target density <span class="math inline">\(f\)</span> must satisfy for this method to be applicable. This vignette considers instances when these conditions do <em>not</em> hold and suggests strategies that may overcome this difficulty. Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently <strong>rust</strong> is designed to work effectively with unimodal densities. This vignette illustrates this using a simple 1-dimensional example.</p>
-<div id="conditions-on-f" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conditions-on-f" class="anchor"></a>Conditions on <span class="math inline">\(f\)</span>
+<div class="section level2">
+<h2 id="conditions-on-f">Conditions on <span class="math inline">\(f\)</span><a class="anchor" aria-label="anchor" href="#conditions-on-f"></a>
 </h2>
 <p>The generalized ratio-of-uniforms method is an acceptance-rejection type of algorithm. It can only be applied to densities for which its acceptance region can be enclosed within a bounding region of finite volume from which it is simple to simulate, usually a cuboidal bounding box. For a <span class="math inline">\(d\)</span>-dimensional density <span class="math inline">\(f(x)\)</span> the bounding box (if it exists) is the <span class="math inline">\((d+1)\)</span>-dimensional set <span class="math inline">\(\{ 0 &lt; u \leq a(r), \, b_i^-(r) \leq v_i \leq b_i^+(r), \, i = 1, \ldots, d \}\)</span>, where <span class="math display">\[
 \begin{eqnarray}
@@ -114,51 +109,44 @@ b_i^+(r) &amp;=&amp; \sup_{\chi_i^+} \, x_i \, f(x)^{r / (r d + 1)},
 \]</span> <span class="math inline">\(x =(x_1, \ldots, x_d)\)</span>, <span class="math inline">\(\chi \subseteq \mathbb{R}^d\)</span>, <span class="math inline">\(\chi_i^- = \{ x \in \chi, x_i \leq 0 \}\)</span> and <span class="math inline">\(\chi_i^+ = \{ x \in \chi, x_i \geq 0 \}\)</span>. See the vignette <a href="rust-a-vignette.html">Introducing rust</a> for more details.</p>
 <p>For a given value of the non-negative tuning parameter <span class="math inline">\(r\)</span> we need <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d\)</span> to be bounded. If <span class="math inline">\(f(x)\)</span> is unbounded then we could use a transformation of variable to obtain a density that <em>is</em> bounded. For bounded <span class="math inline">\(f(x)\)</span> one or more of <span class="math inline">\(x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d\)</span> can be unbounded if <span class="math inline">\(f(x)\)</span> has heavy-tails. Again, we could use a transformation of variable to avoid this problem. For this issue the value of <span class="math inline">\(r\)</span> matters and we may be able to achieve boundedness if a sufficiently large value of <span class="math inline">\(r\)</span> is used. In <strong>rust</strong> <span class="math inline">\(r = 1/2\)</span> is used by default because this is optimal in the Gaussian case. For heavy-tailed densities <span class="math inline">\(r\)</span> needs to be larger, perhaps larger than 1. We consider these strategies in the next two sections.</p>
 </div>
-<div id="unbounded-densities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#unbounded-densities" class="anchor"></a>Unbounded densities</h2>
+<div class="section level2">
+<h2 id="unbounded-densities">Unbounded densities<a class="anchor" aria-label="anchor" href="#unbounded-densities"></a>
+</h2>
 <p>A simple example of an unbounded density is that of a gamma random variable with a shape parameter that is less than 1. Suppose that <span class="math inline">\(X \sim \mbox{gamma}(\alpha, 1)\)</span> and <span class="math inline">\(\alpha &lt; 1\)</span>. Then the density <span class="math inline">\(f_X(x)\)</span> increases without limit as <span class="math inline">\(x \rightarrow 0\)</span> from above. Let <span class="math inline">\(Y = (X^\lambda - 1) / \lambda\)</span>, that is, a Box-Cox transformation <span class="citation">(Box and Cox 1964)</span> of <span class="math inline">\(X\)</span>. If we choose <span class="math inline">\(\lambda\)</span> appropriately then the density <span class="math inline">\(f_Y(y)\)</span> of <span class="math inline">\(Y\)</span> is bounded. <strong>rust</strong> has functions for selecting a suitable value of <span class="math inline">\(\lambda\)</span> in a somewhat automatic way (the user needs to specify a range of values (<code>min_phi</code>, <code>max_phi</code>) over which to perform the calculations). In the gamma(0.1, 1) case below a value of <span class="math inline">\(\lambda\)</span> that is close to 0 is suggested. The plot on the right shows that this does the trick.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/">rust</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a></span><span class="op">)</span>
 <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.1</span>
-<span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>
+<span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>
 <span class="va">ptr_gam</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdgamma"</span><span class="op">)</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_lambda_one_d_rcpp.html">find_lambda_one_d_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>,
                                  max_phi <span class="op">=</span> <span class="va">max_phi</span><span class="op">)</span>
 <span class="co"># Box-Cox transformation parameter</span>
 <span class="va">lambda</span><span class="op">$</span><span class="va">lambda</span>
-<span class="co">#&gt; [1] 0.06758891</span>
 <span class="va">gam</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,
                lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gam</span>, xlab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gam</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, xlab <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></code></pre></div>
-<p><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-2-1.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gam</span>, xlab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gam</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, xlab <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></code></pre></div>
 <p>Here we have used <code>find_lambda_one_d_rcpp</code> and <code>ru_rcpp</code> (see the vignette <a href="rust-c-using-rcpp-vignette.html">Rusting faster: Speedy Simulation using Rcpp</a>) but we could equally have used <code>ru</code> and <code>find_lambda_one_d</code>: this example appears in the help file for <code>find_lambda_one_d</code>.</p>
 </div>
-<div id="heavy-tailed-densities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#heavy-tailed-densities" class="anchor"></a>Heavy-tailed densities</h2>
+<div class="section level2">
+<h2 id="heavy-tailed-densities">Heavy-tailed densities<a class="anchor" aria-label="anchor" href="#heavy-tailed-densities"></a>
+</h2>
 <p>Now we consider densities that are bounded but have sufficiently heavy tails that one or more of <span class="math inline">\(x_i ^ {r d + 1} f(x) ^ r, i = 1, \ldots, d\)</span> are unbounded if <span class="math inline">\(r = 1/2\)</span> is used.</p>
-<div id="cauchy-density" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cauchy-density" class="anchor"></a>Cauchy density</h3>
+<div class="section level3">
+<h3 id="cauchy-density">Cauchy density<a class="anchor" aria-label="anchor" href="#cauchy-density"></a>
+</h3>
 <p>Suppose that <span class="math inline">\(X\)</span> has a standard Cauchy density, that is <span class="math inline">\(f(x) \propto (1 + x^2)^{-1}, -\infty &lt; x &lt; \infty\)</span>. The bounding box cannot be constructed if <span class="math inline">\(r &lt; 1\)</span>. For <span class="math inline">\(r = 1\)</span> the bounding box parameters <span class="math inline">\(b_1^-(r) = -1\)</span> and <span class="math inline">\(b_1^+(r) = 1\)</span> are attained in the limits as <span class="math inline">\(x\)</span> decreases/increases to infinity respectively. This is fine in theory but using <span class="math inline">\(r &gt; 1\)</span> avoids this problem and the largest probability of acceptance is obtained for <span class="math inline">\(r \approx 1.26\)</span>. Below are the estimated bounding boxes and probabilities of acceptance for <span class="math inline">\(r = 1\)</span> (left) and <span class="math inline">\(r = 1.26\)</span> (right).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ptr_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logcauchy"</span><span class="op">)</span>
 <span class="va">cauchy1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_c</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, init <span class="op">=</span> <span class="fl">0</span>, r <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
 <span class="va">cauchy126</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_c</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, init <span class="op">=</span> <span class="fl">0</span>, r <span class="op">=</span> <span class="fl">1.26</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">cauchy1</span><span class="op">$</span><span class="va">box</span>, <span class="va">cauchy126</span><span class="op">$</span><span class="va">box</span><span class="op">)</span>
-<span class="co">#&gt;                box     vals1 conv        box     vals1 conv</span>
-<span class="co">#&gt; a        1.0000000     0.000    0  1.0000000  0.000000    0</span>
-<span class="co">#&gt; b1minus -0.9999999 -2509.398    0 -0.8310221 -2.948272    0</span>
-<span class="co">#&gt; b1plus   0.9999999  2509.398    0  0.8310221  2.948272    0</span>
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cauchy1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">cauchy126</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.7880221 0.8396306</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">cauchy1</span><span class="op">$</span><span class="va">box</span>, <span class="va">cauchy126</span><span class="op">$</span><span class="va">box</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cauchy1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">cauchy126</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></code></pre></div>
 <p>For <span class="math inline">\(r = 1\)</span> the algorithm finds essentially the correct values of <span class="math inline">\(b_1^-\)</span> and <span class="math inline">\(b_1^+\)</span> even though these do not occur at a turning point of the objective functions. The estimated probability of acceptance is indeed larger for <span class="math inline">\(r = 1.26\)</span>.</p>
 </div>
-<div id="hierarchical-1-way-anova-with-few-groups" class="section level3">
-<h3 class="hasAnchor">
-<a href="#hierarchical-1-way-anova-with-few-groups" class="anchor"></a>Hierarchical 1-way ANOVA with few groups</h3>
+<div class="section level3">
+<h3 id="hierarchical-1-way-anova-with-few-groups">Hierarchical 1-way ANOVA with few groups<a class="anchor" aria-label="anchor" href="#hierarchical-1-way-anova-with-few-groups"></a>
+</h3>
 <p>Consider the hierarchical 1-way ANOVA model <span class="math display">\[\begin{equation*}
 Y_{ij} = \mu + \alpha_i + \epsilon_{ij}, \quad\mbox{for} \,\, i = 1, \ldots, I, \, 
 j = 1, \ldots, n_i,  \label{eqn:1way}
@@ -167,66 +155,46 @@ j = 1, \ldots, n_i,  \label{eqn:1way}
 <p>To illustrate the problem that a heavy-tailed density can cause a naive implementation of the generalized ratio-of-uniforms algorithm we use the blood coagulation time data presented in Table 11.2 of <span class="citation">Gelman et al. (2014)</span>. These data are available as the dataframe <code>coagulation</code> in the <strong>bang</strong> package <span class="citation">(Northrop and Hall 2017)</span>: the first column holds the response values (the coagulation times of blood drawn from 24 animals), the second column a factor indicating to which of 4 diets the animal is allocated.</p>
 <p>The <strong>bang</strong> function <code>hanova1</code> samples from the marginal posterior distribution of <span class="math inline">\((\mu, \sigma_\alpha, \sigma)\)</span> given data based on a user-supplied prior distribution. The default prior is <span class="math inline">\(\pi(\mu, \sigma_\alpha, \log\sigma) \propto 1\)</span>. Under this prior, or indeed any prior in which <span class="math inline">\(\mu\)</span> is normally distributed and independent of <span class="math inline">\((\sigma_\alpha, \sigma)\)</span> <em>a priori</em>, the generalized ratio-of-uniforms method can be used to sample from the marginal posterior distribution of <span class="math inline">\((\sigma_\alpha, \sigma)\)</span>. By default (argument <code>param = "trans"</code>) then <code>hanova1</code> parameterizes this marginal posterior in terms of <span class="math inline">\((\log \sigma_\alpha, \log \sigma)\)</span>. If instead we use <code>param = "original"</code>, so that this posterior is parameterized in terms of <span class="math inline">\((\mu, \sigma_\alpha, \sigma)\)</span>, then, with the default <span class="math inline">\(r = 1/2\)</span>, we find that the bounding box cannot be found because the right tail of the posterior for <span class="math inline">\(\sigma_\alpha\)</span> is heavy enough to prevent this. However, if we use <span class="math inline">\(r = 1\)</span> then the bounding box can be found. The two successful approaches (reparameterization or use of <span class="math inline">\(r=1\)</span>) are illustrated below.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/bang/">bang</a></span><span class="op">)</span>
-<span class="va">coag1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/bang/reference/hanova1.html">hanova1</a></span><span class="op">(</span>resp <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, fac <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-<span class="va">coag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/bang/reference/hanova1.html">hanova1</a></span><span class="op">(</span>resp <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, fac <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">1000</span>,
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/bang/" class="external-link">bang</a></span><span class="op">)</span>
+<span class="va">coag1</span> <span class="op">&lt;-</span> <span class="fu">hanova1</span><span class="op">(</span>resp <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, fac <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
+<span class="va">coag2</span> <span class="op">&lt;-</span> <span class="fu">hanova1</span><span class="op">(</span>resp <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, fac <span class="op">=</span> <span class="va">coagulation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">1000</span>,
                  param <span class="op">=</span> <span class="st">"original"</span>, r <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2.5</span>, <span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">97.5</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100</span>
-<span class="va">all1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">coag1</span><span class="op">$</span><span class="va">theta_sim_vals</span>, <span class="va">coag1</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
-<span class="va">all2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">coag2</span><span class="op">$</span><span class="va">theta_sim_vals</span>, <span class="va">coag2</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">all1</span>, <span class="fl">2</span>, <span class="va">quantile</span>, probs <span class="op">=</span> <span class="va">probs</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt;              2.5%  25%  50%  75% 97.5%</span>
-<span class="co">#&gt; theta[1]     58.9 60.4 61.3 62.0  63.6</span>
-<span class="co">#&gt; theta[2]     64.0 65.2 65.9 66.5  67.8</span>
-<span class="co">#&gt; theta[3]     65.8 67.2 67.8 68.4  69.6</span>
-<span class="co">#&gt; theta[4]     59.5 60.6 61.1 61.7  62.9</span>
-<span class="co">#&gt; mu           54.7 62.4 64.0 65.7  76.6</span>
-<span class="co">#&gt; sigma[alpha]  1.9  3.5  4.9  7.7  30.4</span>
-<span class="co">#&gt; sigma         1.8  2.2  2.4  2.7   3.4</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">all2</span>, <span class="fl">2</span>, <span class="va">quantile</span>, probs <span class="op">=</span> <span class="va">probs</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt;              2.5%  25%  50%  75% 97.5%</span>
-<span class="co">#&gt; theta[1]     59.0 60.4 61.1 62.1  63.8</span>
-<span class="co">#&gt; theta[2]     63.9 65.2 65.9 66.5  67.9</span>
-<span class="co">#&gt; theta[3]     65.5 67.1 67.8 68.5  69.6</span>
-<span class="co">#&gt; theta[4]     59.4 60.5 61.1 61.6  62.8</span>
-<span class="co">#&gt; mu           55.2 62.4 64.1 65.9  73.8</span>
-<span class="co">#&gt; sigma[alpha]  1.9  3.4  5.3  8.0  27.4</span>
-<span class="co">#&gt; sigma         1.8  2.2  2.4  2.7   3.4</span></code></pre></div>
+<span class="va">probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.5</span>, <span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">97.5</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100</span>
+<span class="va">all1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">coag1</span><span class="op">$</span><span class="va">theta_sim_vals</span>, <span class="va">coag1</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
+<span class="va">all2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">coag2</span><span class="op">$</span><span class="va">theta_sim_vals</span>, <span class="va">coag2</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">all1</span>, <span class="fl">2</span>, <span class="va">quantile</span>, probs <span class="op">=</span> <span class="va">probs</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">all2</span>, <span class="fl">2</span>, <span class="va">quantile</span>, probs <span class="op">=</span> <span class="va">probs</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>These posterior summaries are similar to those presented in Table 11.3 of <span class="citation">Gelman et al. (2014)</span> (where <span class="math inline">\(\sigma_\alpha\)</span> is denoted <span class="math inline">\(\tau\)</span>), which were obtained using Gibbs sampling.</p>
 <p>The reparameterization strategy has the higher estimated probability of acceptance.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">coag1</span><span class="op">$</span><span class="va">pa</span>
-<span class="co">#&gt; [1] 0.5060729</span>
-<span class="va">coag2</span><span class="op">$</span><span class="va">pa</span>
-<span class="co">#&gt; [1] 0.3118179</span></code></pre></div>
+<span class="va">coag2</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
 </div>
 </div>
-<div id="multimodal-densities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#multimodal-densities" class="anchor"></a>Multimodal densities</h2>
+<div class="section level2">
+<h2 id="multimodal-densities">Multimodal densities<a class="anchor" aria-label="anchor" href="#multimodal-densities"></a>
+</h2>
 <p>Consider the simple bimodal univariate density produced by a mixture of N(0,1) and N(<span class="math inline">\(m\)</span>, 1) densities, with probability <span class="math inline">\(p\)</span> that a value comes from the first component. In principle the generalized ratio-of-uniforms can be used to sample from this density but this relies on the a bounding box being found that includes the entire acceptance region. Currently, <code>ru</code> (and <code>ru_rcpp</code>) search for bounding box parameters in a way that is designed to work well when the density is unimodal. The following examples demonstrate that currently <code>ru</code> isn’t guaranteed to find a suitable bounding box for multimodal densities.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">normal_mixture</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span>, <span class="va">p</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">p</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="va">mu</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">p</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">p</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="va">mu</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">normal_mixture</span>, mu <span class="op">=</span> <span class="fl">10</span>, p <span class="op">=</span> <span class="fl">0.25</span>, init <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res1</span>, main <span class="op">=</span> <span class="st">"(a)"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res1</span>, main <span class="op">=</span> <span class="st">"(a)"</span><span class="op">)</span>
 <span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">normal_mixture</span>, mu <span class="op">=</span> <span class="fl">10</span>, p <span class="op">=</span> <span class="fl">0.25</span>, init <span class="op">=</span> <span class="fl">11</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span>, main <span class="op">=</span> <span class="st">"(b)"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span>, main <span class="op">=</span> <span class="st">"(b)"</span><span class="op">)</span>
 <span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">normal_mixture</span>, mu <span class="op">=</span> <span class="fl">4</span>, p <span class="op">=</span> <span class="fl">0.25</span>, init <span class="op">=</span> <span class="fl">5</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span>, main <span class="op">=</span> <span class="st">"(c)"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res3</span>, main <span class="op">=</span> <span class="st">"(c)"</span><span class="op">)</span>
 <span class="va">res3</span><span class="op">$</span><span class="va">pa</span>
-<span class="co">#&gt; [1] 0.5411255</span>
 <span class="va">res4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">normal_mixture</span>, mu <span class="op">=</span> <span class="fl">4</span>, p <span class="op">=</span> <span class="fl">0.25</span>, init <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res4</span>, main <span class="op">=</span> <span class="st">"(d)"</span><span class="op">)</span></code></pre></div>
-<p><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-1.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-2.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-3.png" width="700"><img src="rust-b-when-to-use-vignette_files/figure-html/unnamed-chunk-6-4.png" width="700"></p>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res4</span>, main <span class="op">=</span> <span class="st">"(d)"</span><span class="op">)</span></code></pre></div>
 <p>In (a), using the initial value <code>init = -1</code> means that the smaller of the two modes is found in the search for <span class="math inline">\(a(r)\)</span>. As a consequence most of the acceptance region for the other component of the mixture is not contained in the bounding box and this component is effectively missing from the sample produced. Case (b) is similar but the larger of the two modes is found. In (c) and (d) the two components are closer, in the sense that the component distributions overlap to a greater degree. In (c) the larger mode is found, the bounding box contains the entire acceptance region and a valid sample is produced. In (d) the smaller mode is found and much of the acceptance region corresponding to the other component is not included in the acceptance region.</p>
 <p>A future release of <strong>rust</strong> will include an option to employ a more extensive search for the bounding box parameters so that some simple multimodal densities can be accommodated. However, multimodality will tend to reduce the probability of acceptance. In example (c) above it is reasonable (approximately 0.55) but as the number of modes and/or dimensions of the density increase the probability of acceptance will decrease.</p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <script type="text/x-mathjax-config">
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
 </script><div id="refs" class="references csl-bib-body hanging-indent">
@@ -240,7 +208,7 @@ Gelman, A. 2006. <span>“Prior Distributions for Variance Parameters in Hierarc
 Gelman, A., J. B. Carlin, H. S. Stern, D. B. Dunson, A. Vehtari, and D. B. Rubin. 2014. <em>Bayesian Data Analysis</em>. third edition. Florida, USA: Chapman &amp; Hall / CRC.
 </div>
 <div id="ref-bang" class="csl-entry">
-Northrop, P. J., and B. D. Hall. 2017. <em><span class="nocase">b</span>ang: Bayesian Analysis, No Gibbs</em>. <a href="https://CRAN.R-project.org/package=bang">https://CRAN.R-project.org/package=bang</a>.
+Northrop, P. J., and B. D. Hall. 2017. <em><span class="nocase">b</span>ang: Bayesian Analysis, No Gibbs</em>. <a href="https://CRAN.R-project.org/package=bang" class="external-link">https://CRAN.R-project.org/package=bang</a>.
 </div>
 </div>
 </div>
@@ -257,11 +225,13 @@ Northrop, P. J., and B. D. Hall. 2017. <em><span class="nocase">b</span>ang: Bay
 
 
       <footer><div class="copyright">
-  <p>Developed by Paul J. Northrop.</p>
+  <p></p>
+<p>Developed by Paul J. Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -269,6 +239,8 @@ Northrop, P. J., and B. D. Hall. 2017. <em><span class="nocase">b</span>ang: Bay
 
   
 
+
+  
 
   </body>
 </html>
