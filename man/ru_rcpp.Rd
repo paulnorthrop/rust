@@ -68,7 +68,7 @@ transformation, \code{trans = "BC"} for Box-Cox transformation,
 If \code{trans = "user"} then the transformation should be specified
 using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 used to pass arguments to \code{phi_to_theta} and \code{log_j}.
-See \strong{Details} and the \code{Examples}.}
+See \strong{Details} and the \strong{Examples}.}
 
 \item{phi_to_theta}{An external pointer to a compiled C++ function returning
 (the inverse) of the transformation from \code{theta} (\eqn{\theta}) to
@@ -117,7 +117,7 @@ than \code{lambda_tol} in magnitude are set to zero.}
 
 \item{rotate}{A logical scalar. If TRUE (\code{d} > 1 only) use Choleski
 rotation.  If d = 1 and \code{rotate = TRUE} then rotate will be set to
-FALSE with a warning.}
+FALSE with a warning.  See \strong{Details}.}
 
 \item{lower, upper}{Numeric vectors.  Lower/upper bounds on the arguments of
 the function \emph{after} any transformation from theta to phi implied by
@@ -218,6 +218,10 @@ An object of class "ru" is a list containing the following
     \item{f_mode}{The estimated mode of the target density f, after any
       Box-Cox transformation and/or user supplied transformation, but before
       mode relocation.}
+    \item{rotation_matrix}{The rotation matrix used to rotate the
+      log-density about the origin, after mode relocation and any other
+      transformations have been applied.  If \code{rotate = FALSE}} then
+      \code{rotation_matrix} is an identity matrix.
 }
 \description{
 Uses the generalized ratio-of-uniforms method to simulate from a

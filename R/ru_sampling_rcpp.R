@@ -40,7 +40,7 @@
 #'   If \code{trans = "user"} then the transformation should be specified
 #'   using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
 #'   used to pass arguments to \code{phi_to_theta} and \code{log_j}.
-#'   See \strong{Details} and the \code{Examples}.
+#'   See \strong{Details} and the \strong{Examples}.
 #' @param phi_to_theta An external pointer to a compiled C++ function returning
 #'   (the inverse) of the transformation from \code{theta} (\eqn{\theta}) to
 #'   \code{phi} (\eqn{\phi}) that may be used to ensure positivity of
@@ -82,7 +82,7 @@
 #'   \code{lambda$gm} is used, not \code{gm}.
 #' @param rotate A logical scalar. If TRUE (\code{d} > 1 only) use Choleski
 #'   rotation.  If d = 1 and \code{rotate = TRUE} then rotate will be set to
-#'   FALSE with a warning.
+#'   FALSE with a warning.  See \strong{Details}.
 #' @param lower,upper Numeric vectors.  Lower/upper bounds on the arguments of
 #'   the function \emph{after} any transformation from theta to phi implied by
 #'   the inverse of \code{phi_to_theta}. If \code{rotate = FALSE} these
@@ -213,6 +213,10 @@
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
+#'     \item{rotation_matrix}{The rotation matrix used to rotate the
+#'       log-density about the origin, after mode relocation and any other
+#'       transformations have been applied.  If \code{rotate = FALSE}} then
+#'       \code{rotation_matrix} is an identity matrix.
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
