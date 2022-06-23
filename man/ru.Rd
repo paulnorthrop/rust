@@ -208,10 +208,10 @@ An object of class \code{"ru"} is a list containing the following
     \item{f_mode}{The estimated mode of the target density f, after any
       Box-Cox transformation and/or user supplied transformation, but before
       mode relocation.}
-    \item{trans_fn}{An R function that performs the combination of all the
-      transformations used to transform the original variable \eqn{\theta}
-      to the variable \eqn{\rho} on which the generalised ratio-of-uniforms
-      method is performed.}
+    \item{trans_fn}{An R function that performs the inverse transformation
+      from the transformed variable \eqn{\rho}, on which the generalised
+      ratio-of-uniforms method is performed, back to the original variable
+      \eqn{\theta}.}
 }
 \description{
 Uses the generalized ratio-of-uniforms method to simulate from a

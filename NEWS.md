@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* The list object returned from the function `ru()` has an extra component named `trans_fn`.  This is an R function that performs the combination of all the transformations used to transform the original variable $\theta$ to the variable $\rho$ on which the generalised ration-of-uniforms method is performed.
+* The list object returned from the function `ru()` has an extra component named `trans_fn`.  This is an R function that performs the inverse transformation from the transformed variable $\rho$, on which the generalised ratio-of-uniforms method is performed, back to the original variable $\theta$.
 
 * The documentation of the functions `ru()` and `ru_rcpp()` now note that if the argument `n = 0` is passed then the ratio-of-uniforms bounding box is returned but no simulation is performed. This may be useful if the bounding box itself is of interest.
 

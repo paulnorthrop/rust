@@ -200,10 +200,10 @@
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
-#'     \item{trans_fn}{An R function that performs the combination of all the
-#'       transformations used to transform the original variable \eqn{\theta}
-#'       to the variable \eqn{\rho} on which the generalised ratio-of-uniforms
-#'       method is performed.}
+#'     \item{trans_fn}{An R function that performs the inverse transformation
+#'       from the transformed variable \eqn{\rho}, on which the generalised
+#'       ratio-of-uniforms method is performed, back to the original variable
+#'       \eqn{\theta}.}
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
