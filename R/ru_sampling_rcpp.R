@@ -841,7 +841,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_rho_args <- logf_args
   res$f_mode <- f_mode
   res$rotate <- rotate
-  res$rotation_matrix <- rotation_matrix
+  res$rotation_matrix <- rot_mat
   res$call <- Call
   res$r <- r
   class(res) <- "ru"
