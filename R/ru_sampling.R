@@ -167,7 +167,7 @@
 #'   The default value of the tuning parameter \code{r} is 1/2, which is
 #'   likely to be close to optimal in many cases, particularly if
 #'   \code{trans = "BC"}.
-#' @return An object of class "ru" is a list containing the following
+#' @return An object of class \code{"ru"} is a list containing the following
 #'   components:
 #'     \item{sim_vals}{An \code{n} by \code{d} matrix of simulated values.}
 #'     \item{box}{A (2 * \code{d} + 1) by \code{d} + 2 matrix of
@@ -200,12 +200,10 @@
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
-#'     \item{rotate}{A logical scalar indicating whether or not rotation is
-#'       used.}
-#'     \item{rotation_matrix}{The rotation matrix used to rotate the
-#'       log-density about the origin, after mode relocation and any other
-#'       transformations have been applied.  If \code{rotate = FALSE}} then
-#'       \code{rotation_matrix} is an identity matrix.
+#'     \item{trans_fn}{An R function that performs the combination of all the
+#'       transformations used to transform the original variable \eqn{\theta}
+#'       to the variable \eqn{\rho} on which the generalised ratio-of-uniforms
+#'       method is performed.}
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
@@ -598,6 +596,9 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       val <- logf(theta, ...) - hscale
       structure(val, theta = theta)
     }
+    trans_fn <- function(._rho) {
+      return(rho_to_psi(._rho))
+    }
   }
   if (trans == "BC") {
     logf_rho <- function(._rho, ...) {
@@ -611,6 +612,11 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       val <- logf(theta, ...) - log_bc_jac - log_j(theta) - hscale
       structure(val, theta = theta)
     }
+    trans_fn <- function(._rho) {
+      psi <- rho_to_psi(._rho)
+      phi <- psi_to_phi(psi)
+      return(phi_to_theta(phi))
+    }
   }
   if (trans == "user") {
     logf_rho <- function(._rho, ...) {
@@ -620,6 +626,10 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       logj <- do.call(log_j, c(list(theta), user_args))
       val <- logf(theta, ...) - logj - hscale
       structure(val, theta = theta)
+    }
+    trans_fn <- function(._rho) {
+      phi <- rho_to_psi(._rho)
+      return(do.call(phi_to_theta, c(list(phi), user_args)))
     }
   }
   neg_logf_rho <- function(._rho, ...) -logf_rho(._rho, ...)
@@ -766,8 +776,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_args <- list(...)
   res$logf_rho <- logf_rho
   res$f_mode <- f_mode
-  res$rotate <- rotate
-  res$rotation_matrix <- rot_mat
+  res$trans_fn <- trans_fn
   res$call <- Call
   res$r <- r
   class(res) <- "ru"

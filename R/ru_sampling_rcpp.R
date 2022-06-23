@@ -177,7 +177,7 @@
 #'   The default value of the tuning parameter \code{r} is 1/2, which is
 #'   likely to be close to optimal in many cases, particularly if
 #'   \code{trans = "BC"}.
-#' @return An object of class "ru" is a list containing the following
+#' @return An object of class \code{"ru"} is a list containing the following
 #'   components:
 #'     \item{sim_vals}{An \code{n} by \code{d} matrix of simulated values.}
 #'     \item{box}{A (2 * \code{d} + 1) by \code{d} + 2 matrix of
@@ -213,12 +213,6 @@
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
-#'     \item{rotate}{A logical scalar indicating whether or not rotation is
-#'       used.}
-#'     \item{rotation_matrix}{The rotation matrix used to rotate the
-#'       log-density about the origin, after mode relocation and any other
-#'       transformations have been applied.  If \code{rotate = FALSE}} then
-#'       \code{rotation_matrix} is an identity matrix.
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
@@ -840,8 +834,6 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_rho <- logf_fun
   res$logf_rho_args <- logf_args
   res$f_mode <- f_mode
-  res$rotate <- rotate
-  res$rotation_matrix <- rot_mat
   res$call <- Call
   res$r <- r
   class(res) <- "ru"

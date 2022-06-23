@@ -182,7 +182,7 @@ The exception to this is when the initial and current solutions are equal.
 Then we start from the current solution multiplied by \code{1 - shoof}.}
 }
 \value{
-An object of class "ru" is a list containing the following
+An object of class \code{"ru"} is a list containing the following
   components:
     \item{sim_vals}{An \code{n} by \code{d} matrix of simulated values.}
     \item{box}{A (2 * \code{d} + 1) by \code{d} + 2 matrix of
@@ -218,12 +218,6 @@ An object of class "ru" is a list containing the following
     \item{f_mode}{The estimated mode of the target density f, after any
       Box-Cox transformation and/or user supplied transformation, but before
       mode relocation.}
-    \item{rotate}{A logical scalar indicating whether or not rotation is
-      used.}
-    \item{rotation_matrix}{The rotation matrix used to rotate the
-      log-density about the origin, after mode relocation and any other
-      transformations have been applied.  If \code{rotate = FALSE}} then
-      \code{rotation_matrix} is an identity matrix.
 }
 \description{
 Uses the generalized ratio-of-uniforms method to simulate from a

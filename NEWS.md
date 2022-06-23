@@ -2,8 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* The rotation matrix used to rotate the log-density about the origin, after mode relocation and any other transformations have been applied has been added to the list returned from `ru()` and from `ru_rcpp()` in the component `rotation_matrix`.  The component `rotation` indicates whether or not rotation was used.
-
+* The list object returned from the function `ru()` has an extra component named `trans_fn`.  This is an R function that performs the combination of all the transformations used to transform the original variable $\theta$ to the variable $\rho$ on which the generalised ration-of-uniforms method is performed.
 
 * The documentation of the functions `ru()` and `ru_rcpp()` now note that if the argument `n = 0` is passed then the ratio-of-uniforms bounding box is returned but no simulation is performed. This may be useful if the bounding box itself is of interest.
 
