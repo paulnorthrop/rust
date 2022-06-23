@@ -213,6 +213,8 @@
 #'     \item{f_mode}{The estimated mode of the target density f, after any
 #'       Box-Cox transformation and/or user supplied transformation, but before
 #'       mode relocation.}
+#'     \item{rotate}{A logical scalar indicating whether or not rotation is
+#'       used.}
 #'     \item{rotation_matrix}{The rotation matrix used to rotate the
 #'       log-density about the origin, after mode relocation and any other
 #'       transformations have been applied.  If \code{rotate = FALSE}} then
@@ -838,6 +840,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   res$logf_rho <- logf_fun
   res$logf_rho_args <- logf_args
   res$f_mode <- f_mode
+  res$rotate <- rotate
+  res$rotation_matrix <- rotation_matrix
   res$call <- Call
   res$r <- r
   class(res) <- "ru"
