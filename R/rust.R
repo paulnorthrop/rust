@@ -17,8 +17,23 @@
 #'   \code{find_lambda_rcpp} and \code{find_lambda_one_d_rcpp}
 #'   Basic \code{plot} and \code{summary} methods are also provided.
 #'
-#' See \code{vignette("rust-a-vignette", package = "rust")} for an overview of
-#' the package.
+#' See the following package vignettes for information:
+#' \itemize{
+#'   \item{
+#'    \href{https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html}{
+#'    Introducing rust} or \code{vignette("rust-a-vignette", package = "rust")}.
+#'   }
+#'   \item{
+#'    \href{https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html}{
+#'    When can rust be used?} or
+#'    \code{vignette("rust-b-when-to-use-vignette", package = "rust")}.
+#'   }
+#'   \item{
+#'    \href{https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html}{
+#'    Rusting faster: Simulation using Rcpp} or
+#'    \code{vignette("rust-c-using-rcpp-vignette", package = "rust")}.
+#'   }
+#' }
 #'
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. Efficient
 #'  generation of random variates via the ratio-of-uniforms method. Statistics

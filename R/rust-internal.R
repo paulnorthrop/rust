@@ -485,7 +485,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
   #   f_mode       : A numeric scalar.  The estimated mode of the target
   #                  log-density logf.
   #   ep           : A numeric scalar.  Controls initial estimates for
-  #                  optimizations to find the b-bounding box parameters.
+  #                  optimisations to find the b-bounding box parameters.
   #                  The default (ep=0) corresponds to starting at the mode of
   #                  logf small positive values of ep move the constrained
   #                  variable slightly away from the mode in the correct
@@ -814,7 +814,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
   #   lower         : A numeric vector.  Lower bounds on the arguments of logf.
   #   upper         : A numeric vector.  Upper bounds on the arguments of logf.
   #   ep            : A numeric scalar.  Controls initial estimates for
-  #                   optimizations to find the b-bounding box parameters.
+  #                   optimisations to find the b-bounding box parameters.
   #                   The default (ep=0) corresponds to starting at the mode of
   #                   logf small positive values of ep move the constrained
   #                   variable slightly away from the mode in the correct

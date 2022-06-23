@@ -36,7 +36,7 @@ ru_rcpp(
 \item{logf}{An external pointer to a compiled C++ function returning the
   log of the target density \eqn{f}.
   This function should return \code{-Inf} when the density is zero.
-  It is better to use \code{logf = } explicitly, e.g.
+  It is better to use \code{logf = } explicitly, for example,
   \code{ru(logf = dnorm, log = TRUE, init = 0.1)},
   to avoid argument matching problems.  In contrast,
   \code{ru(dnorm, log = TRUE, init = 0.1)}
@@ -62,21 +62,26 @@ If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
 Box-Cox transformation or user-defined transformation, but \emph{before}
 any rotation of axes.}
 
-\item{trans}{A character scalar. "none" for no transformation, "BC" for
-Box-Cox transformation, "user" for a user-defined transformation.
+\item{trans}{A character scalar. \code{trans = "none"} for no
+transformation, \code{trans = "BC"} for Box-Cox transformation,
+\code{trans = "user"} for a user-defined transformation.
 If \code{trans = "user"} then the transformation should be specified
 using \code{phi_to_theta} and \code{log_j} and \code{user_args} may be
-used to pass arguments to \code{phi_to_theta} and \code{log_j}.}
+used to pass arguments to \code{phi_to_theta} and \code{log_j}.
+See \strong{Details} and the \code{Examples}.}
 
 \item{phi_to_theta}{An external pointer to a compiled C++ function returning
-(the inverse) of the transformation from theta to phi used to ensure
-positivity of phi prior to Box-Cox transformation.  The argument is
-phi and the returned value is theta.  If \code{phi_to_theta}
-is undefined at the input value then the function should return NA.}
+(the inverse) of the transformation from \code{theta} (\eqn{\theta}) to
+\code{phi} (\eqn{\phi}) that may be used to ensure positivity of
+\eqn{\phi} prior to Box-Cox transformation.  The argument is \code{phi}
+and the returned value is \code{theta}.  If \code{phi_to_theta} is
+undefined at the input value then the function should return \code{NA}.
+See \strong{Details}.}
 
 \item{log_j}{An external pointer to a compiled C++ function returning the
-log of the Jacobian of the transformation from theta to phi, i.e. based on
-derivatives of phi with respect to theta. Takes theta as its argument.}
+log of the Jacobian of the transformation from \code{theta} (\eqn{\theta})
+to \code{phi} (\eqn{\phi}), i.e., based on derivatives of \eqn{\phi} with
+respect to \eqn{\theta}. Takes \code{theta} as its argument.}
 
 \item{user_args}{A list of numeric components. If \code{trans = ``user''}
 then \code{user_args} is a list providing arguments to the user-supplied
@@ -96,8 +101,8 @@ functions \code{phi_to_theta} and \code{log_j}.}
     \item{sd_psi}{A numeric vector.  Estimates of the marginal standard
       deviations of the Box-Cox transformed variables (optional).}
     \item{phi_to_theta}{as above (optional).}
-    \item{log_j}{as above (optional).}
-    \item{user_args}{as above (optional).}
+    \item{log_j}{As above (optional).}
+    \item{user_args}{As above (optional).}
   }
   This list may be created using \code{\link{find_lambda_one_d_rcpp}}
   (for \code{d} = 1) or \code{\link{find_lambda_rcpp}} (for any \code{d}).
@@ -111,13 +116,13 @@ than \code{lambda_tol} in magnitude are set to zero.}
 \code{lambda$gm} is used, not \code{gm}.}
 
 \item{rotate}{A logical scalar. If TRUE (\code{d} > 1 only) use Choleski
-rotation.  If d = 1 and \code{rotate} = TRUE then rotate will be set to
+rotation.  If d = 1 and \code{rotate = TRUE} then rotate will be set to
 FALSE with a warning.}
 
 \item{lower, upper}{Numeric vectors.  Lower/upper bounds on the arguments of
 the function \emph{after} any transformation from theta to phi implied by
 the inverse of \code{phi_to_theta}. If \code{rotate = FALSE} these
-are used in all of the optimizations used to construct the bounding box.
+are used in all of the optimisations used to construct the bounding box.
 If \code{rotate = TRUE} then they are use only in the first optimisation
 to maximise the target density.`
 If \code{trans = "BC"} components of \code{lower} that are negative are
@@ -126,7 +131,7 @@ transformation are calculated inside \code{ru}.}
 
 \item{r}{A numeric scalar.  Parameter of generalized ratio-of-uniforms.}
 
-\item{ep}{A numeric scalar.  Controls initial estimates for optimizations
+\item{ep}{A numeric scalar.  Controls initial estimates for optimisations
 to find the b-bounding box parameters.  The default (\code{ep}=0)
 corresponds to starting at the mode of \code{logf} small positive values
 of \code{ep} move the constrained variable slightly away from the mode in
@@ -134,7 +139,7 @@ the correct direction.  If \code{ep} is negative its absolute value is
 used, with no warning given.}
 
 \item{a_algor, b_algor}{Character scalars.  Either "nlminb" or "optim".
-Respective optimization algorithms used to find a(r) and (bi-(r), bi+(r)).}
+Respective optimisation algorithms used to find a(r) and (bi-(r), bi+(r)).}
 
 \item{a_method, b_method}{Character scalars.  Respective methods used by
 \code{optim} to find a(r) and (bi-(r), bi+(r)).  Only used if \code{optim}
@@ -201,14 +206,21 @@ An object of class "ru" is a list containing the following
 }
 \description{
 Uses the generalized ratio-of-uniforms method to simulate from a
-distribution with log-density \eqn{log f} (up to an additive constant).
-\eqn{f} must be bounded, perhaps after a transformation of variable.
-The file file `user_fns.cpp` that is sourced before running the examples
+distribution with log-density \eqn{\log f}{log f} (up to an additive
+constant). The density \eqn{f} must be bounded, perhaps after a
+transformation of variable.
+The file \code{user_fns.cpp} that is sourced before running the examples
 below is available at the rust Github page at
 \url{https://raw.githubusercontent.com/paulnorthrop/rust/master/src/user_fns.cpp}.
 }
 \details{
-If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
+For information about the generalised ratio-of-uniforms method and
+  transformations see the
+  \href{https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html}{
+  Introducing rust} vignette.  This can also be accessed using
+  \code{vignette("rust-a-vignette", package = "rust")}.
+
+  If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
   implements the (multivariate) generalized ratio of uniforms method
   described in Wakefield, Gelfand and Smith (1991) using a target
   density whose mode is relocated to the origin (`mode relocation') in the
