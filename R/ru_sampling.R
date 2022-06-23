@@ -167,7 +167,7 @@
 #'     \item{logf}{A function. \code{logf} supplied by the user, but
 #'       with f scaled by the maximum of the target density used in the
 #'       ratio-of-uniforms method (i.e. \code{logf_rho}), to avoid numerical
-#'       problems in contouring fin \code{\link{plot.ru}} when
+#'       problems in contouring f in \code{\link{plot.ru}} when
 #'       \code{d = 2}.}
 #'     \item{logf_rho}{A function. The target function actually used in the
 #'       ratio-of-uniforms algorithm.}
