@@ -608,6 +608,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
       if (any(test <= 0)) return(-Inf)
       phi <- psi_to_phi(psi)
       theta <- phi_to_theta(phi)
+      if (any(!is.finite(theta))) return(-Inf)
       log_bc_jac <- sum((lambda - 1)[which_lam] * log(phi[which_lam]))
       val <- logf(theta, ...) - log_bc_jac - log_j(theta) - hscale
       structure(val, theta = theta)
