@@ -54,6 +54,9 @@ the column names of the simulated data matrix to be plotted are used.}
 \code{\link[graphics]{points}} to control the appearance of points
 depicting the simulated values. Only relevant when \code{d = 2}.}
 }
+\value{
+No return value, only the plot is produced.
+}
 \description{
 \code{plot} method for class \code{"ru"}.  For \code{d = 1} a histogram of
 the simulated values is plotted with a the density function superimposed.
@@ -65,17 +68,14 @@ simulated values are produced.
 \examples{
 # Log-normal density ----------------
 x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 1)
-
 \donttest{
 plot(x)
 }
-
 # Improve appearance using arguments to plot() and hist()
 \donttest{
 plot(x, breaks = seq(0, ceiling(max(x$sim_vals)), by = 0.25),
   xlim = c(0, 10))
 }
-
 # Two-dimensional normal with positive association ----------------
 rho <- 0.9
 covmat <- matrix(c(1, rho, rho, 1), 2, 2)
@@ -85,7 +85,6 @@ log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
   - 0.5 * (x - mean) \%*\% solve(sigma) \%*\% t(x - mean)
 }
 x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
-
 \donttest{
 plot(x)
 }

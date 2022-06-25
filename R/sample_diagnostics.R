@@ -36,20 +36,18 @@
 #' @param points_par A list of arguments to pass to
 #'   \code{\link[graphics]{points}} to control the appearance of points
 #'   depicting the simulated values. Only relevant when \code{d = 2}.
+#' @return No return value, only the plot is produced.
 #' @examples
 #' # Log-normal density ----------------
 #' x <- ru(logf = dlnorm, log = TRUE, d = 1, n = 1000, lower = 0, init = 1)
-#'
 #' \donttest{
 #' plot(x)
 #' }
-#'
 #' # Improve appearance using arguments to plot() and hist()
 #' \donttest{
 #' plot(x, breaks = seq(0, ceiling(max(x$sim_vals)), by = 0.25),
 #'   xlim = c(0, 10))
 #' }
-#'
 #' # Two-dimensional normal with positive association ----------------
 #' rho <- 0.9
 #' covmat <- matrix(c(1, rho, rho, 1), 2, 2)
@@ -59,7 +57,6 @@
 #'   - 0.5 * (x - mean) %*% solve(sigma) %*% t(x - mean)
 #' }
 #' x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
-#'
 #' \donttest{
 #' plot(x)
 #' }
@@ -205,6 +202,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     }
     pairwise_plots(plot_data)
   }
+  return(invisible())
 }
 
 # =========================== summary.ru ===========================
