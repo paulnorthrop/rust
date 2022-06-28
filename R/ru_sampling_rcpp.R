@@ -577,6 +577,13 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
   } else {
     which_lam <- which(lambda != 1L)
   }
+  # If mode has been supplied then set init = mode
+  if (!is.null(mode)) {
+    if (length(mode) != d) {
+      stop("''mode'' should be a vector of length ''d''")
+    }
+    init <- mode
+  }
   # If no initial estimates have been supplied then use a vector of ones.
   if (is.null(init)) {
     init <- rep(1, d)
@@ -589,12 +596,12 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
     warning("d > 1 but init has length 1: a d-vector of inits has been used")
   }
   if (len_init != d & len_init != 1) {
-      stop("the length of init is incompatible with d")
+      stop("The length of init is incompatible with d")
   }
   # The option rotate = TRUE is not relevant when d = 1
   if (d == 1 & rotate) {
     rotate <- FALSE
-    warning("rotation is not relevant when d=1: no rotation is used")
+    warning("Rotation is not relevant when d=1: no rotation is used")
   }
   ep <- abs(ep)
   # Objects to store the values underlying the ru box and convergence
