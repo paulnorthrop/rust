@@ -411,10 +411,10 @@
 #' @seealso \code{\link[base]{chol}} for the Choleski decomposition.
 #'
 #' @export
-ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
-               trans = c("none", "BC", "user"),  phi_to_theta,
-               log_j, user_args = list(), lambda = rep(1L, d),
-               lambda_tol = 1e-6, gm,
+ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
+               trans = c("none", "BC", "user"),  phi_to_theta = NULL,
+               log_j = NULL, user_args = list(), lambda = rep(1L, d),
+               lambda_tol = 1e-6, gm = NULL,
                rotate = ifelse(d == 1, FALSE, TRUE),
                lower = rep(-Inf, d),
                upper = rep(Inf, d), r = 1 / 2, ep = 0L,
@@ -478,7 +478,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
   trans <- match.arg(trans)
   # If Box-Cox scale parameter is not supplied (directly) set it to 1,
   # at least for the moment
-  if (missing(gm)) {
+  if (is.null(gm)) {
     gm <- rep(1, d)
   }
   # Set up Box-Cox transformation parameters (if necessary)
@@ -572,7 +572,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
     which_lam <- which(lambda != 1L)
   }
   # If no initial estimates have been supplied then use a vector of ones.
-  if (missing(init)) {
+  if (is.null(init)) {
     init <- rep(1, d)
     warning("No initial estimate of the mode given: a vector of ones has
             been used", noBreaks. = TRUE)
@@ -610,14 +610,14 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
   if (trans == "none" & is_pointer) {
     warning("phi_to_theta() not used when trans = ``none'': identity fn used")
   }
-  if (!is_pointer & !missing(phi_to_theta)) {
+  if (!is_pointer & !is.null(phi_to_theta)) {
     stop("phi_to_theta must be an external pointer to a function or NULL")
   }
-  if (trans == "user" & missing(phi_to_theta)) {
+  if (trans == "user" & is.null(phi_to_theta)) {
     stop("When trans = ``user'' phi_to_theta must be supplied")
   }
   is_pointer <- (class(log_j) == "externalptr")
-  if (!is_pointer & !missing(log_j)) {
+  if (!is_pointer & !is.null(log_j)) {
     stop("log_j must be an external pointer to a function or NULL")
   }
   # variable rotation matrix: set to matrix of ones initially
@@ -635,7 +635,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
     logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
                       logf = logf, pars = pars)
     ru_args <- list(d = d, r = r)
-  } else if (trans == "BC" & missing(phi_to_theta)) {
+  } else if (trans == "BC" & is.null(phi_to_theta)) {
     logf_fun <- cpp_logf_rho_2
     a_obj_fun <- cpp_a_obj_2
     lower_box_fun <- cpp_lower_box_2
@@ -657,7 +657,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
                       phi_to_theta = phi_to_theta, log_j = log_j,
                       user_args = user_args)
     ru_args <- list(d = d, r = r, tfun = tfun)
-  } else if (trans == "BC" & !missing(phi_to_theta)) {
+  } else if (trans == "BC" & !is.null(phi_to_theta)) {
     logf_fun <- cpp_logf_rho_3
     a_obj_fun <- cpp_a_obj_2
     lower_box_fun <- cpp_lower_box_2
@@ -672,7 +672,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
     } else {
       ptpfun <- create_psi_to_phi_xptr("has_zero")
     }
-    if (missing(log_j)) {
+    if (is.null(log_j)) {
       log_j <- create_log_jac_xptr("case_3")
     }
     logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
@@ -689,7 +689,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init,
     tpars <- list()
     tfun <- create_trans_xptr("case_4")
     ptpfun <- create_psi_to_phi_xptr("no_trans")
-    if (missing(log_j)) {
+    if (is.null(log_j)) {
       log_j <- create_log_jac_xptr("case_4")
     }
     logf_args <- list(psi_mode = rep(0, d), rot_mat = diag(d), hscale = 0,
