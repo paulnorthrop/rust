@@ -393,10 +393,10 @@
 #' @seealso \code{\link[base]{chol}} for the Choleski decomposition.
 #'
 #' @export
-ru <- function(logf, ..., n = 1, d = 1, init = NULL,
-               trans = c("none", "BC", "user"),  phi_to_theta = NULL,
-               log_j = NULL, user_args = list(), lambda = rep(1L, d),
-               lambda_tol = 1e-6, gm = NULL,
+ru <- function(logf, ..., n = 1, d = 1, init,
+               trans = c("none", "BC", "user"),  phi_to_theta,
+               log_j, user_args = list(), lambda = rep(1L, d),
+               lambda_tol = 1e-6, gm,
                rotate = ifelse(d == 1, FALSE, TRUE),
                lower = rep(-Inf, d),
                upper = rep(Inf, d), r = 1 / 2, ep = 0L,
@@ -430,7 +430,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   trans <- match.arg(trans)
   # If Box-Cox scale parameter is not supplied (directly) set it to 1,
   # at least for the moment
-  if (is.null(gm)) {
+  if (missing(gm)) {
     gm <- rep(1, d)
   }
   # Set up Box-Cox transformation parameters (if necessary)
@@ -521,7 +521,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
     which_lam <- which(lambda != 1L)
   }
   # If no initial estimates have been supplied then use a vector of ones.
-  if (is.null(init)) {
+  if (missing(init)) {
     init <- rep(1, d)
     warning("No initial estimate of the mode given: a vector of ones has
             been used", noBreaks. = TRUE)
@@ -558,17 +558,17 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   if (trans == "none" & is.function(phi_to_theta)) {
     warning("phi_to_theta() not used when trans = ``none'': identity fn used")
   }
-  if (!is.function(phi_to_theta) & !is.null(phi_to_theta)) {
+  if (!is.function(phi_to_theta) & !missing(phi_to_theta)) {
     stop("phi_to_theta must be a function or NULL")
   }
-  if (trans == "user" & is.null(phi_to_theta)) {
+  if (trans == "user" & missing(phi_to_theta)) {
     stop("When trans = ``user'' phi_to_theta must be supplied")
   }
-  if (is.function(phi_to_theta) & is.null(log_j)) {
+  if (is.function(phi_to_theta) & missing(log_j)) {
     log_j <- function(x) 0
     warning("No Jacobian for phi_to_theta(): constant Jacobian has been used")
   }
-  if (is.null(phi_to_theta)) {
+  if (missing(phi_to_theta)) {
     phi_to_theta <- identity
     log_j <- function(x) 0
   }
