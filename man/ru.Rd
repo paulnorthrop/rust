@@ -55,7 +55,8 @@ bounding box that would have been used.}
 \item{init}{A numeric vector. Initial estimates of the mode of \code{logf}.
 If \code{trans="BC"} or \code{trans = "user"} this is \emph{after} Box-Cox
 transformation or user-defined transformation, but \emph{before} any
-rotation of axes.}
+rotation of axes.
+If \code{init} is not supplied then \code{rep(1, d)} is used.}
 
 \item{trans}{A character scalar. \code{trans = "none"} for no
 transformation, \code{trans = "BC"} for Box-Cox transformation,
