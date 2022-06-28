@@ -23,10 +23,16 @@
 #'   bounding box that would have been used.
 #' @param d A positive integer scalar. The dimension of \eqn{f}.
 #' @param init A numeric vector. Initial estimates of the mode of \code{logf}.
-#'   If \code{trans="BC"} or \code{trans = "user"} this is \emph{after} Box-Cox
-#'   transformation or user-defined transformation, but \emph{before} any
-#'   rotation of axes.
+#'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
+#'   Box-Cox transformation or user-defined transformation, but \emph{before}
+#'   any rotation of axes.
 #'   If \code{init} is not supplied then \code{rep(1, d)} is used.
+#' @param mode A numeric vector of length \code{d}.  The model of \code{logf}.
+#'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
+#'   Box-Cox transformation or user-defined transformation, but \emph{before}
+#'   any rotation of axes.  Only supply \code{mode} if the mode is known: it
+#'   will not be checked.  If \code{mode} is supplied then \code{init} is
+#'   ignored.
 #' @param trans A character scalar. \code{trans = "none"} for no
 #'   transformation, \code{trans = "BC"} for Box-Cox transformation,
 #'   \code{trans = "user"} for a user-defined transformation.
@@ -393,7 +399,7 @@
 #' @seealso \code{\link[base]{chol}} for the Choleski decomposition.
 #'
 #' @export
-ru <- function(logf, ..., n = 1, d = 1, init = NULL,
+ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
                trans = c("none", "BC", "user"),  phi_to_theta = NULL,
                log_j = NULL, user_args = list(), lambda = rep(1L, d),
                lambda_tol = 1e-6, gm = NULL,
@@ -520,6 +526,10 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   } else {
     which_lam <- which(lambda != 1L)
   }
+  # If mode has been supplied then set init = mode
+  if (!is.null(mode)) {
+    init <- mode
+  }
   # If no initial estimates have been supplied then use a vector of ones.
   if (is.null(init)) {
     init <- rep(1, d)
@@ -645,12 +655,21 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL,
   }
   #
   # Calculate a(r) ----------------------------------
-  # Create list of arguments for find_a()
-  for_find_a <- list(neg_logf_rho = neg_logf_rho, init_psi = init_psi, d = d,
-                     r = r, lower = lower, upper = upper, algor = a_algor,
-                     method = a_method, control = a_control, shoof = shoof,
-                     ...)
-  temp <- do.call("find_a", for_find_a)
+  # If mode is supplied then assume it is correct and calculate the Hessian
+  if (is.null(mode)) {
+    # Create list of arguments for find_a()
+    for_find_a <- list(neg_logf_rho = neg_logf_rho, init_psi = init_psi, d = d,
+                       r = r, lower = lower, upper = upper, algor = a_algor,
+                       method = a_method, control = a_control, shoof = shoof,
+                       ...)
+    temp <- do.call("find_a", for_find_a)
+  } else {
+    a_obj <- function(x) {
+      return(neg_logf_rho(x) / (d * r + 1))
+    }
+    temp <- list(par = mode, convergence = 0,
+                 hessian = stats::optimHess(mode, a_obj))
+  }
   #
   # Check that logf is finite at 0
   #

@@ -35,6 +35,12 @@
 #'   Box-Cox transformation or user-defined transformation, but \emph{before}
 #'   any rotation of axes.
 #'   If \code{init} is not supplied then \code{rep(1, d)} is used.
+#' @param mode A numeric vector of length \code{d}.  The model of \code{logf}.
+#'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
+#'   Box-Cox transformation or user-defined transformation, but \emph{before}
+#'   any rotation of axes.  Only supply \code{mode} if the mode is known: it
+#'   will not be checked.  If \code{mode} is supplied then \code{init} is
+#'   ignored.
 #' @param trans A character scalar. \code{trans = "none"} for no
 #'   transformation, \code{trans = "BC"} for Box-Cox transformation,
 #'   \code{trans = "user"} for a user-defined transformation.
@@ -411,7 +417,7 @@
 #' @seealso \code{\link[base]{chol}} for the Choleski decomposition.
 #'
 #' @export
-ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
+ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
                trans = c("none", "BC", "user"),  phi_to_theta = NULL,
                log_j = NULL, user_args = list(), lambda = rep(1L, d),
                lambda_tol = 1e-6, gm = NULL,
@@ -707,13 +713,21 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL,
   }
   #
   # Calculate a(r) ----------------------------------
-  # Create list of arguments for find_a()
-  ru_args <- c(ru_args, logf_args)
-  for_find_a <- list(init_psi = init_psi, lower = lower, upper = upper,
-                     algor = a_algor, method = a_method, control = a_control,
-                     a_obj_fun = a_obj_fun, ru_args = ru_args,
-                     shoof = shoof)
-  temp <- do.call("cpp_find_a", for_find_a)
+  # If mode is supplied then assume it is correct and calculate the Hessian
+  if (is.null(mode)) {
+    # Create list of arguments for find_a()
+    ru_args <- c(ru_args, logf_args)
+    for_find_a <- list(init_psi = init_psi, lower = lower, upper = upper,
+                       algor = a_algor, method = a_method, control = a_control,
+                       a_obj_fun = a_obj_fun, ru_args = ru_args,
+                       shoof = shoof)
+    temp <- do.call("cpp_find_a", for_find_a)
+  } else {
+    ru_args <- c(ru_args, logf_args)
+    add_args <- list(par = mode, fn = a_obj_fun, big_val = Inf)
+    temp <- list(par = mode, convergence = 0,
+                 hessian = do.call(stats::optimHess, c(ru_args, add_args)))
+  }
   #
   # Check that logf is finite at 0
   #
