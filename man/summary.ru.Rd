@@ -2,18 +2,28 @@
 % Please edit documentation in R/sample_diagnostics.R
 \name{summary.ru}
 \alias{summary.ru}
+\alias{print.summary.ru}
 \title{Summarizing ratio-of-uniforms samples}
 \usage{
 \method{summary}{ru}(object, ...)
+
+\method{print}{summary.ru}(x, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"ru"}, a result of a call to
 \code{ru}.}
 
-\item{...}{Additional arguments passed on to \code{summary}.}
+\item{...}{For \code{summary.lm}: additional arguments passed to
+\code{\link{summary}}.
+For \code{print.lm}: additional optional arguments passed to
+\code{\link{print}}.}
+
+\item{x}{an object of class \code{"summary.ru"}, a result of a call to
+\code{\link{summary.ru}}.}
 }
 \value{
-Prints
+For \code{summary.lm}: a list of the following components from
+  \code{object}:
 \itemize{
   \item {information about the ratio-of-uniforms bounding box, i.e.,
     \code{object$box}}
@@ -22,9 +32,14 @@ Prints
   \item {a summary of the simulated values, via
     \code{summary(object$sim_vals)}}
 }
+
+For \code{print.summary.ru}: the argument \code{x}, invisibly.
 }
 \description{
-\code{summary} method for class \code{"ru"}
+\code{summary} method for class \code{"ru"}.
+
+\code{print} method for an object \code{object} of class
+\code{"summary.ru"}.
 }
 \examples{
 # one-dimensional standard normal ----------------

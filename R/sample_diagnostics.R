@@ -209,12 +209,16 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 
 #' Summarizing ratio-of-uniforms samples
 #'
-#' \code{summary} method for class \code{"ru"}
+#' \code{summary} method for class \code{"ru"}.
 #'
 #' @param object an object of class \code{"ru"}, a result of a call to
 #'   \code{ru}.
-#' @param ... Additional arguments passed on to \code{summary}.
-#' @return Prints
+#' @param ... For \code{summary.lm}: additional arguments passed to
+#'   \code{\link{summary}}.
+#'   For \code{print.lm}: additional optional arguments passed to
+#'   \code{\link{print}}.
+#' @return For \code{summary.lm}: a list of the following components from
+#'   \code{object}:
 #' \itemize{
 #'   \item {information about the ratio-of-uniforms bounding box, i.e.,
 #'     \code{object$box}}
@@ -241,6 +245,7 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
 #'   \code{object$box}.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot.
+#' @name summary.ru
 #' @export
 summary.ru <- function(object, ...) {
   if (!inherits(object, "ru")) {
@@ -262,39 +267,8 @@ summary.ru <- function(object, ...) {
 #'
 #' @param x an object of class \code{"summary.ru"}, a result of a call to
 #'   \code{\link{summary.ru}}.
-#' @param ... Additional optional arguments to be passed to
-#'   \code{\link{print}}.
-#'
-#' @details Prints
-#' \itemize{
-#'   \item {a summary of the simulated values, via
-#'     \code{summary(object$sim_vals)}}
-#'   \item {an estimate of the probability of acceptance, i.e.
-#'     \code{object$pa}}
-#'   \item {information about the ratio-of-uniforms bounding box, i.e.
-#'     \code{object$box}}
-#' }
-#' @return The argument \code{x}, invisibly.
-#' @examples
-#' # one-dimensional standard normal ----------------
-#' x <- ru(logf = function(x) -x ^ 2 / 2, d = 1, n = 1000, init = 0)
-#' summary(x)
-#'
-#' # two-dimensional normal with positive association ----------------
-#' rho <- 0.9
-#' covmat <- matrix(c(1, rho, rho, 1), 2, 2)
-#' log_dmvnorm <- function(x, mean = rep(0, d), sigma = diag(d)) {
-#'   x <- matrix(x, ncol = length(x))
-#'   d <- ncol(x)
-#'   - 0.5 * (x - mean) %*% solve(sigma) %*% t(x - mean)
-#' }
-#' x <- ru(logf = log_dmvnorm, sigma = covmat, d = 2, n = 1000, init = c(0, 0))
-#' summary(x)
-#' @seealso \code{\link{summary.ru}} for summaries of the simulated values
-#'   and properties of the ratio-of-uniforms algorithm.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
-#' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
-#'   \code{object$box}.
+#' @return For \code{print.summary.ru}: the argument \code{x}, invisibly.
+#' @rdname summary.ru
 #' @export
 print.summary.ru <- function(x, ...) {
   if (!inherits(x, "summary.ru")) {
