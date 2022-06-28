@@ -668,7 +668,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
     temp <- do.call("find_a", for_find_a)
   } else {
     a_obj <- function(x) {
-      return(neg_logf_rho(x) / (d * r + 1))
+      return(neg_logf_rho(x, ...) / (d * r + 1))
     }
     temp <- list(par = mode, convergence = 0,
                  hessian = stats::optimHess(mode, a_obj))
