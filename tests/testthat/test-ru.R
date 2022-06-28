@@ -15,7 +15,7 @@ normal_box <- function(d, sigma = diag(d), rotate = TRUE, r = 1 / 2) {
   # Calculates bounding box values in the case of a zero-mean unnormalized
   # d-dimensional normal density, with arbitrary covariance structure.
   # "Unnormalized" means that the function has a maximum of 1 attained
-  # at the origin, which is what is required for comparabilty with the
+  # at the origin, which is what is required for comparability with the
   # output from the function ru(), which scales the input function to have
   # a maximum of 1 and relocates the mode to the origin.
   #
