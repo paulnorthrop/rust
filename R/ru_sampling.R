@@ -671,7 +671,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
       return(neg_logf_rho(x, ...) / (d * r + 1))
     }
     temp <- list(par = mode, convergence = 0,
-                 hessian = stats::optimHess(mode, a_obj))
+                 hessian = try(stats::optimHess(mode, a_obj), silent = TRUE))
   }
   #
   # Check that logf is finite at 0

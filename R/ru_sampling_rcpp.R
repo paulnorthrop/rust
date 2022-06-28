@@ -733,7 +733,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
     ru_args <- c(ru_args, logf_args)
     add_args <- list(par = mode, fn = a_obj_fun, big_val = Inf)
     temp <- list(par = mode, convergence = 0,
-                 hessian = do.call(stats::optimHess, c(ru_args, add_args)))
+                 hessian = try(do.call(stats::optimHess, c(ru_args, add_args)),
+                               silent = TRUE))
   }
   #
   # Check that logf is finite at 0
