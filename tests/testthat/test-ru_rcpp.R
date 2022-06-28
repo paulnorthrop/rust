@@ -75,6 +75,10 @@ x1a <- ru_rcpp(logf = ptr_N01, d = 1, n = 1, init = 0)
 test_that("N(0,1)", {
   testthat::expect_equal(x1a$box, normal_box(d = 1), tolerance = my_tol)
 })
+x1a_mode <- ru_rcpp(logf = ptr_N01, d = 1, n = 1, mode = 0)
+test_that("N(0,1), mode supplied", {
+  testthat::expect_equal(x1a_mode$box, normal_box(d = 1), tolerance = my_tol)
+})
 
 # (b) N(0, 2)
 
@@ -84,6 +88,11 @@ covmat <- matrix(sigma, 1, 1)
 x1b <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 1, n = 1, init = 0)
 test_that("N(0,2)", {
   testthat::expect_equal(x1b$box, normal_box(d = 1, sigma = 2),
+                         tolerance = my_tol)
+})
+x1b_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 1, n = 1, mode = 0)
+test_that("N(0,2), mode supplied", {
+  testthat::expect_equal(x1b_mode$box, normal_box(d = 1, sigma = 2),
                          tolerance = my_tol)
 })
 
@@ -101,12 +110,22 @@ x2ai <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1, init = c(0, 0),
 test_that("BVN, rotation", {
   testthat::expect_equal(x2ai$box, normal_box(d = 2), tolerance = my_tol)
 })
+x2ai_mode <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1, mode = c(0, 0),
+                     rotate = TRUE)
+test_that("BVN, rotation, mode supplied", {
+  testthat::expect_equal(x2ai_mode$box, normal_box(d = 2), tolerance = my_tol)
+})
 
 # (ii) rotate = FALSE
 x2aii <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1, init = c(0, 0),
                  rotate = FALSE)
 test_that("BVN, no rotation", {
   testthat::expect_equal(x2aii$box, normal_box(d = 2), tolerance = my_tol)
+})
+x2aii_mode <- ru_rcpp(logf = ptr_bvn, rho = rho, d = 2, n = 1, mode = c(0, 0),
+                      rotate = FALSE)
+test_that("BVN, no rotation, mode supplied", {
+  testthat::expect_equal(x2aii_mode$box, normal_box(d = 2), tolerance = my_tol)
 })
 
 # (b) Zero mean, unit variances with positive association
@@ -123,6 +142,13 @@ test_that("BVN, rho = 0.9, no rotation", {
                                               rotate = FALSE),
                          tolerance = my_tol)
 })
+x2bi_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1,
+                     mode = c(0, 0), rotate = FALSE)
+test_that("BVN, rho = 0.9, no rotation, mode supplied", {
+  testthat::expect_equal(x2bi_mode$box, normal_box(d = 2, sigma = covmat,
+                                                   rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x2bii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
@@ -130,6 +156,13 @@ x2bii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
 test_that("BVN, rho = 0.9, rotation", {
   testthat::expect_equal(x2bii$box, normal_box(d = 2, sigma = covmat,
                                                rotate = TRUE),
+                         tolerance = my_tol)
+})
+x2bii_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1,
+                      mode = c(0, 0), rotate = TRUE)
+test_that("BVN, rho = 0.9, rotation, mode supplied", {
+  testthat::expect_equal(x2bii_mode$box, normal_box(d = 2, sigma = covmat,
+                                                    rotate = TRUE),
                          tolerance = my_tol)
 })
 
@@ -144,6 +177,13 @@ test_that("BVN, general Sigma, no rotation", {
                                               rotate = FALSE),
                          tolerance = my_tol)
 })
+x2ci_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1,
+                     mode = c(0, 0), rotate = FALSE)
+test_that("BVN, general Sigma, no rotation, mode supplied", {
+  testthat::expect_equal(x2ci_mode$box, normal_box(d = 2, sigma = covmat,
+                                                   rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x2cii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
@@ -153,25 +193,47 @@ test_that("BVN, general Sigma, rotation", {
                                                rotate = TRUE),
                          tolerance = my_tol)
 })
+x2cii_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1,
+                      mode = c(0, 0), rotate = TRUE)
+test_that("BVN, general Sigma, rotation, mode supplied", {
+  testthat::expect_equal(x2cii_mode$box, normal_box(d = 2, sigma = covmat,
+                                                    rotate = TRUE),
+                         tolerance = my_tol)
+})
 
-# (d) Mean (1,2), different variances with negative association
+# (d) Zero mean, different variances with negative association
+# (ptr_mvn <- create_xptr("logdmvnorm") does not have a mean argument)
 covmat <- matrix(c(10, -3, -3, 2), 2, 2)
 
 # (i) rotate = FALSE
 x2di <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
-                rotate = FALSE, mean = c(1, 2))
+                rotate = FALSE)
 test_that("BVN, non-zero mu, general Sigma, no rotation", {
   testthat::expect_equal(x2di$box, normal_box(d = 2, sigma = covmat,
                                               rotate = FALSE),
                          tolerance = my_tol)
 })
+x2di_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1,
+                     mode = c(0, 0), rotate = FALSE)
+test_that("BVN, non-zero mu, general Sigma, no rotation, mode supplied", {
+  testthat::expect_equal(x2di_mode$box, normal_box(d = 2, sigma = covmat,
+                                                   rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x2dii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1, init = c(0, 0),
-                 rotate = TRUE, mean = c(1, 2))
+                 rotate = TRUE)
 test_that("BVN, non-zero mu, general Sigma, rotation", {
   testthat::expect_equal(x2dii$box, normal_box(d = 2, sigma = covmat,
                                                rotate = TRUE),
+                         tolerance = my_tol)
+})
+x2dii_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 2, n = 1,
+                      mode = c(0, 0), rotate = TRUE)
+test_that("BVN, non-zero mu, general Sigma, rotation, mode supplied", {
+  testthat::expect_equal(x2dii_mode$box, normal_box(d = 2, sigma = covmat,
+                                                    rotate = TRUE),
                          tolerance = my_tol)
 })
 
@@ -188,6 +250,13 @@ test_that("TVN, rho = 0.9, no rotation", {
                                               rotate = FALSE),
                          tolerance = my_tol)
 })
+x3ai_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = 1,
+                     mode = c(0, 0, 0), rotate = FALSE)
+test_that("TVN, rho = 0.9, no rotation, mode supplied", {
+  testthat::expect_equal(x3ai_mode$box, normal_box(d = 3, sigma = covmat,
+                                                   rotate = FALSE),
+                         tolerance = my_tol)
+})
 
 # (ii) rotate = TRUE
 x3aii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = 1,
@@ -195,6 +264,13 @@ x3aii <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = 1,
 test_that("TVN, rho = 0.9, rotation", {
   testthat::expect_equal(x3aii$box, normal_box(d = 3, sigma = covmat,
                                                rotate = TRUE),
+                         tolerance = my_tol)
+})
+x3aii_mode <- ru_rcpp(logf = ptr_mvn, sigma = covmat, d = 3, n = 1,
+                      mode = c(0, 0, 0), rotate = TRUE)
+test_that("TVN, rho = 0.9, rotation, mode supplied", {
+  testthat::expect_equal(x3aii_mode$box, normal_box(d = 3, sigma = covmat,
+                                                    rotate = TRUE),
                          tolerance = my_tol)
 })
 
@@ -211,6 +287,11 @@ x <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = 1,
              lower = 0, init = 0.1, trans = "BC", lambda = lambda)
 test_that("Log-normal", {
   testthat::expect_equal(x$box, normal_box(d = 1), tolerance = my_tol)
+})
+x_mode <- ru_rcpp(logf = ptr_lnorm, mu = mu, sigma = sigma, d = 1, n = 1,
+                  lower = 0, mode = 0, trans = "BC", lambda = lambda)
+test_that("Log-normal, mode supplied", {
+  testthat::expect_equal(x_mode$box, normal_box(d = 1), tolerance = my_tol)
 })
 
 # C: 1-dimensional gamma density, with shape parameter not less than 1
@@ -270,6 +351,11 @@ x1 <- suppressWarnings(ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
 test_that("Gamma(1, 1)", {
   testthat::expect_equal(x1$box, gamma_box(shape = 1), tolerance = my_tol)
 })
+x1_mode <- suppressWarnings(ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1,
+                                    n = 1, lower = 0, mode = alpha - 1))
+test_that("Gamma(1, 1), mode supplied", {
+  testthat::expect_equal(x1_mode$box, gamma_box(shape = 1), tolerance = my_tol)
+})
 
 # Shape = 10
 alpha <- 10
@@ -277,6 +363,11 @@ x2 <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
              lower = 0, init = alpha)
 test_that("Gamma(10, 1)", {
   testthat::expect_equal(x2$box, gamma_box(shape = 10), tolerance = my_tol)
+})
+x2_mode <- ru_rcpp(logf = ptr_gam, alpha = alpha, d = 1, n = 1,
+                   lower = 0, mode = alpha - 1)
+test_that("Gamma(10, 1)", {
+  testthat::expect_equal(x2_mode$box, gamma_box(shape = 10), tolerance = my_tol)
 })
 
 
