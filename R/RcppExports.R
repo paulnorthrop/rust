@@ -188,7 +188,10 @@ loggp <- function(x, ss) {
 #' Create external pointer to a C++ function for \code{logf}
 #'
 #' @param fstr A string indicating the C++ function required.
-#'
+#' @details See the \href{https://cran.r-project.org/package=rust}{
+#' Rusting faster: Simulation using Rcpp} vignette.
+#' @section Examples:
+#' See the examples in \code{\link{ru_rcpp}}.
 #' @export
 create_xptr <- function(fstr) {
     .Call(`_rust_create_xptr`, fstr)
@@ -205,7 +208,10 @@ bc_log_j <- function(theta, user_args) {
 #' Create external pointer to a C++ function for \code{log_j}
 #'
 #' @param fstr A string indicating the C++ function required.
-#'
+#' @details See the \href{https://cran.r-project.org/package=rust}{
+#' Rusting faster: Simulation using Rcpp} vignette.
+#' @section Examples:
+#' See the examples in \code{\link{ru_rcpp}}.
 #' @export
 create_log_j_xptr <- function(fstr) {
     .Call(`_rust_create_log_j_xptr`, fstr)
@@ -230,7 +236,10 @@ gp_phi_to_theta <- function(phi, user_args) {
 #' Create external pointer to a C++ function for \code{phi_to_theta}
 #'
 #' @param fstr A string indicating the C++ function required.
-#'
+#' @details See the \href{https://cran.r-project.org/package=rust}{
+#' Rusting faster: Simulation using Rcpp} vignette.
+#' @section Examples:
+#' See the examples in \code{\link{ru_rcpp}}.
 #' @export
 create_phi_to_theta_xptr <- function(fstr) {
     .Call(`_rust_create_phi_to_theta_xptr`, fstr)

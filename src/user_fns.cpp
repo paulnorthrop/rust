@@ -152,7 +152,10 @@ double loggp(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
 //' Create external pointer to a C++ function for \code{logf}
 //'
 //' @param fstr A string indicating the C++ function required.
-//'
+//' @details See the \href{https://cran.r-project.org/package=rust}{
+//' Rusting faster: Simulation using Rcpp} vignette.
+//' @section Examples:
+//' See the examples in \code{\link{ru_rcpp}}.
 //' @export
 // [[Rcpp::export]]
 SEXP create_xptr(std::string fstr) {
@@ -203,7 +206,10 @@ double bc_log_j(const Rcpp::NumericVector& theta,
 //' Create external pointer to a C++ function for \code{log_j}
 //'
 //' @param fstr A string indicating the C++ function required.
-//'
+//' @details See the \href{https://cran.r-project.org/package=rust}{
+//' Rusting faster: Simulation using Rcpp} vignette.
+//' @section Examples:
+//' See the examples in \code{\link{ru_rcpp}}.
 //' @export
 // [[Rcpp::export]]
 SEXP create_log_j_xptr(std::string fstr) {
@@ -261,7 +267,10 @@ Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
 //' Create external pointer to a C++ function for \code{phi_to_theta}
 //'
 //' @param fstr A string indicating the C++ function required.
-//'
+//' @details See the \href{https://cran.r-project.org/package=rust}{
+//' Rusting faster: Simulation using Rcpp} vignette.
+//' @section Examples:
+//' See the examples in \code{\link{ru_rcpp}}.
 //' @export
 // [[Rcpp::export]]
 SEXP create_phi_to_theta_xptr(std::string fstr) {

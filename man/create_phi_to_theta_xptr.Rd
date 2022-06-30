@@ -12,3 +12,12 @@ create_phi_to_theta_xptr(fstr)
 \description{
 Create external pointer to a C++ function for \code{phi_to_theta}
 }
+\details{
+See the \href{https://cran.r-project.org/package=rust}{
+Rusting faster: Simulation using Rcpp} vignette.
+}
+\section{Examples}{
+
+See the examples in \code{\link{ru_rcpp}}.
+}
+
