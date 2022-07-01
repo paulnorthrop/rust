@@ -20,9 +20,13 @@
 #'   will throw an error because partial matching results in
 #'   \code{logf} being matched to \code{log = TRUE}.
 #'
-#'   See the \code{vignette("rust-c-using-rcpp-vignette", package = "rust")},
-#'   particularly the Section
-#'   \strong{Providing a C++ function to \code{ru_rcpp}}, for details.
+#'   See the
+#'   \href{https://gallery.rcpp.org/articles/passing-cpp-function-pointers/}{
+#'   Passing user-supplied C++ functions} in the
+#'   \href{https://gallery.rcpp.org/}{Rcpp Gallery} and the
+#'   \strong{Providing a C++ function to \code{ru_rcpp}} section in the
+#'   \href{https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html}{
+#'   Rusting faster: Simulation using Rcpp} vignette.
 #' @param ... Further arguments to be passed to \code{logf} and related
 #'   functions.
 #' @param n A non-negative integer scalar.  The number of simulated values
@@ -147,8 +151,12 @@
 #' @details For information about the generalised ratio-of-uniforms method and
 #'   transformations see the
 #'   \href{https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html}{
-#'   Introducing rust} vignette.  This can also be accessed using
-#'   \code{vignette("rust-a-vignette", package = "rust")}.
+#'   Introducing rust} vignette. See also
+#'   \href{https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html}{
+#'   Rusting faster: Simulation using Rcpp}
+#'   These vignettes can also be accessed using
+#'   \code{vignette("rust-a-vignette", package = "rust")} and
+#'   \code{vignette("rust-c-using-rcpp-vignette", package = "rust")}.
 #'
 #'   If \code{trans = "none"} and \code{rotate = FALSE} then \code{ru}
 #'   implements the (multivariate) generalized ratio of uniforms method
