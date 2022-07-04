@@ -63,8 +63,7 @@
 #'   \code{d}.
 #'
 #' @docType package
-#' @name rust
 #' @importFrom stats runif
 #' @useDynLib rust, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
-NULL
+"_PACKAGE"
