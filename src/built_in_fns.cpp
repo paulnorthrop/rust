@@ -502,9 +502,9 @@ Rcpp::List ru_cpp(const int& n, const int& d, const double& r,
       nacc++ ;
     }
   }
-  return List::create(Named("sim_vals_rho") = sim_vals_rho,
-                      Named("sim_vals") = sim_vals,
-                      Named("ntry") = ntry) ;
+  return List::create(_("sim_vals_rho") = sim_vals_rho,
+                      _("sim_vals") = sim_vals,
+                      _("ntry") = ntry) ;
 }
 
 // [[Rcpp::export]]
@@ -565,9 +565,9 @@ Rcpp::List ru_cpp_2(const int& n, const int& d, const double& r,
       }
     }
   }
-  return List::create(Named("sim_vals_rho") = sim_vals_rho,
-                      Named("sim_vals") = sim_vals,
-                      Named("ntry") = ntry) ;
+  return List::create(_("sim_vals_rho") = sim_vals_rho,
+                      _("sim_vals") = sim_vals,
+                      _("ntry") = ntry) ;
 }
 
 // [[Rcpp::export]]
@@ -642,9 +642,9 @@ Rcpp::List ru_cpp_3(const int& n, const int& d, const double& r,
       }
     }
   }
-  return List::create(Named("sim_vals_rho") = sim_vals_rho,
-                      Named("sim_vals") = sim_vals,
-                      Named("ntry") = ntry) ;
+  return List::create(_("sim_vals_rho") = sim_vals_rho,
+                      _("sim_vals") = sim_vals,
+                      _("ntry") = ntry) ;
 }
 
 // [[Rcpp::export]]
@@ -699,9 +699,9 @@ Rcpp::List ru_cpp_4(const int& n, const int& d, const double& r,
       }
     }
   }
-  return List::create(Named("sim_vals_rho") = sim_vals_rho,
-                      Named("sim_vals") = sim_vals,
-                      Named("ntry") = ntry) ;
+  return List::create(_("sim_vals_rho") = sim_vals_rho,
+                      _("sim_vals") = sim_vals,
+                      _("ntry") = ntry) ;
 }
 
 // [[Rcpp::export]]
