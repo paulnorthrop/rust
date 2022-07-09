@@ -490,7 +490,7 @@ Rcpp::List ru_cpp(const int& n, const int& d, const double& r,
     if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
-    u = runif(1, 0, a_box)[0] ;
+    u = Rcpp::runif(1, 0, a_box)[0] ;
     vs = d_box * Rcpp::runif(d) + l_box ;
     rho = vs / pow(u, r) ;
     theta = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
@@ -544,7 +544,7 @@ Rcpp::List ru_cpp_2(const int& n, const int& d, const double& r,
     if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
-    u = runif(1, 0, a_box)[0] ;
+    u = Rcpp::runif(1, 0, a_box)[0] ;
     vs = d_box * Rcpp::runif(d) + l_box ;
     rho = vs / pow(u, r) ;
     psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
@@ -617,7 +617,7 @@ Rcpp::List ru_cpp_3(const int& n, const int& d, const double& r,
     if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
-    u = runif(1, 0, a_box)[0] ;
+    u = Rcpp::runif(1, 0, a_box)[0] ;
     vs = d_box * Rcpp::runif(d) + l_box ;
     rho = vs / pow(u, r) ;
     psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
@@ -683,7 +683,7 @@ Rcpp::List ru_cpp_4(const int& n, const int& d, const double& r,
     if (ntry % 1000 == 0) {
       Rcpp::checkUserInterrupt();
     }
-    u = runif(1, 0, a_box)[0] ;
+    u = Rcpp::runif(1, 0, a_box)[0] ;
     vs = d_box * Rcpp::runif(d) + l_box ;
     rho = vs / pow(u, r) ;
     phi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
