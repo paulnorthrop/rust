@@ -473,7 +473,8 @@ Rcpp::List ru_cpp(const int& n, const int& d, const double& r,
                   const Rcpp::NumericVector& u_box, const SEXP& logf,
                   const arma::vec& psi_mode, const arma::mat& rot_mat,
                   const double& hscale, const Rcpp::List& pars) {
-  RNGScope scope; // ensure RNG gets set/reset
+  // ensure RNG gets set/reset
+  RNGScope scope;
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
@@ -515,7 +516,8 @@ Rcpp::List ru_cpp_2(const int& n, const int& d, const double& r,
                     const Rcpp::List& pars, const Rcpp::List& tpars,
                     const SEXP& ptpfun, const SEXP& phi_to_theta,
                     const SEXP& log_j, const Rcpp::List& user_args) {
-  RNGScope scope; // ensure RNG gets set/reset
+  // ensure RNG gets set/reset
+  RNGScope scope;
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
@@ -577,7 +579,8 @@ Rcpp::List ru_cpp_3(const int& n, const int& d, const double& r,
                     const Rcpp::List& pars, const Rcpp::List& tpars,
                     const SEXP& ptpfun, const SEXP& phi_to_theta,
                     const SEXP& log_j, const Rcpp::List& user_args) {
-  RNGScope scope; // ensure RNG gets set/reset
+  // ensure RNG gets set/reset
+  RNGScope scope;
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
@@ -653,7 +656,8 @@ Rcpp::List ru_cpp_4(const int& n, const int& d, const double& r,
                     const Rcpp::List& pars, const Rcpp::List& tpars,
                     const SEXP& ptpfun, const SEXP& phi_to_theta,
                     const SEXP& log_j, const Rcpp::List& user_args) {
-  RNGScope scope; // ensure RNG gets set/reset
+  // ensure RNG gets set/reset
+  RNGScope scope;
   // Unwrap pointer to untransformed target log-density.
   typedef double (*funcPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;

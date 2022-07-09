@@ -1,5 +1,9 @@
 # rust 1.3.13.9000
 
+## New features
+
+* `ru()` and `ru_rcpp()` have an additional argument `mode` that allows the user to specify the known mode of the input function `logf` instead of finding it using numerical methods.
+
 ## Bug fixes and minor improvements
 
 * The list object returned from the function `ru()` has an extra component named `trans_fn`.  This is an R function that performs the inverse transformation from the transformed variable $\rho$, on which the generalised ratio-of-uniforms method is performed, back to the original variable $\theta$.
@@ -8,7 +12,7 @@
 
 * In the description of the argument `logf` to `ru()` and `ru_rcpp()` it is advised that `logf = ` should be provided explicitly to avoid the potential for argument matching problems.
 
-* Cosmetic improvements to the package manual.
+* Improvements to the package manual.
 
 * Activated 3rd edition of the `testthat` package
 
