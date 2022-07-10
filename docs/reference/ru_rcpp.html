@@ -87,6 +87,7 @@ below is available at the rust Github page at
   n <span class="op">=</span> <span class="fl">1</span>,
   d <span class="op">=</span> <span class="fl">1</span>,
   init <span class="op">=</span> <span class="cn">NULL</span>,
+  mode <span class="op">=</span> <span class="cn">NULL</span>,
   trans <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"BC"</span>, <span class="st">"user"</span><span class="op">)</span>,
   phi_to_theta <span class="op">=</span> <span class="cn">NULL</span>,
   log_j <span class="op">=</span> <span class="cn">NULL</span>,
@@ -122,9 +123,13 @@ below is available at the rust Github page at
   <code>ru(dnorm, log = TRUE, init = 0.1)</code>
   will throw an error because partial matching results in
   <code>logf</code> being matched to <code>log = TRUE</code>.</p>
-<p>See the <code><a href="../articles/rust-c-using-rcpp-vignette.html">vignette("rust-c-using-rcpp-vignette", package = "rust")</a></code>,
-  particularly the Section
-  <strong>Providing a C++ function to <code>ru_rcpp</code></strong>, for details.</p></dd>
+<p>See the
+  <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/" class="external-link">
+  Passing user-supplied C++ functions</a> in the
+  <a href="https://gallery.rcpp.org/" class="external-link">Rcpp Gallery</a> and the
+  <strong>Providing a C++ function to <code>ru_rcpp</code></strong> section in the
+  <a href="https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html" class="external-link">
+  Rusting faster: Simulation using Rcpp</a> vignette.</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments to be passed to <code>logf</code> and related
 functions.</p></dd>
@@ -139,7 +144,15 @@ bounding box that would have been used.</p></dd>
 <dd><p>A numeric vector. Initial estimates of the mode of <code>logf</code>.
 If <code>trans = "BC"</code> or <code>trans = "user"</code> this is <em>after</em>
 Box-Cox transformation or user-defined transformation, but <em>before</em>
-any rotation of axes.</p></dd>
+any rotation of axes.
+If <code>init</code> is not supplied then <code>rep(1, d)</code> is used.</p></dd>
+<dt>mode</dt>
+<dd><p>A numeric vector of length <code>d</code>.  The mode of <code>logf</code>.
+If <code>trans = "BC"</code> or <code>trans = "user"</code> this is <em>after</em>
+Box-Cox transformation or user-defined transformation, but <em>before</em>
+any rotation of axes.  Only supply <code>mode</code> if the mode is known: it
+will not be checked.  If <code>mode</code> is supplied then <code>init</code> is
+ignored.</p></dd>
 <dt>trans</dt>
 <dd><p>A character scalar. <code>trans = "none"</code> for no
 transformation, <code>trans = "BC"</code> for Box-Cox transformation,
@@ -322,8 +335,12 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
     <p>For information about the generalised ratio-of-uniforms method and
   transformations see the
   <a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html" class="external-link">
-  Introducing rust</a> vignette.  This can also be accessed using
-  <code><a href="../articles/rust-a-vignette.html">vignette("rust-a-vignette", package = "rust")</a></code>.</p>
+  Introducing rust</a> vignette. See also
+  <a href="https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html" class="external-link">
+  Rusting faster: Simulation using Rcpp</a>
+  These vignettes can also be accessed using
+  <code><a href="../articles/rust-a-vignette.html">vignette("rust-a-vignette", package = "rust")</a></code> and
+  <code><a href="../articles/rust-c-using-rcpp-vignette.html">vignette("rust-c-using-rcpp-vignette", package = "rust")</a></code>.</p>
 <p>If <code>trans = "none"</code> and <code>rotate = FALSE</code> then <code>ru</code>
   implements the (multivariate) generalized ratio of uniforms method
   described in Wakefield, Gelfand and Smith (1991) using a target
@@ -485,16 +502,16 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   1.096590  1.774103    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.789266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7968127</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000178  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.303666  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.661406  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.000312  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.366225  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :6.955997  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000267  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.296872  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.682781  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.001341  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.388667  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :6.663132  </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span>
 <span class="r-in"><span class="co"># transformation and the log-Jacobian by hand</span></span>
@@ -513,16 +530,16 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   1.096590  1.774103    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7955449</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7867821</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000438  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.275451  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.659512  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.949173  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.290944  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :6.317972  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.001241  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.282582  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.645874  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.954962  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.318091  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :9.003515  </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># Generalized Pareto posterior distribution ===================</span></span>
@@ -547,24 +564,24 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-plt img"><img src="ru_rcpp-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                box      vals1      vals2 conv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a        1.0000000  0.0000000  0.0000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.1374106 -0.2168720  0.1440081    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.1017526  0.3007094 -0.1762013    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.1747616  0.3109001 -0.1797183    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.1042120 -0.2130340  0.1879804    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 box      vals1      vals2 conv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.0000000  0.0000000    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.14435030 -0.2306654  0.1591693    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.09938311  0.3000742 -0.1708796    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.17556496  0.3106599 -0.1746762    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.11443352 -0.2296184  0.2109750    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1396453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1393534</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.7720   Min.   :-0.8236  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.9967   1st Qu.:-0.5922  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.0782   Median :-0.5338  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.0880   Mean   :-0.5362  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.1721   3rd Qu.:-0.4827  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.5497   Max.   :-0.1991  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.7475   Min.   :-0.8116  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.0071   1st Qu.:-0.5772  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.0870   Median :-0.5271  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.0926   Mean   :-0.5205  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.1746   3rd Qu.:-0.4678  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.6756   Max.   :-0.1731  </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Rotation of axes plus mode relocation ----------------</span></span>
 <span class="r-in"><span class="va">for_ru_rcpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gp</span>, init <span class="op">=</span> <span class="va">init</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>,</span>
@@ -575,24 +592,24 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-plt img"><img src="ru_rcpp-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 box       vals1      vals2 conv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.00000000  0.0000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.04541777 -0.06732128  0.0341977    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.06586209  0.04722330 -0.1140510    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.11243724  0.25513523  0.0999622    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.06745396  0.11612969  0.1216753    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 box       vals1       vals2 conv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.00000000  0.00000000    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.04682114 -0.06969763  0.03744555    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.06547405  0.05545754 -0.11257628    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.12220534  0.27916473  0.12225267    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.07538933  0.14534972  0.13899130    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4196391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4280822</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.7835   Min.   :-0.7866  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.9994   1st Qu.:-0.5891  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.0760   Median :-0.5328  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.0835   Mean   :-0.5323  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.1575   3rd Qu.:-0.4816  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.5098   Max.   :-0.1709  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.7195   Min.   :-0.7693  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.9954   1st Qu.:-0.5818  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.0796   Median :-0.5196  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.0872   Mean   :-0.5163  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.1738   3rd Qu.:-0.4569  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.5317   Max.   :-0.1911  </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Cauchy ========================</span></span>
 <span class="r-in"></span>
@@ -616,7 +633,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-in"></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_hc</span>, init <span class="op">=</span> <span class="fl">0</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7496252</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7315289</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="ru_rcpp-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
@@ -632,13 +649,13 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_normt</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span>
 <span class="r-in">  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2236986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2271798</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Rotation increases the probability of acceptance</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_normt</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span>
 <span class="r-in">  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5198586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5228211</span>
 <span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
 </code></pre></div>
