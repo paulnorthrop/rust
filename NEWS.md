@@ -12,6 +12,8 @@
 
 * In the description of the argument `logf` to `ru()` and `ru_rcpp()` it is advised that `logf = ` should be provided explicitly to avoid the potential for argument matching problems.
 
+* In `plot.ru()` the arguments `xlabs` and `ylabs` have been super-seeded by an argument `var_names`, which can be used to provide variable names for use as axis labels.
+
 * Improvements to the package manual.
 
 * Activated 3rd edition of the `testthat` package

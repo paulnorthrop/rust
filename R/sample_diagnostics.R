@@ -33,6 +33,9 @@
 #' @param xlabs,ylabs Numeric vectors.  When \code{d > 2} these set the labels
 #'   on the x and y axes respectively.  If the user doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
+#' @param var_names A character (or numeric) vector of length \code{x$d}. This
+#'   argument can be used to replace variable names set using \code{var_names}
+#'   in the call to \code{\link{ru}} or \code{\link{ru_rcpp}}.
 #' @param points_par A list of arguments to pass to
 #'   \code{\link[graphics]{points}} to control the appearance of points
 #'   depicting the simulated values. Only relevant when \code{d = 2}.
@@ -66,12 +69,20 @@
 plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                     prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
                     ru_scale = FALSE, rows = NULL, xlabs = NULL,
-                    ylabs = NULL, points_par = list(col = 8)) {
+                    ylabs = NULL, var_names = NULL,
+                    points_par = list(col = 8)) {
   if (!inherits(x, "ru")) {
     stop("use only with \"ru\" objects")
   }
   if (n < 1) {
     stop("n must be no smaller than 1")
+  }
+  # Check var_names
+  if (!is.null(var_names)) {
+    if (length(var_names) != x$d) {
+      stop("''var_names'' must have length ''x$d''")
+    }
+    colnames(x$sim_vals) <- var_names
   }
   if (ru_scale) {
     plot_data <- x$sim_vals_rho
@@ -175,19 +186,12 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
       rows <- x$d - 2
     }
     cols <- ceiling(choose(x$d, 2) / rows)
-    if (is.null(xlabs)) {
-      if (!is.null(colnames(plot_data))) {
-        xlabs <- colnames(plot_data)
-      } else {
-        xlabs <- rep(NA, x$d)
-      }
-    }
-    if (is.null(ylabs)) {
-      if (!is.null(colnames(plot_data))) {
-        ylabs <- colnames(plot_data)
-      } else {
-        ylabs <- rep(NA, x$d)
-      }
+    if (!is.null(colnames(plot_data))) {
+      xlabs <- colnames(plot_data)
+      ylabs <- colnames(plot_data)
+    } else {
+      xlabs <- rep(NA, x$d)
+      ylabs <- rep(NA, x$d)
     }
     oldpar <- graphics::par(mfrow = c(rows, cols))
     on.exit(graphics::par(oldpar))

@@ -133,8 +133,8 @@
 #'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
 #'   \eqn{b_i^+(r)}})
 #'   respectively.
-#' @param var_names A character vector.  Names to give to the column(s) of
-#'   the simulated values.
+#' @param var_names A character (or numeric) vector of length \code{d}.  Names
+#'   to give to the column(s) of the simulated values.
 #' @param shoof A numeric scalar in [0, 1].  Sometimes a spurious
 #'   non-zero convergence indicator is returned from
 #'   \code{\link[stats]{optim}} or \code{\link[stats]{nlminb}}).
@@ -479,6 +479,12 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
   # Check that the values of key arguments are suitable
   if (r < 0) {
     stop("r must be non-negative")
+  }
+  # Check var_names
+  if (!is.null(var_names)) {
+    if (length(var_names) != x$d) {
+      stop("''var_names'' must have length ''x$d''")
+    }
   }
   #
   a_algor <- match.arg(a_algor, c("optim", "nlminb"))

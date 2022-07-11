@@ -166,8 +166,8 @@ warning.}
 \eqn{b_i^+(r)}})
 respectively.}
 
-\item{var_names}{A character vector.  Names to give to the column(s) of
-the simulated values.}
+\item{var_names}{A character (or numeric) vector of length \code{d}.  Names
+to give to the column(s) of the simulated values.}
 
 \item{shoof}{A numeric scalar in [0, 1].  Sometimes a spurious
 non-zero convergence indicator is returned from

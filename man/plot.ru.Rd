@@ -14,6 +14,7 @@
   rows = NULL,
   xlabs = NULL,
   ylabs = NULL,
+  var_names = NULL,
   points_par = list(col = 8)
 )
 }
@@ -49,6 +50,10 @@ internally.}
 \item{xlabs, ylabs}{Numeric vectors.  When \code{d > 2} these set the labels
 on the x and y axes respectively.  If the user doesn't provide these then
 the column names of the simulated data matrix to be plotted are used.}
+
+\item{var_names}{A character (or numeric) vector of length \code{x$d}. This
+argument can be used to replace variable names set using \code{var_names}
+in the call to \code{\link{ru}} or \code{\link{ru_rcpp}}.}
 
 \item{points_par}{A list of arguments to pass to
 \code{\link[graphics]{points}} to control the appearance of points
