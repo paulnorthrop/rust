@@ -440,7 +440,7 @@ x$pa
 norm_lognorm <- function(x, ...) {
   dnorm(x[1], ...) + dlnorm(x[2], ...)
 }
-x <- ru(logf = norm_lognorm, log = TRUE, n = 1000, d = 2, init = c(0, 0),
+x <- ru(logf = norm_lognorm, log = TRUE, n = 1000, d = 2, init = c(-1, 0),
         trans = "BC", lambda = c(1, 0))
 plot(x)
 plot(x, ru_scale = TRUE)
