@@ -220,7 +220,8 @@ An object of class \code{"ru"} is a list containing the following
     \item{trans_fn}{An R function that performs the inverse transformation
       from the transformed variable \eqn{\rho}, on which the generalised
       ratio-of-uniforms method is performed, back to the original variable
-      \eqn{\theta}.}
+      \eqn{\theta}. \strong{Note}: \code{trans_fn} is \strong{not}
+      vectorised with respect to \eqn{\rho}.}
 }
 \description{
 Uses the generalized ratio-of-uniforms method to simulate from a

@@ -210,7 +210,8 @@
 #'     \item{trans_fn}{An R function that performs the inverse transformation
 #'       from the transformed variable \eqn{\rho}, on which the generalised
 #'       ratio-of-uniforms method is performed, back to the original variable
-#'       \eqn{\theta}.}
+#'       \eqn{\theta}. \strong{Note}: \code{trans_fn} is \strong{not}
+#'       vectorised with respect to \eqn{\rho}.}
 #' @references Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
 #'  Efficient generation of random variates via the ratio-of-uniforms method.
 #'  \emph{Statistics and Computing} (1991), \strong{1}, 129-133.
