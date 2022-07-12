@@ -361,7 +361,6 @@
 #' # Bivariate normal x bivariate student-t
 #' log_norm_t <- function(x, mean = rep(0, d), sigma1 = diag(d), sigma2 = diag(d)) {
 #'   x <- matrix(x, ncol = length(x))
-#'   d <- ncol(x)
 #'   log_h1 <- -0.5 * (x - mean) %*% solve(sigma1) %*% t(x - mean)
 #'   log_h2 <- -2 * log(1 + 0.5 * x %*% solve(sigma2) %*% t(x))
 #'   return(log_h1 + log_h2)
