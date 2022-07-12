@@ -379,6 +379,15 @@
 #' x <- ru(logf = log_norm_t, mean = y, sigma1 = covmat, sigma2 = covmat,
 #'   d = 2, n = 10000, init = y, rotate = TRUE)
 #' x$pa
+#'
+#' # Normal x log-normal: different Box-Cox parameters ==================
+#' norm_lognorm <- function(x, ...) {
+#'   dnorm(x[1], ...) + dlnorm(x[2], ...)
+#' }
+#' x <- ru(logf = norm_lognorm, log = TRUE, n = 1000, d = 2, init = c(0, 0),
+#'         trans = "BC", lambda = c(1, 0))
+#' plot(x)
+#' plot(x, ru_scale = TRUE)
 #' }
 #' @seealso \code{\link{ru_rcpp}} for a version of \code{\link{ru}} that uses
 #'   the Rcpp package to improve efficiency.
