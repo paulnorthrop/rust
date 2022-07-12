@@ -120,7 +120,8 @@
 #'   \eqn{b_i^+(r)}})
 #'   respectively.
 #' @param var_names A character (or numeric) vector of length \code{d}.  Names
-#'   to give to the column(s) of the simulated values.
+#'   to give to the column(s) of the simulated values. If \code{var_names} is
+#'   not supplied then \code{(x[1], ..., x[d])} is used.
 #' @param shoof A numeric scalar in [0, 1].  Sometimes a spurious
 #'   non-zero convergence indicator is returned from
 #'   \code{\link[stats]{optim}} or \code{\link[stats]{nlminb}}).
@@ -438,6 +439,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
     if (length(var_names) != x$d) {
       stop("''var_names'' must have length ''x$d''")
     }
+  } else {
+    var_names <- paste0("x[", 1:d, "]")
   }
   #
   a_algor <- match.arg(a_algor, c("optim", "nlminb"))
