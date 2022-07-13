@@ -35,7 +35,7 @@ ru_rcpp(
 }
 \arguments{
 \item{logf}{An external pointer to a compiled C++ function returning the
-  log of the target density \eqn{f}.
+  log of the target density \eqn{f} evaluated at its first argument.
   This function should return \code{-Inf} when the density is zero.
   It is better to use \code{logf = } explicitly, for example,
   \code{ru(logf = dnorm, log = TRUE, init = 0.1)},
