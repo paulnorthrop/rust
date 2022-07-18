@@ -244,19 +244,14 @@ double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode,
   Rcpp::IntegerVector which_lam = tpars["which_lam"] ;
   Rcpp::NumericVector theta, phi, psi, phi2, temp, temp2 ;
   double val, log_bc_jac, logj ;
-  Rcout << "rho = " << rho << std::endl;
   psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
-  Rcout << "psi = " << psi << std::endl;
   temp = psi * con + 1.0 ;
   temp = temp[which_lam] ;
-  Rcout << "temp = " << temp << std::endl;
   if (any_nonpos(temp)) {
     return R_NegInf ;
   }
   phi = psi_to_phi_fun(psi, lambda, gm, con) ;
-  Rcout << "phi = " << phi << std::endl;
   theta = phi_to_theta_fun(phi, user_args) ;
-  Rcout << "theta = " << theta << std::endl;
   if (any_naC(theta)) {
     return R_NegInf ;
   }
@@ -297,6 +292,9 @@ double cpp_logf_rho_4(const arma::vec& rho, const arma::vec& psi_mode,
   double val, logj ;
   phi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
   theta = phi_to_theta_fun(phi, user_args) ;
+  if (any_infinite(theta)) {
+    return R_NegInf ;
+  }
   if (any_naC(theta)) {
     return R_NegInf ;
   }
