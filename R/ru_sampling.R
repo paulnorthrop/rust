@@ -640,10 +640,11 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
       test <- (psi * const + 1)[which_lam]
       if (any(test <= 0)) return(-Inf)
       phi <- psi_to_phi(psi)
-      theta <- phi_to_theta(phi)
+      theta <- do.call(phi_to_theta, c(list(phi), user_args))
       if (any(!is.finite(theta))) return(-Inf)
       log_bc_jac <- sum((lambda - 1)[which_lam] * log(phi[which_lam]))
-      val <- logf(theta, ...) - log_bc_jac - log_j(theta) - hscale
+      logj <- do.call(log_j, c(list(theta), user_args))
+      val <- logf(theta, ...) - log_bc_jac - logj - hscale
       structure(val, theta = theta)
     }
     trans_fn <- function(._rho) {
