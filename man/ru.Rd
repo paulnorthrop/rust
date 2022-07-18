@@ -80,12 +80,18 @@ from \code{theta} (\eqn{\theta}) to \code{phi} (\eqn{\phi}) that may be
 used to ensure positivity of \eqn{\phi} prior to Box-Cox transformation.
 The argument is \code{phi} and the returned value is \code{theta}.
 If \code{phi_to_theta} is undefined at the input value then the
-function should return \code{NA}. See \strong{Details}.}
+function should return \code{NA}. See \strong{Details}.
+If \code{lambda$phi_to_theta} (see argument \code{lambda} below) is
+supplied then this is used instead of any function supplied via
+\code{phi_to_theta}.}
 
 \item{log_j}{A function returning the log of the Jacobian of the
 transformation from \code{theta} (\eqn{\theta}) to \code{phi} (\eqn{\phi}),
 i.e., based on derivatives of \eqn{\phi} with respect to \eqn{\theta}.
-Takes \code{theta} as its argument.}
+Takes \code{theta} as its argument.
+If \code{lambda$log_j} (see argument \code{lambda} below) is
+supplied then this is used instead of any function supplied via
+\code{log_j}.}
 
 \item{user_args}{A list of numeric components. If \code{trans = "user"}
 then \code{user_args} is a list providing arguments to the user-supplied
