@@ -649,7 +649,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
     trans_fn <- function(._rho) {
       psi <- rho_to_psi(._rho)
       phi <- psi_to_phi(psi)
-      return(phi_to_theta(phi))
+      return(do.call(phi_to_theta, c(list(phi), user_args)))
     }
   }
   if (trans == "user") {
