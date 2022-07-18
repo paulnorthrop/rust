@@ -494,7 +494,7 @@ find_bs <-  function(f_rho, d, r, lower, upper, f_mode, ep, vals, conv, algor,
   #   vals         : A numeric matrix.  Will contain the values of the
   #                  variables at which the ru box dimensions occur.
   #                  Row 1 already contains the values for a(r).
-  #   conv         : A numeric scalar.  Will contain the covergence
+  #   conv         : A numeric scalar.  Will contain the convergence
   #                  indicators returned by the optimisation algorithms.
   #                  Row 1 already contains the values for a(r).
   #   algor        : A character scalar. Algorithm ("optim" or "nlminb").
@@ -823,7 +823,7 @@ cpp_find_bs <-  function(lower, upper, ep, vals, conv, algor, method,
   #   vals          : A numeric matrix.  Will contain the values of the
   #                   variables at which the ru box dimensions occur.
   #                   Row 1 already contains the values for a(r).
-  #   conv          : A numeric scalar.  Will contain the covergence
+  #   conv          : A numeric scalar.  Will contain the convergence
   #                   indicators returned by the optimisation algorithms.
   #                   Row 1 already contains the values for a(r).
   #   algor         : A character scalar. Algorithm ("optim" or "nlminb").

@@ -458,6 +458,8 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
   if (is.null(gm)) {
     gm <- rep(1, d)
   }
+  print(lambda)
+  print(length(lambda))
   # Set up Box-Cox transformation parameters (if necessary)
   if (trans == "BC") {
     lambda_type <- "numeric"
@@ -507,12 +509,16 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
       stop("when trans = ``BC'' all elements of upper must be positive")
     }
     # If any components of lower or upper are negative then set them to zero.
+    print(lower)
+    print(upper)
     lower <- pmax(0, lower)
     lower <- ifelse(lambda == 0, gm * log(lower),
                     (lower^lambda - 1) / (lambda * gm ^ (lambda -1)))
     upper <- ifelse(lambda == 0, gm * log(upper),
                     (upper^lambda - 1) / (lambda * gm ^ (lambda -1)))
   }
+  print(lower)
+  print(upper)
   # Check that the optimisation algorithm is appropriate given the bounds in
   # lower and upper.  If not then change it, with a warning.
   if (d == 1 & a_algor == "optim" & any(is.infinite(c(lower,upper)))) {
@@ -576,7 +582,7 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
   # indicators.
   #   vals: will contain the values of the variables at which
   #         the ru box dimensions occur.
-  #   conv: will contain the corresponding covergence indicators returned by
+  #   conv: will contain the corresponding convergence indicators returned by
   #         the optimisation algorithms.
   vals <- matrix(NA, ncol = d, nrow = 2 * d + 1)
   colnames(vals) <- paste("vals", 1:d, sep="")
