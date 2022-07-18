@@ -483,8 +483,8 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
   }
   # Check var_names and set default if var_names has not been supplied
   if (!is.null(var_names)) {
-    if (length(var_names) != x$d) {
-      stop("''var_names'' must have length ''x$d''")
+    if (length(var_names) != d) {
+      stop("''var_names'' must have length ''d''")
     }
   } else {
     var_names <- paste0("x[", 1:d, "]")
