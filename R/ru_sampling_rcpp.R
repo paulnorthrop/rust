@@ -625,7 +625,7 @@ ru_rcpp <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
   # indicators.
   #   vals: will contain the values of the variables at which
   #         the ru box dimensions occur.
-  #   conv: will contain the corresponding covergence indicators returned by
+  #   conv: will contain the corresponding convergence indicators returned by
   #         the optimisation algorithms.
   vals <- matrix(NA, ncol = d, nrow = 2 * d + 1)
   colnames(vals) <- paste("vals", 1:d, sep="")
