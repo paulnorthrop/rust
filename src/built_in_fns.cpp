@@ -10,6 +10,11 @@ using namespace Rcpp;
 // Miscellaneous functions.
 
 // [[Rcpp::export]]
+bool any_infinite(const Rcpp::NumericVector& x) {
+  return Rcpp::is_true(Rcpp::any(Rcpp::is_infinite(x)));
+}
+
+// [[Rcpp::export]]
 bool any_naC(const Rcpp::NumericVector& x) {
   return Rcpp::is_true(Rcpp::any(Rcpp::is_na(x)));
 }
@@ -191,6 +196,9 @@ double cpp_logf_rho_2(const arma::vec& rho, const arma::vec& psi_mode,
     return R_NegInf ;
   }
   phi = psi_to_phi_fun(psi, lambda, gm, con) ;
+  if (any_infinite(phi)) {
+    return R_NegInf ;
+  }
   phi2 = phi[which_lam] ;
   temp = Rcpp::log(phi2) ;
   temp2 = lambda[which_lam] ;
