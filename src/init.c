@@ -3,7 +3,7 @@
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
-/* FIXME: 
+/* FIXME:
    Check these declarations against the C/Fortran source code.
 */
 
@@ -11,6 +11,7 @@
 extern SEXP _rust_all_pos(SEXP);
 extern SEXP _rust_any_col_nonneg(SEXP);
 extern SEXP _rust_any_col_nonpos(SEXP);
+extern SEXP _rust_any_infinite(SEXP);
 extern SEXP _rust_any_naC(SEXP);
 extern SEXP _rust_any_neg(SEXP);
 extern SEXP _rust_any_nonpos(SEXP);
@@ -62,6 +63,10 @@ extern SEXP _rust_ru_cpp(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, S
 extern SEXP _rust_ru_cpp_2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP _rust_ru_cpp_3(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP _rust_ru_cpp_4(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _rust_trans1(SEXP, SEXP, SEXP);
+extern SEXP _rust_trans2(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _rust_trans3(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _rust_trans4(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP _rust_vecpow(SEXP, SEXP);
 extern SEXP _rust_vecpower(SEXP, SEXP);
 
@@ -69,6 +74,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rust_all_pos",                      (DL_FUNC) &_rust_all_pos,                       1},
     {"_rust_any_col_nonneg",               (DL_FUNC) &_rust_any_col_nonneg,                1},
     {"_rust_any_col_nonpos",               (DL_FUNC) &_rust_any_col_nonpos,                1},
+    {"_rust_any_infinite",                 (DL_FUNC) &_rust_any_infinite,                       1},
     {"_rust_any_naC",                      (DL_FUNC) &_rust_any_naC,                       1},
     {"_rust_any_neg",                      (DL_FUNC) &_rust_any_neg,                       1},
     {"_rust_any_nonpos",                   (DL_FUNC) &_rust_any_nonpos,                    1},
@@ -120,6 +126,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rust_ru_cpp_2",                     (DL_FUNC) &_rust_ru_cpp_2,                     16},
     {"_rust_ru_cpp_3",                     (DL_FUNC) &_rust_ru_cpp_3,                     16},
     {"_rust_ru_cpp_4",                     (DL_FUNC) &_rust_ru_cpp_4,                     16},
+    {"_rust_trans1",                       (DL_FUNC) &_rust_trans1,                        3},
+    {"_rust_trans2",                       (DL_FUNC) &_rust_trans2,                        5},
+    {"_rust_trans3",                       (DL_FUNC) &_rust_trans3,                        7},
+    {"_rust_trans4",                       (DL_FUNC) &_rust_trans4,                        6},
     {"_rust_vecpow",                       (DL_FUNC) &_rust_vecpow,                        2},
     {"_rust_vecpower",                     (DL_FUNC) &_rust_vecpower,                      2},
     {NULL, NULL, 0}
