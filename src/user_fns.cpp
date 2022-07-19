@@ -228,7 +228,7 @@ SEXP create_log_j_xptr(std::string fstr) {
 
 // [[Rcpp::export]]
 Rcpp::NumericVector exptrans(const Rcpp::NumericVector& phi,
-                                const Rcpp::List& user_args) {
+                             const Rcpp::List& user_args) {
   return exp(phi);
 }
 
