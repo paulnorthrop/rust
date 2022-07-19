@@ -164,7 +164,6 @@ double cpp_logf_rho(const arma::vec& rho, const arma::vec& psi_mode,
 
 // Transformation function 1
 
-//' @export
 // [[Rcpp::export]]
 arma::vec trans1(const arma::vec& rho, const arma::vec& psi_mode,
                  const arma::mat& rot_mat) {
@@ -218,7 +217,6 @@ double cpp_logf_rho_2(const arma::vec& rho, const arma::vec& psi_mode,
 
 // Transformation function 2
 
-//' @export
 // [[Rcpp::export]]
 arma::vec trans2(const arma::vec& rho, const arma::vec& psi_mode,
                  const arma::mat& rot_mat, const Rcpp::List& tpars,
@@ -299,7 +297,6 @@ double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode,
   return val ;
 }
 
-//' @export
 // [[Rcpp::export]]
 arma::vec trans3(const arma::vec& rho, const arma::vec& psi_mode,
                  const arma::mat& rot_mat, const Rcpp::List& tpars,
@@ -366,7 +363,6 @@ double cpp_logf_rho_4(const arma::vec& rho, const arma::vec& psi_mode,
   return val ;
 }
 
-//' @export
 // [[Rcpp::export]]
 arma::vec trans4(const arma::vec& rho, const arma::vec& psi_mode,
                  const arma::mat& rot_mat, const SEXP& ptpfun,
