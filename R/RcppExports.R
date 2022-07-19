@@ -65,16 +65,36 @@ cpp_logf_rho <- function(rho, psi_mode, rot_mat, hscale, logf, pars) {
     .Call(`_rust_cpp_logf_rho`, rho, psi_mode, rot_mat, hscale, logf, pars)
 }
 
+#' @export
+trans1 <- function(rho, psi_mode, rot_mat) {
+    .Call(`_rust_trans1`, rho, psi_mode, rot_mat)
+}
+
 cpp_logf_rho_2 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
     .Call(`_rust_cpp_logf_rho_2`, rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+}
+
+#' @export
+trans2 <- function(rho, psi_mode, rot_mat, tpars, ptpfun) {
+    .Call(`_rust_trans2`, rho, psi_mode, rot_mat, tpars, ptpfun)
 }
 
 cpp_logf_rho_3 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
     .Call(`_rust_cpp_logf_rho_3`, rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
 }
 
+#' @export
+trans3 <- function(rho, psi_mode, rot_mat, tpars, ptpfun, phi_to_theta, user_args) {
+    .Call(`_rust_trans3`, rho, psi_mode, rot_mat, tpars, ptpfun, phi_to_theta, user_args)
+}
+
 cpp_logf_rho_4 <- function(rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {
     .Call(`_rust_cpp_logf_rho_4`, rho, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args)
+}
+
+#' @export
+trans4 <- function(rho, psi_mode, rot_mat, ptpfun, phi_to_theta, user_args) {
+    .Call(`_rust_trans4`, rho, psi_mode, rot_mat, ptpfun, phi_to_theta, user_args)
 }
 
 rcpp_apply <- function(x, psi_mode, rot_mat, hscale, logf, pars, tpars, ptpfun, phi_to_theta, log_j, user_args) {

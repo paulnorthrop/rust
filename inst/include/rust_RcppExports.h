@@ -361,6 +361,27 @@ namespace rust {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
+    inline arma::vec trans1(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat) {
+        typedef SEXP(*Ptr_trans1)(SEXP,SEXP,SEXP);
+        static Ptr_trans1 p_trans1 = NULL;
+        if (p_trans1 == NULL) {
+            validateSignature("arma::vec(*trans1)(const arma::vec&,const arma::vec&,const arma::mat&)");
+            p_trans1 = (Ptr_trans1)R_GetCCallable("rust", "_rust_trans1");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_trans1(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
+    }
+
     inline double cpp_logf_rho_2(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars, const Rcpp::List& tpars, const SEXP& ptpfun, const SEXP& phi_to_theta, const SEXP& log_j, const Rcpp::List& user_args) {
         typedef SEXP(*Ptr_cpp_logf_rho_2)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_cpp_logf_rho_2 p_cpp_logf_rho_2 = NULL;
@@ -380,6 +401,27 @@ namespace rust {
         if (rcpp_result_gen.inherits("try-error"))
             throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
         return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline arma::vec trans2(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const Rcpp::List& tpars, const SEXP& ptpfun) {
+        typedef SEXP(*Ptr_trans2)(SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_trans2 p_trans2 = NULL;
+        if (p_trans2 == NULL) {
+            validateSignature("arma::vec(*trans2)(const arma::vec&,const arma::vec&,const arma::mat&,const Rcpp::List&,const SEXP&)");
+            p_trans2 = (Ptr_trans2)R_GetCCallable("rust", "_rust_trans2");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_trans2(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
     }
 
     inline double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars, const Rcpp::List& tpars, const SEXP& ptpfun, const SEXP& phi_to_theta, const SEXP& log_j, const Rcpp::List& user_args) {
@@ -403,6 +445,27 @@ namespace rust {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
+    inline arma::vec trans3(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const Rcpp::List& tpars, const SEXP& ptpfun, const SEXP& phi_to_theta, const Rcpp::List& user_args) {
+        typedef SEXP(*Ptr_trans3)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_trans3 p_trans3 = NULL;
+        if (p_trans3 == NULL) {
+            validateSignature("arma::vec(*trans3)(const arma::vec&,const arma::vec&,const arma::mat&,const Rcpp::List&,const SEXP&,const SEXP&,const Rcpp::List&)");
+            p_trans3 = (Ptr_trans3)R_GetCCallable("rust", "_rust_trans3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_trans3(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(tpars)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
+    }
+
     inline double cpp_logf_rho_4(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars, const Rcpp::List& tpars, const SEXP& ptpfun, const SEXP& phi_to_theta, const SEXP& log_j, const Rcpp::List& user_args) {
         typedef SEXP(*Ptr_cpp_logf_rho_4)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_cpp_logf_rho_4 p_cpp_logf_rho_4 = NULL;
@@ -422,6 +485,27 @@ namespace rust {
         if (rcpp_result_gen.inherits("try-error"))
             throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
         return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline arma::vec trans4(const arma::vec& rho, const arma::vec& psi_mode, const arma::mat& rot_mat, const SEXP& ptpfun, const SEXP& phi_to_theta, const Rcpp::List& user_args) {
+        typedef SEXP(*Ptr_trans4)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_trans4 p_trans4 = NULL;
+        if (p_trans4 == NULL) {
+            validateSignature("arma::vec(*trans4)(const arma::vec&,const arma::vec&,const arma::mat&,const SEXP&,const SEXP&,const Rcpp::List&)");
+            p_trans4 = (Ptr_trans4)R_GetCCallable("rust", "_rust_trans4");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_trans4(Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(psi_mode)), Shield<SEXP>(Rcpp::wrap(rot_mat)), Shield<SEXP>(Rcpp::wrap(ptpfun)), Shield<SEXP>(Rcpp::wrap(phi_to_theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
     }
 
     inline Rcpp::NumericVector rcpp_apply(const Rcpp::NumericMatrix& x, const arma::vec& psi_mode, const arma::mat& rot_mat, const double& hscale, const SEXP& logf, const Rcpp::List& pars, const Rcpp::List& tpars, const SEXP& ptpfun, const SEXP& phi_to_theta, const SEXP& log_j, const Rcpp::List& user_args) {

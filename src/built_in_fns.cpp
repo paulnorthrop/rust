@@ -162,6 +162,15 @@ double cpp_logf_rho(const arma::vec& rho, const arma::vec& psi_mode,
   return val ;
 }
 
+// Transformation function 1
+
+//' @export
+// [[Rcpp::export]]
+arma::vec trans1(const arma::vec& rho, const arma::vec& psi_mode,
+                 const arma::mat& rot_mat) {
+  return cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
+}
+
 // Case 2: Box-Cox, rotation and relocation.
 
 // [[Rcpp::export]]
@@ -205,6 +214,29 @@ double cpp_logf_rho_2(const arma::vec& rho, const arma::vec& psi_mode,
   log_bc_jac = sum((temp2 - 1.0) * temp) ;
   val = fun(phi, pars) - log_bc_jac - hscale ;
   return val ;
+}
+
+// Transformation function 2
+
+//' @export
+// [[Rcpp::export]]
+arma::vec trans2(const arma::vec& rho, const arma::vec& psi_mode,
+                 const arma::mat& rot_mat, const Rcpp::List& tpars,
+                 const SEXP& ptpfun) {
+  Rcpp::NumericVector phi, psi ;
+  psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
+  // Unwrap pointer to psi_to_phi transformation function.
+  typedef Rcpp::NumericVector (*ptpPtr)(const Rcpp::NumericVector& psi,
+                               const Rcpp::NumericVector& lambda,
+                               const Rcpp::NumericVector& gm,
+                               const Rcpp::NumericVector& con) ;
+  Rcpp::NumericVector lambda = tpars["lambda"] ;
+  Rcpp::NumericVector gm = tpars["gm"] ;
+  Rcpp::NumericVector con = tpars["con"] ;
+  Rcpp::XPtr<ptpPtr> xptpfun(ptpfun) ;
+  ptpPtr psi_to_phi_fun = *xptpfun ;
+  phi = psi_to_phi_fun(psi, lambda, gm, con) ;
+  return phi ;
 }
 
 // Case 3: Transformation to positivity, Box-Cox, rotation and relocation.
@@ -252,6 +284,9 @@ double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode,
   }
   phi = psi_to_phi_fun(psi, lambda, gm, con) ;
   theta = phi_to_theta_fun(phi, user_args) ;
+  if (any_infinite(theta)) {
+    return R_NegInf ;
+  }
   if (any_naC(theta)) {
     return R_NegInf ;
   }
@@ -262,6 +297,34 @@ double cpp_logf_rho_3(const arma::vec& rho, const arma::vec& psi_mode,
   log_bc_jac = sum((temp2 - 1.0) * temp) ;
   val = fun(theta, pars) - log_bc_jac - logj - hscale ;
   return val ;
+}
+
+//' @export
+// [[Rcpp::export]]
+arma::vec trans3(const arma::vec& rho, const arma::vec& psi_mode,
+                 const arma::mat& rot_mat, const Rcpp::List& tpars,
+                 const SEXP& ptpfun, const SEXP& phi_to_theta,
+                 const Rcpp::List& user_args) {
+  Rcpp::NumericVector theta, phi, psi ;
+  psi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
+  // Unwrap pointer to psi_to_phi transformation function.
+  typedef Rcpp::NumericVector (*ptpPtr)(const Rcpp::NumericVector& psi,
+                               const Rcpp::NumericVector& lambda,
+                               const Rcpp::NumericVector& gm,
+                               const Rcpp::NumericVector& con) ;
+  Rcpp::NumericVector lambda = tpars["lambda"] ;
+  Rcpp::NumericVector gm = tpars["gm"] ;
+  Rcpp::NumericVector con = tpars["con"] ;
+  Rcpp::XPtr<ptpPtr> xptpfun(ptpfun) ;
+  ptpPtr psi_to_phi_fun = *xptpfun ;
+  phi = psi_to_phi_fun(psi, lambda, gm, con) ;
+  // Unwrap pointer to phi_to_theta transformation function.
+  typedef Rcpp::NumericVector (*pttPtr)(const Rcpp::NumericVector& phi,
+                               const Rcpp::List& user_args) ;
+  Rcpp::XPtr<pttPtr> xpttfun(phi_to_theta) ;
+  pttPtr phi_to_theta_fun = *xpttfun ;
+  theta = phi_to_theta_fun(phi, user_args) ;
+  return theta ;
 }
 
 // Case 4: User-supplied transformation, rotation and relocation.
@@ -301,6 +364,22 @@ double cpp_logf_rho_4(const arma::vec& rho, const arma::vec& psi_mode,
   logj = log_j_fun(theta, user_args) ;
   val = fun(theta, pars) - logj - hscale ;
   return val ;
+}
+
+//' @export
+// [[Rcpp::export]]
+arma::vec trans4(const arma::vec& rho, const arma::vec& psi_mode,
+                 const arma::mat& rot_mat, const SEXP& ptpfun,
+                 const SEXP& phi_to_theta, const Rcpp::List& user_args) {
+  Rcpp::NumericVector theta, phi, psi ;
+  phi = cpp_rho_to_psi(rho, psi_mode, rot_mat) ;
+  // Unwrap pointer to phi_to_theta transformation function.
+  typedef Rcpp::NumericVector (*pttPtr)(const Rcpp::NumericVector& phi,
+                               const Rcpp::List& user_args) ;
+  Rcpp::XPtr<pttPtr> xpttfun(phi_to_theta) ;
+  pttPtr phi_to_theta_fun = *xpttfun ;
+  theta = phi_to_theta_fun(phi, user_args) ;
+  return theta ;
 }
 
 // Function to vectorize cpp_logf_rho_4() for use in find_lambda_rcpp()
