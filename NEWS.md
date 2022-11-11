@@ -1,4 +1,4 @@
-# rust 1.3.13.9000
+# rust 1.4.0
 
 ## New features
 
@@ -21,6 +21,8 @@
 * Improvements to the package manual.
 
 * Activated 3rd edition of the `testthat` package
+
+* WARNINGs in the CRAN package check results, like "init.c:60:47: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes] extern SEXP _revdbayes_RcppExport_registerCCallable();" have been avoided.
 
 # rust 1.3.13
 
