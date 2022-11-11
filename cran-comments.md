@@ -14,4 +14,4 @@ The WARNINGs under Additional issues for the last released version of rust on CR
 
 ## Downstream dependencies
 
-All downstream dependencies of rust (bang, revdbayes and threshr) passed R CMD check.
+All downstream dependencies of rust (bang, DSSP, revdbayes and threshr) passed R CMD check.
