@@ -1,3 +1,5 @@
+The WARNINGs under Additional issues for the last released version of rust on CRAN have been fixed.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
