@@ -1,3 +1,5 @@
+I have fixed the problem that caused check results ERRORs for reverse dependency package DSSP.
+
 The WARNINGs under Additional issues for the last released version of rust on CRAN have been fixed.
 
 ## R CMD check results
