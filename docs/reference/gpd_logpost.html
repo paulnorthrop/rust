@@ -20,7 +20,7 @@ posterior density that is proper."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -75,7 +75,7 @@ posterior density that is proper.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gpd_logpost</span><span class="op">(</span><span class="va">pars</span>, <span class="va">ss</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gpd_logpost</span><span class="op">(</span><span class="va">pars</span>, <span class="va">ss</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,19 +83,24 @@ posterior density that is proper.</p>
     <dl><dt>pars</dt>
 <dd><p>A numeric vector containing the values of the generalized Pareto
 parameters \(\sigma\) and \(\xi\).</p></dd>
+
+
 <dt>ss</dt>
 <dd><p>A numeric list. Summary statistics to be passed to the generalized
 Pareto log-likelihood.  Calculated using <code>gpd_sum_stats</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric scalar. The value of the log-likelihood.</p>
+    
+
+<p>A numeric scalar. The value of the log-likelihood.</p>
     </div>
     <div id="references">
     <h2>References</h2>
     <p>Northrop, P. J. and Attalides, N. (2016) Posterior propriety in
 Bayesian extreme value analyses using reference priors. Statistica Sinica,
-26(2), 721-743, doi: <a href="https://doi.org/10.5705/ss.2014.034" class="external-link">10.5705/ss.2014.034</a>
+26(2), 721-743, <a href="https://doi.org/10.5705/ss.2014.034" class="external-link">doi:10.5705/ss.2014.034</a>
 .</p>
     </div>
     <div id="see-also">
@@ -107,15 +112,15 @@ Bayesian extreme value analyses using reference priors. Statistica Sinica,
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># Sample data from a GP(sigma, xi) distribution</span></span>
-<span class="r-in"><span class="va">gpd_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="rgpd.html">rgpd</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">100</span>, xi <span class="op">=</span> <span class="fl">0</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Calculate summary statistics for use in the log-likelihood</span></span>
-<span class="r-in"><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gpd_sum_stats.html">gpd_sum_stats</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Calculate the generalized Pareto log-posterior</span></span>
-<span class="r-in"><span class="fu">gpd_logpost</span><span class="op">(</span>pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, ss <span class="op">=</span> <span class="va">ss</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -96.3342</span>
-<span class="r-in"><span class="co"># }</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Sample data from a GP(sigma, xi) distribution</span></span></span>
+<span class="r-in"><span><span class="va">gpd_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="rgpd.html">rgpd</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">100</span>, xi <span class="op">=</span> <span class="fl">0</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Calculate summary statistics for use in the log-likelihood</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gpd_sum_stats.html">gpd_sum_stats</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Calculate the generalized Pareto log-posterior</span></span></span>
+<span class="r-in"><span><span class="fu">gpd_logpost</span><span class="op">(</span>pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, ss <span class="op">=</span> <span class="va">ss</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -116.0684</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -130,7 +135,7 @@ Bayesian extreme value analyses using reference priors. Statistica Sinica,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

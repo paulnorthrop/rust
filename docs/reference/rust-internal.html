@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -69,91 +69,91 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_cox</span><span class="op">(</span><span class="va">x</span>, lambda <span class="op">=</span> <span class="fl">1</span>, gm <span class="op">=</span> <span class="fl">1</span>, lambda_tol <span class="op">=</span> <span class="fl">1e-06</span><span class="op">)</span>
-
-<span class="fu">box_cox_vec</span><span class="op">(</span><span class="va">x</span>, lambda <span class="op">=</span> <span class="fl">1</span>, gm <span class="op">=</span> <span class="fl">1</span>, lambda_tol <span class="op">=</span> <span class="fl">1e-06</span><span class="op">)</span>
-
-<span class="fu">optim_box_cox</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">w</span>,
-  lambda_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,
-  start <span class="op">=</span> <span class="cn">NULL</span>,
-  which_lam <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">n_grid_fn</span><span class="op">(</span><span class="va">d</span><span class="op">)</span>
-
-<span class="fu">init_psi_calc</span><span class="op">(</span><span class="va">phi_to_psi</span>, <span class="va">phi</span>, <span class="va">lambda</span>, <span class="va">gm</span>, <span class="va">w</span>, <span class="va">which_lam</span><span class="op">)</span>
-
-<span class="fu">log_gpd_mdi_prior</span><span class="op">(</span><span class="va">pars</span><span class="op">)</span>
-
-<span class="fu">gpd_loglik</span><span class="op">(</span><span class="va">pars</span>, <span class="va">gpd_data</span>, <span class="va">m</span>, <span class="va">xm</span>, <span class="va">sum_gp</span><span class="op">)</span>
-
-<span class="fu">gpd_mle</span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span>
-
-<span class="fu">fallback_gp_mle</span><span class="op">(</span><span class="va">init</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">gpd_obs_info</span><span class="op">(</span><span class="va">gpd_pars</span>, <span class="va">y</span>, eps <span class="op">=</span> <span class="fl">1e-05</span>, m <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="fu">find_a</span><span class="op">(</span>
-  <span class="va">neg_logf_rho</span>,
-  <span class="va">init_psi</span>,
-  <span class="va">d</span>,
-  <span class="va">r</span>,
-  <span class="va">lower</span>,
-  <span class="va">upper</span>,
-  <span class="va">algor</span>,
-  <span class="va">method</span>,
-  <span class="va">control</span>,
-  <span class="va">shoof</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">find_bs</span><span class="op">(</span>
-  <span class="va">f_rho</span>,
-  <span class="va">d</span>,
-  <span class="va">r</span>,
-  <span class="va">lower</span>,
-  <span class="va">upper</span>,
-  <span class="va">f_mode</span>,
-  <span class="va">ep</span>,
-  <span class="va">vals</span>,
-  <span class="va">conv</span>,
-  <span class="va">algor</span>,
-  <span class="va">method</span>,
-  <span class="va">control</span>,
-  <span class="va">shoof</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">cpp_find_a</span><span class="op">(</span>
-  <span class="va">init_psi</span>,
-  <span class="va">lower</span>,
-  <span class="va">upper</span>,
-  <span class="va">algor</span>,
-  <span class="va">method</span>,
-  <span class="va">control</span>,
-  <span class="va">a_obj_fun</span>,
-  <span class="va">ru_args</span>,
-  <span class="va">shoof</span>
-<span class="op">)</span>
-
-<span class="fu">cpp_find_bs</span><span class="op">(</span>
-  <span class="va">lower</span>,
-  <span class="va">upper</span>,
-  <span class="va">ep</span>,
-  <span class="va">vals</span>,
-  <span class="va">conv</span>,
-  <span class="va">algor</span>,
-  <span class="va">method</span>,
-  <span class="va">control</span>,
-  <span class="va">lower_box_fun</span>,
-  <span class="va">upper_box_fun</span>,
-  <span class="va">ru_args</span>,
-  <span class="va">shoof</span>
-<span class="op">)</span>
-
-<span class="fu">fac3</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_cox</span><span class="op">(</span><span class="va">x</span>, lambda <span class="op">=</span> <span class="fl">1</span>, gm <span class="op">=</span> <span class="fl">1</span>, lambda_tol <span class="op">=</span> <span class="fl">1e-06</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_cox_vec</span><span class="op">(</span><span class="va">x</span>, lambda <span class="op">=</span> <span class="fl">1</span>, gm <span class="op">=</span> <span class="fl">1</span>, lambda_tol <span class="op">=</span> <span class="fl">1e-06</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">optim_box_cox</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">w</span>,</span>
+<span>  lambda_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  start <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  which_lam <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">n_grid_fn</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">init_psi_calc</span><span class="op">(</span><span class="va">phi_to_psi</span>, <span class="va">phi</span>, <span class="va">lambda</span>, <span class="va">gm</span>, <span class="va">w</span>, <span class="va">which_lam</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">log_gpd_mdi_prior</span><span class="op">(</span><span class="va">pars</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">gpd_loglik</span><span class="op">(</span><span class="va">pars</span>, <span class="va">gpd_data</span>, <span class="va">m</span>, <span class="va">xm</span>, <span class="va">sum_gp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">gpd_mle</span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fallback_gp_mle</span><span class="op">(</span><span class="va">init</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">gpd_obs_info</span><span class="op">(</span><span class="va">gpd_pars</span>, <span class="va">y</span>, eps <span class="op">=</span> <span class="fl">1e-05</span>, m <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">find_a</span><span class="op">(</span></span>
+<span>  <span class="va">neg_logf_rho</span>,</span>
+<span>  <span class="va">init_psi</span>,</span>
+<span>  <span class="va">d</span>,</span>
+<span>  <span class="va">r</span>,</span>
+<span>  <span class="va">lower</span>,</span>
+<span>  <span class="va">upper</span>,</span>
+<span>  <span class="va">algor</span>,</span>
+<span>  <span class="va">method</span>,</span>
+<span>  <span class="va">control</span>,</span>
+<span>  <span class="va">shoof</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">find_bs</span><span class="op">(</span></span>
+<span>  <span class="va">f_rho</span>,</span>
+<span>  <span class="va">d</span>,</span>
+<span>  <span class="va">r</span>,</span>
+<span>  <span class="va">lower</span>,</span>
+<span>  <span class="va">upper</span>,</span>
+<span>  <span class="va">f_mode</span>,</span>
+<span>  <span class="va">ep</span>,</span>
+<span>  <span class="va">vals</span>,</span>
+<span>  <span class="va">conv</span>,</span>
+<span>  <span class="va">algor</span>,</span>
+<span>  <span class="va">method</span>,</span>
+<span>  <span class="va">control</span>,</span>
+<span>  <span class="va">shoof</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cpp_find_a</span><span class="op">(</span></span>
+<span>  <span class="va">init_psi</span>,</span>
+<span>  <span class="va">lower</span>,</span>
+<span>  <span class="va">upper</span>,</span>
+<span>  <span class="va">algor</span>,</span>
+<span>  <span class="va">method</span>,</span>
+<span>  <span class="va">control</span>,</span>
+<span>  <span class="va">a_obj_fun</span>,</span>
+<span>  <span class="va">ru_args</span>,</span>
+<span>  <span class="va">shoof</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cpp_find_bs</span><span class="op">(</span></span>
+<span>  <span class="va">lower</span>,</span>
+<span>  <span class="va">upper</span>,</span>
+<span>  <span class="va">ep</span>,</span>
+<span>  <span class="va">vals</span>,</span>
+<span>  <span class="va">conv</span>,</span>
+<span>  <span class="va">algor</span>,</span>
+<span>  <span class="va">method</span>,</span>
+<span>  <span class="va">control</span>,</span>
+<span>  <span class="va">lower_box_fun</span>,</span>
+<span>  <span class="va">upper_box_fun</span>,</span>
+<span>  <span class="va">ru_args</span>,</span>
+<span>  <span class="va">shoof</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fac3</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="details">
@@ -173,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

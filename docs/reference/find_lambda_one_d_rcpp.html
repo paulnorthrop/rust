@@ -24,7 +24,7 @@ phi (\(\phi\)) on the Box-Cox transformed scale."><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,20 +83,20 @@ denote the argument of \(\log f\) on the original scale and
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>
-  <span class="va">logf</span>,
-  <span class="va">...</span>,
-  ep_bc <span class="op">=</span> <span class="fl">1e-04</span>,
-  min_phi <span class="op">=</span> <span class="va">ep_bc</span>,
-  max_phi <span class="op">=</span> <span class="fl">10</span>,
-  num <span class="op">=</span> <span class="fl">1001L</span>,
-  xdiv <span class="op">=</span> <span class="fl">100</span>,
-  probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.99</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
-  lambda_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,
-  phi_to_theta <span class="op">=</span> <span class="cn">NULL</span>,
-  log_j <span class="op">=</span> <span class="cn">NULL</span>,
-  user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span></span>
+<span>  <span class="va">logf</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  ep_bc <span class="op">=</span> <span class="fl">1e-04</span>,</span>
+<span>  min_phi <span class="op">=</span> <span class="va">ep_bc</span>,</span>
+<span>  max_phi <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  num <span class="op">=</span> <span class="fl">1001L</span>,</span>
+<span>  xdiv <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.99</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,</span>
+<span>  lambda_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  phi_to_theta <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  log_j <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -104,30 +104,46 @@ denote the argument of \(\log f\) on the original scale and
     <dl><dt>logf</dt>
 <dd><p>A pointer to a compiled C++ function returning the log
 of the target density \(f\).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments to be passed to <code>logf</code> and related
 functions.</p></dd>
+
+
 <dt>ep_bc</dt>
 <dd><p>A (positive) numeric scalar. Smallest possible value of
 <code>phi</code> to consider.  Used to avoid negative values of <code>phi</code>.</p></dd>
+
+
 <dt>min_phi, max_phi</dt>
 <dd><p>Numeric scalars.  Smallest and largest values
 of <code>phi</code> at which to evaluate <code>logf</code>, i.e., the range of values
 of <code>phi</code> over which to evaluate <code>logf</code>. Any components in
 <code>min_phi</code> that are not positive are set to <code>ep_bc</code>.</p></dd>
+
+
 <dt>num</dt>
 <dd><p>A numeric scalar. Number of values at which to evaluate
 <code>logf</code>.</p></dd>
+
+
 <dt>xdiv</dt>
 <dd><p>A numeric scalar.  Only values of <code>phi</code> at which the
 density \(f\) is greater than the (maximum of \(f\)) / <code>xdiv</code> are
 used.</p></dd>
+
+
 <dt>probs</dt>
 <dd><p>A numeric scalar. Probabilities at which to estimate the
 quantiles of that will be used as data to find lambda.</p></dd>
+
+
 <dt>lambda_range</dt>
 <dd><p>A numeric vector of length 2.  Range of lambda over
 which to optimise.</p></dd>
+
+
 <dt>phi_to_theta</dt>
 <dd><p>A pointer to a compiled C++ function returning
 (the inverse) of the transformation from <code>theta</code> to <code>phi</code> used
@@ -135,38 +151,52 @@ to ensure positivity of <code>phi</code> prior to Box-Cox transformation.  The
 argument is <code>phi</code> and the returned value is <code>theta</code>.  If
 <code>phi_to_theta</code> is undefined at the input value then the function
 should return <code>NA</code>.</p></dd>
+
+
 <dt>log_j</dt>
 <dd><p>A pointer to a compiled C++ function returning the log of
 the Jacobian of the transformation from <code>theta</code> to <code>phi</code>, i.e.,
 based on derivatives of \(phi\) with respect to \(theta\). Takes
 <code>theta</code> as its argument.
 If this is not supplied then a constant Jacobian is used.</p></dd>
+
+
 <dt>user_args</dt>
 <dd><p>A list of numeric components providing arguments to
 the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list containing the following components</p>
+    
+
+<p>A list containing the following components</p>
 <dl><dt>lambda</dt>
 <dd><p>A numeric scalar.  The value of <code>lambda</code>.</p></dd>
-<dt>gm</dt>
+
+  <dt>gm</dt>
 <dd><p>A numeric scalar.  Box-cox scaling parameter, estimated by the
     geometric mean of the quantiles used in the optimisation to find the
     value of lambda.</p></dd>
-<dt>init_psi</dt>
+
+  <dt>init_psi</dt>
 <dd><p>A numeric scalar.  An initial estimate of the mode of the
     Box-Cox transformed density</p></dd>
-<dt>sd_psi</dt>
+
+  <dt>sd_psi</dt>
 <dd><p>A numeric scalar.  Estimates of the marginal standard
     deviations of the Box-Cox transformed variables.</p></dd>
-<dt>phi_to_theta</dt>
+
+ <dt>phi_to_theta</dt>
 <dd><p>as detailed above (only if <code>phi_to_theta</code> is
    supplied)</p></dd>
-<dt>log_j</dt>
+
+ <dt>log_j</dt>
 <dd><p>as detailed above (only if <code>log_j</code> is supplied)</p></dd>
-<dt>user_args</dt>
+
+ <dt>user_args</dt>
 <dd><p>as detailed above (only if <code>user_args</code> is supplied)</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -195,7 +225,7 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
  Transformations of Multivariate Data, Biometrics, 27(4).</p>
 <p>Eddelbuettel, D. and Francois, R. (2011). Rcpp: Seamless
  R and C++ Integration. <em>Journal of Statistical Software</em>,
- <strong>40</strong>(8), 1-18. doi: <a href="https://doi.org/10.18637/jss.v040.i08" class="external-link">10.18637/jss.v040.i08</a></p>
+ <strong>40</strong>(8), 1-18. <a href="https://doi.org/10.18637/jss.v040.i08" class="external-link">doi:10.18637/jss.v040.i08</a></p>
 <p>Eddelbuettel, D. (2013). <em>Seamless R and C++ Integration
  with Rcpp</em>, Springer, New York. ISBN 978-1-4614-6867-7.</p>
     </div>
@@ -209,17 +239,17 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Log-normal density ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Note: the default value of max_phi = 10 is OK here but this will not</span></span>
-<span class="r-in"><span class="co"># always be the case.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ptr_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdlnorm"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span class="r-in"><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_lnorm</span>, mu <span class="op">=</span> <span class="va">mu</span>, sigma <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lambda</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Log-normal density ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Note: the default value of max_phi = 10 is OK here but this will not</span></span></span>
+<span class="r-in"><span><span class="co"># always be the case.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ptr_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdlnorm"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_lnorm</span>, mu <span class="op">=</span> <span class="va">mu</span>, sigma <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lambda</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06564725</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -235,22 +265,22 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $user_args</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_lnorm</span>, mu <span class="op">=</span> <span class="va">mu</span>, sigma <span class="op">=</span> <span class="va">sigma</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">             n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Gamma density ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="co"># Choose a sensible value of max_phi</span></span>
-<span class="r-in"><span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># [I appreciate that typically the quantile function won't be available.</span></span>
-<span class="r-in"><span class="co"># In practice the value of lambda chosen is quite insensitive to the choice</span></span>
-<span class="r-in"><span class="co"># of max_phi, provided that max_phi is not far too large or far too small.]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ptr_gam</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdgamma"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
-<span class="r-in">                                 max_phi <span class="op">=</span> <span class="va">max_phi</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lambda</span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_lnorm</span>, mu <span class="op">=</span> <span class="va">mu</span>, sigma <span class="op">=</span> <span class="va">sigma</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>             n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Gamma density ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="co"># Choose a sensible value of max_phi</span></span></span>
+<span class="r-in"><span><span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># [I appreciate that typically the quantile function won't be available.</span></span></span>
+<span class="r-in"><span><span class="co"># In practice the value of lambda chosen is quite insensitive to the choice</span></span></span>
+<span class="r-in"><span><span class="co"># of max_phi, provided that max_phi is not far too large or far too small.]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ptr_gam</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_xptr.html">create_xptr</a></span><span class="op">(</span><span class="st">"logdgamma"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>,</span></span>
+<span class="r-in"><span>                                 max_phi <span class="op">=</span> <span class="va">max_phi</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lambda</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2727968</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -266,19 +296,19 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $user_args</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
-<span class="r-in">             lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
-<span class="r-in"><span class="co"># NB. for alpha &lt; 1 the gamma(alpha, beta) density is not bounded</span></span>
-<span class="r-in"><span class="co"># So the ratio-of-uniforms emthod can't be used but it may work after a</span></span>
-<span class="r-in"><span class="co"># Box-Cox transformation.</span></span>
-<span class="r-in"><span class="co"># find_lambda_one_d() works much better than find_lambda() here.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
-<span class="r-in">                                 max_phi <span class="op">=</span> <span class="va">max_phi</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lambda</span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span></span>
+<span class="r-in"><span>             lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span></span>
+<span class="r-in"><span><span class="co"># NB. for alpha &lt; 1 the gamma(alpha, beta) density is not bounded</span></span></span>
+<span class="r-in"><span><span class="co"># So the ratio-of-uniforms emthod can't be used but it may work after a</span></span></span>
+<span class="r-in"><span><span class="co"># Box-Cox transformation.</span></span></span>
+<span class="r-in"><span><span class="co"># find_lambda_one_d() works much better than find_lambda() here.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu">find_lambda_one_d_rcpp</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>,</span></span>
+<span class="r-in"><span>                                 max_phi <span class="op">=</span> <span class="va">max_phi</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lambda</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06758891</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -294,14 +324,14 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $user_args</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
-<span class="r-in">             lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru_rcpp.html">ru_rcpp</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">ptr_gam</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span></span>
+<span class="r-in"><span>             lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="find_lambda_one_d_rcpp-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="find_lambda_one_d_rcpp-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -316,7 +346,7 @@ the user-supplied functions <code>phi_to_theta</code> and <code>log_j</code>.</p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -20,7 +20,7 @@ transformation of variable."><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -75,40 +75,41 @@ transformation of variable.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ru</span><span class="op">(</span>
-  <span class="va">logf</span>,
-  <span class="va">...</span>,
-  n <span class="op">=</span> <span class="fl">1</span>,
-  d <span class="op">=</span> <span class="fl">1</span>,
-  init <span class="op">=</span> <span class="cn">NULL</span>,
-  mode <span class="op">=</span> <span class="cn">NULL</span>,
-  trans <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"BC"</span>, <span class="st">"user"</span><span class="op">)</span>,
-  phi_to_theta <span class="op">=</span> <span class="cn">NULL</span>,
-  log_j <span class="op">=</span> <span class="cn">NULL</span>,
-  user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="va">d</span><span class="op">)</span>,
-  lambda_tol <span class="op">=</span> <span class="fl">1e-06</span>,
-  gm <span class="op">=</span> <span class="cn">NULL</span>,
-  rotate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">d</span> <span class="op">==</span> <span class="fl">1</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="va">d</span><span class="op">)</span>,
-  upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">Inf</span>, <span class="va">d</span><span class="op">)</span>,
-  r <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,
-  ep <span class="op">=</span> <span class="fl">0L</span>,
-  a_algor <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">d</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"nlminb"</span> <span class="kw">else</span> <span class="st">"optim"</span>,
-  b_algor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nlminb"</span>, <span class="st">"optim"</span><span class="op">)</span>,
-  a_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nelder-Mead"</span>, <span class="st">"BFGS"</span>, <span class="st">"CG"</span>, <span class="st">"L-BFGS-B"</span>, <span class="st">"SANN"</span>, <span class="st">"Brent"</span><span class="op">)</span>,
-  b_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nelder-Mead"</span>, <span class="st">"BFGS"</span>, <span class="st">"CG"</span>, <span class="st">"L-BFGS-B"</span>, <span class="st">"SANN"</span>, <span class="st">"Brent"</span><span class="op">)</span>,
-  a_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  b_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  var_names <span class="op">=</span> <span class="cn">NULL</span>,
-  shoof <span class="op">=</span> <span class="fl">0.2</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ru</span><span class="op">(</span></span>
+<span>  <span class="va">logf</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  d <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  init <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mode <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  trans <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"BC"</span>, <span class="st">"user"</span><span class="op">)</span>,</span>
+<span>  phi_to_theta <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  log_j <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="va">d</span><span class="op">)</span>,</span>
+<span>  lambda_tol <span class="op">=</span> <span class="fl">1e-06</span>,</span>
+<span>  gm <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rotate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">d</span> <span class="op">==</span> <span class="fl">1</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="va">d</span><span class="op">)</span>,</span>
+<span>  upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">Inf</span>, <span class="va">d</span><span class="op">)</span>,</span>
+<span>  r <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>  ep <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  a_algor <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">d</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"nlminb"</span> <span class="kw">else</span> <span class="st">"optim"</span>,</span>
+<span>  b_algor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nlminb"</span>, <span class="st">"optim"</span><span class="op">)</span>,</span>
+<span>  a_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nelder-Mead"</span>, <span class="st">"BFGS"</span>, <span class="st">"CG"</span>, <span class="st">"L-BFGS-B"</span>, <span class="st">"SANN"</span>, <span class="st">"Brent"</span><span class="op">)</span>,</span>
+<span>  b_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nelder-Mead"</span>, <span class="st">"BFGS"</span>, <span class="st">"CG"</span>, <span class="st">"L-BFGS-B"</span>, <span class="st">"SANN"</span>, <span class="st">"Brent"</span><span class="op">)</span>,</span>
+<span>  a_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  b_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  var_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shoof <span class="op">=</span> <span class="fl">0.2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>logf</dt>
-<dd><p>A function returning the log of the target density \(f\).
+<dd><p>A function returning the log of the target density \(f\)
+evaluated at its first argument.
 This function should return <code>-Inf</code> when the density is zero.
 It is better to use <code>logf = </code> explicitly, for example,
 <code>ru(logf = dnorm, log = TRUE, init = 0.1)</code>,
@@ -116,22 +117,32 @@ to avoid argument matching problems.  In contrast,
 <code>ru(dnorm, log = TRUE, init = 0.1)</code>
 will throw an error because partial matching results in
 <code>logf</code> being matched to <code>log = TRUE</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments to be passed to <code>logf</code> and related
 functions.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>A non-negative integer scalar.  The number of simulated values
 required. If <code>n = 0</code> then no simulation is performed but the
 component <code>box</code> in the returned object gives the ratio-of-uniforms
 bounding box that would have been used.</p></dd>
+
+
 <dt>d</dt>
 <dd><p>A positive integer scalar. The dimension of \(f\).</p></dd>
+
+
 <dt>init</dt>
 <dd><p>A numeric vector. Initial estimates of the mode of <code>logf</code>.
 If <code>trans = "BC"</code> or <code>trans = "user"</code> this is <em>after</em>
 Box-Cox transformation or user-defined transformation, but <em>before</em>
 any rotation of axes.
 If <code>init</code> is not supplied then <code>rep(1, d)</code> is used.</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>A numeric vector of length <code>d</code>.  The mode of <code>logf</code>.
 If <code>trans = "BC"</code> or <code>trans = "user"</code> this is <em>after</em>
@@ -139,6 +150,8 @@ Box-Cox transformation or user-defined transformation, but <em>before</em>
 any rotation of axes.  Only supply <code>mode</code> if the mode is known: it
 will not be checked.  If <code>mode</code> is supplied then <code>init</code> is
 ignored.</p></dd>
+
+
 <dt>trans</dt>
 <dd><p>A character scalar. <code>trans = "none"</code> for no
 transformation, <code>trans = "BC"</code> for Box-Cox transformation,
@@ -147,22 +160,36 @@ If <code>trans = "user"</code> then the transformation should be specified
 using <code>phi_to_theta</code> and <code>log_j</code> and <code>user_args</code> may be
 used to pass arguments to <code>phi_to_theta</code> and <code>log_j</code>.
 See <strong>Details</strong> and the <strong>Examples</strong>.</p></dd>
+
+
 <dt>phi_to_theta</dt>
 <dd><p>A function returning (the inverse) of the transformation
 from <code>theta</code> (\(\theta\)) to <code>phi</code> (\(\phi\)) that may be
 used to ensure positivity of \(\phi\) prior to Box-Cox transformation.
 The argument is <code>phi</code> and the returned value is <code>theta</code>.
 If <code>phi_to_theta</code> is undefined at the input value then the
-function should return <code>NA</code>. See <strong>Details</strong>.</p></dd>
+function should return <code>NA</code>. See <strong>Details</strong>.
+If <code>lambda$phi_to_theta</code> (see argument <code>lambda</code> below) is
+supplied then this is used instead of any function supplied via
+<code>phi_to_theta</code>.</p></dd>
+
+
 <dt>log_j</dt>
 <dd><p>A function returning the log of the Jacobian of the
 transformation from <code>theta</code> (\(\theta\)) to <code>phi</code> (\(\phi\)),
 i.e., based on derivatives of \(\phi\) with respect to \(\theta\).
-Takes <code>theta</code> as its argument.</p></dd>
+Takes <code>theta</code> as its argument.
+If <code>lambda$log_j</code> (see argument <code>lambda</code> below) is
+supplied then this is used instead of any function supplied via
+<code>log_j</code>.</p></dd>
+
+
 <dt>user_args</dt>
 <dd><p>A list of numeric components. If <code>trans = "user"</code>
 then <code>user_args</code> is a list providing arguments to the user-supplied
 functions <code>phi_to_theta</code> and <code>log_j</code>.</p></dd>
+
+
 <dt>lambda</dt>
 <dd><p>Either</p><ul><li><p>A numeric vector.  Box-Cox transformation parameters, or</p></li>
 <li><p>A list with components</p><dl><dt>lambda</dt>
@@ -191,17 +218,25 @@ functions <code>phi_to_theta</code> and <code>log_j</code>.</p></dd>
 </dl><p>This list may be created using <a href="find_lambda_one_d.html">find_lambda_one_d</a> (for <code>d</code> = 1)
   or <a href="find_lambda.html">find_lambda</a> (for any <code>d</code>).</p></li>
 </ul></dd>
+
+
 <dt>lambda_tol</dt>
 <dd><p>A numeric scalar.  Any values in lambda that are less
 than <code>lambda_tol</code> in magnitude are set to zero.</p></dd>
+
+
 <dt>gm</dt>
 <dd><p>A numeric vector. Box-cox scaling parameters (optional). If
 <code>lambda$gm</code> is supplied in input list <code>lambda</code> then
 <code>lambda$gm</code> is used, not <code>gm</code>.</p></dd>
+
+
 <dt>rotate</dt>
 <dd><p>A logical scalar. If TRUE (<code>d</code> &gt; 1 only) use Choleski
 rotation.  If d = 1 and <code>rotate = TRUE</code> then rotate will be set to
 FALSE with a warning. See <strong>Details</strong>.</p></dd>
+
+
 <dt>lower, upper</dt>
 <dd><p>Numeric vectors.  Lower/upper bounds on the arguments of
 the function <em>after</em> any transformation from theta to phi implied by
@@ -212,8 +247,12 @@ to maximise the target density.`
 If <code>trans = "BC"</code> components of <code>lower</code> that are negative are
 set to zero without warning and the bounds implied after the Box-Cox
 transformation are calculated inside <code>ru</code>.</p></dd>
+
+
 <dt>r</dt>
 <dd><p>A numeric scalar.  Parameter of generalized ratio-of-uniforms.</p></dd>
+
+
 <dt>ep</dt>
 <dd><p>A numeric scalar.  Controls initial estimates for optimisations
 to find the \(b\)-bounding box parameters.  The default (<code>ep</code>=0)
@@ -221,12 +260,16 @@ corresponds to starting at the mode of <code>logf</code> small positive values
 of <code>ep</code> move the constrained variable slightly away from the mode in
 the correct direction.  If <code>ep</code> is negative its absolute value is
 used, with no warning given.</p></dd>
+
+
 <dt>a_algor, b_algor</dt>
 <dd><p>Character scalars.  Either <code>"nlminb"</code> or
 <code>"optim"</code>.
 Respective optimisation algorithms used to find \(a(r)\) and
 (\(b\)<sub>i</sub><sup>-</sup>(r),
 \(b\)<sub>i</sub><sup>+</sup>(r)).</p></dd>
+
+
 <dt>a_method, b_method</dt>
 <dd><p>Character scalars.  Respective methods used by
 <code>optim</code> to find \(a(r)\) and
@@ -235,15 +278,22 @@ Respective optimisation algorithms used to find \(a(r)\) and
 Only used if <code>optim</code> is the chosen algorithm.  If <code>d</code> = 1 then
 <code>a_method</code> and <code>b_method</code> are set to <code>"Brent"</code> without
 warning.</p></dd>
+
+
 <dt>a_control, b_control</dt>
 <dd><p>Lists of control arguments to <code>optim</code> or
 <code>nlminb</code> to find \(a(r)\) and
 (\(b\)<sub>i</sub><sup>-</sup>(r),
 \(b\)<sub>i</sub><sup>+</sup>(r))
 respectively.</p></dd>
+
+
 <dt>var_names</dt>
-<dd><p>A character vector.  Names to give to the column(s) of
-the simulated values.</p></dd>
+<dd><p>A character (or numeric) vector of length <code>d</code>.  Names
+to give to the column(s) of the simulated values. If <code>var_names</code> is
+not supplied then <code>(x[1], ..., x[d])</code> is used.</p></dd>
+
+
 <dt>shoof</dt>
 <dd><p>A numeric scalar in [0, 1].  Sometimes a spurious
 non-zero convergence indicator is returned from
@@ -258,14 +308,18 @@ between these two extremes, with a value close to zero giving a starting
 value that is close to the current solution.
 The exception to this is when the initial and current solutions are equal.
 Then we start from the current solution multiplied by <code>1 - shoof</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>"ru"</code> is a list containing the following
+    
+
+<p>An object of class <code>"ru"</code> is a list containing the following
   components:</p>
 <dl><dt>sim_vals</dt>
 <dd><p>An <code>n</code> by <code>d</code> matrix of simulated values.</p></dd>
-<dt>box</dt>
+
+    <dt>box</dt>
 <dd><p>A (2 * <code>d</code> + 1) by <code>d</code> + 2 matrix of
       ratio-of-uniforms bounding box information, with row names indicating
       the box parameter.  The columns contain</p><dl><dt>column 1</dt>
@@ -282,36 +336,47 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 </dl><p>Scaling of f within <code>ru</code> and relocation of the
       mode to the origin means that the first row of <code>box</code> will always
       be <code>c(1, rep(0, d))</code>.</p></dd>
-<dt>pa</dt>
+
+    <dt>pa</dt>
 <dd><p>A numeric scalar.  An estimate of the probability of
       acceptance.</p></dd>
-<dt>r</dt>
+
+    <dt>r</dt>
 <dd><p>The value of <code>r</code>.</p></dd>
-<dt>d</dt>
+
+    <dt>d</dt>
 <dd><p>The value of <code>d</code>.</p></dd>
-<dt>logf</dt>
+
+    <dt>logf</dt>
 <dd><p>A function. <code>logf</code> supplied by the user, but
       with f scaled by the maximum of the target density used in the
       ratio-of-uniforms method (i.e. <code>logf_rho</code>), to avoid numerical
       problems in contouring f in <code><a href="plot.ru.html">plot.ru</a></code> when
       <code>d = 2</code>.</p></dd>
-<dt>logf_rho</dt>
+
+    <dt>logf_rho</dt>
 <dd><p>A function. The target function actually used in the
       ratio-of-uniforms algorithm.</p></dd>
-<dt>sim_vals_rho</dt>
+
+    <dt>sim_vals_rho</dt>
 <dd><p>An <code>n</code> by <code>d</code> matrix of values simulated
       from the function used in the ratio-of-uniforms algorithm.</p></dd>
-<dt>logf_args</dt>
+
+    <dt>logf_args</dt>
 <dd><p>A list of further arguments to <code>logf</code>.</p></dd>
-<dt>f_mode</dt>
+
+    <dt>f_mode</dt>
 <dd><p>The estimated mode of the target density f, after any
       Box-Cox transformation and/or user supplied transformation, but before
       mode relocation.</p></dd>
-<dt>trans_fn</dt>
+
+    <dt>trans_fn</dt>
 <dd><p>An R function that performs the inverse transformation
       from the transformed variable \(\rho\), on which the generalised
       ratio-of-uniforms method is performed, back to the original variable
-      \(\theta\).</p></dd>
+      \(\theta\). <strong>Note</strong>: <code>trans_fn</code> is <strong>not</strong>
+      vectorised with respect to \(\rho\).</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -355,7 +420,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
     <p>Wakefield, J. C., Gelfand, A. E. and Smith, A. F. M. (1991)
  Efficient generation of random variates via the ratio-of-uniforms method.
  <em>Statistics and Computing</em> (1991), <strong>1</strong>, 129-133.
- doi: <a href="https://doi.org/10.1007/BF01889987" class="external-link">10.1007/BF01889987</a>
+ <a href="https://doi.org/10.1007/BF01889987" class="external-link">doi:10.1007/BF01889987</a>
 .</p>
     </div>
     <div id="see-also">
@@ -381,84 +446,84 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Normal density ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># One-dimensional standard normal ----------------</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="fl">2</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Two-dimensional standard normal ----------------</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Two-dimensional normal with positive association ----------------</span></span>
-<span class="r-in"><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
-<span class="r-in"><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">log_dmvnorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span>, <span class="va">sigma</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">x</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># No rotation.</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span class="r-in">        rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># With rotation.</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># three-dimensional normal with positive association ----------------</span></span>
-<span class="r-in"><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">rho</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">rho</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># No rotation.  Slow !</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># With rotation.</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Log-normal density ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Sampling on original scale ----------------</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Box-Cox transform with lambda = 0 ----------------</span></span>
-<span class="r-in"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span class="r-in">        trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span>
-<span class="r-in"><span class="co"># transformation and the log-Jacobian by hand</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span class="r-in">        trans <span class="op">=</span> <span class="st">"user"</span>, phi_to_theta <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
-<span class="r-in">        log_j <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Gamma(alpha, 1) density ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Note: the gamma density in unbounded when its shape parameter is &lt; 1.</span></span>
-<span class="r-in"><span class="co"># Therefore, we can only use trans="none" if the shape parameter is &gt;= 1.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Sampling on original scale ----------------</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Normal density ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># One-dimensional standard normal ----------------</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="fl">2</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Two-dimensional standard normal ----------------</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Two-dimensional normal with positive association ----------------</span></span></span>
+<span class="r-in"><span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span></span>
+<span class="r-in"><span><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">log_dmvnorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span>, <span class="va">sigma</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">x</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># No rotation.</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With rotation.</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># three-dimensional normal with positive association ----------------</span></span></span>
+<span class="r-in"><span><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">rho</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">rho</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># No rotation.  Slow !</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With rotation.</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_dmvnorm</span>, sigma <span class="op">=</span> <span class="va">covmat</span>, d <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Log-normal density ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Sampling on original scale ----------------</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Box-Cox transform with lambda = 0 ----------------</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
+<span class="r-in"><span>        trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span></span>
+<span class="r-in"><span><span class="co"># transformation and the log-Jacobian by hand</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>, init <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
+<span class="r-in"><span>        trans <span class="op">=</span> <span class="st">"user"</span>, phi_to_theta <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        log_j <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Gamma(alpha, 1) density ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Note: the gamma density in unbounded when its shape parameter is &lt; 1.</span></span></span>
+<span class="r-in"><span><span class="co"># Therefore, we can only use trans="none" if the shape parameter is &gt;= 1.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Sampling on original scale ----------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The Hessian of the target log-density at its mode is not positive</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>             definite. This may not be a problem, but it may be that a mode</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>             at/near a parameter boundary has been found and/or that the target</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>             function is unbounded.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   It might be worth using the option trans = ``BC''. </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Box-Cox transform with lambda = 1/3 works well for shape &gt;= 1. -----------</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Box-Cox transform with lambda = 1/3 works well for shape &gt;= 1. -----------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               box     vals1 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.000000  0.000000    0</span>
@@ -466,30 +531,30 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   1.096590  1.774103    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7980846</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.792393</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000165  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.287890  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.672850  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.031353  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.426511  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :7.523879  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span>
-<span class="r-in"><span class="co"># transformation and the log-Jacobian by hand</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Note: when phi_to_theta is undefined at x this function returns NA</span></span>
-<span class="r-in"><span class="va">phi_to_theta</span>  <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">*</span> <span class="va">lambda</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="op">(</span><span class="va">x</span> <span class="op">*</span> <span class="va">lambda</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">^</span> <span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">lambda</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">log_j</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op">(</span><span class="va">lambda</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span class="r-in">        trans <span class="op">=</span> <span class="st">"user"</span>, phi_to_theta <span class="op">=</span> <span class="va">phi_to_theta</span>, log_j <span class="op">=</span> <span class="va">log_j</span>,</span>
-<span class="r-in">        user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000425  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.299669  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.772728  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.105237  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.572409  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :6.670955  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span></span>
+<span class="r-in"><span><span class="co"># transformation and the log-Jacobian by hand</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Note: when phi_to_theta is undefined at x this function returns NA</span></span></span>
+<span class="r-in"><span><span class="va">phi_to_theta</span>  <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">*</span> <span class="va">lambda</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="op">(</span><span class="va">x</span> <span class="op">*</span> <span class="va">lambda</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">^</span> <span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">lambda</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">log_j</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op">(</span><span class="va">lambda</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>        trans <span class="op">=</span> <span class="st">"user"</span>, phi_to_theta <span class="op">=</span> <span class="va">phi_to_theta</span>, log_j <span class="op">=</span> <span class="va">log_j</span>,</span></span>
+<span class="r-in"><span>        user_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               box     vals1 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.000000  0.000000    0</span>
@@ -497,137 +562,147 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   1.096590  1.774103    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7930214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8077544</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000184  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.278228  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.682248  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.996081  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.402768  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :5.843917  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># Generalized Pareto posterior distribution ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Sample data from a GP(sigma, xi) distribution</span></span>
-<span class="r-in"><span class="va">gpd_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="rgpd.html">rgpd</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">100</span>, xi <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Calculate summary statistics for use in the log-likelihood</span></span>
-<span class="r-in"><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gpd_sum_stats.html">gpd_sum_stats</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Calculate an initial estimate</span></span>
-<span class="r-in"><span class="va">init</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Mode relocation only ----------------</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span class="r-in"><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span>
-<span class="r-in">         lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Parameter constraint line xi &gt; -sigma/max(data)</span></span>
-<span class="r-in"><span class="co"># [This may not appear if the sample is far from the constraint.]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">/</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.004694  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.260520  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.654676  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.951382  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.329885  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :7.222960  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Generalized Pareto posterior distribution ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Sample data from a GP(sigma, xi) distribution</span></span></span>
+<span class="r-in"><span><span class="va">gpd_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="rgpd.html">rgpd</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">100</span>, xi <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Calculate summary statistics for use in the log-likelihood</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gpd_sum_stats.html">gpd_sum_stats</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Calculate an initial estimate</span></span></span>
+<span class="r-in"><span><span class="va">init</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">gpd_data</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Mode relocation only ----------------</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span></span>
+<span class="r-in"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span></span>
+<span class="r-in"><span>         lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Parameter constraint line xi &gt; -sigma/max(data)</span></span></span>
+<span class="r-in"><span><span class="co"># [This may not appear if the sample is far from the constraint.]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">/</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ru-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 box      vals1      vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.0000000  0.0000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.14421286 -0.2280351  0.1390430    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.09908001  0.3183226 -0.1735230    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.18240725  0.3248627 -0.1757324    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.09872053 -0.2261401  0.1772165    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.11664709 -0.1844345  0.1336287    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.08736422  0.2430316 -0.1483708    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.14530209  0.2572889 -0.1519982    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.10290640 -0.1731564  0.1888078    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1212268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1893939</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.7671   Min.   :-0.8705  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.1054   1st Qu.:-0.6289  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.1795   Median :-0.5765  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.1884   Mean   :-0.5750  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.2684   3rd Qu.:-0.5263  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.7139   Max.   :-0.2725  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Rotation of axes plus mode relocation ----------------</span></span>
-<span class="r-in"><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span>
-<span class="r-in">         lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">/</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.6192   Min.   :-0.6469  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.8387   1st Qu.:-0.4827  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.9103   Median :-0.4343  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.9145   Mean   :-0.4301  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.9839   3rd Qu.:-0.3825  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.2518   Max.   :-0.1650  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Rotation of axes plus mode relocation ----------------</span></span></span>
+<span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span></span>
+<span class="r-in"><span>         lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">/</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ru-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 box       vals1       vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.00000000  0.00000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.03670150 -0.05320499  0.03735106    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.06111797  0.03647961 -0.10703848    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.11980430  0.27859183  0.09463386    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.06089623  0.12316767  0.10931680    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.04958341 -0.07457340  0.03055453    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.06347453  0.05635108 -0.10779890    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.10280276  0.22105153  0.10351106    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.07476671  0.11562816  0.13717808    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4025765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4482295</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.8343   Min.   :-0.8080  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.0842   1st Qu.:-0.6282  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.1724   Median :-0.5716  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.1796   Mean   :-0.5712  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.2729   3rd Qu.:-0.5167  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.6181   Max.   :-0.2815  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Cauchy ========================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># The bounding box cannot be constructed if r &lt; 1.  For r = 1 the</span></span>
-<span class="r-in"><span class="co"># bounding box parameters b1-(r) and b1+(r) are attained in the limits</span></span>
-<span class="r-in"><span class="co"># as x decreases/increases to infinity respectively.  This is fine in</span></span>
-<span class="r-in"><span class="co"># theory but using r &gt; 1 avoids this problem and the largest probability</span></span>
-<span class="r-in"><span class="co"># of acceptance is obtained for r approximately equal to 1.26.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dcauchy</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, init <span class="op">=</span> <span class="fl">0</span>, r <span class="op">=</span> <span class="fl">1.26</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Half-Cauchy ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">log_halfcauchy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Cauchy.html" class="external-link">dcauchy</a></span><span class="op">(</span><span class="va">x</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Like the Cauchy case the bounding box cannot be constructed if r &lt; 1.</span></span>
-<span class="r-in"><span class="co"># We could use r &gt; 1 but the mode is on the edge of the support of the</span></span>
-<span class="r-in"><span class="co"># density so as an alternative we use a log transformation.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_halfcauchy</span>, init <span class="op">=</span> <span class="fl">0</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.754717</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.6329   Min.   :-0.6756  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.8361   1st Qu.:-0.4819  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.9036   Median :-0.4298  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.9103   Mean   :-0.4272  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.9753   3rd Qu.:-0.3780  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.3286   Max.   :-0.1686  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cauchy ========================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># The bounding box cannot be constructed if r &lt; 1.  For r = 1 the</span></span></span>
+<span class="r-in"><span><span class="co"># bounding box parameters b1-(r) and b1+(r) are attained in the limits</span></span></span>
+<span class="r-in"><span><span class="co"># as x decreases/increases to infinity respectively.  This is fine in</span></span></span>
+<span class="r-in"><span><span class="co"># theory but using r &gt; 1 avoids this problem and the largest probability</span></span></span>
+<span class="r-in"><span><span class="co"># of acceptance is obtained for r approximately equal to 1.26.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dcauchy</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, init <span class="op">=</span> <span class="fl">0</span>, r <span class="op">=</span> <span class="fl">1.26</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Half-Cauchy ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">log_halfcauchy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Cauchy.html" class="external-link">dcauchy</a></span><span class="op">(</span><span class="va">x</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Like the Cauchy case the bounding box cannot be constructed if r &lt; 1.</span></span></span>
+<span class="r-in"><span><span class="co"># We could use r &gt; 1 but the mode is on the edge of the support of the</span></span></span>
+<span class="r-in"><span><span class="co"># density so as an alternative we use a log transformation.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_halfcauchy</span>, init <span class="op">=</span> <span class="fl">0</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7524454</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ru-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Example 4 from Wakefield et al. (1991) ===================</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Bivariate normal x bivariate student-t</span></span>
-<span class="r-in"><span class="va">log_norm_t</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span>, <span class="va">sigma1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="va">sigma2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">x</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">log_h1</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">log_h2</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">log_h1</span> <span class="op">+</span> <span class="va">log_h2</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
-<span class="r-in"><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Case in the top right corner of Table 3</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_norm_t</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span>
-<span class="r-in">  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2280138</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Rotation increases the probability of acceptance</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_norm_t</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span>
-<span class="r-in">  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5209147</span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example 4 from Wakefield et al. (1991) ===================</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Bivariate normal x bivariate student-t</span></span></span>
+<span class="r-in"><span><span class="va">log_norm_t</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span>, <span class="va">sigma1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="va">sigma2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">x</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">log_h1</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">log_h2</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">log_h1</span> <span class="op">+</span> <span class="va">log_h2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span></span>
+<span class="r-in"><span><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Case in the top right corner of Table 3</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_norm_t</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span></span>
+<span class="r-in"><span>  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2242404</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Rotation increases the probability of acceptance</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_norm_t</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span></span>
+<span class="r-in"><span>  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5169562</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Normal x log-normal: different Box-Cox parameters ==================</span></span></span>
+<span class="r-in"><span><span class="va">norm_lognorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">norm_lognorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, n <span class="op">=</span> <span class="fl">1000</span>, d <span class="op">=</span> <span class="fl">2</span>, init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ru-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ru-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -642,7 +717,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

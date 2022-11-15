@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.13.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -64,19 +64,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.3.13.9000" id="rust-13139000">rust 1.3.13.9000<a class="anchor" aria-label="anchor" href="#rust-13139000"></a></h2>
+<h2 class="page-header" data-toc-text="1.4.0" id="rust-140">rust 1.4.0<a class="anchor" aria-label="anchor" href="#rust-140"></a></h2>
 <div class="section level3">
-<h3 id="new-features-1-3-13-9000">New features<a class="anchor" aria-label="anchor" href="#new-features-1-3-13-9000"></a></h3>
+<h3 id="new-features-1-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-4-0"></a></h3>
 <ul><li>
 <code><a href="../reference/ru.html">ru()</a></code> and <code><a href="../reference/ru_rcpp.html">ru_rcpp()</a></code> have an additional argument <code>mode</code> that allows the user to specify the known mode of the input function <code>logf</code> instead of finding it using numerical methods.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-and-minor-improvements-1-3-13-9000">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-3-13-9000"></a></h3>
-<ul><li><p>The list object returned from the function <code><a href="../reference/ru.html">ru()</a></code> has an extra component named <code>trans_fn</code>. This is an R function that performs the inverse transformation from the transformed variable <span class="math inline"><em>ρ</em></span>, on which the generalised ratio-of-uniforms method is performed, back to the original variable <span class="math inline"><em>θ</em></span>.</p></li>
+<h3 id="bug-fixes-and-minor-improvements-1-4-0">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-4-0"></a></h3>
+<ul><li><p>An extra example has been added to <code><a href="../reference/ru.html">ru()</a></code>, involving different Box-Cox transformation parameters for different component variables.</p></li>
+<li><p>The list object returned from the function <code><a href="../reference/ru.html">ru()</a></code> has an extra component named <code>trans_fn</code>. This is an R function that performs the inverse transformation from the transformed variable <span class="math inline"><em>ρ</em></span>, on which the generalised ratio-of-uniforms method is performed, back to the original variable <span class="math inline"><em>θ</em></span>.</p></li>
 <li><p>The documentation of the functions <code><a href="../reference/ru.html">ru()</a></code> and <code><a href="../reference/ru_rcpp.html">ru_rcpp()</a></code> now note that if the argument <code>n = 0</code> is passed then the ratio-of-uniforms bounding box is returned but no simulation is performed. This may be useful if the bounding box itself is of interest.</p></li>
 <li><p>In the description of the argument <code>logf</code> to <code><a href="../reference/ru.html">ru()</a></code> and <code><a href="../reference/ru_rcpp.html">ru_rcpp()</a></code> it is advised that <code>logf =</code> should be provided explicitly to avoid the potential for argument matching problems.</p></li>
+<li><p>In <code><a href="../reference/plot.ru.html">plot.ru()</a></code> the arguments <code>xlabs</code> and <code>ylabs</code> have been super-seeded by an argument <code>var_names</code>, which can be used to provide variable names for use as axis labels.</p></li>
 <li><p>Improvements to the package manual.</p></li>
 <li><p>Activated 3rd edition of the <code>testthat</code> package</p></li>
+<li><p>WARNINGs in the CRAN package check results, like “init.c:60:47: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes] extern SEXP _revdbayes_RcppExport_registerCCallable();” have been avoided.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -244,7 +247,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
