@@ -184,8 +184,7 @@ warning.}
 respectively.}
 
 \item{var_names}{A character (or numeric) vector of length \code{d}.  Names
-to give to the column(s) of the simulated values. If \code{var_names} is
-not supplied then \code{(x[1], ..., x[d])} is used.}
+to give to the column(s) of the simulated values.}
 
 \item{shoof}{A numeric scalar in [0, 1].  Sometimes a spurious
 non-zero convergence indicator is returned from
