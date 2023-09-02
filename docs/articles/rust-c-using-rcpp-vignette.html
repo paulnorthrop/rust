@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-11-15</h4>
+            <h4 data-toc-skip class="date">2023-09-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-c-using-rcpp-vignette.Rmd" class="external-link"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-c-using-rcpp-vignette.Rmd</code></div>
@@ -232,6 +232,7 @@ We use the <strong>microbenchmark</strong> package <span class="citation">(Mersm
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org" class="external-link">Rcpp</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'Rcpp' was built under R version 4.2.3</span></span>
 <span><span class="co"># Is microbenchmark available?</span></span>
 <span><span class="va">got_microbenchmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"microbenchmark"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span></span>
@@ -289,9 +290,9 @@ density, based on the C++ function <code>logdN01</code> in the example
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span></span>
-<span><span class="co">#&gt;   old 20.570 22.680 25.370  24.18 28.110 36.62   100</span></span>
-<span><span class="co">#&gt;   new  2.341  2.566  3.115   2.69  2.835 15.00   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span></span>
+<span><span class="co">#&gt;   old 22.770 25.240 28.330 27.660 30.320 41.200   100</span></span>
+<span><span class="co">#&gt;   new  2.443  2.663  3.124  2.784  3.043  7.449   100</span></span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than
 <code>ru</code>. If we start from the same random number seed we get the
 same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
@@ -338,9 +339,9 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr     min    lq   mean median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 220.600 234.6 241.90 241.80 246.50 299.00   100</span></span>
-<span><span class="co">#&gt;   new   9.755  10.4  11.78  10.96  12.29  19.59   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span></span>
+<span><span class="co">#&gt;   old 254.30 269.30 284.40 279.20 287.60 435.60   100</span></span>
+<span><span class="co">#&gt;   new  10.13  10.83  12.25  11.23  12.65  20.77   100</span></span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div class="section level3">
@@ -373,9 +374,9 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 41.470 44.460 48.560 47.760 50.170 131.00   100</span></span>
-<span><span class="co">#&gt;   new  5.269  5.522  6.086  5.768  6.197  10.05   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr    min     lq   mean median    uq    max neval</span></span>
+<span><span class="co">#&gt;   old 45.250 49.860 55.600 53.380 57.93 102.30   100</span></span>
+<span><span class="co">#&gt;   new  5.839  6.255  7.621  6.623  7.56  17.02   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generalized-pareto-posterior-density">Generalized Pareto posterior density<a class="anchor" aria-label="anchor" href="#generalized-pareto-posterior-density"></a>
@@ -444,9 +445,9 @@ initial value in the search for the posterior mode.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr   min    lq   mean median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 86.68 96.18 100.40 100.70 104.70 116.30   100</span></span>
-<span><span class="co">#&gt;   new 18.10 19.03  20.85  20.17  21.62  34.32   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr   min    lq   mean median    uq   max neval</span></span>
+<span><span class="co">#&gt;   old 92.78 105.5 113.00 111.50 116.7 195.4   100</span></span>
+<span><span class="co">#&gt;   new 19.00  19.9  21.85  20.73  23.3  37.9   100</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -526,10 +527,10 @@ of the transformation.</p>
 <span><span class="co">#&gt; 0.12670792 0.02477219 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $phi_to_theta</span></span>
-<span><span class="co">#&gt; &lt;pointer: 0x00000072c234c300&gt;</span></span>
+<span><span class="co">#&gt; &lt;pointer: 0x000002a518f55ed0&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $log_j</span></span>
-<span><span class="co">#&gt; &lt;pointer: 0x00000072c234c5b0&gt;</span></span>
+<span><span class="co">#&gt; &lt;pointer: 0x000002a518f55bf0&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $user_args</span></span>
 <span><span class="co">#&gt; $user_args$xm</span></span>
@@ -586,7 +587,7 @@ Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=micr
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -22,7 +22,7 @@ the Box-Cox transformed scale."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -285,13 +285,6 @@ argument.</p></dd>
 <span class="r-in"><span><span class="co"># Sample on original scale, with no rotation ----------------</span></span></span>
 <span class="r-in"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span></span>
 <span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>One or more convergence indicators are non-zero.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                box      vals1      vals2 conv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a        1.0000000  0.0000000  0.0000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.1854356 -0.2913386  0.2037820    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.1328697  0.3225436 -0.1956673   52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.2329050  0.4036546 -0.2448614    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.1367010 -0.2970759  0.2322891    0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Parameter constraint line xi &gt; -sigma/max(data)</span></span></span>
 <span class="r-in"><span><span class="co"># [This may not appear if the sample is far from the constraint.]</span></span></span>
@@ -301,22 +294,22 @@ argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                box      vals1      vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.0000000  0.0000000  0.0000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.1854356 -0.2913386  0.2037820    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.1328697  0.3225436 -0.1956673   52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.2329050  0.4036546 -0.2448614    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.1367010 -0.2970759  0.2322891    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.1378013 -0.2152475  0.1934682    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.1307220  0.2939543 -0.2194152    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.1783610  0.3184562 -0.2292375    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.1439619 -0.2073210  0.2530588    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07623113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1714384</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.8232   Min.   :-0.9883  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.1634   1st Qu.:-0.7775  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.2733   Median :-0.7101  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.2736   Mean   :-0.7042  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.3741   3rd Qu.:-0.6315  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.7129   Max.   :-0.3023  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.5396   Min.   :-0.74146  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.8224   1st Qu.:-0.50262  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.8948   Median :-0.43577  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.9037   Mean   :-0.43238  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.9805   3rd Qu.:-0.36532  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.3336   Max.   :-0.03571  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sample on original scale, with rotation ----------------</span></span></span>
 <span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span></span>
@@ -327,22 +320,22 @@ argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 box       vals1       vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.00000000  0.00000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.04208088 -0.06274538  0.04012962    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.06553054  0.06191396 -0.11357541    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.13931897  0.33244758  0.10225550    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.06340680  0.12636209  0.10774394    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.07043559 -0.10819518  0.02401882    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.08299984  0.08114796 -0.13931416    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.11591667  0.23820498  0.10916915    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.09140633  0.11384229  0.16067565    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3741115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4882812</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.7845   Min.   :-0.9927  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.1685   1st Qu.:-0.7710  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.2649   Median :-0.7038  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.2692   Mean   :-0.6999  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.3690   3rd Qu.:-0.6308  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.7125   Max.   :-0.3240  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.5852   Min.   :-0.79124  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.8231   1st Qu.:-0.50928  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.9030   Median :-0.43833  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.9076   Mean   :-0.43546  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.9861   3rd Qu.:-0.36457  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.3722   Max.   :-0.01867  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sample on Box-Cox transformed scale ----------------</span></span></span>
 <span class="r-in"><span></span></span>
@@ -365,25 +358,25 @@ argument.</p></dd>
 <span class="r-in"><span>  max_phi <span class="op">=</span> <span class="va">max_phi</span>, phi_to_theta <span class="op">=</span> <span class="va">phi_to_theta</span>, log_j <span class="op">=</span> <span class="va">log_j</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">lambda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lambda</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.05488329  0.39519782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3506078 0.4650507</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $gm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.27067478 0.02150933</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.89424758 0.07674996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $init_psi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  0.3010108 -0.1898817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1053620 -0.3757019</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd_psi</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Var1       Var2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.14463769 0.01961209 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.10928160 0.04200855 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $phi_to_theta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000000293171c710&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000001f83e7240a8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $log_j</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function(x) 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000000293171c710&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000001f83e7240a8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sample on Box-Cox transformed, without rotation</span></span></span>
@@ -396,22 +389,22 @@ argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 box      vals1       vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.0000000  0.00000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.19953754 -0.3354985  0.02696395    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.02571467  0.1253784 -0.03890432    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.18877954  0.3089738 -0.01855521    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.02798652 -0.1702980  0.04626664    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.14719641 -0.2400340  0.05954685    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.05557124  0.1404652 -0.08787884    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.15705366  0.2647217 -0.05178776    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.06189867 -0.1392226  0.10437023    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4606172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4480287</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.8513   Min.   :-0.9980  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.1680   1st Qu.:-0.7793  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.2717   Median :-0.7080  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.2788   Mean   :-0.7076  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.3818   3rd Qu.:-0.6360  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.7688   Max.   :-0.2894  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.5745   Min.   :-0.76141  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.8108   1st Qu.:-0.51016  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.8892   Median :-0.42958  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.8997   Mean   :-0.42787  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.9811   3rd Qu.:-0.35266  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.3416   Max.   :-0.03276  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sample on Box-Cox transformed, with rotation</span></span></span>
 <span class="r-in"><span><span class="va">x4</span> <span class="op">&lt;-</span> <span class="fu"><a href="ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span></span>
@@ -423,22 +416,22 @@ argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 box        vals1        vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.000000000  0.000000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.06673302 -0.109322583  0.011306767    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.06295056 -0.004509002 -0.095239360    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.06993865  0.117107238  0.008341827    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.06851213 -0.003294784  0.113262607    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.08053026 -0.128851694  0.004232157    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.08062042  0.008848057 -0.127490812    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.09204823  0.157526210  0.004624646    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.08979999  0.008517515  0.151415862    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5399568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5608525</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.8671   Min.   :-0.9996  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.1777   1st Qu.:-0.7798  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.2752   Median :-0.7095  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.2794   Mean   :-0.7073  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.3821   3rd Qu.:-0.6413  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.7298   Max.   :-0.3163  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.5732   Min.   :-0.7834  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.8131   1st Qu.:-0.5129  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.9019   Median :-0.4389  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.9094   Mean   :-0.4355  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.9991   3rd Qu.:-0.3583  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.3951   Max.   :-0.0603  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">def_par</span> <span class="op">&lt;-</span> <span class="fu">graphics</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -467,7 +460,7 @@ argument.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
