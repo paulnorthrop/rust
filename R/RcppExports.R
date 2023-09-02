@@ -267,5 +267,5 @@ create_phi_to_theta_xptr <- function(fstr) {
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('_rust_RcppExport_registerCCallable', PACKAGE = 'rust')
+    .Call(`_rust_RcppExport_registerCCallable`)
 })
