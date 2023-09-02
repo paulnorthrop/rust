@@ -1,3 +1,9 @@
+# rust 1.4.1
+
+## Bug fixes and minor improvements
+
+* The unnecessary C++11 specification has been dropped to avoid a CRAN Package Check NOTE. 
+
 # rust 1.4.0
 
 ## New features
