@@ -13,4 +13,4 @@ A patch to fix the problems at https://cran.r-project.org/web/checks/check_resul
 
 ## Downstream dependencies
 
-Apart from notes unrelated to rust, the downstream dependencies of rust (bang, DSSP, revdbayes and threshr) passed R CMD check. (I will fix these notes for bang and threshr shortly.)
+Apart from notes unrelated to rust, the downstream dependencies of rust (bang, DSSP, lite, revdbayes and threshr) passed R CMD check. (I will fix these notes for bang and threshr shortly.)
