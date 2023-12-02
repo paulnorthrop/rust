@@ -1,4 +1,4 @@
-The NOTE at https://cran.r-project.org/web/checks/check_results_rust.html has been fixed.
+A patch to fix the problems at https://cran.r-project.org/web/checks/check_results_rust.html
 
 ## R CMD check results
 
@@ -6,11 +6,11 @@ The NOTE at https://cran.r-project.org/web/checks/check_results_rust.html has be
 
 ## Test environments
 
-- Debian Linux, GCC (R-patched and R-devel) on R-hub
-- Fedora Linux, GCC (R-devel) on R-hub
+- Debian Linux, clang (R-devel) on R-hub
+- Fedora Linux, clang (R-devel) on R-hub
 - macOS (R-release), ubuntu (R-oldrel, R-release, R-devel), windows (R-release) using the rcmdcheck package
-- win-builder (R-devel, R-release and R-oldrel)
+- win-builder (R-devel, R-release and R-oldrelease)
 
 ## Downstream dependencies
 
-All downstream dependencies of rust (bang, DSSP, revdbayes and threshr) passed R CMD check.
+Apart from notes unrelated to rust, the downstream dependencies of rust (bang, DSSP, revdbayes and threshr) passed R CMD check. (I will fix these notes for bang and threshr shortly.)
