@@ -3,6 +3,7 @@
 ## Bug fixes and minor improvements
 
 * The unnecessary C++11 specification has been dropped to avoid a CRAN Package Check NOTE. 
+
 * README.md: Used app.codecov.io as base for codecov link.
 
 # rust 1.4.0
