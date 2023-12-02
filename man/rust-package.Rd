@@ -24,20 +24,20 @@ The main functions in the rust package are \code{\link{ru}} and
 
 See the following package vignettes for information:
 \itemize{
-  \item{
+  \item
    \href{https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html}{
    Introducing rust} or \code{vignette("rust-a-vignette", package = "rust")}.
-  }
-  \item{
+
+  \item
    \href{https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html}{
    When can rust be used?} or
    \code{vignette("rust-b-when-to-use-vignette", package = "rust")}.
-  }
-  \item{
+
+  \item
    \href{https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html}{
    Rusting faster: Simulation using Rcpp} or
    \code{vignette("rust-c-using-rcpp-vignette", package = "rust")}.
-  }
+
 }
 }
 \references{

@@ -16,9 +16,9 @@
 #' @param n A numeric scalar.  Only relevant if \code{x$d = 1} or
 #'   \code{x$d = 2}. The meaning depends on the value of x$d.
 #' \itemize{
-#'   \item {For d = 1 : n + 1 is the number of abscissae in the trapezium
-#'      method used to normalize the density.}
-#'   \item {For d = 2 : an n by n regular grid is used to contour the density.}
+#'   \item For d = 1 : n + 1 is the number of abscissae in the trapezium
+#'      method used to normalize the density.
+#'   \item For d = 2 : an n by n regular grid is used to contour the density.
 #' }
 #' @param prob Numeric vector. Only relevant for \code{d = 2}.  The contour
 #'   lines are drawn such that the respective probabilities that the variable
@@ -224,12 +224,12 @@ plot.ru <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' @return For \code{summary.lm}: a list of the following components from
 #'   \code{object}:
 #' \itemize{
-#'   \item {information about the ratio-of-uniforms bounding box, i.e.,
-#'     \code{object$box}}
-#'   \item {an estimate of the probability of acceptance, i.e.,
-#'     \code{object$pa}}
-#'   \item {a summary of the simulated values, via
-#'     \code{summary(object$sim_vals)}}
+#'   \item information about the ratio-of-uniforms bounding box, i.e.,
+#'     \code{object$box}
+#'   \item an estimate of the probability of acceptance, i.e.,
+#'     \code{object$pa}
+#'   \item a summary of the simulated values, via
+#'     \code{summary(object$sim_vals)}
 #' }
 #' @examples
 #' # one-dimensional standard normal ----------------

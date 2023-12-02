@@ -25,12 +25,12 @@ For \code{print.lm}: additional optional arguments passed to
 For \code{summary.lm}: a list of the following components from
   \code{object}:
 \itemize{
-  \item {information about the ratio-of-uniforms bounding box, i.e.,
-    \code{object$box}}
-  \item {an estimate of the probability of acceptance, i.e.,
-    \code{object$pa}}
-  \item {a summary of the simulated values, via
-    \code{summary(object$sim_vals)}}
+  \item information about the ratio-of-uniforms bounding box, i.e.,
+    \code{object$box}
+  \item an estimate of the probability of acceptance, i.e.,
+    \code{object$pa}
+  \item a summary of the simulated values, via
+    \code{summary(object$sim_vals)}
 }
 
 For \code{print.summary.ru}: the argument \code{x}, invisibly.
