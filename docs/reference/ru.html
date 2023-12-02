@@ -20,7 +20,7 @@ transformation of variable."><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.2</span>
       </span>
     </div>
 
@@ -530,16 +530,16 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   1.096590  1.774103    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8064516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7898894</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.000191  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.275322  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.666218  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.032052  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.466906  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :6.010042  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.001014  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.265434  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.644152  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.952868  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.332549  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :7.743005  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span></span>
 <span class="r-in"><span><span class="co"># transformation and the log-Jacobian by hand</span></span></span>
@@ -561,16 +561,16 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   1.096590  1.774103    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7692308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8149959</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        V1           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.001587  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.: 0.291744  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median : 0.686435  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.039294  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 1.399661  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :11.063883  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        V1         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.00139  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.28631  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.73125  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.02380  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.45912  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :8.89260  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Generalized Pareto posterior distribution ===================</span></span></span>
@@ -595,22 +595,22 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                box      vals1      vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.0000000  0.0000000  0.0000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.1188737 -0.1860627  0.1677344    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.1115844  0.2403914 -0.1829660    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.1517396  0.2686121 -0.1908018    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.1313956 -0.1719426  0.2344356    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.1470570 -0.2302711  0.1838644    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.1254229  0.3144929 -0.2121549    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.1871838  0.3313767 -0.2205314    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.1312131 -0.2263418  0.2277324    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2225189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1365374</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.5703   Min.   :-0.61961  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.7534   1st Qu.:-0.42427  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.8217   Median :-0.36381  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.8245   Mean   :-0.35897  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.8897   3rd Qu.:-0.29733  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.2160   Max.   : 0.08822  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.6330   Min.   :-0.8852  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.9301   1st Qu.:-0.6135  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.0163   Median :-0.5466  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.0242   Mean   :-0.5432  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.1120   3rd Qu.:-0.4750  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.5566   Max.   :-0.1018  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Rotation of axes plus mode relocation ----------------</span></span></span>
 <span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span></span>
@@ -622,22 +622,22 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> ru bounding box:  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 box       vals1       vals2 conv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a        1.00000000  0.00000000  0.00000000    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.06883367 -0.10596499  0.01966408    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.07725030  0.07391289 -0.12666802    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.10551440  0.20826338  0.08956542    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.09096560  0.10184520  0.16230059    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1minus -0.05885368 -0.08930363  0.03127933    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2minus -0.07484686  0.07088965 -0.12660462    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b1plus   0.11681709  0.25229663  0.10518267    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.07830222  0.11031778  0.13590062    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4943154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.450045</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        V1               V2         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.5083   Min.   :-0.6699  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.7394   1st Qu.:-0.4175  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :0.8031   Median :-0.3520  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :0.8136   Mean   :-0.3478  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:0.8782   3rd Qu.:-0.2844  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.2449   Max.   : 0.2085  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.6291   Min.   :-0.8767  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:0.9251   1st Qu.:-0.6122  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.0116   Median :-0.5380  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.0203   Mean   :-0.5392  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.1073   3rd Qu.:-0.4695  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.5219   Max.   :-0.1233  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cauchy ========================</span></span></span>
 <span class="r-in"><span></span></span>
@@ -661,7 +661,7 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_halfcauchy</span>, init <span class="op">=</span> <span class="fl">0</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7320644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7473842</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ru-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -683,13 +683,13 @@ Then we start from the current solution multiplied by <code>1 - shoof</code>.</p
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_norm_t</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span></span>
 <span class="r-in"><span>  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2267008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2323852</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Rotation increases the probability of acceptance</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">log_norm_t</span>, mean <span class="op">=</span> <span class="va">y</span>, sigma1 <span class="op">=</span> <span class="va">covmat</span>, sigma2 <span class="op">=</span> <span class="va">covmat</span>,</span></span>
 <span class="r-in"><span>  d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">10000</span>, init <span class="op">=</span> <span class="va">y</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="va">pa</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5201831</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5239168</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Normal x log-normal: different Box-Cox parameters ==================</span></span></span>
 <span class="r-in"><span><span class="va">norm_lognorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
