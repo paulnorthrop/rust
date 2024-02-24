@@ -15,11 +15,7 @@ csl: taylor-and-francis-chicago-author-date.csl
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
-
-required <- c("bang")
-
-if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
-  knitr::opts_chunk$set(eval = FALSE)
+got_bang <- requireNamespace("bang", quietly = TRUE)
 ```
 
 The generalized ratio-of-uniforms can be used to simulate from a wide range of $d$-dimensional multivariate probability densities, provided that $d$ is not so large that its efficiency is prohibitively low (see the vignette [Introducing rust](rust-a-vignette.html)).  However, there are conditions that the target density $f$ must satisfy for this method to be applicable.  This vignette considers instances when these conditions do *not* hold and suggests strategies that may overcome this difficulty.  Although the ratio-of-uniforms method can be used to simulate from multimodal densities, currently **rust** is designed to work effectively with unimodal densities.  This vignette illustrates this using a simple 1-dimensional example.
@@ -94,7 +90,7 @@ To illustrate the problem that a heavy-tailed density can cause a naive implemen
 
 The **bang** function `hanova1` samples from the marginal posterior distribution of $(\mu, \sigma_\alpha, \sigma)$ given data based on a user-supplied prior distribution.  The default prior is $\pi(\mu, \sigma_\alpha, \log\sigma) \propto 1$.  Under this prior, or indeed any prior in which $\mu$ is normally distributed and independent of $(\sigma_\alpha, \sigma)$ *a priori*, the generalized ratio-of-uniforms method can be used to sample from the marginal posterior distribution of $(\sigma_\alpha, \sigma)$.  By default (argument `param = "trans"`) then `hanova1` parameterizes this marginal posterior in terms of $(\log \sigma_\alpha, \log \sigma)$.  If instead we use `param = "original"`, so that this posterior is parameterized in terms of $(\mu, \sigma_\alpha, \sigma)$, then, with the default $r = 1/2$, we find that the bounding box cannot be found because the right tail of the posterior for $\sigma_\alpha$ is heavy enough to prevent this.  However, if we use $r = 1$ then the bounding box can be found.  The two successful approaches (reparameterization or use of $r=1$) are illustrated below.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', eval = got_bang}
 library(bang)
 coag1 <- hanova1(resp = coagulation[, 1], fac = coagulation[, 2], n = 1000)
 coag2 <- hanova1(resp = coagulation[, 1], fac = coagulation[, 2], n = 1000,
@@ -110,7 +106,7 @@ These posterior summaries are similar to those presented in Table 11.3 of @BDA20
 
 The reparameterization strategy has the higher estimated probability of acceptance.
 
-```{r}
+```{r, eval = got_bang}
 coag1$pa
 coag2$pa
 ```
