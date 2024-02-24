@@ -15,11 +15,7 @@ csl: taylor-and-francis-chicago-author-date.csl
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
-
-required <- c("revdbayes")
-
-if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
-  knitr::opts_chunk$set(eval = FALSE)
+got_revdbayes <- requireNamespace("revdbayes", quietly = TRUE)
 ```
 
 The **rust** package implements the multivariate generalized ratio-of-uniforms method of simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f(x)$ proportional to the density function of the distribution.  For an introduction to *rust* see the vignette [Introducing rust](rust-a-vignette.html). 
@@ -259,7 +255,7 @@ The C++ function to calculate the log-posterior density is:
 
 We simulate some data from a Generalized Pareto distribution, calculate summary statistics involved in the likelihood and calculate an initial value in the search for the posterior mode.
 
-```{r}
+```{r, eval = got_revdbayes}
 set.seed(46)
 # Sample data from a GP(sigma, xi) distribution
 gpd_data <- rgpd(m = 100, xi = -0.5, sigma = 1)
@@ -271,7 +267,7 @@ init <- c(mean(gpd_data), 0)
 
 Again we see that `ru_rcpp` is substantially faster than `ru`.
 
-```{r}
+```{r, eval = got_revdbayes}
 # Arguments for ru_rcpp
 ptr_gp <- create_xptr("loggp")
 for_ru_rcpp <- c(list(logf = ptr_gp, init = init, d = 2, n = n,
@@ -317,7 +313,7 @@ lambda
 
 In this example we supply an external pointer to a C++ function `phi_to_theta` that ensures that both parameters of the model are strictly positive, a requirement for the Box-Cox transformation to be applicable. The function `phi_to_theta` must have the same structure as the function used to calculate $\log f$. See [Providing a C++ function to `ru_rcpp`](#cpp_fun) for details. See the [Introducing rust](rust-a-vignette.html) vignette for the form of the transformation.
 
-```{r}
+```{r, eval = got_revdbayes}
 temp <- do.call(gpd_init, ss)
 min_phi <- pmax(0, temp$init_phi - 2 * temp$se_phi)
 max_phi <- pmax(0, temp$init_phi + 2 * temp$se_phi)

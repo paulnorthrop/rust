@@ -15,11 +15,7 @@ csl: taylor-and-francis-chicago-author-date.csl
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
-
-required <- c("revdbayes")
-
-if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
-  knitr::opts_chunk$set(eval = FALSE)
+got_revdbayes <- requireNamespace("revdbayes", quietly = TRUE)
 ```
 
 The **rust** package implements the multivariate generalized ratio-of-uniforms method for simulating random variates from a $d$-dimensional continuous distribution.  The user specifies (the log of) a positive target function $f$ that is proportional to the density function of the distribution.  For guidance on which target functions are suitable see the vignette [When can rust be used?](rust-b-when-to-use-vignette.html). 
@@ -107,7 +103,7 @@ $\pi(\theta) \propto \sigma^{-1} \exp[-(\xi+1)]$ for $\sigma > 0$, $\xi \geq -1$
 
 We simulate some data from a GP$(1, -1/2)$ distribution.  We choose $\xi=-1/2$ because this tends to result in a posterior distribution with strong negative posterior association between $\sigma$ and $\xi$, making the benefit of transformation more apparent.  We also calculate some sample properties that feature in the likelihood, so that they can be passed to the log-density `logf` rather than being recalculated, and set an initial estimate at which `logf` is positive.
 
-```{r}
+```{r, eval = got_revdbayes}
 library(rust)
 set.seed(46)
 # Sample data from a GP(sigma, xi) distribution
@@ -119,7 +115,7 @@ init <- c(mean(gpd_data), 0)
 ```
 
 We set the size of the sample required.  We sample first on the $(\sigma, \xi)$ scale, with mode relocation only.  Then we add a rotation of the $(\sigma, \xi)$.  
-```{r}
+```{r, eval = got_revdbayes}
 n <- 10000
 # Mode relocation only ----------------
 x1 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, init = init,
@@ -132,7 +128,7 @@ x2 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, init = init,
 
 Now we perform Box-Cox transformation. We define $\phi_1 = \sigma, \phi_2 = \xi + \sigma / x_{(m)}$, so that the components of $\phi=(\phi_1, \phi_2)$ are positive, and set the inverse transformation `phi_to_theta` and the log-Jacobian `log_j`.
 
-```{r}
+```{r, eval = got_revdbayes}
 # Find initial estimates for phi = (phi1, phi2),
 # where phi1 = sigma
 #   and phi2 = xi + sigma / max(x),
@@ -155,7 +151,7 @@ log_j <- function(x) 0
 
 We use `find_lambda` to set a suitable value of $\lambda=(\lambda_1, \lambda_2)$.
 
-```{r}
+```{r, eval = got_revdbayes}
 lambda <- find_lambda(logf = gpd_logpost, ss = ss, d = 2, min_phi = min_phi,
   max_phi = max_phi, phi_to_theta = phi_to_theta, log_j = log_j)
 lambda
@@ -163,7 +159,7 @@ lambda
 
 We sample from the Box-Cox transformed density, first without, and then with, rotation of axes.
 
-```{r}
+```{r, eval = got_revdbayes}
 # Sample on Box-Cox transformed, without rotation
 x3 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, trans = "BC",
   lambda = lambda, rotate = FALSE)
@@ -175,7 +171,7 @@ x4 <- ru(logf = gpd_logpost, ss = ss, d = 2, n = n, trans = "BC",
 
 We plot the samples obtained on the scales used for the ratio-of-uniforms algorithm and contours of the corresponding target density $f_\rho\!(\rho)$.
 
-```{r, fig.show='hold', out.width="45%"}
+```{r, fig.show='hold', out.width="45%", eval = got_revdbayes}
 plot(x1, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75, 
   main = paste("mode relocation \n pa = ", round(x1$pa, 3)))
 plot(x2, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75, 
@@ -189,7 +185,7 @@ plot(x4, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75,
 The figure shows how the transformations affect with shape of the density from which we simulate.  In the bottom right plot the density contours suggests little dependence between the transformed components.  The estimate of the probability of acceptance is approximately equal to the 0.534 obtained for a 2-dimensional normal distribution with independent components.
 
 Finally, we show a plot of the sample and contours on the original $(\sigma, \xi$)-scale.  
-```{r, fig.align='center'}
+```{r, fig.align='center', eval = got_revdbayes}
 plot(x4, xlab = "sigma", ylab = "xi")
 ```
 
