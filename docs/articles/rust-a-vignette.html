@@ -89,7 +89,7 @@ with Transformation</h1>
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2023-12-02</h4>
+            <h4 data-toc-skip class="date">2024-02-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-a-vignette.Rmd" class="external-link"><code>vignettes/rust-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-a-vignette.Rmd</code></div>
@@ -370,8 +370,9 @@ the likelihood, so that they can be passed to the log-density
 <code>logf</code> rather than being recalculated, and set an initial
 estimate at which <code>logf</code> is positive.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">46</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">46</span><span class="op">)</span></span>
 <span><span class="co"># Sample data from a GP(sigma, xi) distribution</span></span>
 <span><span class="va">gpd_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rgpd.html">rgpd</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">100</span>, xi <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># Calculate summary statistics for use in the log-likelihood</span></span>
@@ -381,7 +382,7 @@ estimate at which <code>logf</code> is positive.</p>
 <p>We set the size of the sample required. We sample first on the <span class="math inline">\((\sigma, \xi)\)</span> scale, with mode relocation
 only. Then we add a rotation of the <span class="math inline">\((\sigma,
 \xi)\)</span>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
 <span><span class="co"># Mode relocation only ----------------</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>,</span>
@@ -394,7 +395,7 @@ only. Then we add a rotation of the <span class="math inline">\((\sigma,
 x_{(m)}\)</span>, so that the components of <span class="math inline">\(\phi=(\phi_1, \phi_2)\)</span> are positive, and
 set the inverse transformation <code>phi_to_theta</code> and the
 log-Jacobian <code>log_j</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Find initial estimates for phi = (phi1, phi2),</span></span>
 <span><span class="co"># where phi1 = sigma</span></span>
 <span><span class="co">#   and phi2 = xi + sigma / max(x),</span></span>
@@ -414,7 +415,7 @@ log-Jacobian <code>log_j</code>.</p>
 <span><span class="va">phi_to_theta</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">phi</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">phi</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">phi</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">phi</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">ss</span><span class="op">$</span><span class="va">xm</span><span class="op">)</span></span>
 <span><span class="va">log_j</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">0</span></span></code></pre></div>
 <p>We use <code>find_lambda</code> to set a suitable value of <span class="math inline">\(\lambda=(\lambda_1, \lambda_2)\)</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_lambda.html">find_lambda</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, min_phi <span class="op">=</span> <span class="va">min_phi</span>,</span>
 <span>  max_phi <span class="op">=</span> <span class="va">max_phi</span>, phi_to_theta <span class="op">=</span> <span class="va">phi_to_theta</span>, log_j <span class="op">=</span> <span class="va">log_j</span><span class="op">)</span></span>
 <span><span class="va">lambda</span></span>
@@ -433,14 +434,14 @@ log-Jacobian <code>log_j</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $phi_to_theta</span></span>
 <span><span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x000001b77e0a9588&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x000001d5df93d990&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $log_j</span></span>
 <span><span class="co">#&gt; function(x) 0</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x000001b77e143448&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x000001d5df98a120&gt;</span></span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and
 then with, rotation of axes.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample on Box-Cox transformed, without rotation</span></span>
 <span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">gpd_logpost</span>, ss <span class="op">=</span> <span class="va">ss</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
 <span>  lambda <span class="op">=</span> <span class="va">lambda</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -451,7 +452,7 @@ then with, rotation of axes.</p>
 <p>We plot the samples obtained on the scales used for the
 ratio-of-uniforms algorithm and contours of the corresponding target
 density <span class="math inline">\(f_\rho\!(\rho)\)</span>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, cex.main <span class="op">=</span> <span class="fl">0.75</span>, cex.lab <span class="op">=</span> <span class="fl">0.75</span>, </span>
 <span>  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"mode relocation \n pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, cex.main <span class="op">=</span> <span class="fl">0.75</span>, cex.lab <span class="op">=</span> <span class="fl">0.75</span>, </span>
@@ -460,7 +461,7 @@ density <span class="math inline">\(f_\rho\!(\rho)\)</span>.</p>
 <span>  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Box-Cox and mode relocation \n pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">x3</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x4</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, cex.main <span class="op">=</span> <span class="fl">0.75</span>, cex.lab <span class="op">=</span> <span class="fl">0.75</span>,</span>
 <span>  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Box-Cox, mode relocation and rotation \n pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">x4</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-2.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-3.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-8-4.png" width="45%"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-9-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-9-2.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-9-3.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-9-4.png" width="45%"></p>
 <p>The figure shows how the transformations affect with shape of the
 density from which we simulate. In the bottom right plot the density
 contours suggests little dependence between the transformed components.
@@ -469,11 +470,11 @@ the 0.534 obtained for a 2-dimensional normal distribution with
 independent components.</p>
 <p>Finally, we show a plot of the sample and contours on the original
 <span class="math inline">\((\sigma, \xi\)</span>)-scale.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x4</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
-<p>and an example of the output from <code>summary.ru</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x4</span>, xlab <span class="op">=</span> <span class="st">"sigma"</span>, ylab <span class="op">=</span> <span class="st">"xi"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>and an example of the output from <code>summary.ru</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ru bounding box:  </span></span>
 <span><span class="co">#&gt;                 box        vals1        vals2 conv</span></span>
@@ -505,8 +506,9 @@ mean <span class="math inline">\(\mu\)</span> and variance <span class="math inl
 transformation, i.e. a Box-Cox transformation with <span class="math inline">\(\lambda =0\)</span>, produces exact normality and
 we find that the estimated probability of acceptance if greater when we
 transform than when we don’t.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Sampling on original scale ----------------</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="co"># Sampling on original scale ----------------</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span></span>
 <span><span class="co">#&gt; [1] 0.5740858</span></span>
@@ -539,7 +541,7 @@ transform than when we don’t.</p>
 sampling we use the <code>trans = "user"</code> argument and supply the
 inverse Box-Cox transformation via <code>phi_to_theta</code> and the
 log-Jacobian via <code>log_j</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span>
 <span><span class="co"># transformation and the log-Jacobian by hand</span></span>
 <span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span>, trans <span class="op">=</span> <span class="st">"user"</span>,</span>
@@ -548,13 +550,13 @@ log-Jacobian via <code>log_j</code>.</p>
 <span><span class="co">#&gt; [1] 0.7931472</span></span></code></pre></div>
 <p>Sampling is performed using a normal density before transforming back
 to the log-normal scale.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, xlab <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, xlab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-13-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-13-2.png" width="45%"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-14-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-14-2.png" width="45%"></p>
 <p>We could also use <code>find_lambda_one_d</code> to estimate a
 suitable value of <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Note: the default value of max_phi = 10 is OK here but this will not always be the case.</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_lambda_one_d.html">find_lambda_one_d</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">lambda</span></span>
@@ -572,7 +574,7 @@ suitable value of <span class="math inline">\(\lambda\)</span>.</p>
 <p>We get a value of <span class="math inline">\(\lambda\)</span> that
 is close to zero and an estimated probability of acceptance that is
 similar to before.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
 <span><span class="va">x4</span><span class="op">$</span><span class="va">pa</span></span>
 <span><span class="co">#&gt; [1] 0.7914523</span></span></code></pre></div>
@@ -588,7 +590,7 @@ probability of acceptance by transforming to approximate normality using
 a cube root transformation <span class="citation">(Wilson and Hilferty
 1931)</span>, i.e. a Box-Cox transformation with <span class="math inline">\(\lambda = 1/3\)</span>. We illustrate this for
 <span class="math inline">\(\alpha = 1\)</span>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, lower <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>       init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
@@ -608,7 +610,7 @@ axes in a multidimensional example then we may have a problem because
 the rotation is based on an estimate of the Hessian of the density at
 the mode.</p>
 <p>Now we use a cube root transformation.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Box-Cox transform with lambda = 1/3 works well for shape &gt;= 1. -----------</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
 <span>       lambda <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
@@ -616,7 +618,7 @@ the mode.</p>
 <span><span class="co">#&gt; [1] 0.7937768</span></span></code></pre></div>
 <p>Again we show how <code>trans = "user"</code> can be used to use
 user-defined transformation, this time supplying the value of <span class="math inline">\(\lambda\)</span> using <code>user_args</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Equivalently, we could use trans = "user" and supply the (inverse) Box-Cox</span></span>
 <span><span class="co"># transformation and the log-Jacobian by hand</span></span>
 <span><span class="co"># Note: when phi_to_theta is undefined at x this function returns NA</span></span>
@@ -642,7 +644,7 @@ values over which to evaluate the gamma density in order to estimate
 <span class="math inline">\(\lambda\)</span>. Here we cheat by using the
 gamma quantile function, something that wouldn’t usually be
 available.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
 <span><span class="co"># Choose a sensible value of max_phi</span></span>
 <span><span class="va">max_phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></span><span class="op">(</span><span class="fl">0.999</span>, shape <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
@@ -674,17 +676,17 @@ below). After a transformation that is close to a log transformation the
 target density (see the plot on the right) is bounded above and the
 estimated probability of acceptance is similar to that of a normal
 distribution.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x4</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-20-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-20-2.png" width="45%"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-21-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-21-2.png" width="45%"></p>
 </div>
 <div class="section level3">
 <h3 id="example-4-normal-density">Example 4: normal density<a class="anchor" aria-label="anchor" href="#example-4-normal-density"></a>
 </h3>
 <p>We show the effects of rotation of axes for the two- and three-
 dimensional normal density.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># two-dimensional normal with positive association ----------------</span></span>
 <span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
 <span><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
@@ -702,12 +704,12 @@ dimensional normal density.</p>
 <span><span class="co">#&gt; [1] 0.2353273 0.5368839</span></span></code></pre></div>
 <p>The probability of acceptance is increased by the rotation of axes.
 These plots show why.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-22-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-22-2.png" width="45%"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-23-1.png" width="45%"><img src="rust-a-vignette_files/figure-html/unnamed-chunk-23-2.png" width="45%"></p>
 <p>The three-dimensional case.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># three-dimensional normal with positive association ----------------</span></span>
 <span><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">rho</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">rho</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co"># No rotation.  Slow !</span></span>
@@ -720,12 +722,12 @@ These plots show why.</p>
 <span><span class="co">#&gt; [1] 0.05319488 0.31257814</span></span></code></pre></div>
 <p>Again, pairwise plots of the simulated values illustrate the effect
 of the rotation of axes.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x4</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-24-2.png" width="672"></p>
+<p><img src="rust-a-vignette_files/figure-html/unnamed-chunk-25-2.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
