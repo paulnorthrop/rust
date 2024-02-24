@@ -103,8 +103,11 @@ $\pi(\theta) \propto \sigma^{-1} \exp[-(\xi+1)]$ for $\sigma > 0$, $\xi \geq -1$
 
 We simulate some data from a GP$(1, -1/2)$ distribution.  We choose $\xi=-1/2$ because this tends to result in a posterior distribution with strong negative posterior association between $\sigma$ and $\xi$, making the benefit of transformation more apparent.  We also calculate some sample properties that feature in the likelihood, so that they can be passed to the log-density `logf` rather than being recalculated, and set an initial estimate at which `logf` is positive.
 
-```{r, eval = got_revdbayes}
+```{r}
 library(rust)
+```
+
+```{r, eval = got_revdbayes}
 set.seed(46)
 # Sample data from a GP(sigma, xi) distribution
 gpd_data <- rgpd(m = 100, xi = -0.5, sigma = 1)
@@ -191,7 +194,7 @@ plot(x4, xlab = "sigma", ylab = "xi")
 
 \ldots and an example of the output from `summary.ru`.  
 
-```{r}
+```{r, eval = got_revdbayes}
 summary(x4)
 ```
 
@@ -200,6 +203,7 @@ summary(x4)
 If $X$ has a log-normal distribution with parameters $\mu$ and $\sigma$ then $Z = \log X$ has a normal distribution with mean $\mu$ and variance $\sigma^2$.  Therefore, we know that a log transformation, i.e. a Box-Cox transformation with $\lambda =0$, produces exact normality and we find that the estimated probability of acceptance if greater when we transform than when we don't.
 
 ```{r}
+n <- 10000
 # Sampling on original scale ----------------
 x1 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, lower = 0, init = 1)
 x1$pa
