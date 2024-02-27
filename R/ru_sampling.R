@@ -513,18 +513,18 @@ ru <- function(logf, ..., n = 1, d = 1, init = NULL, mode = NULL,
     # If any components of lower or upper are negative then set them to zero.
     lower <- pmax(0, lower)
     lower <- ifelse(lambda == 0, gm * log(lower),
-                    (lower^lambda - 1) / (lambda * gm ^ (lambda -1)))
+                    (lower ^ lambda - 1) / (lambda * gm ^ (lambda -1)))
     upper <- ifelse(lambda == 0, gm * log(upper),
-                    (upper^lambda - 1) / (lambda * gm ^ (lambda -1)))
+                    (upper ^ lambda - 1) / (lambda * gm ^ (lambda -1)))
   }
   # Check that the optimisation algorithm is appropriate given the bounds in
   # lower and upper.  If not then change it, with a warning.
-  if (d == 1 & a_algor == "optim" & any(is.infinite(c(lower,upper)))) {
+  if (d == 1 & a_algor == "optim" & any(is.infinite(c(lower, upper)))) {
     a_algor = "nlminb"
     warning("For d = 1 finite lower and upper bounds must be supplied when
             using a_algor = `optim'.  a_algor has been changed to `nlminb'")
   }
-  if (d == 1 & b_algor == "optim" & any(is.infinite(c(lower,upper)))) {
+  if (d == 1 & b_algor == "optim" & any(is.infinite(c(lower, upper)))) {
     b_algor = "nlminb"
     warning("For d = 1 finite lower and upper bounds must be supplied when
             using b_algor = `optim'.  b_algor has been changed to `nlminb'")
