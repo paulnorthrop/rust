@@ -62,7 +62,8 @@ bounding box that would have been used.}
 
 \item{d}{A positive integer scalar. The dimension of \eqn{f}.}
 
-\item{init}{A numeric vector. Initial estimate of the mode of \code{logf}.
+\item{init}{A numeric vector of length \code{d}. Initial estimate of the
+mode of \code{logf}.
 If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
 Box-Cox transformation or user-defined transformation, but \emph{before}
 any rotation of axes.
