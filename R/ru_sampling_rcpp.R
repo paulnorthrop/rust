@@ -40,6 +40,8 @@
 #'   Box-Cox transformation or user-defined transformation, but \emph{before}
 #'   any rotation of axes.
 #'   If \code{init} is not supplied then \code{rep(1, d)} is used.
+#'   If \code{length(init) = 1} and \code{d > 1} then
+#'   \code{init <- rep(init, length.out = d)} is used.
 #' @param mode A numeric vector of length \code{d}.  The mode of \code{logf}.
 #'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
 #'   Box-Cox transformation or user-defined transformation, but \emph{before}
