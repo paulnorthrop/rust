@@ -34,7 +34,7 @@
 #'   component \code{box} in the returned object gives the ratio-of-uniforms
 #'   bounding box that would have been used.
 #' @param d A positive integer scalar. The dimension of \eqn{f}.
-#' @param init A numeric vector. Initial estimates of the mode of \code{logf}.
+#' @param init A numeric vector. Initial estimate of the mode of \code{logf}.
 #'   If \code{trans = "BC"} or \code{trans = "user"} this is \emph{after}
 #'   Box-Cox transformation or user-defined transformation, but \emph{before}
 #'   any rotation of axes.
