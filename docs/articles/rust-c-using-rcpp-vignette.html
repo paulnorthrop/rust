@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rusting Faster: Simulation using Rcpp • rust</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.3</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2024-02-24</h4>
+            <h4 data-toc-skip class="date">2024-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-c-using-rcpp-vignette.Rmd" class="external-link"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-c-using-rcpp-vignette.Rmd</code></div>
@@ -289,9 +289,9 @@ density, based on the C++ function <code>logdN01</code> in the example
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span></span>
-<span><span class="co">#&gt;   old 17.430 19.930 22.700  21.50 24.540 38.20   100</span></span>
-<span><span class="co">#&gt;   new  2.007  2.191  2.612   2.28  2.569 11.37   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span></span>
+<span><span class="co">#&gt;   old 15.300 16.610 18.440 17.690 19.460 31.820   100</span></span>
+<span><span class="co">#&gt;   new  2.163  2.297  2.771  2.407  2.828  7.851   100</span></span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than
 <code>ru</code>. If we start from the same random number seed we get the
 same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
@@ -338,9 +338,9 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr     min      lq    mean  median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 197.800 208.800 213.900 211.800 216.00 298.10   100</span></span>
-<span><span class="co">#&gt;   new   8.442   8.849   9.832   9.217  10.32  16.09   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr     min      lq   mean median    uq   max neval</span></span>
+<span><span class="co">#&gt;   old 191.100 205.200 280.30 222.00 279.6 657.4   100</span></span>
+<span><span class="co">#&gt;   new   8.711   9.749  16.09  10.57  13.9 206.8   100</span></span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div class="section level3">
@@ -373,9 +373,9 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr    min     lq   mean median     uq   max neval</span></span>
-<span><span class="co">#&gt;   old 34.910 37.680 40.930 40.110 42.930 55.40   100</span></span>
-<span><span class="co">#&gt;   new  4.588  4.832  5.553  5.119  5.722 13.03   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr    min     lq mean median     uq    max neval</span></span>
+<span><span class="co">#&gt;   old 35.720 42.720 76.5 49.700 99.510 429.10   100</span></span>
+<span><span class="co">#&gt;   new  5.167  5.838 10.0  6.782  9.293  62.63   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generalized-pareto-posterior-density">Generalized Pareto posterior density<a class="anchor" aria-label="anchor" href="#generalized-pareto-posterior-density"></a>
@@ -444,9 +444,9 @@ initial value in the search for the posterior mode.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr   min    lq  mean median    uq    max neval</span></span>
-<span><span class="co">#&gt;   old 73.55 81.21 86.39  85.61 88.54 157.30   100</span></span>
-<span><span class="co">#&gt;   new 14.79 15.88 17.18  16.33 17.81  25.69   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr   min    lq   mean median     uq   max neval</span></span>
+<span><span class="co">#&gt;   old 73.84 87.24 139.50 103.70 186.80 374.2   100</span></span>
+<span><span class="co">#&gt;   new 16.95 19.41  29.85  25.06  35.91 144.4   100</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -526,10 +526,10 @@ of the transformation.</p>
 <span><span class="co">#&gt; 0.12670792 0.02477219 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $phi_to_theta</span></span>
-<span><span class="co">#&gt; &lt;pointer: 0x0000025e0bf35bc0&gt;</span></span>
+<span><span class="co">#&gt; &lt;pointer: 0x000001f45a4f86b0&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $log_j</span></span>
-<span><span class="co">#&gt; &lt;pointer: 0x0000025e0bf35aa0&gt;</span></span>
+<span><span class="co">#&gt; &lt;pointer: 0x000001f45a4f8660&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $user_args</span></span>
 <span><span class="co">#&gt; $user_args$xm</span></span>
@@ -541,7 +541,7 @@ of the transformation.</p>
 </h2>
 <script type="text/x-mathjax-config">
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
-</script><div id="refs" class="references csl-bib-body hanging-indent">
+</script><div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-RcppDEbook" class="csl-entry">
 Eddelbuettel, D. 2013. <em>Seamless <span>R</span> and <span>C++</span>
 Integration with Rcpp</em>. New York: Springer.
@@ -586,7 +586,7 @@ Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=micr
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>

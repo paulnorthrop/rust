@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introducing rust: Ratio-of-Uniforms Simulation with Transformation • rust</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.3</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ with Transformation</h1>
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2024-02-24</h4>
+            <h4 data-toc-skip class="date">2024-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-a-vignette.Rmd" class="external-link"><code>vignettes/rust-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>rust-a-vignette.Rmd</code></div>
@@ -286,7 +286,7 @@ components of <span class="math inline">\(\phi\)</span> are positive
 prior to a Box-Cox transformation.</li>
 <li>
 <span class="math inline">\(\psi=\psi(\phi)\)</span> performs
-Box-Cox transformations on the margins, i.e. for <span class="math inline">\(i=1, \ldots, d\)</span>, <span class="math inline">\(\psi_i = g_i \log(\phi_i)\)</span> for <span class="math inline">\(\lambda_i = 0\)</span> and <span class="math inline">\(\displaystyle\psi_i = \frac{\phi_i^{\lambda_i} -
+Box-Cox transformations on the margins, i.e. for <span class="math inline">\(i=1, \ldots, d\)</span>, <span class="math inline">\(\psi_i = g_i  \log(\phi_i)\)</span> for <span class="math inline">\(\lambda_i = 0\)</span> and <span class="math inline">\(\displaystyle\psi_i = \frac{\phi_i^{\lambda_i} -
 1}{\lambda_i g_i^{\lambda_i-1}}\)</span>, for <span class="math inline">\(\lambda_i \neq 0\)</span>.</li>
 <li>Mode relocation means transforming from <span class="math inline">\(\psi\)</span> to <span class="math inline">\(\psi
 - \hat{\psi}\)</span>, where <span class="math inline">\(\hat{\psi}\)</span> is the estimated mode on the
@@ -434,11 +434,11 @@ log-Jacobian <code>log_j</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $phi_to_theta</span></span>
 <span><span class="co">#&gt; function(phi) c(phi[1], phi[2] - phi[1] / ss$xm)</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x000001d5df93d990&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x000001bc9fc2c1b8&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $log_j</span></span>
 <span><span class="co">#&gt; function(x) 0</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x000001d5df98a120&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x000001bc9fa14dc0&gt;</span></span></code></pre></div>
 <p>We sample from the Box-Cox transformed density, first without, and
 then with, rotation of axes.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -735,7 +735,7 @@ of the rotation of axes.</p>
 </h2>
 <script type="text/x-mathjax-config">
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
-</script><div id="refs" class="references csl-bib-body hanging-indent">
+</script><div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-BC1964" class="csl-entry">
 Box, G. E. P., and D. R. Cox. 1964. <span>“An Analysis of
 Transformations.”</span> <em>Journal of the Royal Statistical Society.
@@ -805,7 +805,7 @@ Chi-Square.”</span> <em>Proc. Natl. Acad. Sci. USA</em> 17 (12):
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
