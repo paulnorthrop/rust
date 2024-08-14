@@ -148,7 +148,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #'
 #'   For \eqn{\xi < -1} the likelihood is unbounded, MLE may fail when
 #'   \eqn{\xi} is not greater than \eqn{-0.5} and the observed Fisher
-#'   information for \eqn{(sigma, xi)} has finite variance only if
+#'   information for \eqn{(\sigma, \xi)} has finite variance only if
 #'   \eqn{\xi > -0.25}.  We use the ML estimate provided that
 #'   the estimate of \eqn{\xi} returned from \code{gpd_mle} is greater than
 #'   \eqn{-1}. We only use the SE if the MLE of \eqn{\xi} is greater than
@@ -156,7 +156,7 @@ rgpd <- function (m = 1, sigma = 1, xi = 0) {
 #'
 #'   If either the MLE or the SE are not OK then we try PWM.  We use the PWM
 #'   estimate only if is admissible, and the MLE was not OK.  We use the PWM SE,
-#'   but this will be \code{c(NA, NA)} is the PWM estimate of \eqn{\xi} is
+#'   but this will be \code{c(NA, NA)} if the PWM estimate of \eqn{\xi} is
 #'   \eqn{> 1/2}.  If the estimate is still not OK then we try LRS.  As a last
 #'   resort, which will tend to occur only when \eqn{\xi} is strongly negative,
 #'   we set \eqn{\xi = -1} and estimate sigma conditional on this.

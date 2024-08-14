@@ -69,7 +69,7 @@ the user-supplied functions \code{phi_to_theta} and \code{log_j}.}
 \value{
 A list containing the following components
   \item{lambda}{A numeric vector.  The value of \code{lambda}.}
-  \item{gm}{A numeric vector.  Box-cox scaling parameter, estimated by the
+  \item{gm}{A numeric vector.  Box-Cox scaling parameter, estimated by the
     geometric mean of the values of phi used in the optimisation to find
     the value of lambda, weighted by the values of f evaluated at phi.}
   \item{init_psi}{A numeric vector.  An initial estimate of the mode of the

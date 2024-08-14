@@ -56,7 +56,7 @@ should return \code{NA}.}
 
 \item{log_j}{A pointer to a compiled C++ function returning the log of
 the Jacobian of the transformation from \code{theta} to \code{phi}, i.e.,
-based on derivatives of \eqn{phi} with respect to \eqn{theta}. Takes
+based on derivatives of \eqn{\phi} with respect to \eqn{\theta}. Takes
 \code{theta} as its argument.
 If this is not supplied then a constant Jacobian is used.}
 
@@ -66,7 +66,7 @@ the user-supplied functions \code{phi_to_theta} and \code{log_j}.}
 \value{
 A list containing the following components
   \item{lambda}{A numeric scalar.  The value of \code{lambda}.}
-  \item{gm}{A numeric scalar.  Box-cox scaling parameter, estimated by the
+  \item{gm}{A numeric scalar.  Box-Cox scaling parameter, estimated by the
     geometric mean of the quantiles used in the optimisation to find the
     value of lambda.}
   \item{init_psi}{A numeric scalar.  An initial estimate of the mode of the

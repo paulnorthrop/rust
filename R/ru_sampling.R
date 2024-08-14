@@ -69,7 +69,7 @@
 #'   \item A list with components
 #'   \describe{
 #'     \item{lambda}{A numeric vector.  Box-Cox parameters (required).}
-#'     \item{gm}{A numeric vector.  Box-cox scaling parameters (optional).
+#'     \item{gm}{A numeric vector.  Box-Cox scaling parameters (optional).
 #'       If supplied this overrides any \code{gm} supplied by the individual
 #'       \code{gm} argument described below.}
 #'     \item{init_psi}{A numeric vector.  Initial estimate of mode \emph{after}
@@ -84,7 +84,7 @@
 #' }
 #' @param lambda_tol A numeric scalar.  Any values in lambda that are less
 #'  than \code{lambda_tol} in magnitude are set to zero.
-#' @param gm A numeric vector. Box-cox scaling parameters (optional). If
+#' @param gm A numeric vector. Box-Cox scaling parameters (optional). If
 #'   \code{lambda$gm} is supplied in input list \code{lambda} then
 #'   \code{lambda$gm} is used, not \code{gm}.
 #' @param rotate A logical scalar. If TRUE (\code{d} > 1 only) use Choleski
@@ -101,7 +101,7 @@
 #'   transformation are calculated inside \code{ru}.
 #' @param r A numeric scalar.  Parameter of generalized ratio-of-uniforms.
 #' @param ep A numeric scalar.  Controls initial estimates for optimisations
-#'   to find the \eqn{b}-bounding box parameters.  The default (\code{ep}=0)
+#'   to find the \eqn{b}-bounding box parameters.  The default (\code{ep} = 0)
 #'   corresponds to starting at the mode of \code{logf} small positive values
 #'   of \code{ep} move the constrained variable slightly away from the mode in
 #'   the correct direction.  If \code{ep} is negative its absolute value is
@@ -109,25 +109,19 @@
 #' @param a_algor,b_algor Character scalars.  Either \code{"nlminb"} or
 #'   \code{"optim"}.
 #'   Respective optimisation algorithms used to find \eqn{a(r)} and
-#'   (\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
-#'   \eqn{b_i^-(r)}},
-#'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
-#'   \eqn{b_i^+(r)}}).
+#'   (\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{\eqn{b_i^-(r)}},
+#'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{\eqn{b_i^+(r)}}).
 #' @param a_method,b_method Character scalars.  Respective methods used by
 #'   \code{optim} to find \eqn{a(r)} and
-#'   (\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
-#'   \eqn{b_i^-(r)}},
-#'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
-#'   \eqn{b_i^+(r)}}).
+#'   (\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{\eqn{b_i^-(r)}},
+#'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{\eqn{b_i^+(r)}}).
 #'   Only used if \code{optim} is the chosen algorithm.  If \code{d} = 1 then
 #'   \code{a_method} and \code{b_method} are set to \code{"Brent"} without
 #'   warning.
 #' @param a_control,b_control  Lists of control arguments to \code{optim} or
 #'   \code{nlminb} to find \eqn{a(r)} and
-#'   (\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
-#'   \eqn{b_i^-(r)}},
-#'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
-#'   \eqn{b_i^+(r)}})
+#'   (\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{\eqn{b_i^-(r)}},
+#'   \ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{\eqn{b_i^+(r)}})
 #'   respectively.
 #' @param var_names A character (or numeric) vector of length \code{d}.  Names
 #'   to give to the column(s) of the simulated values.

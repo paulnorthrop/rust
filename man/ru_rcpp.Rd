@@ -115,7 +115,7 @@ functions \code{phi_to_theta} and \code{log_j}.}
   \item A list with components
   \describe{
     \item{lambda}{A numeric vector.  Box-Cox parameters (required).}
-    \item{gm}{A numeric vector.  Box-cox scaling parameters (optional).
+    \item{gm}{A numeric vector.  Box-Cox scaling parameters (optional).
       If supplied this overrides any \code{gm} supplied by the individual
       \code{gm} argument described below.}
     \item{init_psi}{A numeric vector.  Initial estimate of mode \emph{after}
@@ -133,7 +133,7 @@ functions \code{phi_to_theta} and \code{log_j}.}
 \item{lambda_tol}{A numeric scalar.  Any values in lambda that are less
 than \code{lambda_tol} in magnitude are set to zero.}
 
-\item{gm}{A numeric vector. Box-cox scaling parameters (optional). If
+\item{gm}{A numeric vector. Box-Cox scaling parameters (optional). If
 \code{lambda$gm} is supplied in input list \code{lambda} then
 \code{lambda$gm} is used, not \code{gm}.}
 
@@ -154,7 +154,7 @@ transformation are calculated inside \code{ru}.}
 \item{r}{A numeric scalar.  Parameter of generalized ratio-of-uniforms.}
 
 \item{ep}{A numeric scalar.  Controls initial estimates for optimisations
-to find the \eqn{b}-bounding box parameters.  The default (\code{ep}=0)
+to find the \eqn{b}-bounding box parameters.  The default (\code{ep} = 0)
 corresponds to starting at the mode of \code{logf} small positive values
 of \code{ep} move the constrained variable slightly away from the mode in
 the correct direction.  If \code{ep} is negative its absolute value is
@@ -163,27 +163,21 @@ used, with no warning given.}
 \item{a_algor, b_algor}{Character scalars.  Either \code{"nlminb"} or
 \code{"optim".}
 Respective optimisation algorithms used to find \eqn{a(r)} and
-(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
-\eqn{b_i^-(r)}},
-\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
-\eqn{b_i^+(r)}}).}
+(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{\eqn{b_i^-(r)}},
+\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{\eqn{b_i^+(r)}}).}
 
 \item{a_method, b_method}{Character scalars.  Respective methods used by
 \code{optim} to find \eqn{a(r)} and
-(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
-\eqn{b_i^-(r)}},
-\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
-\eqn{b_i^+(r)}}).
+(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{\eqn{b_i^-(r)}},
+\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{\eqn{b_i^+(r)}}).
 Only used if \code{optim} is the chosen algorithm.  If \code{d} = 1 then
 \code{a_method} and \code{b_method} are set to \code{"Brent"} without
 warning.}
 
 \item{a_control, b_control}{Lists of control arguments to \code{optim} or
 \code{nlminb} to find \eqn{a(r)} and
-(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{
-\eqn{b_i^-(r)}},
-\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{
-\eqn{b_i^+(r)}})
+(\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>-</sup>}(r)}{\eqn{b_i^-(r)}},
+\ifelse{html}{\eqn{b}\out{<sub>i</sub>}\out{<sup>+</sup>}(r)}{\eqn{b_i^+(r)}})
 respectively.}
 
 \item{var_names}{A character (or numeric) vector of length \code{d}.  Names
@@ -256,7 +250,8 @@ For information about the generalised ratio-of-uniforms method and
   \href{https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html}{
   Introducing rust} vignette. See also
   \href{https://paulnorthrop.github.io/rust/articles/rust-c-using-rcpp-vignette.html}{
-  Rusting faster: Simulation using Rcpp}
+  Rusting faster: Simulation using Rcpp}.
+
   These vignettes can also be accessed using
   \code{vignette("rust-a-vignette", package = "rust")} and
   \code{vignette("rust-c-using-rcpp-vignette", package = "rust")}.

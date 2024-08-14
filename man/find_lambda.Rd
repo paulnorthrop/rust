@@ -62,7 +62,7 @@ argument.}
 \value{
 A list containing the following components
   \item{lambda}{A numeric vector.  The value of lambda.}
-  \item{gm}{A numeric vector.  Box-cox scaling parameter, estimated by the
+  \item{gm}{A numeric vector.  Box-Cox scaling parameter, estimated by the
     geometric mean of the values of \code{phi} used in the optimisation to
     find the value of lambda, weighted by the values of \eqn{f} evaluated at
     \code{phi}.}

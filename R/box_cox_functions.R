@@ -35,7 +35,7 @@
 #'   returned value is \code{theta}.
 #' @param log_j A function returning the log of the Jacobian of the
 #'   transformation from \code{theta} to \code{phi}, i.e. based on derivatives
-#'   of \eqn{phi} with respect to \eqn{theta}. Takes \code{theta} as its
+#'   of \eqn{\phi} with respect to \eqn{\theta}. Takes \code{theta} as its
 #'   argument. If this is not supplied then a constant Jacobian is used.
 #' @details The general idea is to estimate quantiles of \eqn{f} corresponding
 #'   to a set of equally-spaced probabilities in \code{probs} and to use these
@@ -55,7 +55,7 @@
 #'   probabilities at the midpoints as weights.
 #' @return A list containing the following components
 #'   \item{lambda}{A numeric scalar.  The value of lambda.}
-#'   \item{gm}{A numeric scalar.  Box-cox scaling parameter, estimated by the
+#'   \item{gm}{A numeric scalar.  Box-Cox scaling parameter, estimated by the
 #'     geometric mean of the quantiles used in the optimisation to find the
 #'     value of lambda.}
 #'   \item{init_psi}{A numeric scalar.  An initial estimate of the mode of the
@@ -259,7 +259,7 @@ find_lambda_one_d <- function(logf, ..., ep_bc = 1e-4, min_phi = ep_bc,
 #'  certain components of \code{phi} are to be transformed.
 #' @return A list containing the following components
 #'   \item{lambda}{A numeric vector.  The value of lambda.}
-#'   \item{gm}{A numeric vector.  Box-cox scaling parameter, estimated by the
+#'   \item{gm}{A numeric vector.  Box-Cox scaling parameter, estimated by the
 #'     geometric mean of the values of \code{phi} used in the optimisation to
 #'     find the value of lambda, weighted by the values of \eqn{f} evaluated at
 #'     \code{phi}.}
