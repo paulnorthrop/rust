@@ -3,7 +3,7 @@
 ## Bug fixes and minor improvements
 
 * Corrected typos and made cosmetic improvements to the package manual.
-* Out new version on CRAN to assist in investigating the CRAN package check errors and warnings for the revdbayes package, which impports functions from rust.
+* Out new version on CRAN to assist in investigating the CRAN package check errors and warnings for the revdbayes package, which imports functions from rust.
 
 # rust 1.4.2
 
