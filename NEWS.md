@@ -3,7 +3,7 @@
 ## Bug fixes and minor improvements
 
 * Corrected typos and made cosmetic improvements to the package manual.
-* Out new version on CRAN to assist in investigating the CRAN package check errors and warnings for the revdbayes package, which imports functions from rust.
+* Put new version on CRAN to assist in investigating the CRAN package check errors and warnings for the revdbayes package, which imports functions from rust. Update (18/08/2024): ultimately, the errors on r-release-macos-x86_64 and r-oldrel-macos-x86_64 stemming from revdbayes' unit tests were disappeared after Rcpp v1.0.13 bedded in on CRAN.
 
 # rust 1.4.2
 
