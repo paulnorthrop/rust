@@ -1,93 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/rust-a-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/rust-b-when-to-use-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/rust-c-using-rcpp-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_log_j_xptr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_phi_to_theta_xptr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_xptr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find_lambda.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find_lambda_one_d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find_lambda_one_d_rcpp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find_lambda_rcpp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpd_init.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpd_logpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpd_sum_stats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.ru.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.ru.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.summary.ru.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rgpd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ru.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rust-internal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rust-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rust.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ru_rcpp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.ru.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/paulnorthrop/rust/404.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/articles/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/articles/rust-a-vignette.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/articles/rust-b-when-to-use-vignette.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/articles/rust-c-using-rcpp-vignette.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/authors.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/LICENSE.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/news/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/create_log_j_xptr.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/create_phi_to_theta_xptr.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/create_xptr.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/find_lambda.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/find_lambda_one_d.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/find_lambda_one_d_rcpp.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/find_lambda_rcpp.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/gpd_init.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/gpd_logpost.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/gpd_sum_stats.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/plot.ru.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/print.ru.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/rgpd.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/ru.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/rust-internal.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/rust-package.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/ru_rcpp.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/rust/reference/summary.ru.html</loc></url>
 </urlset>
+
