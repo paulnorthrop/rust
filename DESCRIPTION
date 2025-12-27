@@ -2,7 +2,7 @@ Package: rust
 Type: Package
 Title: Ratio-of-Uniforms Simulation with Transformation
 Version: 1.4.3
-Date: 2024-08-14
+Date: 2025-12-27
 Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
   role = c("aut", "cre", "cph"))
 Description: Uses the generalized ratio-of-uniforms (RU) method to simulate
@@ -24,7 +24,7 @@ License: GPL (>= 2)
 Encoding: UTF-8
 Depends:
     R (>= 3.3.0)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 Suggests: bang,
     knitr,
     microbenchmark,
