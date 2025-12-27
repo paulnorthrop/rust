@@ -1,10 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rust <img src="tools/rust_logo.png" align="right" />
+# rust <a href="https://paulnorthrop.github.io/rust/"><img src="tools/rust_logo.png" align="right" style="float:right; height:150px;" alt="rust logo"/></a>
 
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/rust?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/rust)
 [![R-CMD-check](https://github.com/paulnorthrop/rust/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/rust/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/rust/coverage.svg?branch=master)](https://app.codecov.io/github/paulnorthrop/rust?branch=master)
