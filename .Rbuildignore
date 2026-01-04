@@ -5,7 +5,6 @@
 ^cran-comments\.md$
 ^revdep$
 ^\.travis\.yml$
-^appveyor\.yml$
 ^before-install\.sh$
 ^_pkgdown\.yml$
 ^docs$
