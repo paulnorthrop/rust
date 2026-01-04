@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2025-12-27</h4>
+            <h4 data-toc-skip class="date">2026-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/rust/blob/HEAD/vignettes/rust-c-using-rcpp-vignette.Rmd"><code>vignettes/rust-c-using-rcpp-vignette.Rmd</code></a></small>
       <div class="d-none name"><code>rust-c-using-rcpp-vignette.Rmd</code></div>
@@ -269,9 +269,9 @@ density, based on the C++ function <code>logdN01</code> in the example
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr   min     lq   mean median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 15.82 18.070 20.330 18.960 20.470 77.460   100</span></span>
-<span><span class="co">#&gt;   new  2.12  2.306  2.651  2.431  2.703  5.497   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr    min     lq   mean median     uq    max neval</span></span>
+<span><span class="co">#&gt;   old 15.160 16.760 18.340 17.980 19.200 27.080   100</span></span>
+<span><span class="co">#&gt;   new  2.113  2.287  2.567  2.352  2.552  5.614   100</span></span></code></pre></div>
 <p>As we would hope, <code>ru_rcpp</code> is faster than
 <code>ru</code>. If we start from the same random number seed we get the
 same simulated values from <code>ru</code> and <code>ru_rcpp</code>.</p>
@@ -319,8 +319,8 @@ double logdmvnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) 
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
 <span><span class="co">#&gt;  expr     min      lq   mean median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 187.300 199.400 221.70 209.50 232.80 350.60   100</span></span>
-<span><span class="co">#&gt;   new   8.838   9.764  10.98  10.06  10.87  34.94   100</span></span></code></pre></div>
+<span><span class="co">#&gt;   old 192.200 213.300 253.30 225.20 254.40 502.50   100</span></span>
+<span><span class="co">#&gt;   new   8.821   9.538  11.51  10.33  11.57  33.38   100</span></span></code></pre></div>
 <p>Again, the improvement in speed obtained using Rcpp is clear.</p>
 </div>
 <div class="section level3">
@@ -353,9 +353,9 @@ double logdlnorm(const Rcpp::NumericVector&amp; x, const Rcpp::List&amp; pars) {
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr    min    lq   mean median     uq   max neval</span></span>
-<span><span class="co">#&gt;   old 37.260 40.47 47.460 43.740 48.660 100.4   100</span></span>
-<span><span class="co">#&gt;   new  5.128  5.56  6.614  5.843  6.639  22.6   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr   min     lq   mean median     uq   max neval</span></span>
+<span><span class="co">#&gt;   old 33.73 36.110 40.500 38.800 42.610 76.52   100</span></span>
+<span><span class="co">#&gt;   new  4.97  5.223  5.801  5.438  5.951 10.78   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generalized-pareto-posterior-density">Generalized Pareto posterior density<a class="anchor" aria-label="anchor" href="#generalized-pareto-posterior-density"></a>
@@ -424,9 +424,9 @@ initial value in the search for the posterior mode.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;  expr   min    lq   mean median     uq    max neval</span></span>
-<span><span class="co">#&gt;   old 75.39 81.90 104.30  96.04 109.20 403.60   100</span></span>
-<span><span class="co">#&gt;   new 15.99 17.31  21.71  19.59  22.59  67.68   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  expr   min    lq  mean median    uq    max neval</span></span>
+<span><span class="co">#&gt;   old 71.50 78.22 87.98  82.61 90.37 220.40   100</span></span>
+<span><span class="co">#&gt;   new 15.48 16.32 18.39  17.00 19.26  32.26   100</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -506,10 +506,10 @@ of the transformation.</p>
 <span><span class="co">#&gt; 0.12670792 0.02477219 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $phi_to_theta</span></span>
-<span><span class="co">#&gt; &lt;pointer: 0x0000021a868f0db0&gt;</span></span>
+<span><span class="co">#&gt; &lt;pointer: 0x000002a6821f6c60&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $log_j</span></span>
-<span><span class="co">#&gt; &lt;pointer: 0x0000021a868f0d00&gt;</span></span>
+<span><span class="co">#&gt; &lt;pointer: 0x000002a6821f6e20&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $user_args</span></span>
 <span><span class="co">#&gt; $user_args$xm</span></span>
