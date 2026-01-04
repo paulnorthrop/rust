@@ -12,6 +12,9 @@ Status](https://codecov.io/github/paulnorthrop/rust/coverage.svg?branch=master)]
 [![Downloads
 (total)](https://cranlogs.r-pkg.org/badges/grand-total/rust?color=brightgreen)](https://cran.r-project.org/package=rust)
 
+See also [RUSampling](https://pypi.org/project/rusampling/) for a
+translation of `rust` into Python, courtesy of Lynne Jewson.
+
 ## Ratio-of-uniforms simulation with transformation
 
 ### What does rust do?
