@@ -10,4 +10,4 @@
 
 ## Downstream dependencies
 
-Apart from a NOTE (checking C++ specification) for DSSP unrelated to rust, the downstream dependencies of rust (bang, DSSP, lite, revdbayes and threshr) passed R CMD check. 
+The downstream dependencies of rust (bang, evmissing, fitdistcp, lite, revdbayes and threshr) passed R CMD check. 
